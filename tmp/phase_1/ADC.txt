@@ -1,0 +1,2231 @@
+
+=== PDF PAGE 1 ===
+                 Quad Analog-to-Digital Converter
+                                             (ADC)
+Data Sheet                            ADAU1978
+
+FEATURES                                 GENERAL DESCRIPTION
+Four 2 V rms differential inputs                             The ADAU1978 incorporates four high performance, analog-
+On-chip phase-locked loop (PLL) for master clock                    to-digital converters (ADCs) with 2 V rms capable ac-coupled
+Low electromagnetic interference (EMI) design                     inputs. The ADCs use a multibit sigma-delta (Σ-Δ)
+109 dB analog-to-digital converter (ADC) dynamic range         architecture with continuous time front end for low EMI. An
+Total harmonic distortion + noise (THD + N): −95 dB              I2C/serial peripheral interface (SPI) control port is included
+                                                                         that allows a microcontroller to adjust volume and manySelectable digital high-pass filter
+                                                               other parameters. The ADAU1978 uses only a single 3.3 V24-bit stereo ADC with 8 kHz to 192 kHz sample rates
+                                                                     supply. The part internally generates the required digitalDigital volume control with autoramp function
+                                              DVDD supply. The low power architecture reduces the
+I2C/SPI controllable for flexibility                                                      power consumption. The ADAU1978 is available in a 40-lead
+Software-controllable clickless mute                                                        LFCSP package. The on-chip PLL can derive the master clock
+Software power-down                                                         from an external clock input or frame clock (sample rate
+Right justified, left justified, I2S, and TDM modes                   clock). When fed with the frame clock, it eliminates the
+Master and slave operation modes                           need for a separate high frequency master clock in the
+40-lead LFCSP package                                          system.
+Qualified for automotive applications                                                          Note that throughout this data sheet, multifunction pins,
+APPLICATIONS                                           such as SCL/CCLK, are referred to either by the entire pin                                                  name or by a single function of the pin, for example, CCLK,
+Automotive audio systems                              when only that function is relevant.
+Active noise cancellation systems
+
+                          FUNCTIONAL BLOCK DIAGRAM
+                                                                                                                                                                                    AVDD1  AVDD3  AVDD2
+
+
+                                                                                               3.3V TO 1.8V
+                                                                    REGULATOR       DVDD                              ADAU1978                                                                                                                                                                                   AVDD1AVDD3
+
+                               AIN1P                                                        ADC              GAIN                              AIN1N                                                                                                                                                                                           PORT         IOVDD
+                               AIN2P                                                        LRCLK
+                                                        ADC
+                              AIN2N
+                                                                                      BCLK                               AIN3P                                                                                                                                            AUDIO
+                                                        ADC                              AIN3N                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          CALIBRATION               SDATAOUT1
+                               AIN4P                                                        ADC                                                           DECIMATOR/HPF DC               SDATAOUT2                                                                                                                                                                                                                                                                                        SERIAL                              AIN4N                                                                                                                                                                                                                                                                          PROGRAMMABLE
+
+                                                    AGND1   AGND3                      SCL/CCLK
+                                                         AVDD2                            SDA/COUT
+                                                                                                         I2C/SPI         ADDR1/CIN
+                                               BG           PLL      CONTROL       ADDR0/CLATCH                                                    REF
+
+                                                                                                 PD/RST
+                                                 AGND2       AGND2
+                                                                                                          AGND1  AGND2  AGND3  AGND4  AGND5  AGND6 DGND            VREF             MCLKIN                                 PLL_FILT     SA_MODE                                                                                                                                                                                                                            11292-001
+                                                                     Figure 1.
+
+
+
+
+
+Rev. B                              Document Feedback
+Information furnished by Analog Devices is believed to be accurate and reliable. However, no
+responsibility is assumed by Analog Devices for its use, nor for any infringements of patents       One Technology Way, P.O. Box 9106, Norwood, MA 02062-9106,
+or other rights of third parties that may result from its use. Specifications subject to change
+                                                                               U.S.A.without notice. No license is granted by implication or otherwise under any patent or patent
+rights of Analog Devices. Trademarks and registered trademarks are the property of their          Tel: 781.329.4700 ©2014‒2024 Analog Devices, Inc. All rights reserved.
+respective owners.                                                            Technical Support                        www.analog.com
+
+=== PDF PAGE 2 ===
+ADAU1978                                              Data Sheet
+
+TABLE OF CONTENTS
+Features ......................................................................................................... 1          SPI Mode ............................................................................................... 25
+Applications ................................................................................................ 1         Register Summary ................................................................................. 27
+General Description ................................................................................. 1         Register Details ...................................................................................... 28
+Functional Block Diagram .................................................................... 1          Master Power and Soft Reset Register .................................... 28
+Revision History ........................................................................................ 2         PLL Control Register ....................................................................... 29
+Specifications .............................................................................................. 3          Block Power Control and Serial Port Control Register .... 30
+  Analog Performance Specifications ............................................. 3            Serial Port Control Register 1 ..................................................... 31
+  Digital Input/Output Specifications ............................................ 3            Serial Port Control Register 2 ..................................................... 32
+  Power Supply Specifications ........................................................... 4          Channel 1 and Channel 2 Mapping for Output Serial Ports
+                                                                     Register ................................................................................................. 33  Digital Filter Specifications ............................................................. 4
+                                                             Channel 3 and Channel 4 Mapping for Output Serial Ports  Timing Specifications ......................................................................... 5
+                                                                     Register ................................................................................................. 35
+Absolute Maximum Ratings ................................................................. 7
+                                                                           Serial Output Drive and Overtemperature Protection
+  Thermal Resistance............................................................................. 7                                                                   Control Register ................................................................................ 36
+  ESD Caution ............................................................................................ 7                                                                  Post ADC Gain Channel 1 Control Register ........................... 37
+Pin Configuration and Function Descriptions ............................. 8                                                                  Post ADC Gain Channel 2 Control Register ........................... 38
+Typical Performance Characteristics ............................................ 10                                                                  Post ADC Gain Channel 3 Control Register ........................... 38
+Theory of Operation ............................................................................. 12                                                                  Post ADC Gain Channel 4 Control Register ........................... 39
+  Overview ............................................................................................... 12                                                                High-Pass Filter and DC Offset Control Register and
+  Power Supply and Voltage Reference ...................................... 12          Master Mute Register ...................................................................... 40
+  Power-On Reset Sequence ............................................................ 12        ADC Clipping Status Register ...................................................... 41
+  PLL and Clock ..................................................................................... 13            Digital DC High-Pass Filter and Calibration Register ....... 42
+  Analog Inputs ...................................................................................... 14         Typical Application Circuit ............................................................... 43
+  ADC .......................................................................................................... 16         Outline Dimensions .............................................................................. 44
+  ADC Summing Modes ...................................................................... 16          Ordering Guide .................................................................................. 44
+  Serial Audio Data Output Ports, Data Format ...................... 17          Automotive Products ...................................................................... 44
+Control Ports ............................................................................................ 21
+  I2C Mode ................................................................................................ 22
+
+REVISION HISTORY
+8/24—Rev. A to Rev. B
+Change to Table 5...................................................................................... 5
+Change to Power-On Reset Sequence ........................................... 12
+
+1/14—Rev. 0 to Rev. A
+Change to Features Section .................................................................. 1
+Change to Dynamic Range (A-Weighted) Line Input
+Parameter, Table 1 .................................................................................... 3
+Change to Figure 9 ................................................................................ 10
+Change to Figure 34 .............................................................................. 23
+Changes to Figure 44 ........................................................................... 43
+
+5/13—Revision 0: Initial Version
+
+
+
+
+
+                                                                   Rev. B | Page 2 of 44
+
+=== PDF PAGE 3 ===
+Data Sheet                                       ADAU1978
+
+SPECIFICATIONS
+Performance of all channels is identical, exclusive of the interchannel gain mismatch and interchannel phase deviation
+specifications. AVDDx/IOVDD = 3.3 V; DVDD (internally generated) = 1.8 V; TA = −40°C to +105°C, unless otherwise noted. Master clock
+= 12.288 MHz (48 kHz fS, 256 × fS mode); input sample rate = 48 kHz; measurement bandwidth = 20 Hz to 20 kHz; word width = 24 bits;
+load capacitance (digital output) = 20 pF; load current (digital output) = ±1 mA; digital input voltage high = 2.0 V; and digital input
+voltage low = 0.8 V.
+ANALOG PERFORMANCE SPECIFICATIONS
+
+Table 1.
+Parameter                                   Test Conditions/Comments                Min   Typ  Max   Unit
+LINE INPUT
+  Full-Scale AC Differential Input Voltage                                                      2          V rms
+  Full-Scale Single-Ended Input Voltage                                                       1          V rms
+  Input Common-Mode Voltage                    VIN, cm at AINxP/AINxN pins                                 1.5         V dc
+ANALOG-TO-DIGITAL CONVERTERS
+   Differential Input Resistance               Between AINxP and AINxN                               28.6        kΩ
+  Single-Ended Input Resistance             Between AINxP and AINxN                               14.3        kΩ
+  ADC Resolution                                                                         24               Bits
+  Dynamic Range (A-Weighted) Line Input1     Input = 1 kHz, −60 dBFS (0 dBFS = 2 V rms input)   103    109         dB
+   Total Harmonic Distortion + Noise (THD + N)   Input = 1 kHz, −1 dBFS (0 dBFS = 2 V rms input)          −95  −88   dB
+   Digital Gain Post ADC                                                             0            60     dB
+  Gain Error                                                                 −10         +10  %
+  Interchannel Gain Mismatch                                                            −0.25         +0.25  dB
+  Gain Drift                                                                              100         ppm/°C
+  Common-Mode Rejection Ratio (CMRR)     200 mV rms, 1 kHz                          50     65          dB
+                                        200 mV rms, 20 kHz                                56          dB
+  Power Supply Rejection Ratio (PSRR)        100 mV rms, 1 kHz on AVDD = 3.3 V                   70          dB
+  Interchannel Isolation                                                                    100         dB
+  Interchannel Phase Deviation                                                              0            Degrees
+REFERENCE
+  Internal Reference Voltage                VREF pin                                        1.47    1.50   1.54   V
+  Output Impedance                                                                       20         kΩ
+ADC SERIAL PORT
+  Output Sample Rate                                                               8            192    kHz
+
+1 This is for a sampling frequency, fS, ranging from 44.1 kHz to 192 kHz.
+
+DIGITAL INPUT/OUTPUT SPECIFICATIONS
+
+Table 2.
+Parameter                               Test Conditions/Comments    Min             Typ   Max           Unit
+INPUT
+  High Level Input Voltage (VIH)                                               0.7 × IOVDD                        V
+  Low Level Input Voltage (VIL)                                                                              0.3 × IOVDD   V
+  Input Leakage Current                                        −10                   +10          µA
+  Input Capacitance                                                                       5             pF
+OUTPUT
+  High Level Output Voltage (VOH)          IOH = 1 mA                 IOVDD − 0.60                       V
+  Low Level Output Voltage (VOL)             IOL = 1 mA                                                      0.4          V
+                                                                   Rev. B | Page 3 of 44
+
+=== PDF PAGE 4 ===
+ADAU1978                                              Data Sheet
+
+POWER SUPPLY SPECIFICATIONS
+AVDD = 3.3 V, DVDD = 1.8 V, IOVDD = 3.3 V, and fS = 48 kHz (master mode), unless otherwise noted.
+
+Table 3.
+Parameter                          Test Conditions/Comments                    Min    Typ    Max     Unit
+SUPPLY
+ DVDD                          On-chip low dropout (LDO) regulator                  1.62      1.8      1.98    V
+  AVDDx                    AVDD                                                   3.0       3.3       3.6     V
+  IOVDD                     IOVDD                                               1.62      3.3       3.6     V
+IOVDD CURRENT                   Master clock = 256 × fS
+  Normal Operation                        fS = 48 kHz                                             450            µA
+                                                   fS = 96 kHz                                             880            µA
+                                                   fS = 192 kHz                                                   1.75         mA
+  Power-Down                               fS = 48 kHz to 192 kHz                                   20            µA
+AVDDx CURRENT
+  Normal Operation                 4-channel ADC, DVDD internal                             14          mA
+                                   4-channel ADC, DVDD external                                    9.5          mA
+  Power-Down                                                                         270            µA
+DVDD CURRENT
+  Normal Operation            DVDD external                                                    4.5          mA
+  Power-Down                                                                         65            µA
+POWER DISSIPATION
+  Normal Operation                Master clock = 256 fS, 48 kHz
+    Analog Supply             DVDD internal                                                 46.2        mW
+                         DVDD external                                          31         mW
+     Digital Supply             DVDD external                                                    8.1        mW
+     Digital I/O Supply            IOVDD = 3.3 V                                                 1.49        mW
+  Power-Down, All Supplies                                                               960         µW
+
+DIGITAL FILTER SPECIFICATIONS
+
+Table 4.
+Parameter                  Mode                            Factor       Min     Typ    Max     Unit
+ADC DECIMATION FILTER               All modes, typical at fS = 48 kHz
+  Pass Band                                                         0.4375 × fS             21              kHz
+  Pass-Band Ripple                                                                        ±0.015          dB
+  Transition Band                                                           0.5 × fS                24              kHz
+  Stop Band                                                         0.5625 × fS             27              kHz
+  Stop-Band Attenuation                                                       79                      dB
+  Group Delay                               fS = 8 kHz to 96 kHz                 22.9844/fS              479               µs
+                                                   fS = 192 kHz                                          35                µs
+HIGH-PASS FILTER                        All modes, typical at 48 kHz
+  Cutoff Frequency                 At −3 dB point                                             0.9375           Hz
+  Phase Deviation                  At 20 Hz                                              10                Degrees
+  Settling Time                                                                       1                  sec
+ADC DIGITAL GAIN                       All modes                                    0                60      dB
+  Gain Step Size                                                                                0.375            dB
+
+
+                                                                   Rev. B | Page 4 of 44
+
+=== PDF PAGE 5 ===
+Data Sheet                                       ADAU1978
+
+TIMING SPECIFICATIONS
+
+Table 5.
+                                 Limit at
+Parameter                Min  Max   Unit   Description
+INPUT MASTER CLOCK (MCLK)
+  Duty Cycle                 40     60   %     MCLKIN duty cycle; MCLKIN at 256 × fS, 384 × fS, 512 × fS, and 768 × fS
+   fMCLKIN                     See Table 9   MHz   MCLKIN frequency, PLL in MCLK mode
+RESET
+  Reset Pulse                15            ns     RST low
+PLL
+  Lock Time                        10    ms    MCLK mode
+I2C PORT                                         See Figure 4
+   fSCL                             400    kHz    SCL frequency
+   tSCLH                           0.6            µs     SCL high
+   tSCLL                            1.3            µs     SCL low
+   tSCS                            0.6            µs     Setup time; relevant for repeated start condition
+   tSCH                            0.6            µs     Hold time; after this period of time, the first clock pulse is generated
+   tDS                       100           ns     Data setup time
+   tDH                       0                    Data hold time
+   tSCR                             300    ns     SCL rise time
+   tSCF                             300    ns     SCL fall time
+   tSDR                             300    ns    SDA rise time
+   tSDF                             300    ns    SDA fall time
+   tBFT                            1.3            µs      Bus-free time; time between stop and start
+   tSUSTO                          0.6            µs     Setup time for stop condition
+SPI PORT                                         See Figure 3
+   fCCLK                            10    MHz   CCLK frequency
+   tCCPH                      35            ns     CCLK high
+   tCCPL                      35            ns     CCLK low
+   tCDS                      10            ns     CIN setup to CCLK rising
+   tCDH                      10            ns     CIN hold from CCLK rising
+   tCLS                       10            ns    CLATCH setup to CCLK rising
+   tCLH                      40            ns    CLATCH hold from CCLK rising
+   tCLPH                      10            ns    CLATCH high
+   tCOE                             30     ns    COUT enable from CLATCH falling
+   tCOD                             30     ns    COUT delay from CCLK falling
+   tCOTS                            30     ns    COUT tristate from CLATCH rising
+ADC SERIAL PORT                                  See Figure 2
+   tABH                      10            ns     BCLK high, slave mode
+   tABL                       10            ns     BCLK low, slave mode
+   tALS                       10            ns     LRCLK setup to BCLK rising, slave mode
+   tALH                      5              ns     LRCLK hold from BCLK rising, slave mode
+   tABDD                            18     ns    SDATAOUTx delay from BCLK falling
+
+
+
+
+
+                                                                   Rev. B | Page 5 of 44
+
+=== PDF PAGE 6 ===
+ADAU1978                                              Data Sheet
+
+Timing Diagrams
+                                       tALS
+
+             LRCLK
+
+                                                                                                                                             tALH
+                            tABH
+
+             BCLK
+
+                                      tABL
+
+                         tABDD
+         SDATAOUTx
+      LEFT JUSTIFIED              MSB       MSB – 1
+            MODE
+
+
+                                       tABDD
+         SDATAOUTx
+                I2S MODE                         MSB
+
+
+                                                         tABDD
+         SDATAOUTx
+      RIGHT JUSTIFIED                                                    MSB                           LSB
+            MODE
+
+                                               8-BIT CLOCKS
+                                                (24-BIT DATA)
+
+                                              12-BIT CLOCKS
+                                                (20-BIT DATA)
+
+                                              14-BIT CLOCKS
+                                                (18-BIT DATA)
+
+                                              16-BIT CLOCKS                                                (16-BIT DATA)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      11292-002
+                                                        Figure 2. Serial Output Port Timing
+
+
+                    tCLS                                                                                                  tCLH
+        tCOE                                                                                                                                          tCLPH
+                                                                        tCCPL
+      CLATCH                                tCCPH
+
+
+        CCLK
+
+
+           CIN
+
+                                                      tCDH
+                                 tCDS                                                                                                          tCOTS
+
+        COUT
+                                                                                                                tCOD                                                                                                                                                                                                   11292-003
+
+                                                             Figure 3. SPI Port Timing
+
+
+
+
+
+                                                             Figure 4. I2C Port Timing
+
+
+
+
+
+                                                                   Rev. B | Page 6 of 44
+
+=== PDF PAGE 7 ===
+Data Sheet                                       ADAU1978
+
+ABSOLUTE MAXIMUM RATINGS
+                                      THERMAL RESISTANCETable 6.
+Parameter                           Rating                        θJA represents junction-to-ambient thermal resistance, and
+                                                                                 θJC represents the junction-to-case thermal resistance. All
+Analog (AVDDx) Supply                 −0.3 V to +3.6 V                                                                       characteristics are for a standard JEDEC board per JESD51.
+Digital Supply
+                                                         Table 7. Thermal Resistance  DVDD                              −0.3 V to +1.98 V
+                                                        Package Type                θJA       θJC      Unit  IOVDD                             −0.3 V to +3.63 V
+                                                             40-Lead LFCSP               32.8      1.93     °C/WInput Current (Except Supply Pins)      ±20 mA
+Analog Input Voltage (Signal Pins)        –0.3 V to +3.6 V
+Digital Input Voltage (Signal Pins)        −0.3 V to +3.6 V       ESD CAUTION
+Operating Temperature Range          −40°C to +105°C
+(Ambient)
+Junction Temperature Range           −40°C to +125°C
+Storage Temperature Range            −65°C to +150°C
+
+Stresses above those listed under Absolute Maximum
+Ratings may cause permanent damage to the device. This is
+a stress rating only; functional operation of the device at
+these or any other conditions above those indicated in the
+operational section of this specification is not implied.
+Exposure to absolute maximum rating conditions for
+extended periods may affect device reliability.
+
+
+
+
+
+                                                                   Rev. B | Page 7 of 44
+
+=== PDF PAGE 8 ===
+ADAU1978                                              Data Sheet
+
+PIN CONFIGURATION AND FUNCTION DESCRIPTIONS
+
+                                                                                                                                                                      AVDD1 AIN4P AIN4N AIN3P AIN3N AIN2P AIN2N AIN1P AIN1N AVDD3
+                                                                  40 39 38 37 36 35 34 33 32 31
+
+
+                                          AGND1  1                               30 NC
+                                              VREF  2                               29 AGND6
+                                                 PLL_FILT  3                               28 AGND5
+                                            AVDD2  4      ADAU1978         27 NC
+                                          AGND2  5                               26 NC                                                          TOP VIEW
+                                                PD/RST  6          (Not to Scale)         25 NC
+                                             MCLKIN  7                               24 NC
+                                            NC  8                               23 NC
+                                        SA_MODE  9                               22 AGND4
+                                           DVDD 10                               21 AGND3
+
+
+
+                                                                  11 12 13 14 15 16 17 18 19 20
+                                                                                                                                    DGND IOVDD SDATAOUT1 SDATAOUT2 LRCLK BCLK SDA/COUT SCL/CCLK ADDR0/CLATCHADDR1/CIN
+                                       NOTES
+                                                                  1. NC = NO CONNECT. DO NOT CONNECT TO THIS PIN.
+                                                                  2. THE EXPOSED PAD MUST BE CONNECTED TO THE                                      GROUND PLANE ON THE PRINTED CIRCUIT BOARD (PCB).                      11292-005
+                                                            Figure 5. Pin Configuration
+
+
+Table 8. Pin Function Descriptions
+Pin No.      Mnemonic    Type   Description
+                                     1
+
+1          AGND1       P      Analog Ground.
+2            VREF       O      Voltage Reference. Decouple VREF to AGND with a 10 µF capacitor in parallel with a 100 nF
+                                           capacitor.
+3               PLL_FILT     O      PLL Loop Filter. Return PLL_FILT to AVDD using recommended loop filter components.
+4          AVDD2       P      Analog Power Supply. Connect AVDD2 to an analog 3.3 V supply.
+5          AGND2       P      Analog Ground.
+6            PD/RST               I       Power-Down/Reset (Active Low).
+7           MCLKIN              I       Master Clock Input.
+8, 23 to 27,   NC              No Connect. Do not connect to these pins. Leave the NC pins open.
+30
+9          SA_MODE          I       Standalone Mode. Connect SA_MODE to IOVDD using 10 kΩ pull-up resistor for
+                                     standalone mode.
+10         DVDD      O       1.8 V Digital Power Supply Output. Decouple to DGND with 100 nF and 10 µF capacitors.
+11         DGND        P        Digital Ground.
+12          IOVDD       P        Digital I/O Power Supply. Connect IOVDD to a supply from 1.8 V to 3.3 V.
+13          SDATAOUT1  O    ADC Serial Data Output Pair 1 (ADC L1 and ADC R1).
+14          SDATAOUT2  O    ADC Serial Data Output Pair 2 (ADC L2 and ADC R2).
+15           LRCLK          I/O    Frame Clock for ADC Serial Port.
+16           BCLK           I/O      Bit Clock for ADC Serial Port.
+17          SDA/COUT     I/O      Serial Data Out (I2C)/Control Data Output (SPI).
+18           SCL/CCLK           I         Serial Clock Input (I2C)/Control Clock Input (SPI).
+19          ADDR0/              I       Chip Address Bit 0 Setting (I2C)/Chip Select Input for Control Data (SPI).
+            CLATCH
+20          ADDR1/CIN        I       Chip Address Bit 1 Setting (I2C)/Control Data Input (SPI).
+
+                                                                   Rev. B | Page 8 of 44
+
+=== PDF PAGE 9 ===
+Data Sheet                                       ADAU1978
+
+
+Pin No.      Mnemonic    Type   Description
+                                     1
+
+21         AGND3       P      Analog Ground.
+22         AGND4       P      Analog Ground.
+28         AGND5       P      Analog Ground.
+29         AGND6       P      Analog Ground.
+31          AVDD3       P      Analog Power Supply. Connect AVDD3 to an analog 3.3 V supply.
+32          AIN1N                I       Analog Input Channel 1 Inverting Input.
+33           AIN1P                 I       Analog Input Channel 1 Noninverting Input.
+34          AIN2N                I       Analog Input Channel 2 Inverting Input.
+35           AIN2P                 I       Analog Input Channel 2 Noninverting Input.
+36          AIN3N                I       Analog Input Channel 3 Inverting Input.
+37           AIN3P                 I       Analog Input Channel 3 Noninverting Input.
+38          AIN4N                I       Analog Input Channel 4 Inverting Input.
+39           AIN4P                 I       Analog Input Channel 4 Noninverting Input.
+40          AVDD1       P      Analog Power Supply. Connect AVDD1 to an analog 3.3 V supply.
+             EP                   Exposed Pad. The exposed pad must be connected to the ground plane on the printed
+                                                circuit board (PCB).
+
+1 P = power, O = output, I = input, I/O = input/output.
+
+
+
+
+
+                                                                   Rev. B | Page 9 of 44
+
+=== PDF PAGE 10 ===
+ADAU1978                                              Data Sheet
+
+TYPICAL PERFORMANCE CHARACTERISTICS
+         0                                                                                  0
+       –10                                                                                  –5
+                                                                                            –10
+       –20
+                                                                                            –15
+       –30                                                                                  –20
+       –40                                                                                  –25
+       –50                                                                                  –30
+                                                                                            –35
+       –60         (dBFS)                                                                                       –40       –70                                                                                                                                                         (dB)  –45
+       –80                                                                                  –50
+       –90                                                                                  –55                                                                                                                                                                             CMRR  –60
+      –100
+                                                                                            –65              AMPLITUDE –110                                                                                  –70
+      –120                                                                                  –75
+      –130                                                                                  –80
+                                                                                            –85
+      –140
+                                                                                            –90
+      –150                                                                                  –95
+      –160                                                                                 –100
+           0    2    4    6    8    10   12   14   16   18    20                           20           100           1k           10k           20k                                                                                            FREQUENCY (Hz)                                                                                                                                                       11292-009                        FREQUENCY (kHz)                                                                                                                                              11292-006
+  Figure 6. Fast Fourier Transform, 2 mV Differential Input at fS = 48             Figure 9. CMRR Differential Input, Referenced to 200 mV Differential
+                          kHz                                                                         Input
+
+
+         0                                                                                   0
+       –10                                                                                  –10
+       –20                                                                                  –20
+       –30                                                                                  –30
+       –40                                                                                  –40
+       –50                                                                                  –50
+       –60                                                                                  –60       (dBFS)       –70                                                                                                                                                                                                                                      (dBFS)  –70
+       –80                                                                                  –80
+       –90                                                                                  –90
+      –100                                                                                  –100           AMPLITUDE –110                                                                                                                                                                                                                                                                                                                                                         AMPLITUDE –110
+      –120                                                                                  –120
+      –130                                                                                  –130
+      –140                                                                                  –140
+      –150                                                                                  –150
+      –160                                                                                  –160
+                          0.1                1                 10                                  0    2    4    6    8    10   12   14   16   18    20                        FREQUENCY (kHz)                                                                                                                                                     11292-007                                   FREQUENCY (kHz)                                                                                                                                              11292-010
+     Figure 7. Fast Fourier Transform, −1 dBFS Differential Input                             Figure 10. Fast Fourier Transform, No Input
+
+
+         0                                                                                             0.10
+       –10
+       –20                                                                                             0.08
+       –30
+                                                                                                         0.06
+       –40
+       –50                                                                                             0.04
+          (dBFS)  –60–70                                                                                                                                                         (dB)  0.02
+  N       –80                                                                                   0
+  +
+       –90
+     THD –100                                                                                          –0.02      –110                                                                                                                                                                                                                                                                                                                                                         MAGNITUDE
+                                                                                                     –0.04
+      –120
+      –130                                                                                          –0.06
+      –140
+                                                                                                     –0.08      –150
+      –160                                                                                          –0.10
+           0    0.2   0.4    0.6    0.8    1.0    1.2    1.4    1.6   1.8   2.0                            0   2000  4000  6000  8000 10000 12000 14000 16000 18000                         INPUT AMPLITUDE (V rms)                                                                                                                      11292-008                                                                                            FREQUENCY (Hz)                                                                                                                                          11292-011
+               Figure 8. THD + N vs. Input Amplitude                                     Figure 11. ADC Pass-Band Ripple at fS = 48 kHz
+
+
+
+
+
+                                                                  Rev. B | Page 10 of 44
+
+=== PDF PAGE 11 ===
+Data Sheet                                       ADAU1978
+
+
+
+          0
+
+         –10
+
+         –20
+
+         –30
+        (dB)  –40
+
+         –50
+
+         –60                  MAGNITUDE
+         –70
+
+         –80
+
+         –90
+
+        –100
+            0    5000  10000 15000                                   20000 25000                                               30000 35000 40000                          11292-012                         FREQUENCY                                                    (Hz)
+       Figure 12. ADC Filter Stop-Band Response at fS = 48 kHz
+
+
+
+
+
+                                                                  Rev. B | Page 11 of 44
+
+=== PDF PAGE 12 ===
+ADAU1978                                              Data Sheet
+
+THEORY OF OPERATION
+OVERVIEW                                                   the charge-up time for the external capacitors and on the
+                                                 AVDDx ramp-up time.
+The ADAU1978 incorporates four high performance ADCs
+                                                      The PLL is enabled a fixed amount of time after the POR isand a phase-locked loop circuit for generating the necessary
+                                                                     released. Once the PLL is provided stable clocks it has aon-chip clock signals.
+                                                maximum lock time of 10mS in MCLK mode as mentioned
+POWER SUPPLY AND VOLTAGE REFERENCE              in Table 5. Once the PLL is locked, its output (the internal
+                                                           master clock) is divided and used to provide input clocks toThe ADAU1978 requires a single 3.3 V power supply.
+                                                                the state machine.Separate power supply input pins are provided for the
+analog and boost converter. Decouple these pins to AGND         The state machine is also enabled for a fixed amount of time
+with 100 nF ceramic chip capacitors placed as close as                after the POR is released. Once the state machine has
+possible to the pins to minimize noise pickup. A bulk                     initialized, the ADC and other blocks become operational.
+aluminum electrolytic capacitor of at least 10 μF must be          The state machine initialization is not gated by PLL lock,
+provided on the same PCB as the ADC. It is important that           only the state machine enable. PLL lock can occur after state
+the analog supply be as clean as possible for                     machine enable with incorrect initialization configuration.
+best performance.                                                 In such cases, there is a risk of indeterminate ADC behavior
+                                                                       for the ADAU1978. One such instance where this couldThe supply voltage for the digital core (DVDD) is generated
+                                                              occur is if the input clocks to the PLL take a long time tousing an internal low dropout regulator. The typical DVDD
+                                                                              stabilize.output is 1.8 V and must be decoupled using a 100 nF
+ceramic capacitor and a 10 µF capacitor. Place the 100 nF           For proper initialization of the state machine, the software
+ceramic capacitor as close as possible to the DVDD pin.              configuration needs to ensure that the ADAU1978 is not
+                                                            software-powered up until the PLL lock stabilizes. Thus, inThe voltage reference for the analog blocks is generated
+                                              MCLK mode the PWUP bit (Bit [0] of Register Addressinternally and output at the VREF pin (Pin 2). The typical
+                                                          0x00) can only be asserted at least 10 mS after DVDD > 1.2voltage at the pin is 1.5 V with an AVDDx of 3.3 V.
+                                                 V and the input clocks are stable.
+All digital inputs are compatible with TTL and CMOS levels.
+All outputs are driven from the IOVDD supply. The IOVDD      POR HYSTERESIS
+can be in the 1.8 V to 3.3 V range. The IOVDD pin must be                                                       The internal power-on reset circuit is provided with hysteresis
+decoupled with a 100 nF capacitor placed as close to the                                                                    to ensure that a reset of the part is not initiated by an
+IOVDD pin as possible.                                                               instantaneous glitch on DVDD. The typical trip points are
+The ADC internal voltage reference is output from the VREF            1.2 V with PD/RST high and 0.6 V (±20%) with PD/RST low.
+pin and must be decoupled using a 100 nF ceramic                 This ensures the core is not reset until the DVDD level falls
+capacitor in parallel with a 10 µF capacitor. The VREF pin has        below the 0.6 V trip point.
+limited current capability. The voltage reference is used as a                                                        As soon as the PD/RST pin is pulled high, the internal
+reference to the ADC; therefore, it is recommended not to
+                                                                   regulator starts charging up CEXT on the DVDD pin. The DVDDdraw current from this pin for external circuits. When using
+                                                                charge-up time is based on the output resistance of thethis reference, use a noninverting amplifier buffer to
+                                                                   regulator and the external decoupling capacitor. The timeprovide a reference to other circuits in the application.
+                                                                constant can be calculated as
+In reset mode, the VREF pin is disabled to save power and is
+                                                                                           tC = ROUT × CEXT
+enabled only when the RST pin is pulled high.
+                                                       where ROUT = 20 Ω typical.
+POWER-ON RESET SEQUENCE
+                                                             For example, if CEXT is 10 µF, tC is 200 µs, and is the time that
+The ADAU1978 requires that a single 3.3 V power supply be             it takes to reach the DVDD voltage, within 63.6%.
+provided externally at the AVDDx pin. The part internally                                                       The power-on reset circuit releases an internal reset of the
+generates DVDD (1.8 V), which is used for the digital core of                                                                 core when DVDD reaches 1.2 V (see Figure 13). Therefore, it
+the ADC. The DVDD supply output pin (Pin 10) is provided                                                                                   is recommended to wait for at least the tC period to elapse
+to connect the decoupling capacitors to DGND. The typical                                                                before sending I2C or SPI control signals.
+recommended values for the decoupling capacitors are 100
+nF in parallel with 10 µF. During a reset, the DVDD regulator
+is disabled to reduce power consumption. After the PD/RST
+pin (Pin 6) is pulled high, the part enables the DVDD
+regulator. However, the internal ADC and digital core reset is
+controlled by the internal POR signal (power-on reset) circuit,
+which monitors the DVDD level. Therefore, the device does
+not come out of a reset until DVDD reaches 1.2 V and the
+POR signal is released. The DVDD settling time depends on
+
+                                                                  Rev. B | Page 12 of 44
+
+=== PDF PAGE 13 ===
+Data Sheet                                       ADAU1978
+
+
+
+                                                                                                      +3.3V
+
+
+
+                                                                     AVDD1  AVDD3  AVDD2
+
+
+
+                                                                                                  DVDD
+                                                                                                                3.3V TO 1.8V
+                                                                                REGULATOR           C       CEXT        REXT
+                                                                                                                                           0.1µF    10µF        3kΩ
+                                                                                                         MLCC X7R
+
+                                                                                 TO INTERNAL
+                                                                                    BLOCKS               +1.8V OR +3.3V
+
+                                                                                                            IOVDD
+                                                              ADAU1978
+                                                                                                         C
+                                                                                                                                                   0.1µF
+
+                  Figure 13. Power-On Reset Timing                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   11292-114
+When applying a hardware reset to the part by pulling the                        Figure 14. DVDD Regulator Output Connections
+PD/RST pin (Pin 6) low and then high, there are certain
+time restrictions. During the PD/RST low pulse period, the       PLL AND CLOCK
+DVDD starts discharging. The discharge time constant is          The ADAU1978 has a built-in analog PLL to provide a jitter-
+decided on by the internal resistance of the regulator and            free master clock to the internal ADC. The PLL must be
+CEXT. The time required for DVDD to fall from 1.8 V to 0.48 V        programmed for the appropriate input clock frequency. The
+(0.6 V − 20%) can be estimated using the following              PLL_CONTROL Register 0x01 is used for setting the PLL.
+equation:                                                      The CLK_S bit (Bit 4) of Register 0x01 is used for setting the
+     tD = 1.32 × RINT × CEXT                                          clock source for the PLL. The clock source can be either the
+where RINT = 64 kΩ typical. (RINT can vary due to process by         MCLKIN pin or the LRCLK pin (slave mode). In LRCLK
+±20%.)                                                  mode, the PLL can support sample rates between 32 kHz
+                                                       and 192 kHz.
+For example, if CEXT is 10 µF, tD is 0.845 sec.
+                                                                   In MCLK input mode, the MCS bits (Bits[2:0] of Register
+Depending on CEXT, tD may vary and, in turn, affect the mini-                                                          0x01) must be set to the desired input clock frequency for the
+mum hold period for the PD/RST pulse. The PD/RST pulse                                                   MCLKIN pin. Table 9 shows the input master clock
+must be held low for the tD time period to initialize the core                                                              frequency required for the most common sample rates and
+properly.                                                                the MCS bit settings.
+The required PD/RST low pulse period can be reduced by         The PLL_LOCK bit (Bit 7) of Register 0x01 indicates the lock
+adding a resistor across CEXT. The new tD value can then be           status of the PLL. It is recommended that after initial
+calculated as                                              power-up the PLL lock status be read to ensure that the PLL
+     tD = 1.32 × REQ × CEXT                                        outputs the correct frequency before unmuting the audio
+                                                                   outputs.
+where REQ = 64 kΩ || REXT.
+The resistor ensures that DVDD not only discharges quickly          Table 9. Required Input Master Clock Frequency for
+during a reset or an AVDDx power loss but also resets the         Common Sample Rates
+internal blocks correctly. Note that some power loss in this                             Frequency        MCLKIN
+resistor is to be expected because the resistor constantly        MCS         fS        Multiplication       Frequency
+draws current from DVDD. The typical value for CEXT is 10             (Bits[2:0])  (kHz)    Ratio             (MHz)
+µF and for REXT is 3 kΩ. This results in a time constant of                                                          000       32      128 × fS             4.096
+     tD = 1.32 × REQ × CEXT = 37.8 ms                                                          001       32      256 × fS             8.192
+where REQ = 2.866 kΩ (64 kΩ || 3 kΩ).                          010       32      384 × fS             12.288
+Using this equation at a set CEXT value, the REXT can be                011       32      512 × fS             16.384
+calculated for a desired PD/RST pulse period.                                                          100       32      768 × fS             24.576
+There is also a software reset bit (S_RST, Bit 7 of Register 0x00)        000         44.1     128 × fS             5.6448
+available that can be used to reset the part, but note that                                                          001         44.1     256 × fS             11.2896during an AVDDx power loss, the software reset may not
+                                                          010         44.1     384 × fS             16.9344ensure proper initialization because DVDD may not be
+stable.                                                    011         44.1     512 × fS             22.5792
+                                                          100         44.1     768 × fS             33.8688
+                                                          000       48      128 × fS             6.144
+
+
+                                                                  Rev. B | Page 13 of 44
+
+=== PDF PAGE 14 ===
+ADAU1978                                              Data Sheet
+
+001       48      256 × fS             12.288          ANALOG INPUTS
+010       48      384 × fS             18.432               The ADAU1978 has four differential analog inputs. The
+011       48      512 × fS             24.576              ADCs can accommodate both dc- and ac-coupled input
+100       48      768 × fS             36.864                    signals.
+000       96      64 × fS              6.144               The block diagram shown in Figure 16 represents the
+                                                                        typical input circuit.001       96      128 × fS             12.288
+                                                                    In most audio applications, the dc content of the signal is010       96      192 × fS             18.432
+                                                         removed by using a coupling capacitor. However, the
+011       96      256 × fS             24.576                                                  ADAU1978 consists of a unique input structure that allows
+100       96      384 × fS             36.864                 ac coupling of the input signals. The typical input resistance
+000       192     32 × fS              6.144                        is approximately 14 kΩ from each input to AGND.
+001       192     64 × fS              12.288               The high-pass filter has a 1.4 Hz, 6 dB per octave cutoff at a
+010       192     96 × fS              18.432              48 kHz sample rate. The cutoff frequency scales directly
+                                                             with the sample frequency. However, care is required in dc-011       192     128 × fS             24.576                                                             coupled applications to ensure that the common-mode dc
+100       192     192 × fS             36.864                  voltage does not exceed the specified limit. The input
+                                                                 required for the full-scale ADC output (0 dBFS) is typicallyThe PLL can accept the audio frame clock (sample rate
+                                                     2 V rms differential.clock)
+as the input, but the serial port must be configured as a                                                      R
+slave, and the frame clock must be fed to the part from the                      AINxP              R
+master.
+It is strongly recommended that the PLL be disabled, repro-                                                      VREF
+grammed with the new setting, and then reenabled. A lock                                                                                          R
+bit                                                                                    AINxN
+is provided that can be polled via the I2C to check whether
+the PLL has acquired lock.                                                                                 R
+The PLL requires an external filter, which is connected at                            VIDVICM+= V= INPUTVCM ATDIFFERENTIALAINxPthe PLL_FILT pin (Pin 3). The recommended PLL filter                              VICM– = VCM AT AINxN                                                                                                                                                                                                                       11292-015
+circuit for MCLK or LRCLK mode is shown in Figure 15.                                    Figure 16. Analog Input Block
+Using NPO capacitors is recommended for temperature
+stability. Place the filter components close to the device for
+best performance.
+
+      AVDDx                     AVDDx
+
+               39nF                            5.6nF
+                               2.2nF                          390pF
+               4.87kΩ                         1kΩ
+
+     PLL_FILT                      PLL_FILT
+            LRCLK MODE               MCLK MODE                                                     11292-014
+                        Figure 15. PLL Filter
+
+
+
+
+
+                                                                  Rev. B | Page 14 of 44
+
+=== PDF PAGE 15 ===
+Data Sheet                                       ADAU1978
+
+Line Inputs                                            The C1 and C2 values can be found for the required low
+                                                              frequency cutoff using the following equation:
+This section describes some of the possible ways to connect
+the line level inputs of the ADAU1978.                            C1 or C2 = 1/(2 × π × fC × Input Resistance)
+Line Input Balanced or Differential Input DC-Coupled         where the Input Resistance of the ADAU1978 is 14.3 kΩ
+Case                                                                       typical.
+                                                                 Refer to Figure 18 for information about connecting the lineFor example, for an input signal of 2 V rms differential with
+                                                                          level inputs to the ADAU1978.approximately 1.5 V common-mode dc, the signal at each
+input pin has a 1 V rms or 2.8 V p-p signal swing. With              Line Input Unbalanced or Single-Ended, Pseudo
+common-mode dc of 1.5 V, the signal can swing between             Differential AC-Coupled Case
+(1.5 V + 1.414 V) = 2.914 V to (1.5 V − 1.414 V) = 0.086 V at
+                                                             For a single-ended application, reduce the signal swing byeach input. Therefore, this is approximately 5.6 V p-p
+                                                                         half because only one input is used for the signal with thedifferential across AINxP and AINxN and measures close to
+                                                               other connected to 0 V. Doing this reduces the input signal0 dBFS (ac only with a dc high-pass filter) at the ADC output
+                                                                      capability to 1 V rms in the single-ended application and(see Figure 17).
+                                                         measures approximately −6.16 dBFS (ac only with a dc
+Line Input Balanced or Differential Input AC-Coupled           high-pass filter) at the ADC output.
+Case                                                              See Figure 19 for additional information. The value of the
+For connecting the ADAU1978 to a head unit amplifier            C1/C2 is similar to the balanced ac-coupled case previously
+output, ac coupling is recommended. In this case, the             mentioned in the Line Input Balanced or Differential Input
+AINxP/AINxN pins are at a common-mode level of 1.5 V.            AC-Coupled Case section.
+The attenuator can be used to reduce the input level if it is
+more than 2 V rms.
+
+                            TYPICAL AUDIO POWER
+                              AMPLIFIER OUTPUT
+
+                                                              AINxP
+
+
+
+                                                             AINxN
+
+                                        VDIFF = 2V rms AC
+                               VCM = 1.5V DC                     OPTION A: DIFFERENTIAL DC-COUPLED                                        11292-016
+                                     Figure 17. Connecting the Line Level Inputs—Differential DC-Coupled Case
+
+                             TYPICAL AUDIO POWER
+                               AMPLIFIER OUTPUT
+
+                                                                 C1
+                                                                         AINxP
+
+                                               ATTENUATOR
+
+                                                                        AINxN
+                                                                 C2
+
+                                                                            VDIFF = 2V rms                                                            OPTION B: DIFFERENTIAL AC-COUPLED       11292-017
+                                     Figure 18. Connecting the Line Level Inputs—Differential AC-Coupled Case
+
+                                 TYPICAL AUDIO POWER
+                                   AMPLIFIER OUTPUT
+
+                                                C1
+                                                               AINxP
+
+
+
+                                                              AINxN
+                                                C2
+
+                                            VIN = 1V rms AC
+                                                OPTION C: PSEUDO DIFFERENTIAL AC-COUPLED                 11292-018
+                                 Figure 19. Connecting the Line Level Inputs—Pseudo Differential AC-Coupled Case
+
+
+
+
+
+                                                                  Rev. B | Page 15 of 44
+
+=== PDF PAGE 16 ===
+ADAU1978                                              Data Sheet
+
+
+                                                                                      OPTION B: DIFFERENTIAL AC-COUPLED
+ADC                                                                     TYPICALOUTPUTSTEREO
+                                                                                                                 VDIFF = 2V rms
+The ADAU1978 contains four sigma-delta (Σ-Δ) ADC                                       C1          AIN1P
+channels configured as two stereo pairs with configurable
+differential/ single-ended inputs. The ADC can operate at a                                               AIN1N
+nominal sample rate of 32 kHz up to 192 kHz. The ADCs                                     C2                                                                                                          Σ
+include on-board digital antialiasing filters with 79 dB stop-
+                                                                                                                  AIN2P
+band attenuation and linear phase response. Digital outputs
+are supplied through two serial data output pins (one for                                                AIN2N
+each stereo pair) and a common frame clock (LRCLK) and
+bit clock (BCLK). Alternatively, one of the TDM modes can
+be used to support up to 16 channels on a single TDM data                                C3          AIN3P
+line.                                                                                                           AIN3N
+With smaller amplitude input signals, a 10-bit                                              C4
+programmable digital gain compensation for an individual                                                         Σ
+channel is provided to scale up the output word to full scale.                                             AIN4P
+Take care to avoid overcompensation (large gain                                                         AIN4N
+compensation), which leads to clipping and THD
+degradation in the ADC.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               11292-019
+The ADCs also have a dc offset calibration algorithm to null                 Figure 20. 2-Channel Summing Mode Connection Diagram
+the systematic dc offset of the ADC. This feature is useful for
+dc measurement applications.                             4-Channel Summing Mode
+ADC SUMMING MODES                          When the SUM_MODE Bits (Bits[7:6] of Register 0x0E) are
+                                                                      set to 10, the Channel 1 through Channel 4 ADC data are
+The four ADCs can be grouped into either a single stereo           combined and output from the SDATAOUT1 pin. As a result,
+ADC or a single mono ADC to increase the SNR for the                the SNR improves by 6 dB. For this mode, all four channels
+application. Two options are available: one option for              must be connected to the same input signal source.
+summing two channels                                                                   OPTION B: DIFFERENTIAL AC-COUPLED
+of the ADC and another option for summing all four                    TYPICALOUTPUTSTEREO
+channels of the ADC. Summing is performed in the digital                                     VDIFF = 2V rms
+block.                                                                                        C1          AIN1P
+2-Channel Summing Mode                                                                             AIN1N
+                                                                                              C2
+When the SUM_MODE bits (Bits[7:6] of Register 0x0E) are
+set to 01, the Channel 1 and Channel 2 ADC data are                                                       AIN2P
+combined and output from the SDATAOUT1 pin. Similarly, the                                            AIN2N
+Channel 3 and Channel 4 ADC data are combined and output
+from the SDATAOUT2 pin. As a result, the SNR improves by 3
+                                                                                                          Σ
+dB. For this mode, both Channel 1 and Channel 2 must be
+connected to the same input signal source. Similarly, Channel                                             AIN3P
+3 and Channel 4 must be connected to the same input signal                                             AIN3N
+source.
+
+
+                                                                                                                  AIN4P
+
+                                                                                                                AIN4N
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  11292-020
+                                                                                    Figure 21. 4-Channel Summing Mode Connection Diagram
+
+
+
+
+
+                                                                  Rev. B | Page 16 of 44
+
+=== PDF PAGE 17 ===
+Data Sheet                                       ADAU1978
+
+SERIAL AUDIO DATA OUTPUT PORTS, DATA          Stereo Mode
+FORMAT                                                        In 2-channel or stereo mode, the SDATAOUT1 outputs ADC
+                                                               data for Channel 1 and Channel 2, and the SDATOUT2The serial audio port comprises four pins: BCLK, LRCLK,
+                                                              outputs ADC data for Channel 3 and Channel 4. Figure 22SDATAOUT1, and SDATAOUT2. The ADAU1978 ADC outputs
+                                                            through Figure 24 show the supported audio formats.are available on the SDATAOUT1 and SDATAOUT2 pins in
+serial format. The BCLK and LRCLK pins serve as the bit
+clock and frame clock, respectively. The port can be operated
+as master or slave and can be set either in stereo mode (2-
+channel mode) or in TDM multichannel mode. The
+supported popular audio formats are I2S, left justified (LJ),
+and right justified (RJ).
+
+
+          BCLK
+
+
+
+
+          LRCLK
+
+
+      SDATAOUT1                   CHANNEL 1                                                  CHANNEL 2
+          (I2S MODE)
+
+                                                 8 TO 32 BCLKs                                                            8 TO 32 BCLKs
+
+      SDATAOUT2
+          (I2S MODE)                  CHANNEL 3                                                  CHANNEL 4
+
+
+     NOTES
+         1. SAI = 0.         2. SDATA_FMT = 00 (I2S).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              11292-024
+                                                            Figure 22. I2S Audio Format
+
+
+
+
+
+                                                       Figure 23. Left Justified Audio Format
+
+
+
+
+
+          BCLK
+
+
+
+
+         LRCLK
+
+
+     SDATAOUT1                                       CHANNEL 1                                                    CHANNEL 2
+        (RJ MODE)
+
+
+
+     SDATAOUT2
+        (RJ MODE)                                       CHANNEL 3                                                   CHANNEL 4
+
+     NOTES        1. SDATA_FMT = 10 (RJ, 24-BIT).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               11292-026
+                                                      Figure 24. Right Justified Audio Format
+
+
+
+
+
+                                                                  Rev. B | Page 17 of 44
+
+=== PDF PAGE 18 ===
+ADAU1978                                              Data Sheet
+
+TDM Mode                                                 During the unused slots, the output pin becomes high-Z so
+                                                                    that the same data line can be shared with other devices on
+Register 0x05 through Register 0x08 provide                                                                the TDM bus.
+programmability for the TDM mode. The TDM slot width,
+data width, and channel assignment, as well as the pin used        The TDM port can be operated as either a master or a slave.
+to output the data, are programmable.                              In master mode, the BCLK and LRCLK are output from the
+                                                      ADAU1978, whereas in slave mode, the BCLK and LRCLK pins
+By default, serial data is output on the SDATAOUT1 pin;                                                                are set to receive the clock from the master in the system.
+however, the SDATA_SEL bit (Bit 7 of Register 0x06) can be
+used to change the setting so that serial data is output from        Both the nonpulse and pulse modes are supported. In
+the SDATAOUT2 pin.                                          nonpulse mode, the LRCLK signal is typically 50% of the duty
+                                                                               cycle, whereas in pulse mode, the LRCLK signal must be at
+The TDM mode supports two, four, eight, or 16 channels. The                                                                           least one BCLK wide (see Figure 25 and Figure 26).
+ADAU1978 outputs four channels of data in the assigned
+slots (Figure 27 shows the TDM mode slot assignments).
+
+
+
+
+      BCLK
+
+                                       32/24/16 BCLKs                                     32/24/16 BCLKs                                               32/24/16 BCLKs
+
+
+     LRCLK
+
+
+
+  SDATA I2S                       CHANNEL 1                             CHANNEL 2                                     CHANNEL N
+
+                                   8 TO 32 BCLKs                                 8 TO 32 BCLKs                                          8 TO 32 BCLKs
+
+
+   SDATA LJ        CHANNEL 1                                    CHANNEL 2                                            CHANNEL N
+
+                         8 TO 32 BCLKs                                 8 TO 32 BCLKs                                          8 TO 32 BCLKs
+
+
+  SDATA I2S                           CHANNEL 1                           CHANNEL 2                                   CHANNEL N
+
+                                          24 OR 16 BCLKs                                 24 OR 16 BCLKs                                         24 OR 16 BCLKs
+
+
+
+  NOTES
+   1. SAI = 001 (2 CHANNELS), 010 (4 CHANNELS), 011 (8 CHANNELS), 100 (16 CHANNELS).
+   2. SDATA_FMT = 00 (I2S), 01 (LJ), 10 (RJ, 24-BIT), 11 (RJ, 16-BIT).
+   3. BCLKEDGE = 0.
+   4. LR_MODE = 0.   5. SLOT_WIDTH = 00 (32 BCLKs), 01 (24 BCLKs), 10 (16 BCLKs).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         11292-027
+                                                   Figure 25. TDM Nonpulse Mode Audio Format
+
+
+
+
+
+     BCLK
+
+                                       32/24/16 BCLKs                                     32/24/16 BCLKs                                               32/24/16 BCLKs
+
+
+     LRCLK
+
+
+
+  SDATA I2S                       CHANNEL 1                             CHANNEL 2                                     CHANNEL N
+
+                                  8 TO 32 BCLKs                                 8 TO 32 BCLKs                                          8 TO 32 BCLKs
+
+
+  SDATA LJ        CHANNEL 1                                    CHANNEL 2                                            CHANNEL N
+
+                         8 TO 32 BCLKs                                 8 TO 32 BCLKs                                          8 TO 32 BCLKs
+
+
+  SDATA I2S                           CHANNEL 1                          CHANNEL 2                                   CHANNEL N
+
+                                          24 OR 16 BCLKs                                 24 OR 16 BCLKs                                         24 OR 16 BCLKs
+
+
+
+  NOTES
+   1. SAI = 001 (2 CHANNELS), 010 (4 CHANNELS), 011 (8 CHANNELS), 100 (16 CHANNELS)
+   2. SDATA_FMT = 00 (I2S), 01 (LJ), 10 (RJ, 24-BIT), 11 (RJ, 16-BIT)
+   3. BCLKEDGE = 0
+   4. LR_MODE = 1   5. SLOT_WIDTH = 00 (32 BCLKs), 01 (24 BCLKs), 10 (16 BCLKs)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 11292-028
+                                                     Figure 26. TDM Pulse Mode Audio Format
+
+
+
+
+
+                                                                  Rev. B | Page 18 of 44
+
+=== PDF PAGE 19 ===
+Data Sheet                                       ADAU1978
+
+
+
+              LRCLK
+
+
+                                NUMBER OF BCLK CYCLES = (NUMBER OF BCLKs/SLOT) × NUMBER OF SLOTS
+              BCLK
+
+
+    SDATAOUTx—TDM2                                         SLOT1                                                                              SLOT2
+
+
+    SDATAOUTx—TDM4                    SLOT1                                    SLOT2                                     SLOT3                                    SLOT4
+
+
+    SDATAOUTx—TDM8          SLOT1               SLOT2                SLOT3               SLOT4                SLOT5                SLOT6                SLOT7                SLOT8
+
+
+   SDATAOUTx—TDM16    SLOT1     SLOT2      SLOT3     SLOT4     SLOT5     SLOT6     SLOT7     SLOT8     SLOT9     SLOT10    SLOT11    SLOT12    SLOT13     SLOT14    SLOT15     SLOT16
+
+
+
+
+
+                              DATA WIDTH
+                                            16/24 BITS
+                     HIGH-Z                    HIGH-Z
+
+                                   SLOT WIDTH
+                                                16/24/32 BITS
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           11292-029
+                                                       Figure 27. TDM Mode Slot Assignment
+
+Table 10. Bit Clock Frequency TDM Mode
+                                                      BCLK Frequency
+Mode                         16-Bit Clocks Per Slot          24-Bit Clocks Per Slot          32-Bit Clocks Per Slot
+TDM2                       32 × fS                      48 × fS                      64 × fS
+TDM4                       64 × fS                      96 × fS                      128 × fS
+TDM8                       128 × fS                     192 × fS                     256 × fS
+TDM16                      256 × fS                     384 × fS                     512 × fS
+
+
+The bit clock frequency depends on the sample rate, the slot         frame. There are two options in this case: either operate
+width, and the number of bit clocks per slot. Table 10 can be        with a 32-bit data width in TDM4 or operate with a 16-bit
+used to calculate the BCLK frequency.                             data width in TDM8. In slave mode, this limitation does not
+                                                                          exist because the bit clock and frame clock are fed to theThe sample rate (fS) can range from 8 kHz up to 192 kHz.
+                                                      ADAU1978. Various combinations of BCLK frequencies andHowever, in master mode, the maximum bit clock frequency
+                                                    modes are available, but take care to choose the(BCLK) is 24.576 MHz. For example, for a sample rate of
+                                                            combination that is most suitable for the application.192 kHz, 128 × fS is the maximum possible BCLK frequency.
+Therefore, only 128-bit clock cycles are available per TDM
+
+
+
+
+
+                                                                  Rev. B | Page 19 of 44
+
+=== PDF PAGE 20 ===
+ADAU1978                                              Data Sheet
+
+Connection Options                                                                            Master
+Figure 28 through Figure 32 show the available options for                       SLAVE                       SLAVE
+connecting the serial audio port in I2S or TDM mode. In                   ADAU1978                     DSP
+TDM mode, it is recommended to include the pull-down
+resistor on the data signal to prevent the line from floating                          BCLK
+when the SDATAOUTx pin of the ADAU1978 becomes high-Z                        LRCLK
+during an inactive period. The resistor value should be such                    SDATAOUTx
+that no more than 2 mA is drawn from the SDATAOUTx pin.
+Although the resistor value is typically in the 10 kΩ to 47 kΩ
+range, the appropriate resistor value depends on the                           MASTER
+devices on the data bus.                                           ADAU1978
+                                                                         OR
+           MASTER                      SLAVE                                        SIMILIAR ADC
+        ADAU1978                     DSP                                       BCLK
+
+                                                                                   LRCLK
+                BCLK                                                           SDATAOUTx
+               LRCLK                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     11292-034
+           SDATAOUT1
+           SDATAOUT2                                                                                                                                                                                                                                                11292-030                     Figure 31. Serial Port ConnectionMasterOption 4—TDM Mode, Second ADC
+  Figure 28. Serial Port Connection Option 1—I2S/Left Justified/Right                       SLAVE                     MASTER
+                    Justified Modes, ADAU1978 Master                           ADAU1978                     DSP
+
+             SLAVE                     MASTER
+        ADAU1978                     DSP                                       BCLK
+                                                                                   LRCLK
+
+                                                                               SDATAOUTx                BCLK
+
+               LRCLK
+
+           SDATAOUT1
+           SDATAOUT2                                                                                                                                                                                                                                                11292-033                      ADAU1978SLAVE
+  Figure 29. Serial Port Connection Option 2—I2S/Left Justified/Right                         SIMILIAROR ADC
+                     Justified Modes, ADAU1978 Slave
+                                                                                  BCLK
+           MASTER                       SLAVE                                      LRCLK
+        ADAU1978                     DSP                                   SDATAOUTx
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   11292-032
+                BCLK
+                                                                               Figure 32. Serial Port Connection Option 5—TDM Mode, DSP Master
+               LRCLK
+
+           SDATAOUTx
+
+
+
+
+            SLAVE
+        ADAU1978
+            OR
+            SIMILIAR ADC
+
+                BCLK
+
+               LRCLK
+           SDATAOUTx                                                                                                                                                                                                                                                    11292-031
+ Figure 30. Serial Port Connection Option 3—TDM Mode, ADAU1978
+
+
+
+
+
+                                                                  Rev. B | Page 20 of 44
+
+=== PDF PAGE 21 ===
+Data Sheet                                       ADAU1978
+
+CONTROL PORTS
+The ADAU1978 control port allows two modes of operation,         to the part. However, to operate the PLL, serial audio ports,
+either 2-wire I2C mode or 4-wire SPI mode, that are used for       and boost converter, the master clock is necessary.
+setting the internal registers of the part. Both the I2C and                                                     By default, the ADAU1978 operates in I2C mode, but the part
+SPI modes allow read and write capability of the registers.                                                             can be put into SPI mode by pulling the CLATCH pin low three
+All the registers are eight bits wide. The registers start at                                                                       times.
+Address 0x00 and end at Address 0x1A.
+                                                      The control port pins are multifunctional, depending on the
+The control port in both I2C and SPI modes is slave only and,                                                 mode in which the part is operating. Table 11 describes the
+therefore, requires the master in the system to operate. The                                                                   control port pin functions in both modes.
+registers can be accessed with or without the master clock
+
+
+Table 11. Control Port Pin Functions
+                                                          I2C Mode                                 SPI Mode
+Pin No.    Mnemonic            Pin Function                   Pin Type      Pin Function             Pin Type
+17        SDA/COUT          SDA data                        I/O         COUT output data      O
+18         SCL/CCLK             SCL clock                                           I            CCLK input clock                    I
+19         ADDR0/CLATCH          I2C Device Address Bit 0                   I           CLATCH input                         I
+20         ADDR1/CIN              I2C Device Address Bit 1                   I            CIN input data                       I
+
+
+
+
+
+                                                                  Rev. B | Page 21 of 44
+
+=== PDF PAGE 22 ===
+ADAU1978                                              Data Sheet
+
+I2C MODE                                            The SDA pin can sink 2 mA of current; therefore, the
+                                                 minimum value of RPULL UP for an IOVDD of 3.3 V is 1.5 kΩ.
+The ADAU1978 supports a 2-wire serial (I2C-compatible)
+                                                         Depending on the capacitance of the board, the speed of thebus protocol. Two pins, serial data (SDA) and serial clock
+                                                          bus can be restricted to meet the rise time and fall time(SCL), are used to communicate with the system I2C master
+                                                                            specifications.controller. In I2C mode, the ADAU1978 is always a slave on the
+bus, meaning that it cannot initiate a data transfer. Each             For fast mode with a bit rate time of around 1 Mbps, the rise
+slave device on the I2C bus is recognized by a unique device         time must be less than 550 ns. Use the following equation to
+address. The device address and R/W byte for the ADAU1978        determine whether the rise time specification can be met:
+are shown in Table 12. The address resides in the first seven                                                                                           t = 0.8473 × RPULL UP × CBOARD
+bits of the I2C write. Bit 7 and Bit 6 of the I2C address for the
+                                                       where CBOARD must be less than 236 pF to meet the 300 nsADAU1978 are set by the levels on the ADDR1 and ADDR0
+                                                                         rise time requirement.pins. The LSB of the first I2C byte (the R/W bit) from the
+master identifies whether it is a read or write operation.            For the SCL pin, the calculations depend on the current sink
+Logic Level 1 in the LSB (Bit 0) corresponds to a read                capability of the I2C master used in the system.
+operation, and Logic Level 0 corresponds to a write                                                      Addressing
+operation.
+                                                                                           Initially, each device on the I2C bus is in an idle state and
+Table 12. I2C First Byte Format                                 monitors the SDA and SCL lines for a start condition and the
+                    Bit    Bit    Bit    Bit    Bit    Bit          proper address. The I2C master initiates a data transfer by
+Bit 7     Bit 6    5     4     3     2     1     0            establishing a start condition, defined by a high-to-low
+                                                                      transition on SDA while SCL remains high. This indicatesADDR1  ADDR0  1     0     0     0     1    R/W
+                                                                    that an address/data stream follows. All devices on the bus
+                                                           respond to the start condition and acquire the next eight bits
+The first seven bits of the I2C chip address for the                 from the master (the 7-bit address plus the R/W bit) MSB
+ADAU1978 are xx10001. Bit 7 and Bit 6 of the address byte             first. The master sends the 7-bit device address with the
+can be set using the ADDR1 and ADDR0 pins to set the chip      R/W bit to all the slaves on the bus. The device with the
+address to the desired value.                                   matching address responds by pulling the data line (SDA)
+                                                        low during the ninth clock pulse. This ninth bit is known asThe 7-bit I2C device address can be set to one of four of the
+                                                        an acknowledge bit. All other devices withdraw from thefollowing possible options using the ADDR1 and ADDR0
+                                                          bus at this point and return to the idle condition.pins:
+                                                       The R/W bit determines the direction of the data. A Logic 0 on•   I2C Device Address 0010001 (0x11)
+                                                                  the LSB of the first byte means that the master is to write•   I2C Device Address 0110001 (0x31)
+                                                                  information to the slave, whereas a Logic 1 means that the•   I2C Device Address 1010001 (0x51)
+                                                           master is to read information from the slave after writing the
+•   I2C Device Address 1110001 (0x71)                                                                address and repeating the start address. A data transfer takes
+In I2C mode, both the SDA and SCL pins require that an              place until a master initiates a stop condition. A stop
+appropriate pull-up resistor be connected to IOVDD. Ensure         condition occurs when SDA transitions from low to high
+that the voltage on these signal lines does not exceed the           while SCL is held high.
+voltage on the IOVDD pin. Figure 44 shows a typical                Stop and start conditions can be detected at any stage during
+connection diagram for the I2C mode.                                                                  the data transfer. If these conditions are asserted out of
+The value of the pull-up resistor for the SDA or SCL pin can         sequence during normal read and write operations, the
+be calculated as follows.                                 ADAU1978 immediately jumps to the idle condition.
+   Minimum RPULL UP = (IOVDD − VIL)/ISINK                         Figure 33 and Figure 34 use the following abbreviations:
+where:                                            ACK = acknowledge
+IOVDD is the I/O supply voltage, typically ranging from 1.8 V      No ACK = no acknowledge
+up to 3.3 V.
+VIL is the maximum voltage at Logic Level 0 (that is, 0.4 V, as
+per the I2C specifications).
+ISINK is the current sink capability of the I/O pin.
+
+
+
+
+
+                                                                  Rev. B | Page 22 of 44
+
+=== PDF PAGE 23 ===
+Data Sheet                                       ADAU1978
+
+
+
+          0     1     2     3     4     5     6     7     8     9     10    11    12    13    14    15    16    17    18    19    20    21    22    23    24    25    26    27
+
+    SCL
+
+
+                        FIRST BYTE (DEVICE ADDRESS)                  SECOND BYTE (REGISTER ADDRESS)                            THIRD BYTE (DATA)
+
+    SDA     ADDR1 ADDR0   1     0       0       0        1     R/W
+        START                                              ACK                                                 ACK                                          STOP                                                                  ADAU1978                                                   ADAU1978                                                                                                                                                                                                                                                                                                                         11292-035
+                                                   Figure 33. I2C Write to ADAU1978, Single Byte
+
+
+
+
+
+                                                  Figure 34. I2C Read from ADAU1978, Single Byte
+
+
+
+
+
+                                                                  Rev. B | Page 23 of 44
+
+=== PDF PAGE 24 ===
+ADAU1978                                              Data Sheet
+
+I2C Read and Write Operations                                  issue a repeated start command followed by the chip address
+                                                               byte with the R/W bit set to 1 (read). This causes the
+Figure 35 shows the format of a single-word I2C write
+                                                  ADAU1978 SDA to reverse and begin driving data back tooperation. Every ninth clock pulse, the ADAU1978 issues an
+                                                                the master. The master then responds every ninth pulseacknowledge by pulling SDA low.
+                                                             with an acknowledge pulse to the ADAU1978.
+Figure 36 shows the format of a burst mode write sequence.
+                                                                Figure 38 shows the format of a burst mode read sequence.This figure shows an example of a write to sequential single-
+                                                                This figure shows an example of a read from sequentialbyte registers. The ADAU1978 increments its address
+                                                                     single-byte registers. The ADAU1978 increments its addressregister after every byte because the requested address
+                                                                       registers after every byte because the ADAU1978 uses an 8-corresponds to a register or memory area with a 1-byte
+                                                                               bit register address.word length.
+                                                                Figure 35 to Figure 38 use the following abbreviations:Figure 37 shows the format of a single-word I2C read
+                                                           S = start bitoperation. Note that the first R/W bit is 0, indicating a write                                                    P = stop bit
+operation. This is because the address still needs to be written                                         AM = acknowledge by master
+to set up the internal address. After the ADAU1978                                                     AS = acknowledge by slave
+acknowledges the receipt of the address, the master must
+
+
+                             S    CHIP ADDRESS,   AS   REGISTER ADDRESS   AS      DATA BYTE      P
+                                      R/W = 0                   8 BITS                                                                                                                                                                                                                                                                                               11292-037
+                                                     Figure 35. Single-Word I2C Write Format
+
+
+
+
+                       S    CHIP    AS REGISTER   CHIP   AS  DATA  AS  DATA  AS  DATA  AS  DATA  AS    ...  P
+                           ADDRESS,      ADDRESS ADDRESS,     BYTE 1     BYTE 2    BYTE 3     BYTE 4
+                            R/W = 0          8 BITS   R/W = 0                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        11292-038
+                                                      Figure 36. Burst Mode I2C Write Format
+
+
+
+                              S      CHIP     AS    REGISTER    AS   S      CHIP     AS    DATA  P
+                                    ADDRESS,        ADDRESS              ADDRESS,         BYTE 1
+                                     R/W = 0             8 BITS                R/W = 1                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 11292-039
+                                                      Figure 37. Single-Word I2C Read Format
+
+
+
+
+                           S    CHIP    AS  REGISTER  AS S    CHIP    AS  DATA  AM  DATA  AM    ...  P
+                                ADDRESS,      ADDRESS         ADDRESS,      BYTE 1     BYTE 2
+                                R/W = 0          8 BITS           R/W = 1                                                                                                                                                                                                                                                                                         11292-040
+                                                      Figure 38. Burst Mode I2C Read Format
+
+
+
+
+
+                                                                  Rev. B | Page 24 of 44
+
+=== PDF PAGE 25 ===
+Data Sheet                                       ADAU1978
+
+SPI MODE                                                Register Address
+By default, the ADAU1978 is in I2C mode. To invoke SPI            The 8-bit address word is decoded to a location in one of
+control mode, pull CLATCH low three times. This can be done           the registers. This address is the location of the appropriate
+by performing three dummy writes to the SPI port (the                   register.
+ADAU1978 does not acknowledge these three writes, see          Data Bytes
+Figure 39). Beginning with the fourth SPI write, data can be
+                                                      The number of data bytes varies according to the registerwritten to or read from the device. The ADAU1978 can be
+                                                              being accessed. During a burst mode write, an initial registertaken out of SPI mode only by a full reset initiated by power
+                                                               address is written followed by a continuous sequence of datacycling the device.
+                                                                          for consecutive register locations.
+The SPI port uses a 4-wire interface, consisting of the
+                                               A sample timing diagram for a single-word SPI writeCLATCH, CCLK, CIN, and COUT signals, and it is always a slave
+                                                                operation to a register is shown in Figure 40. A sampleport. The CLATCH signal goes low at the beginning of a
+                                                                timing diagram of a single-word SPI read operation istransaction and high at the end of a transaction. The CCLK
+                                                    shown in Figure 41. The COUT pin goes from being high-Zsignal latches COUT on a low-to-high transition. COUT data
+                                                                    to being driven at the beginning of Byte 3. In this example,is shifted out of the ADAU1978 on the falling edge of CCLK
+                                                             Byte 0 to Byte 1 contain the device address, the R/W bit,and is clocked into a receiving device, such as a
+                                                       and the register address to be read. Subsequent bytes carrymicrocontroller, on the CCLK rising edge. The CIN signal
+                                                                the data from the device.carries the serial input data, and the COUT signal carries the
+serial output data. The COUT signal remains tristated until a       Standalone Mode
+read operation is requested. This allows direct connection to
+                                                      The ADAU1978 can also operate in standalone mode.other SPI-compatible peripheral COUT ports for sharing the
+                                                            However, in standalone mode, the boost converter,same system controller port. All SPI transactions have the
+                                                         microphone bias, and diagnostics blocks are powered down.same basic generic control word format, as shown in Table
+                                                          To set the part in standalone mode, pull the SA_MODE pin to15. A timing diagram is shown in Figure 3. Write all data
+                                                          IOVDD. In this mode, some pins change functionality toMSB first.
+                                                                provide more flexibility (see Table 14 for more information).
+Chip Address R/W
+                                                         Table 14. Pin Functionality in Standalone Mode
+The LSB of the first byte of an SPI transaction is a R/W bit. This                                                              Pin
+bit determines whether the communication is a read (Logic                                                              Function1      Setting   Description
+Level 1) or a write (Logic Level 0). This format is shown in
+                                                 ADDR0        0           I2S SAI formatTable 13.
+                                                                       1      TDM modes, determined by the
+Table 13. SPI Address and R/W Byte Format                                     SDATAOUT2 pin
+Bit 7   Bit 6   Bit 5   Bit 4   Bit 3   Bit 2   Bit 1   Bit 0                                                 ADDR1        0         Master mode SAI
+0      0      0      0      0      0      0     R/W                      1          Slave mode SAI
+                                                  SDA          0       MCLK = 256 × fS, PLL on
+                                                                       1       MCLK = 384 × fS, PLL on
+                                                         SCL           0        48 kHz sample rate
+                                                                       1        96 kHz sample rate
+                                                    SDATAOUT2    0       TDM4—LRCLK pulse
+                                                                       1       TDM8—LRCLK pulse
+
+                                                                                                        1 Pin functionality, not full pin names, is listed. See Table 11 for additional
+                                                                                    information.
+
+
+Table 15. Generic Control Word Format
+Byte 0                       Byte 1                       Byte 2                       Byte 31
+Device Address[6:0], R/W        Register Address[7:0]             Data[7:0]                         Data[7:0]
+
+1 Continues to end of data.
+
+
+
+
+
+                                                                  Rev. B | Page 25 of 44
+
+=== PDF PAGE 26 ===
+ADAU1978                                              Data Sheet
+
+
+
+             0    1    2    3    4    5    6    7    8    9   10   11   12   13   14   15   16   17   18   19   20   21   22   23   24   25   26   27
+   CLATCH
+
+
+     CCLK
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              11292-041
+        CIN
+                                                       Figure 39. SPI Mode Initial Sequence
+
+
+
+                  0    1    2    3    4    5    6    7    8    9   10   11   12   13   14   15   16   17   18   19   20   21   22   23   24   25
+
+        CLATCH
+
+
+          CCLK
+
+                           DEVICE ADDRESS (7 BITS)  R/W                                                           REGISTER ADDRESS BYTE                   DATA BYTE                                                                                                                                 11292-042             CIN
+                                       Figure 40. SPI Write to ADAU1978 Clocking (Single-Word Write Mode)
+
+
+
+                 0    1    2    3    4    5    6    7    8    9   10   11   12   13   14   15   16   17   18   19   20   21   22   23   24   25
+         CCLK
+
+
+       CLATCH
+
+                      DEVICE ADDRESS (7 BITS)
+                                                        REGISTER ADDRESS BYTE                     DATA BYTE
+            CIN
+                                              R/W
+        COUT                                                                         DATA BYTE FROM ADAU1978                                                                                           11292-043
+                                      Figure 41. SPI Read from ADAU1978 Clocking (Single-Word Read Mode)
+
+
+
+
+
+                                                 Figure 42. SPI Write to ADAU1978 (Multiple Bytes)
+
+
+
+
+
+                                                Figure 43. SPI Read from ADAU1978 (Multiple Bytes)
+
+
+
+
+
+                                                                  Rev. B | Page 26 of 44
+
+=== PDF PAGE 27 ===
+Data Sheet                                       ADAU1978
+
+REGISTER SUMMARY
+Table 16. REGMAP_ADAU1978 Register Summary
+Reg Name               Bits Bit 7         Bit 6               Bit 5         Bit 4          Bit 3             Bit 2        Bit 1        Bit 0       Reset  RW
+0x00 M_POWER            [7:0] S_RST                                     RESERVED                          PWUP      0x00   RW
+0x01 PLL_CONTROL       [7:0] PLL_LOCK   PLL_MUTE       RESERVED   CLK_S       RESERVED               MCS               0x41   RW
+0x02 RESERVED            [7:0]                                          RESERVED                                                Reserved Reserved
+0x03 RESERVED            [7:0]                                          RESERVED                                                Reserved Reserved
+0x04 BLOCK_POWER_SAI [7:0] LR_POL     BCLKEDGE       LDO_EN    VREF_EN     ADC_EN4      ADC_EN3  ADC_EN2   ADC_EN1   0x3F   RW
+0x05 SAI_CTRL0            [7:0]        SDATA_FMT                             SAI                                  FS                0x02   RW
+0x06 SAI_CTRL1            [7:0] SDATA_SEL         SLOT_WIDTH        DATA_WIDTH LR_MODE      SAI_MSB   BCLKRATE  SAI_MS     0x00   RW
+0x07 SAI_CMAP12         [7:0]                   CMAP_C2                                   CMAP_C1                    0x10   RW
+0x08 SAI_CMAP34         [7:0]                   CMAP_C4                                   CMAP_C3                    0x32   RW
+0x09 SAI_OVERTEMP      [7:0] SAI_DRV_C4 SAI_DRV_C3      SAI_DRV_C2 SAI_DRV_C1  DRV_HIZ       RESERVED  RESERVED  OT         0xF0   RW
+0x0A POSTADC_GAIN1    [7:0]                                        PADC_GAIN1                                          0xA0   RW
+0x0B POSTADC_GAIN2    [7:0]                                        PADC_GAIN2                                          0xA0   RW
+0x0C POSTADC_GAIN3    [7:0]                                        PADC_GAIN3                                          0xA0   RW
+0x0D POSTADC_GAIN4    [7:0]                                        PADC_GAIN4                                          0xA0   RW
+0x0E MISC_CONTROL     [7:0]       SUM_MODE        RESERVED  MMUTE                  RESERVED             DC_CAL    0x02   RW
+0x0F RESERVED            [7:0]         RESERVED                RESERVED              RESERVED              RESERVED       0xFF   RW
+0x10 RESERVED            [7:0]                    RESERVED                    RESERVED     RESERVED  RESERVED  RESERVED  0x0F   RW
+0x11 RESERVED            [7:0] RESERVED  RESERVED       RESERVED  RESERVED   RESERVED     RESERVED  RESERVED  RESERVED  0x00   RW
+0x12 RESERVED            [7:0] RESERVED  RESERVED       RESERVED  RESERVED   RESERVED     RESERVED  RESERVED  RESERVED  0x00   RW
+0x13 RESERVED            [7:0] RESERVED  RESERVED       RESERVED  RESERVED   RESERVED     RESERVED  RESERVED  RESERVED  0x00   RW
+0x14 RESERVED            [7:0] RESERVED  RESERVED       RESERVED  RESERVED   RESERVED     RESERVED  RESERVED  RESERVED  0x00   RW
+0x15 RESERVED            [7:0] RESERVED  RESERVED       RESERVED  RESERVED   RESERVED     RESERVED  RESERVED  RESERVED  0x20   RW
+0x16 RESERVED            [7:0] RESERVED  RESERVED       RESERVED  RESERVED   RESERVED     RESERVED  RESERVED  RESERVED  0x00   RW
+0x17 RESERVED            [7:0]         RESERVED                RESERVED              RESERVED              RESERVED       Reserved Reserved
+0x18 RESERVED            [7:0]         RESERVED                RESERVED       RESERVED     RESERVED  RESERVED  RESERVED  Reserved Reserved
+0x19 ASDC_CLIP           [7:0]                    RESERVED                     ADC_CLIP4     ADC_CLIP3 ADC_CLIP2  ADC_CLIP1  0x00   RW
+0x1A DC_HPF_CAL         [7:0] DC_SUB_C4 DC_SUB_C3      DC_SUB_C2 DC_SUB_C1   DC_HPF_C4     DC_HPF_C3 DC_HPF_C2 DC_HPF_C1 0x00   RW
+
+
+
+
+
+                                                                  Rev. B | Page 27 of 44
+
+=== PDF PAGE 28 ===
+ADAU1978                                              Data Sheet
+
+REGISTER DETAILS
+MASTER POWER AND SOFT RESET REGISTER
+Address: 0x00, Reset: 0x00, Name: M_POWER
+The power management control register is used for enabling the boost regulator, microphone bias, PLL, band gap reference, ADC,
+and LDO regulator.
+
+
+
+
+
+Table 17. Bit Descriptions for M_POWER
+Bits   Bit Name   Settings  Description                                                               Reset  Access
+7     S_RST                 Software Reset. The software reset resets all internal circuitry and all control        0x0   RW
+                                  registers to their respective default states. It is not necessary to reset the
+                       ADAU1978 during a power-up or power-down cycle.
+                       0  Normal Operation.
+                       1  Software Reset.
+[6:1]  RESERVED             Reserved.                                                                0x00  RW
+0    PWUP                Master Power-Up Control. The master power-up control fully powers up or         0x0   RW
+                          powers down the ADAU1978. This must be set to 1 to power up the ADAU1978.
+                                Individual blocks can be powered down via their respective power control
+                                   registers.
+                       0   Full Power-Down.
+                       1  Master Power-Up.
+
+
+
+
+
+                                                                  Rev. B | Page 28 of 44
+
+=== PDF PAGE 29 ===
+Data Sheet                                       ADAU1978
+
+PLL CONTROL REGISTER
+Address: 0x01, Reset: 0x41, Name: PLL_CONTROL
+
+
+
+
+
+Table 18. Bit Descriptions for PLL_CONTROL
+Bits     Bit Name      Settings     Description                                                                                  Reset    Access
+7      PLL_LOCK                 PLL Lock Status. PLL lock status bit. When set to 1, the PLL is locked.                                     0x0     R
+                         0   PLL Not Locked.
+                         1   PLL Locked.
+6      PLL_MUTE                 PLL Unlock Automute. When set to 1, it mutes the ADC output if PLL becomes unlocked.                   0x1    RW
+                         0  No Automatic Mute on PLL Unlock.
+                         1   Automatic Mute with PLL Unlock.
+5      RESERVED                   Reserved.                                                                                   0x0    RW
+4      CLK_S                     PLL Clock Source Select. Selecting input clock source for PLL.                                          0x0    RW
+                         0  MCLK Used for PLL Input.
+                         1   LRCLK Used for PLL Input; Only Supported for Sample Rates in the range of 32 kHz to 192 kHz.
+3      RESERVED                   Reserved.                                                                                   0x0    RW
+[2:0]   MCS                      Master Clock Select. MCS bits determine the frequency multiplication ratio of the PLL. It must be set based     0x1    RW
+                            on the input MCLK frequency and sample rate.
+                         001   256 × fS MCLK for 32 kHz up to 48 kHz (see the PLL and Clock section for other sample rates).
+                         010   384 × fS MCLK for 32 kHz up to 48 kHz (see the PLL and Clock section for other sample rates).
+                         011   512 × fS MCLK for 32 kHz up to 48 kHz (see the PLL and Clock section for other sample rates).
+                         100   768 × fS MCLK for 32 kHz up to 48 kHz (see the PLL and Clock section for other sample rates).
+                         000   128 × fS MCLK for 32 kHz up to 48 kHz (see the PLL and Clock section for other sample rates).
+                         101   Reserved.
+                         110   Reserved.
+                         111   Reserved.
+
+
+                                                                  Rev. B | Page 29 of 44
+
+=== PDF PAGE 30 ===
+ADAU1978                                              Data Sheet
+
+BLOCK POWER CONTROL AND SERIAL PORT CONTROL REGISTER
+Address: 0x04, Reset: 0x3F, Name: BLOCK_POWER_SAI
+
+
+
+
+
+Table 19. Bit Descriptions for BLOCK_POWER_SAI
+Bits   Bit Name   Settings   Description                                                                   Reset   Access
+7     LR_POL                  Sets LRCLK Polarity                                                             0x0   RW
+                       0  LRCLK Low then High
+                       1  LRCLK High then Low
+6    BCLKEDGE               Sets the Bit Clock Edge on Which Data Changes                                     0x0   RW
+                       0  Data Changes on Falling Edge
+                       1  Data Changes on Rising Edge
+5    LDO_EN            LDO Regulator Enable                                                           0x1   RW
+                       0  LDO Powered Down
+                       1  LDO Enabled
+4     VREF_EN               Voltage Reference Enable                                                        0x1   RW
+                       0   Voltage Reference Powered Down
+                       1   Voltage Reference Enabled
+3    ADC_EN4           ADC Channel 4 Enable                                                           0x1   RW
+                       0  ADC Channel Powered Down
+                       1  ADC Channel Enabled
+2    ADC_EN3           ADC Channel 3 Enable                                                           0x1   RW
+                       0  ADC Channel Powered Down
+                       1  ADC Channel Enabled
+1    ADC_EN2           ADC Channel 2 Enable                                                           0x1   RW
+                       0  ADC Channel Powered Down
+                       1  ADC Channel Enabled
+0    ADC_EN1           ADC Channel 1 Enable                                                           0x1   RW
+                       0  ADC Channel Powered Down
+                       1  ADC Channel Enabled
+
+
+
+                                                                  Rev. B | Page 30 of 44
+
+=== PDF PAGE 31 ===
+Data Sheet                                       ADAU1978
+
+SERIAL PORT CONTROL REGISTER 1
+Address: 0x05, Reset: 0x02, Name: SAI_CTRL0
+
+
+
+
+
+Table 20. Bit Descriptions for SAI_CTRL0
+Bits      Bit Name         Settings      Description                                              Reset     Access
+[7:6]    SDATA_FMT                          Serial Data Format                                        0x0     RW
+                                00   I2S Data Delayed from Edge of LRCLK by 1 BCLK
+                                01   Left Justified
+                                10   Right Justified, 24-Bit Data
+                                11   Right Justified, 16-Bit Data
+[5:3]     SAI                                   Serial Port Mode                                          0x0     RW
+                               000   Stereo (I2S, LJ, RJ)
+                               001  TDM2
+                               010  TDM4
+                               011  TDM8
+                               100  TDM16
+[2:0]     FS                            Sampling Rate                                            0x2     RW
+                               000  8 kHz to 12 kHz
+                               001  16 kHz to 24 kHz
+                               010  32 kHz to 48 kHz
+                               011  64 kHz to 96 kHz
+                               100  128 kHz to 192 kHz
+
+
+
+
+
+                                                                  Rev. B | Page 31 of 44
+
+=== PDF PAGE 32 ===
+ADAU1978                                              Data Sheet
+
+SERIAL PORT CONTROL REGISTER 2
+Address: 0x06, Reset: 0x00, Name: SAI_CTRL1
+
+
+
+
+
+Table 21. Bit Descriptions for SAI_CTRL1
+Bits      Bit Name          Settings     Description                                                       Reset    Access
+7       SDATA_SEL                 SDATAOUTx Pin Selection in TDM4 or Greater Modes                    0x0    RW
+                                 0  SDATAOUT1 used for output
+                                 1  SDATAOUT2 used for output
+[6:5]    SLOT_WIDTH                Number of BCLKs per Slot in TDM Mode                               0x0    RW
+                                00  32 BCLKs per TDM slot
+                                01  24 BCLKs per TDM slot
+                                10  16 BCLKs per TDM slot
+                                11   Reserved
+4      DATA_WIDTH                  Output Data Bit Width                                               0x0    RW
+                                 0   24-bit data
+                                 1   16-bit data
+3      LR_MODE                        Sets LRCLK Mode                                                   0x0    RW
+                                 0  50% duty cycle clock
+                                 1  Pulse—LRCLK is a single BCLK cycle wide pulse
+2       SAI_MSB                         Sets Data to be Input/Output Either MSB or LSB First                     0x0    RW
+                                 0  MSB first data
+                                 1  LSB first data
+1       BCLKRATE                        Sets the Number of Bit Clock Cycles per Data Channel Generated When in   0x0    RW
+                                       Master Mode
+                                 0  32 BCLKs/channel
+                                 1  16 BCLKs/channel
+0       SAI_MS                           Sets the Serial Port into Master or Slave Mode                           0x0    RW
+                                 0  LRCLK/BCLK slave
+                                 1  LRCLK/BCLK master
+
+                                                                  Rev. B | Page 32 of 44
+
+=== PDF PAGE 33 ===
+Data Sheet                                       ADAU1978
+
+CHANNEL 1 AND CHANNEL 2 MAPPING FOR OUTPUT SERIAL PORTS REGISTER
+Address: 0x07, Reset: 0x10, Name: SAI_CMAP12
+
+
+
+
+
+Table 22. Bit Descriptions for SAI_CMAP12
+Bits     Bit Name         Settings    Description                                                    Reset    Access
+[7:4]    CMAP_C2                ADC Channel 2 Output Mapping                                  0x1    RW
+                            0000   Slot 1 for Channel
+                            0001   Slot 2 for Channel
+                            0010   Slot 3 for Channel (on SDATAOUT2 in stereo modes)
+                            0011   Slot 4 for Channel (on SDATAOUT2 in stereo modes)
+                            0100   Slot 5 for Channel (TDM8+ only)
+                            0101   Slot 6 for Channel (TDM8+ only)
+                            0110   Slot 7 for Channel (TDM8+ only)
+                            0111   Slot 8 for Channel (TDM8+ only)
+                            1000   Slot 9 for Channel (TDM16 only)
+                            1001   Slot 10 for Channel (TDM16 only)
+                            1010   Slot 11 for Channel (TDM16 only)
+                            1011   Slot 12 for Channel (TDM16 only)
+                            1100   Slot 13 for Channel (TDM16 only)
+                            1101   Slot 14 for Channel (TDM16 only)
+                            1110   Slot 15 for Channel (TDM16 only)
+
+                                                                  Rev. B | Page 33 of 44
+
+=== PDF PAGE 34 ===
+ADAU1978                                              Data Sheet
+
+
+Bits     Bit Name         Settings    Description                                                    Reset    Access
+                            1111   Slot 16 for Channel (TDM16 only)
+[3:0]    CMAP_C1                ADC Channel 1 Output Mapping. If CMAP is set to a slot that does     0x0    RW
+                                     not exist for a given serial mode, that channel is not driven. For
+                                      example, if CMAP is set to Slot 9 and the serial format is I2S, that
+                                      channel is not driven. If more than one channel is set to the same
+                                                   slot, only the lowest channel number is driven; other channels are not
+                                            driven.
+                            0000   Slot 1 for Channel
+                            0001   Slot 2 for Channel
+                            0010   Slot 3 for Channel (on SDATAOUT2 in stereo modes)
+                            0011   Slot 4 for Channel (on SDATAOUT2 in stereo modes)
+                            0100   Slot 5 for Channel (TDM8+ only)
+                            0101   Slot 6 for Channel (TDM8+ only)
+                            0110   Slot 7 for Channel (TDM8+ only)
+                            0111   Slot 8 for Channel (TDM8+ only)
+                            1000   Slot 9 for Channel (TDM16 only)
+                            1001   Slot 10 for Channel (TDM16 only)
+                            1010   Slot 11 for Channel (TDM16 only)
+                            1011   Slot 12 for Channel (TDM16 only)
+                            1100   Slot 13 for Channel (TDM16 only)
+                            1101   Slot 14 for Channel (TDM16 only)
+                            1110   Slot 15 for Channel (TDM16 only)
+                            1111   Slot 16 for Channel (TDM16 only)
+
+
+
+
+
+                                                                  Rev. B | Page 34 of 44
+
+=== PDF PAGE 35 ===
+Data Sheet                                       ADAU1978
+
+CHANNEL 3 AND CHANNEL 4 MAPPING FOR OUTPUT SERIAL PORTS REGISTER
+Address: 0x08, Reset: 0x32, Name: SAI_CMAP34
+
+
+
+
+
+Table 23. Bit Descriptions for SAI_CMAP34
+Bits    Bit Name    Settings    Description                                                                           Reset   Access
+[7:4]   CMAP_C4           ADC Channel 4 Output Mapping                                                         0x3   RW
+                     0000   Slot 1 for Channel
+                     0001   Slot 2 for Channel
+                     0010   Slot 3 for Channel (on SDATAOUT2 in stereo modes)
+                     0011   Slot 4 for Channel (on SDATAOUT2 in stereo modes)
+                     0100   Slot 5 for Channel (TDM8+ only)
+                     0101   Slot 6 for Channel (TDM8+ only)
+                     0110   Slot 7 for Channel (TDM8+ only)
+                     0111   Slot 8 for Channel (TDM8+ only)
+                     1000   Slot 9 for Channel (TDM16 only)
+                     1001   Slot 10 for Channel (TDM16 only)
+                     1010   Slot 11 for Channel (TDM16 only)
+                     1011   Slot 12 for Channel (TDM16 only)
+                     1100   Slot 13 for Channel (TDM16 only)
+                     1101   Slot 14 for Channel (TDM16 only)
+                     1110   Slot 15 for Channel (TDM16 only)
+                     1111   Slot 16 for Channel (TDM16 only)
+                                                                  Rev. B | Page 35 of 44
+
+=== PDF PAGE 36 ===
+ADAU1978                                              Data Sheet
+
+
+Bits    Bit Name    Settings    Description                                                                           Reset   Access
+[3:0]   CMAP_C3           ADC Channel 3 Output Mapping                                                         0x2   RW
+                     0000   Slot 1 for Channel
+                     0001   Slot 2 for Channel
+                     0010   Slot 3 for Channel (on SDATAOUT2 in stereo modes)
+                     0011   Slot 4 for Channel (on SDATAOUT2 in stereo modes)
+                     0100   Slot 5 for Channel (TDM8+ only)
+                     0101   Slot 6 for Channel (TDM8+ only)
+                     0110   Slot 7 for Channel (TDM8+ only)
+                     0111   Slot 8 for Channel (TDM8+ only)
+                     1000   Slot 9 for Channel (TDM16 only)
+                     1001   Slot 10 for Channel (TDM16 only)
+                     1010   Slot 11 for Channel (TDM16 only)
+                     1011   Slot 12 for Channel (TDM16 only)
+                     1100   Slot 13 for Channel (TDM16 only)
+                     1101   Slot 14 for Channel (TDM16 only)
+                     1110   Slot 15 for Channel (TDM16 only)
+                     1111   Slot 16 for Channel (TDM16 only)
+
+SERIAL OUTPUT DRIVE CONTROL AND OVERTEMPERATURE PROTECTION STATUS REGISTER
+Address: 0x09, Reset: 0xF0, Name: SAI_OVERTEMP
+
+
+
+
+
+Table 24. Bit Descriptions for SAI_OVERTEMP
+Bits   Bit Name     Settings   Description                                                                Reset    Access
+7     SAI_DRV_C4             Channel 4 Serial Output Drive Enable.                                          0x1    RW
+
+                                                                  Rev. B | Page 36 of 44
+
+=== PDF PAGE 37 ===
+Data Sheet                                       ADAU1978
+
+
+Bits   Bit Name     Settings   Description                                                                Reset    Access
+                         0  Channel Not Driven on Serial Output Port.
+                         1  Channel Driven on Serial Output Port. Slot determined by CMAP_4.
+6     SAI_DRV_C3             Channel 3 Serial Output Drive Enable.                                          0x1    RW
+                         0  Channel Not Driven on Serial Output Port.
+                         1  Channel Driven on Serial Output Port. Slot determined by CMAP_3.
+5     SAI_DRV_C2             Channel 2 Serial Output Drive Enable.                                          0x1    RW
+                         0  Channel Not Driven on Serial Output Port.
+                         1  Channel Driven on Serial Output Port. Slot determined by CMAP_2.
+4     SAI_DRV_C1             Channel 1 Serial Output Drive Enable.                                          0x1    RW
+                         0  Channel Not Driven on Serial Output Port.
+                         1  Channel Driven on Serial Output Port. Slot determined by CMAP_1.
+3     DRV_HIZ                   Select whether to tristate unused SAI channels or actively drive these data slots.      0x0    RW
+                         0  Unused outputs driven low.
+                         1  Unused outputs High-Z.
+[2:1]  RESERVED               Reserved                                                                  0x0     R
+0    OT                      Overtemperature Status.                                                     0x0     R
+                         0  Normal Operation.
+                         1   Overtemperature Fault.
+
+POST ADC GAIN CHANNEL 1 CONTROL REGISTER
+Address: 0x0A, Reset: 0xA0, Name: POSTADC_GAIN1
+
+
+
+
+
+Table 25. Bit Descriptions for POSTADC_GAIN1
+Bits        Bit Name                Settings            Description                               Reset        Access
+[7:0]      PADC_GAIN1                               Channel 1 Post ADC Gain                  0xA0      RW
+                                        00000000  +60 dB Gain
+                                        00000001  +59.625 dB Gain
+                                        00000010  +59.25 dB Gain
+                                                                                                                     ...      ...
+                                        10011111  +0.375 dB Gain
+                                        10100000  0 dB Gain
+                                        10100001  −0.375 dB Gain
+                                                                                                                     ...      ...
+                                        11111110  −35.625 dB Gain
+                                        11111111  Mute
+
+                                                                  Rev. B | Page 37 of 44
+
+=== PDF PAGE 38 ===
+ADAU1978                                              Data Sheet
+
+POST ADC GAIN CHANNEL 2 CONTROL REGISTER
+Address: 0x0B, Reset: 0xA0, Name: POSTADC_GAIN2
+
+
+
+
+
+Table 26. Bit Descriptions for POSTADC_GAIN2
+Bits        Bit Name               Settings           Description                             Reset       Access
+[7:0]      PADC_GAIN2                             Channel 2 Post ADC Gain                0xA0     RW
+                                      00000000  +60 dB Gain
+                                      00000001  +59.625 dB Gain
+                                      00000010  +59.25 dB Gain
+                                                                                                              ...     ...
+                                      10011111  +0.375 dB Gain
+                                      10100000  0 dB Gain
+                                      10100001  −0.375 dB Gain
+                                                                                                              ...     ...
+                                      11111110  −35.625 dB Gain
+                                      11111111  Mute
+
+POST ADC GAIN CHANNEL 3 CONTROL REGISTER
+Address: 0x0C, Reset: 0xA0, Name: POSTADC_GAIN3
+
+
+
+
+
+Table 27. Bit Descriptions for POSTADC_GAIN3
+Bits        Bit Name               Settings           Description                             Reset       Access
+[7:0]      PADC_GAIN3                             Channel 3 Post ADC Gain                0xA0     RW
+                                      00000000  +60 dB Gain
+                                      00000001  +59.625 dB Gain
+                                      00000010  +59.25 dB Gain
+                                                                                                              ...     ...
+                                      10011111  +0.375 dB Gain
+                                      10100000  0 dB Gain
+
+                                                                  Rev. B | Page 38 of 44
+
+=== PDF PAGE 39 ===
+Data Sheet                                       ADAU1978
+
+
+Bits        Bit Name               Settings           Description                             Reset       Access
+                                      10100001  −0.375 dB Gain
+                                                                                                              ...     ...
+                                      11111110  −35.625 dB Gain
+                                      11111111  Mute
+
+POST ADC GAIN CHANNEL 4 CONTROL REGISTER
+Address: 0x0D, Reset: 0xA0, Name: POSTADC_GAIN4
+
+
+
+
+
+Table 28. Bit Descriptions for POSTADC_GAIN4
+Bits     Bit Name         Settings    Description                                                    Reset    Access
+[7:0]    PADC_GAIN4                 Channel 4 Post ADC Gain                                      0xA0   RW
+                        00000000  +60 dB Gain
+                        00000001  +59.625 dB Gain
+                        00000010  +59.25 dB Gain
+                                                                             ...     ...
+                        10011111  +0.375 dB Gain
+                        10100000  0 dB Gain
+                        10100001  −0.375 dB Gain
+                                                                             ...     ...
+                        11111110  −35.625 dB Gain
+                        11111111  Mute
+
+
+
+
+
+                                                                  Rev. B | Page 39 of 44
+
+=== PDF PAGE 40 ===
+ADAU1978                                              Data Sheet
+
+HIGH-PASS FILTER AND DC OFFSET CONTROL REGISTER AND MASTER MUTE REGISTER
+Address: 0x0E, Reset: 0x02, Name: MISC_CONTROL
+
+
+
+
+
+Table 29. Bit Descriptions for MISC_CONTROL
+Bits    Bit Name       Settings    Description                                                      Reset    Access
+[7:6]   SUM_MODE                Channel Summing Mode Control for Higher SNR                      0x0    RW
+                           00  Normal 4-Channel Operation
+                           01  2-Channel Summing Operation (See the ADC Summing Modes Section)
+                           10  1-Channel Summing Operation (See the ADC Summing Modes Section)
+                           11  Reserved
+5     RESERVED                  Reserved                                                        0x0    RW
+4    MMUTE                    Master Mute                                                     0x0    RW
+                            0  Normal Operation
+                            1   All Channels Muted
+[3:1]   RESERVED                  Reserved                                                        0x0    RW
+0     DC_CAL               DC Calibration Enable                                             0x0    RW
+                            0  Normal Operation
+                            1  Perform DC Calibration
+
+
+
+
+
+                                                                  Rev. B | Page 40 of 44
+
+=== PDF PAGE 41 ===
+Data Sheet                                       ADAU1978
+
+ADC CLIPPING STATUS REGISTER
+Address: 0x19, Reset: 0x00, Name: ASDC_CLIP
+
+
+
+
+
+Table 30. Bit Descriptions for ASDC_CLIP
+Bits        Bit Name             Settings          Description                               Reset        Access
+[7:4]      RESERVED                             Reserved                                  0x0      RW
+3         ADC_CLIP4                      ADC Channel 4 Clip Status                   0x0        R
+                                          0  Normal Operation
+                                          1  ADC Channel Clipping
+2         ADC_CLIP3                      ADC Channel 3 Clip Status                   0x0        R
+                                          0  Normal Operation
+                                          1  ADC Channel Clipping
+1         ADC_CLIP2                      ADC Channel 2 Clip Status                   0x0        R
+                                          0  Normal Operation
+                                          1  ADC Channel Clipping
+0         ADC_CLIP1                      ADC Channel 1 Clip Status                   0x0        R
+                                          0  Normal Operation
+                                          1  ADC Channel Clipping
+
+
+
+
+
+                                                                  Rev. B | Page 41 of 44
+
+=== PDF PAGE 42 ===
+ADAU1978                                              Data Sheet
+
+DIGITAL DC HIGH-PASS FILTER AND CALIBRATION REGISTER
+Address: 0x1A, Reset: 0x00, Name: DC_HPF_CAL
+
+
+
+
+
+Table 31. Bit Descriptions for DC_HPF_CAL
+Bits      Bit Name          Settings       Description                                            Reset     Access
+7      DC_SUB_C4                      Channel 4 DC Subtraction from Calibration                 0x0     RW
+                                  0  No DC Subtraction
+                                  1  DC Value from DC Calibration Is Subtracted
+6      DC_SUB_C3                      Channel 3 DC Subtraction from Calibration                 0x0     RW
+                                  0  No DC Subtraction
+                                  1  DC Value from DC Calibration Is Subtracted
+5      DC_SUB_C2                      Channel 2 DC Subtraction from Calibration                 0x0     RW
+                                  0  No DC Subtraction
+                                  1  DC Value from DC Calibration Is Subtracted
+4      DC_SUB_C1                      Channel 1 DC Subtraction from Calibration                 0x0     RW
+                                  0  No DC Subtraction
+                                  1  DC Value from DC Calibration Is Subtracted
+3      DC_HPF_C4                      Channel 4 DC High-Pass Filter Enable                      0x0     RW
+                                  0  HPF Off
+                                  1  HPF On
+2      DC_HPF_C3                      Channel 3 DC High-Pass Filter Enable                      0x0     RW
+                                  0  HPF Off
+                                  1  HPF On
+1      DC_HPF_C2                      Channel 2 DC High-Pass Filter Enable                      0x0     RW
+                                  0  HPF Off
+                                  1  HPF On
+0      DC_HPF_C1                      Channel 1 DC High-Pass Filter Enable                      0x0     RW
+                                  0  HPF Off
+                                  1  HPF On
+
+
+                                                                  Rev. B | Page 42 of 44
+
+=== PDF PAGE 43 ===
+Data Sheet                                       ADAU1978
+
+TYPICAL APPLICATION CIRCUIT
+
+
+
+                                                                                                +3.3V
+
+
+                                                                                                 10µF
+                                                                                C12        MLCC X7R
+                                                                                             0.1µF
+
+
+                                                                                   C13
+                                                                                                0.1µF
+
+
+
+                                                                                      C14
+                                                                                                   0.1µF                     * FOR MORE INFORMATION ABOUT CALCULATING THE VALUE
+                                                                                         FOR REXT, SEE THE POWER-ON RESET SEQUENCE SECTION.                                                                                                                                                                                                            AVDD1 AVDD3 AVDD2
+
+                                                                                                     3.3V TO 1.8V       DVDD
+                                                                          REGULATOR
+                                                                                                               C15     C16
+                            ADAU1978                                                         0.1µF    10µF        REXT*
+                                                                                                    MLCC X7R
+
+                                                                                                                            +1.8V OR +3.3V
+              MAX                      INPUT 2V rms                                                                                                                      AVDD1 AVDD3                      IOVDD                    DIFFERENTIAL                                      AIN1P                                                                                                GAIN                             C7                      LINE1            AIN1N                              ADC                              PORT                         0.1µF
+                                      AIN2P                                                         LRCLK
+                      LINE2            AIN2N                              ADC                      BCLK                                      AIN3P                                                                                                                                               AUDIO        SDATAOUT1             TO DSP                      LINE3            AIN3N                              ADC                                                     CALIBRATION            SDATAOUT2
+                                      AIN4P                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   DECIMATOR/HPFDC
+                                                                 ADC                      LINE4            AIN4N                                                                                                                                                                                                                                                                                                                 SERIAL                                    IOVDD                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            PROGRAMMABLE
+                                                                                                                         R9  R10  R11  R12       R16
+                                                             AGND1     AGND3
+                                                                                                     SCL/CCLK
+                                                                  AVDD2                         SDA/COUT
+                                                                                                               I2C/SPI         ADDR1/CIN                                                                                                                                   MICRO-                                                         BG      PLL                                                                REF                                                                            CONTROL                                                                                                  ADDR0/CLATCH            CONTROLLER
+
+                                                                                                        PD/RST
+                                                           AGND2   AGND2
+                                                                                                                    R13     R14
+
+                                                                                   NOTES                                                                                                                    AGND1 AGND2 AGND3 AGND4 AGND5 AGND6    DGND                                                                                                                                         1.                                                                                                                  R9,                                                                                                   R10                                                                                                          = TYPICAL                                                                                                                         2                                                                                                      KOHM.                                                                                                                                                           VREF          MCLKIN            PLL_FILT             SA_MODE                                                               C18      C19                                                                                                                                         2.                                                                                                R11                                                                                    THROUGH                                                                                                            R14                                                                                                   USED                                                                                                   FOR SETTING THE DEVICE IN I 2C MODE.
+                                                                 10µF      0.1µF                           3. R16 = TYPICAL 47 KOHM.
+                                                                                                                                         4. PLL LOOP FILTER:
+
+                                                                                        C21
+                                                                                C20
+                                                                                        R17                    PLL INPUT OPTION
+                                                                                                      LRCLK  MCLK
+
+                                                                                                         R17     4.87kΩ   1kΩ
+                                                                                            +3.3V (AVDD2)            C20    2200pF   390pF                                                                                                         C21    39nF     5600pF                                                                                                                                                                      11292-046
+                                         Figure 44. Typical Application Circuit, Four Inputs, I2C and I2S Mode
+
+
+
+
+
+                                                                  Rev. B | Page 43 of 44
+
+=== PDF PAGE 44 ===
+ADAU1978                                              Data Sheet
+
+OUTLINE DIMENSIONS
+
+
+
+                                                           6.10                                     0.30
+                                                           6.00 SQ                                  0.25
+                                  PIN 1              5.90                                     0.18
+                          INDICATOR                                                                                                                                 31                          40       PIN 1                                                                                                       INDICATOR
+                                                                                                                                  30                       1
+                                                                                         0.50
+                                                             BSC                                                                                           EXPOSED             4.05
+                                                                                                PAD                3.90 SQ
+                                                                                                                                 3.75
+
+
+
+                                                                                                                                  21                      10
+
+                                                                                                                                 20                                                                                        0.45                                                                                                                                                             11      0.25 MIN                                        TOP VIEW                                                                         BOTTOM VIEW                                                                                        0.40
+                                                                                        0.35              FOR PROPER CONNECTION OF
+                                       0.80                                                  THE EXPOSED PAD, REFER TO
+                                       0.75                                                  THE PIN CONFIGURATION AND
+                                                                                    0.05 MAX             FUNCTION DESCRIPTIONS
+                                       0.70                                                                                    0.02 NOM             SECTION OF THIS DATA SHEET.
+                                                                 COPLANARITY
+                                                                                             0.08
+                          SEATING                                      0.20 REF
+                         PLANE
+                                             COMPLIANT TO JEDEC STANDARDS MO-220-WJJD.                                                                                                                                                                                                                                                     05-06-2011-A
+                                          Figure 45. 40-Lead Lead Frame Chip Scale Package [LFCSP_WQ]
+                                            6 mm × 6 mm Body, Very Very Thin Quad
+                                                               (CP-40-14)
+                                                   Dimensions shown in millimeters
+
+
+ORDERING GUIDE
+Model1, 2                  Temperature Range         Package Description                Package Option
+ADAU1978WBCPZ            –40°C to +105°C             40-Lead LFCSP_WQ                  CP-40-14
+ADAU1978WBCPZ-RL         –40°C to +105°C             40-Lead LFCSP, 13” Tape and Reel       CP-40-14
+EVAL-ADAU1978Z                                             Evaluation Board
+
+1 Z = RoHS Compliant Part.
+2 W = Qualified for Automotive Applications.
+
+AUTOMOTIVE PRODUCTS
+The ADAU1978WBCPZ models are available with controlled manufacturing to support the quality and reliability requirements of
+automotive applications. Note that these automotive models may have specifications that differ from the commercial models;
+therefore, designers should review the Specifications section of this data sheet carefully. Only the automotive grade products
+shown are available for use in automotive applications. Contact your local Analog Devices account representative for specific
+product ordering information and to obtain the specific Automotive Reliability reports for these models.
+
+
+
+
+
+I2C refers to a communications protocol originally developed by Philips Semiconductors (now NXP Semiconductors).
+
+
+
+©2014‒2024 Analog Devices, Inc. All rights reserved. Trademarks
+and registered trademarks are the property of their respective
+owners.
+
+                                                                  Rev. B | Page 44 of 44

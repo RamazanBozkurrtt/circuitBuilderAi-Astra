@@ -1,0 +1,403 @@
+
+=== PDF PAGE 1 ===
+Engineer-to-Engineer Note        EE-470
+
+                    Technical notes on using Analog Devices products and development tools
+                              Visit our Web resources http://www.analog.com/ee-notes and http://www.analog.com/processors
+                          or e-mail processor.support@analog.com or processor.tools.support@analog.com for technical
+                         support.
+
+ADSP-2156x Power Sequencing Requirements
+
+Contributed by Shivakumar Puran and Prasanth Rajagopal                             Rev 1 – February 17, 2025
+
+Introduction
+This application note explains the power sequencing requirements for ADSP-2156x processors. It
+describes the impact of indeterminate output voltage (also known as power-on glitch) on various I/O
+pins during power supply ramp-up. It provides mitigation strategies, power supply design examples,
+and reference implementations of a power sequence.
+
+Power Sequencing
+There are a few critical requirements for power sequencing that include maintaining the VDELTA_EXT_REF
+voltage between VDD_EXT and VDD_REF and VDD_ANA within +/-1.89V. This specification must
+always be met, including during power-up, reset, and power-down phases. Failure to meet this
+requirement can impact functionality and damage the IC. Figure 1 shows the power up and power down
+parameters.
+
+
+
+
+
+Figure 1:Power-up and Power-down Voltage Delta Requirement.
+
+Another important factor given in the processor data sheet[1] is that any I/O pin operating in the
+VDD_EXT power domain (such as GPIO pins, DAI pins, SYS_HWRST, SYS_RESOUT, and so on),
+can momentarily drive until the VDD_SUPPLY rails are powered up. This behavior can cause an
+indeterminate voltage glitch on the I/O pins during the power sequencing. Once VDD_REF reaches a
+
+
+Copyright 2025, Analog Devices, Inc. All rights reserved. Analog Devices assumes no responsibility for customer product design or the use or application of
+customers’ products or for any infringements of patents or rights of others which may result from Analog Devices assistance. All trademarks and logos are
+property of their respective holders. Information furnished by Analog Devices applications and development tools engineers is believed to be accurate and
+reliable, however no responsibility is assumed by Analog Devices regarding technical accuracy and topicality of the content provided in Analog Devices Engineer-
+to-Engineer Notes.
+
+=== PDF PAGE 2 ===
+stable voltage acceptable by the chip, the glitch on the I/O pins settles to a defined stable state. Refer
+to Appendix A for a list of affected I/O pins.
+Glitch details and conditions cannot be quantified and can vary based on process variation, temperature,
+board conditions, etc. Systems that share these signals on the board must determine whether there are
+any issues that must be addressed. Hence, the power circuit must be carefully designed.
+
+I/O Pin Behavior during Power Supply Ramping
+During power-up, when the VDD_EXT supply starts to ramp up, the voltage on I/O pins operating in
+the VDD_EXT domain also rises in proportion to the voltage on the VDD_EXT power rail. The
+indeterminate voltage rise in I/O pins can be seen until VDD_REF reaches stable voltage. Once the
+VDD_REF voltage is stable, the I/O pins will not be driven, and the voltage starts settling to a defined
+voltage logic state.
+Figure 2 shows the behavior of an I/O pin during power supply ramp-up. In this case, two pins are
+considered for probing purposes, DAI0_PIN0 and SYS_HWRST on the ADSP-21569 SOM board[9].
+
+
+
+
+
+Figure 2: Indeterminate Voltage on I/O pins during Power-up.
+
+       The same delta VDELTA_EXT_REF voltage applies to power down sequencing. Indeterminate
+         voltage can also occur during power-down sequencing.
+
+Mitigating Indeterminate Voltage
+The indeterminate output voltage on I/O pins appears only when VDD_EXT is ramped-up first. To
+avoid any indeterminate voltage drive on the I/O pins during power-on, the VDD_REF supply can be
+ramped-up first followed by VDD_EXT while still maintaining the required VDELTA_EXT_REF voltage.
+
+
+
+
+ADSP-2156x Power Sequencing Requirements (EE-470)                               Page 2 of 14
+
+=== PDF PAGE 3 ===
+Figure 3 shows the modified default power sequencing as captured on the EV-21569-SOM board[9].
+The image shows that the indeterminate voltage can be mitigated by supplying VDD_REF first
+followed by VDD_EXT.
+In this case, the I/O pads are fully isolated. In cases where the pads are not isolated, it is possible to see
+small voltage levels while probing due to board parasitic or external circuitry. However, the processor
+does not drive the pins during power supply ramping.
+
+
+
+
+
+Figure 3:VDD_REF Supply Ramping First followed by VDD_EXT
+
+
+Impact of the Indeterminate Voltage on Applications
+Indeterminate voltage can impact the processor at the system level. The following use cases provide
+examples of the impact.
+
+Example Case 1:
+In Figure 4, the processor is sharing a common reset or I/O signal between the SoC or memory device.
+During power-up, the processor, SoC, and memory devices must be in a valid reset logic state until all
+supply rails are stable. Any indeterminate voltage glitch on the reset or I/O signals due to I/O pins of
+the processor can be interpreted by input pins as logic 1 or 0. This behavior can enable or disable the
+SoC/memory devices erratically for a short duration. It causes the SoC to execute partial instructions
+or incomplete writes to memory and can potentially cause a catastrophic issue.
+
+
+
+
+
+ADSP-2156x Power Sequencing Requirements (EE-470)                               Page 3 of 14
+
+=== PDF PAGE 4 ===
+Figure 4: Reset Shared between Processor and SoC/Memory Device
+
+Example Case 2:
+Figure 5 shows another scenario that can occur when interfacing the processor with an FPGA. Most
+semiconductor devices have internal protection circuits to make the devices more resistant to stray
+electric fields and currents. Typically, ESD protection for I/O pins consists of diodes connected to the
+power supplies. During an ESD event, these diodes conduct ESD energy into the power supplies, where
+it is absorbed either by the clamp or bypass capacitors. In most cases, the ESD protection on the I/O
+pins is not an issue because the device typically cannot drive the input or output pins into a problematic
+state.
+However, during power-up, if a processor is turned-on before the interfaced FPGA/SoC devices, a
+problem can occur. The indeterminate voltage glitch from the processor pins can force the ESD diodes
+to conduct and provide a path for current to flow through the diode; it then becomes a weak power
+supply for the FPGA/SoC. In this case, the device behavior can become quite erratic. It can potentially
+affect the start-up of the FPGA/SoC and, possibly, damage the device.
+
+
+
+
+
+Figure 5:ADSP Interfaced with FPGA/SoC device with Typical on-chip ESD Protection
+
+
+
+ADSP-2156x Power Sequencing Requirements (EE-470)                               Page 4 of 14
+
+=== PDF PAGE 5 ===
+Example Case 3:
+In some systems, when the reset input of the processor is monitored by the fault detection pin of the
+power regulator, a problem can occur. See Figure 6 for an example configuration. During the start-up
+of the power supplies, any indeterminate voltage glitch on the SYS_HWRSTb pin can falsely trigger
+the fault detection, causing the power regulators to disable the power supplies. The fault pin detects the
+indeterminate voltage glitch each time the power supplies attempt to ramp up. This behavior leads to a
+deadlock state whenever the power regulators reinitialize the power supply start-up sequence.
+
+
+
+
+
+Figure 6:. SYS_HWRSTb /IO Pin Monitored by Fault Input of Power Regulator
+
+
+Mitigation Strategies
+To address the indeterminate voltage issues, use the power sequencing outlined in this application note.
+Maintaining VDELTA_EXT_REF voltage within +/-1.89V is mandatory under all the conditions. If
+maintaining the power sequencing of VDD_REF ramping-up first followed by VDD_EXT is not
+feasible, use the following methods to mitigate the indeterminate voltage on I/O pins at the system
+level.
+        These strategies are not verified on ADI evaluation boards. Instead, they are meant as reference
+          strategies for implementation. Customers must do thorough board simulation and testing before         finalizing any scheme.
+
+
+Case 1 :
+For SYS_HWRSTb input, use supervisory ICs to manage the reset, power-up and power-down
+sequences. This configuration ensures  stable voltage  rails. See Figure  7. By implementing a
+supervisory/reset driver IC, any indeterminate voltage from the processor on the SYS_HWRST pin
+during power-up will not impact the actual system or SoC.
+
+
+
+ADSP-2156x Power Sequencing Requirements (EE-470)                               Page 5 of 14
+
+=== PDF PAGE 6 ===
+Figure 7: Reset Driver IC Interfaced with ADSP-2156x Processor
+
+Case 2:
+For I/O pins, use a bidirectional buffer IC between the processor and SoC. This configuration helps
+avoid the impact of indeterminate voltage on system operation. For an active-high I/O pin requirement,
+it is supposed to be pulled-up to logic high; therefore, any indeterminate voltage on I/O pins during
+power supply ramping is not an issue.
+
+Power Supply Design Examples
+Careful power supply circuit design can help mitigate the indeterminate voltage on I/O pins. Figure 8
+through Figure 11 are some design examples of power supply circuits suitable for processors. The
+examples show power sequencing with VDD_REF ramping-up  first followed by VDD_EXT to
+mitigate indeterminate voltage on I/O pins. Additionally, the VDELTA_EXT_REF requirement is also met.
+These examples include regulators from ADI.
+       These design examples are not verified on ADI evaluation boards. They are meant as
+         reference strategies for implementation. Customers must do thorough board simulation and         testing to ensure proper sequencing is maintained during both power-up and power-down
+        before finalizing any scheme.
+
+Implementation 1:
+Figure 8 shows the implementation of the VDD_REF and VDD_EXT power supply reference design
+in LTspice[4]. Use a common input supply source for the DC-DC regulators of VDD_EXT and
+VDD_REF. By controlling the enable pin of the VDD_EXT regulator from the output of the VDD_REF
+regulator, VDD_REF ramps up first followed by VDD_EXT. Figure 9 shows the power sequence
+simulation waveform. If the regulator supports a soft start feature, adjust the value of the soft start
+capacitor  of  the VDD_EXT  regulator  to maintain  the power-up sequence and  VDELTA_EXT_REF
+requirement.
+
+
+
+
+ADSP-2156x Power Sequencing Requirements (EE-470)                               Page 6 of 14
+
+=== PDF PAGE 7 ===
+Figure 8: LT8636 (VDD_EXT) and LTC3307A (VDD_REF) Regulators Supplied by Common Input.
+
+
+
+
+
+ADSP-2156x Power Sequencing Requirements (EE-470)                               Page 7 of 14
+
+=== PDF PAGE 8 ===
+Figure 9:VDD_REF Ramp-up Followed by VDD_EXT
+
+Implementation 2:
+   Another approach to derive VDD_REF from VDD_EXT rail is by adding a high-side MOSFET on
+    the VDD_EXT supply path. See Figure 10. This design controls the gate of the high-side MOSFET
+   using VDD_REF supply voltage. It ensures that the VDD_EXT supply to the processor pins is
+   enabled only after VDD_REF.
+
+
+
+
+
+ADSP-2156x Power Sequencing Requirements (EE-470)                               Page 8 of 14
+
+=== PDF PAGE 9 ===
+Figure 10:VDD_REF Derived from VDD_EXT Regulator with High-side MOSFET
+
+
+
+
+
+Figure 11:VDD_REF rail Ramp-up Followed by VDD_EXT
+
+
+
+
+ADSP-2156x Power Sequencing Requirements (EE-470)                               Page 9 of 14
+
+=== PDF PAGE 10 ===
+Summary
+Indeterminate voltage on I/O pins can cause component damage and affect system reliability. Use the
+recommended power sequencing or mitigation strategies to prevent glitches on I/O pins and ensure
+reliable system operation.
+
+
+
+
+
+ADSP-2156x Power Sequencing Requirements (EE-470)                              Page 10 of 14
+
+=== PDF PAGE 11 ===
+References
+[1]  ADSP-21562/21563/21565/21566/21567/21569 Data Sheet (Rev. D). June 2023. Analog Devices, Inc.
+[2]  “Is Your Application Protected from Glitches?” September 2021. Analog Devices, Inc.
+     https://www.analog.com/en/resources/technical-articles/is-your-application-protected-from-glitches.html
+[3]  ADSP-21562/3/5/6/7/9 x SHARC+ Processor Hardware Reference (Rev. 1.1). October 2022. Analog Devices, Inc.
+[4]  LTspice® Design Tools & Calculators. Analog Devices, Inc. 2025, https://www.analog.com/en/resources/design-tools-
+     and-calculators/ltspice-simulator.html.
+[5]  LT8636/LT8637 42V, 5A/7A Peak Synchronous Step-Down Silent Switcher with 2.5µA Quiescent Current Data Sheet
+     (Rev E). August 2024. Analog Devices, Inc. https://www.analog.com/media/en/technical-documentation/data-
+     sheets/lt8636-8637.pdf.
+[6]  LTC3307A 5V, 3A Synchronous Step-Down Silent Switcher in 2mm x 2mm LQFN and 1.6mm x 1.6mm WLCSP Data Sheet
+     (Rev E). November 2022. Analog Devices, Inc. https://www.analog.com/media/en/technical-documentation/data-
+     sheets/ltc3307a-1_reve.pdf.
+[7]  ADP151 Ultralow Noise, 200 mA, CMOS Linear Regulator Data Sheet (Rev J). March 2022. Analog Devices,
+     Inc.https://www.analog.com/media/en/technical-documentation/data-sheets/adp151.pdf.
+[8]  MAX16161/MAX16162 nanoPower Supply Supervisors with Glitch-Free Power-Up Data Sheet (Rev 4). March 2024.
+    Analog Devices, Inc. https://www.analog.com/media/en/technical-documentation/data-sheets/max16161-max16162.pdf
+[9]  EV-21569-SOM System-on-Module (SOM) Board to Evaluate the ADSP-21562/3/5/6/7/9 SHARC+® Audio Processors.
+    December 2020. Analog Devices, Inc. https://www.analog.com/en/resources/evaluation-hardware-and-
+     software/evaluation-boards-kits/ev-21569-som.html.
+
+
+
+
+
+ADSP-2156x Power Sequencing Requirements (EE-470)                                 Page 11 of 14
+
+=== PDF PAGE 12 ===
+Appendix A:
+Table 1 lists the I/O signals that are impacted by indeterminate voltage during power sequencing.
+  The signal name column includes the signal name for every pin and the GPIO multiplexed pin function,
+   where applicable.
+  The Type column identifies the I/O type or supply type of the pin. The abbreviations used in this column
+    are analog (a), Input, Output, and InOut.
+  The Power Domain column specifies the power supply domain in which the signal resides.
+
+Table 1:I/O Signals
+
+  Signal Name     Type      Power Domain
+  DAI0_PIN01         InOut      VDD_EXT
+  DAI0_PIN02         InOut      VDD_EXT
+  DAI0_PIN03         InOut      VDD_EXT
+  DAI0_PIN04         InOut      VDD_EXT
+  DAI0_PIN05         InOut      VDD_EXT
+  DAI0_PIN06         InOut      VDD_EXT
+  DAI0_PIN07         InOut      VDD_EXT
+  DAI0_PIN08         InOut      VDD_EXT
+  DAI0_PIN09         InOut      VDD_EXT
+  DAI0_PIN10         InOut      VDD_EXT
+  DAI0_PIN11         InOut      VDD_EXT
+  DAI0_PIN12         InOut      VDD_EXT
+  DAI0_PIN19         InOut      VDD_EXT
+  DAI0_PIN20         InOut      VDD_EXT
+  DAI1_PIN01         InOut      VDD_EXT
+  DAI1_PIN02         InOut      VDD_EXT
+  DAI1_PIN03         InOut      VDD_EXT
+  DAI1_PIN04         InOut      VDD_EXT
+  DAI1_PIN05         InOut      VDD_EXT
+  DAI1_PIN06         InOut      VDD_EXT
+  DAI1_PIN07         InOut      VDD_EXT
+  DAI1_PIN08         InOut      VDD_EXT
+  DAI1_PIN09         InOut      VDD_EXT
+  DAI1_PIN10         InOut      VDD_EXT
+  DAI1_PIN11         InOut      VDD_EXT
+
+
+ADSP-2156x Power Sequencing Requirements (EE-470)                                 Page 12 of 14
+
+=== PDF PAGE 13 ===
+  Signal Name     Type      Power Domain
+  DAI1_PIN12         InOut      VDD_EXT
+  DAI1_PIN19         InOut      VDD_EXT
+  DAI1_PIN20         InOut      VDD_EXT
+  JTG_TCK             Input      VDD_EXT
+  JTG_TDI              Input      VDD_EXT
+  JTG_TDO            Output     VDD_EXT
+  JTG_TMS            InOut      VDD_EXT
+  JTG_TRST            Input      VDD_EXT
+  PA_00               InOut      VDD_EXT
+  PA_01               InOut      VDD_EXT
+  PA_02               InOut      VDD_EXT
+  PA_03               InOut      VDD_EXT
+  PA_04               InOut      VDD_EXT
+  PA_05               InOut      VDD_EXT
+  PA_06               InOut      VDD_EXT
+  PA_07               InOut      VDD_EXT
+  PA_08               InOut      VDD_EXT
+  PA_09               InOut      VDD_EXT
+  PA_10               InOut      VDD_EXT
+  PA_11               InOut      VDD_EXT
+  PA_12               InOut      VDD_EXT
+  PA_13               InOut      VDD_EXT
+  PA_14               InOut      VDD_EXT
+  PA_15               InOut      VDD_EXT
+  PB_00               InOut      VDD_EXT
+  PB_01               InOut      VDD_EXT
+  PB_02               InOut      VDD_EXT
+  PB_03               InOut      VDD_EXT
+  PB_04               InOut      VDD_EXT
+  PB_05               InOut      VDD_EXT
+  PB_06               InOut      VDD_EXT
+  PB_07               InOut      VDD_EXT
+  PB_08               InOut      VDD_EXT
+  PB_09               InOut      VDD_EXT
+
+
+ADSP-2156x Power Sequencing Requirements (EE-470)                                 Page 13 of 14
+
+=== PDF PAGE 14 ===
+  Signal Name     Type      Power Domain
+  PB_10               InOut      VDD_EXT
+  PB_11               InOut      VDD_EXT
+  PB_12               InOut      VDD_EXT
+  PB_13               InOut      VDD_EXT
+  PB_14               InOut      VDD_EXT
+  PB_15               InOut      VDD_EXT
+  PC_00               InOut      VDD_EXT
+  PC_01               InOut      VDD_EXT
+  PC_02               InOut      VDD_EXT
+  PC_03               InOut      VDD_EXT
+  PC_04               InOut      VDD_EXT
+  PC_05               InOut      VDD_EXT
+  PC_06               InOut      VDD_EXT
+  PC_07               InOut      VDD_EXT
+  SYS_BMODE0        Input      VDD_EXT
+  SYS_BMODE1        Input      VDD_EXT
+  SYS_BMODE2        Input      VDD_EXT
+  SYS_CLKOUT        a         VDD_EXT
+  SYS_FAULT         InOut      VDD_EXT
+  SYS_HWRST         Input      VDD_EXT
+  SYS_RESOUT        Output     VDD_EXT
+
+Document History
+
+  Revision                                       Description
+
+  Rev 1 – February 5, 2025 by Shivakumar Puran   Initial Release
+         and Prasanth Rajagopal
+
+
+
+
+
+ADSP-2156x Power Sequencing Requirements (EE-470)                                 Page 14 of 14
