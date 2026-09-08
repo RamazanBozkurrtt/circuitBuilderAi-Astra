@@ -1,0 +1,770 @@
+
+=== PDF PAGE 1 ===
+Engineer-to-Engineer Note          EE-414
+
+                     Technical  notes  on  using  Analog  Devices  products  and  development  tools
+                                Visit our Web resources http://www.analog.com/ee-notes and http://www.analog.com/processors or
+                          e-mail processor.support@analog.com or processor.tools.support@analog.com for technical support.
+
+Estimating Power for ADSP-2156x SHARC+ Processors
+Contributed by Prasanth Ragagopal                                                      Rev 2 – March 15, 2021
+
+Introduction
+This EE-note describes how to estimate power consumption on ADSP-2156x processors, which include a
+SHARC+® high-performance core and a multitude of peripherals, accelerators and high-speed Direct
+Memory Access (DMA) channels. These processors have multiple power and clock domains. This
+application note provides a simplified methodology for estimating the total System-on-Chip (SoC) power
+consumption depending on the amount of processor activity.
+Power estimates are based on design simulations and characterization data measured across power supply
+voltage, core and system clock frequency, and junction temperature (TJ). The power can vary widely
+depending on how the on-chip ADSP-2156x resources are used. Thus, power consumption cannot be
+estimated accurately without an understanding of the components in use and the usage patterns for those
+components. By providing the usage parameters, board designers can obtain accurate consumption estimates
+to consider when developing power supply and thermal relief solutions for their ADSP-2156x-based
+products.
+See the following sections of the ADSP-2156x SHARC+ DSP Data Sheet[1] for details specific to discussions
+throughout this EE-Note:
+   •  See the Recommended Operating Conditions section for details regarding supported power supply
+       ranges.
+   •  See the Electrical Characteristics and subsequent Total Internal Power Dissipation sections for
+        details regarding current specifications.
+In the associated file[2] furnished with this EE-note, there is a convenient power calculator tool. This tool
+allows users to obtain a total power profile by populating the cells in a spreadsheet with data found both in
+the processor data sheet and as a result of calculations specific to the intended application. This document
+explains the cases where information in the power calculator is not in the data sheet.
+This EE-note also describes how to provide the appropriate input to the power calculator such that the full
+power profile for the application can be obtained. It describes how the calculations are made and how the
+results contribute to the overall power profile.
+
+
+
+
+
+Copyright 2021, Analog Devices, Inc. All rights reserved. Analog Devices assumes no responsibility for customer product design or the use or application of customers’
+products or for any infringements of patents or rights of others which may result from Analog Devices assistance. All trademarks and logos are property of their
+respective holders. Information furnished by Analog Devices applications and development tools engineers is believed to be accurate and reliable, however no
+responsibility is assumed by Analog Devices regarding technical accuracy and topicality of the content provided in Analog Devices Engineer-to-Engineer Notes.
+
+=== PDF PAGE 2 ===
+Power Domains
+There are multiple power domains associated with the ADSP-2156x processor; total power consumption is
+the sum of the power consumed across all the power domains. There are four major power domains that are
+significant contributors to the overall power profile:
+   •  VDD_INT: most internal on-chip logic (for example, core, accelerators, DMA engines, and so on)
+   •  VDD_EXT: for example, I/O pad ring, JTAG
+   •  VDD_REF: I/O reference supply
+   •  VDD_DMC: DDR controller
+The power consumption from the following supply domains are insignificant and not considered part of the
+associated power calculator.
+   •  VDD_ANA: Power supply for HADC/TMU analog blocks.
+
+Estimating Internal Power Consumption (PDD_INT_TOT)
+The total power consumption associated with the on-chip logic (on the VDD_INT supply) is the sum of the
+static (leakage) and dynamic (switching) power components. The dynamic component depends primarily
+on processor activity, which includes the instruction execution sequence, the data operands involved, and
+the instruction rate on each core, as well as the number of active peripherals/accelerators, their clock rates,
+and any associated DMA data traffic. The dynamic current is also influenced by temperature. The static
+component is independent of processor activity and is a function of temperature and voltage.
+The internal current (IDD_INT_TOT) consumed by the ADSP-2156x processors is comprised of:
+   •   IDD_INT_ STATIC: leakage current
+   •   IDD_INT_CCLK_SHARC0_DYN: dynamic current in the CCLK domain for the SHARC+ core
+   •   IDD_INT_DCLK_DYN: dynamic current in the DCLK domain (no other activity)
+   •   IDD_INT_SYSCLK_DYN: dynamic current in the SYSCLK domain (no other activity)
+   •   IDD_INT_SCLK0_DYN: dynamic current in the SCLK0 domain (no other activity)
+   •   IDD_INT_SCLK1_DYN: dynamic current in the SCLK1 domain (no other activity)
+   •   IDD_INT_OCLK_DYN: dynamic current in the OCLK domain (no other activity)
+   •  IDD_INT_DMA_DR_DYN: dynamic current consumed due to DMA activity
+   •   IDD_INT_ACCL_DYN: dynamic current consumed by the FIR/IIR accelerator blocks
+Therefore, the total current can be expressed as the sum of each of the above components, where there is a
+single static power component and several dynamic power components that must be included in the overall
+power profile.
+Maximum specifications for IDD_INT are provided in the processor data sheet  at specific voltages,
+frequencies, and temperatures. The following sections describe how to use this data to calculate the overall
+power requirements of the application.
+
+Estimating Total IDD_INT Dynamic Current
+Due to the multi-featured clock and power capabilities of the ADSP-2156x processors, there are many
+contributors to the overall dynamic component associated with the power consumed by the core. While
+there is opportunity to disable clocks to the various domains, each must be scrutinized to determine what
+Estimating Power for ADSP-2156x SHARC+ Processors (EE-414)                            Page 2 of 18
+
+=== PDF PAGE 3 ===
+must be accounted for with respect to power dissipation when any combination of these domains is active
+in the system.
+             The dynamic current data included as part of this EE-note and associated power
+                 calculator spreadsheet pertains to maximum junction temperature of 125°C and                 the worst-case (highest-power) fabrication process.
+
+Core Dynamic Current (IDD_INT_CCLK_SHARC_DYN)
+The ADSP-2156x processor data sheet provides the baseline dynamic current consumption specifications, which
+are obtained with the processor running what is defined to be a “typical” application. It is represented in the data
+sheet by the IDD-TYP specification. However, these conditions do not represent all possible application code. Also
+ignored is the concept of silicon process variation, which influences the power profile because of non-uniform
+transistor physics across the silicon. When making decisions regarding the power supply design, the worst-case
+scenario must always be considered. The above assumptions are addressed in two places in the data sheet in
+order to facilitate extrapolation to obtain the maximum requirements for the power supply design:
+   •  Dynamic Current tables – provide the maximum (across process and temperature) core dynamic current
+        specification as a function of voltage (VDD_INT) and frequency (fCCLK) while running “typical” application
+       code
+   •   Activity Scaling Factor (ASF) tables – describe discrete dynamic activity levels to provide insight as to
+     how the dynamic current scales with changing loads on the core
+Using these combined specifications, the dynamic component of core power consumption can be obtained by
+multiplying the baseline spec obtained from the Dynamic Current tables and the associated ASF, as further
+explored in the following sections.
+
+SHARC+® Core Activity Scaling Factor (ASF) Vectors
+The Activity Scaling Factors for SHARC+ Core0 table in the data sheet defines the following vectors:
+   •   IDD-IDLE: SHARC+ core executing only the IDLE instruction
+   •   IDD-NOP: SHARC+ core executing 100% NOPs
+   •   IDD-TYP_3070: SHARC+ core executing 30% floating-point (FP) multiply/add/subtract and store
+        instructions and 70% NOPs
+   •   IDD-TYP_5050: SHARC+ core executing 50% FP multiply/add/subtract and store instructions and 50%
+     NOPs
+   •   IDD-TYP_7030: SHARC+ core executing 70% FP multiply/add/subtract and store instructions and 30%
+     NOPs (used for IDD_TYP specification )
+   •   IDD-PEAK_100: SHARC+ core executing 100% FP multiply/add/subtract and store instructions
+   •   IDD-LS: SHARC+ core in light sleep mode (new feature added in ADSP-2156x processors)
+
+            The test code used to measure IDD-PEAK_100 represents the worst-case
+              core  operation and  is  not  sustainable  under normal  application               conditions.
+In addition to the ASFs, the power calculator defines the following vector on the Core Activity Factors tab:
+   •   IDD-CLOCK_GATED: SHARC+ core clock disabled (no dynamic power)
+
+
+Estimating Power for ADSP-2156x SHARC+ Processors (EE-414)                            Page 3 of 18
+
+=== PDF PAGE 4 ===
+Low Power Features
+The ADSP-2156x SHARC+ processors provide an additional power-saving feature to reduce power
+consumption in on-chip L1 memory and when the core is idle.
+   •  Low Power Idle Mode (core light sleep): When the core goes into the idle state, upon executing the
+     IDLE instruction, there is still active/switching power associated with all active clocks (even though
+       there is no activity inside the core). To reduce the power, program the core light sleep enable field
+      which is a core clock gating mechanism (core light sleep) for switching off these clocks.
+            The core light sleep mechanism is effective only when the processor is
+              booted, and NOT when executing from an emulator.
+
+              Additional modes such as Memory Sleep and Memory Shutdown
+             mentioned in the SHARC+ Core Programming Reference do not              provide significant power savings.
+
+
+Using ASFs to Establish Application-Specific Total Average Power Profile
+Once the baseline dynamic current specification from the Dynamic Current tables is obtained from the
+spreadsheet cell associated with the CCLK frequency (fCCLK) and the input voltage (VDD_INT) of interest, the
+next step is to analyze the application to identify and apply the proper ASFs. The application must be broken
+down into percentages of time spent in states associated with one of these standard power vectors. With
+knowledge of the program flow and an estimate of the percentage of time spent at each activity level, the
+baseline dynamic current and the corresponding ASF can be used to determine the average dynamic current
+consumption for each core.
+For example, IDD_INT_CCLK_SHARC0_DYN for the SHARC+ core0 in a specific application can be calculated
+according to Equation 1, where “%” is the percentage of the overall time that the application spends in that
+state:
+IDD_INT_CCLK_SHARC0_DYN = (% Peak activity level x IDD-PEAK_100 ASF x IDD_INT_CCLK_SHARC0_DYN) +
+(% High activity level x IDD-TYP_7030 ASF x IDD_INT_CCLK_SHARC0_DYN) +
+(% Moderate activity level x IDD-TYP_5050 ASF x IDD_INT_CCLK_SHARC0_DYN) +
+(% Low activity level x IDD-TYP_3070 ASF x IDD_INT_CCLK_SHARC0_DYN) +
+(% NOP activity level x IDD-NOP ASF x IDD_INT_CCLK_SHARC0_DYN) +
+(% IDLE activity level x IDD-IDLE ASF x IDD_INT_CCLK_SHARC0_DYN) +
+(% CCLK disabled x IDD-CLOCK_GATED ASF x IDD_INT_CCLK_SHARC0_DYN) +
+(% LS activity level x IDD-LS ASF x IDD_INT_CCLK_SHARC0_DYN)
+Equation 1. Total Individual Core Dynamic Current
+
+Note that the IDD_INT_CCLK_SHARC0_DYN output is the average current, whereas the IDD_INT_CCLK_SHARC0_DYN
+inputs are with ASF = 1.0. Consider a SHARC+ core0 application that is continuously running and never
+idles, where core activity is:
+
+Estimating Power for ADSP-2156x SHARC+ Processors (EE-414)                            Page 4 of 18
+
+=== PDF PAGE 5 ===
+   •   IDD-PEAK_100 activity level – 10%
+   •   IDD-TYP_7030 activity level – 20%
+   •   IDD-TYP_5050 activity level – 50%
+   •   IDD-TYP_3070 activity level – 10%
+   •   IDD-NOP activity level – 10%
+   •   IDD-LS, IDD-IDLE and IDD-CLOCK_GATED activity level – 0%
+
+Applying Equation 1 to this profile yields:
+IDD_INT_CCLK_SHARC0_DYN =    (0.1 x IDD-PEAK_100 ASF x IDD INT_CCLK_SHARC0_DYN) + (0.2 x IDD-TYP_7030 ASF x
+IDD_INT_CCLK_SHARC0_DYN) +
+(0.5 x IDD-TYP_5050 ASF x IDD_INT_CCLK_SHARC0_DYN) + (0.1 x IDD-TYP_3070 ASF x IDD_INT_CCLK_SHARC0_DYN) +
+(0.1 x IDD-NOP ASF x IDD_INT_CCLK_SHARC0_DYN)
+
+Estimating System Clock Tree Currents
+ADSP-2156x processors have multiple system clock domains to clock the system buses, various peripherals,
+DMA controllers, L2 memory, and a DDR controller. Each of these clock domains consumes power that
+dissipates in the internal power domain due to its respective clock toggling inside the chip. Additional power
+consumed by the peripherals and DMA (when turned on) is attributed to individual peripherals/DMAs
+running in the system. This power is estimated separately and added to the baseline system power when the
+total power profile is calculated.
+There are four major system clock domains on ADSP-2156x processors: SYSCLK, SCLK0, SCLK1, and
+DCLK.
+There is also a programmable output clock (OCLK), which can be generated by one of the CGUs and routed
+to an external pin on the processor. It has a small influence on the overall power profile as well.
+To estimate the impact to the current consumed in the VDD_INT domain as a result of each of these system
+clocks, unique scaling factors are furnished in the processor data sheet. The factors represent the currents
+consumed per MHz per volt in each system clock domain; therefore, VDD_INT is in terms of volts, and fXXX
+is in terms of MHz in the system clock dynamic current equations:
+   •  IDD_INT_DCLK_DYN = 0.125 x VDD_INT x fDCLK
+   •   IDD_INT_SYSCLK_DYN = 0.626 x VDD_INT x fSYSCLK
+   •   IDD_INT_SCLK0_DYN = 0.23 x VDD_INT x fSCLK0
+   •   IDD_INT_SCLK1_DYN = 0.02 x VDD_INT x fSCLK1
+   •  IDD_INT_OCLK_DYN = 0.048 x VDD_INT x fOCLK
+
+             The scaling factor for each of the system clock dynamic current equations is
+                 in units of mA/MHz/V; therefore, the result for each is in terms of mA.
+
+Estimating DMA Contribution to Internal Dynamic Current (IDD_INT_DMA_DR_DYN)
+Different types of DMA transactions in the system result in additional power consumption:
+   • DMA transfers between the various memory spaces
+   • DMA transfers from memory to peripherals
+   • DMA transfers from peripherals to memory
+Estimating Power for ADSP-2156x SHARC+ Processors (EE-414)                            Page 5 of 18
+
+=== PDF PAGE 6 ===
+Power consumption varies with the number of running DMA channels and the rate at which they move data
+through the system. To estimate DMA power consumption, three power profiles are available in the power
+calculator in the DMA/Peripheral Usage pull-down in the VDD_INT Clock Domains & DMA Rates table on
+the Power Estimation tab:
+1. HIGH: comprised of high-speed MDMA, multiple low-speed MDMAs, and several high-speed
+    peripheral DMAs running simultaneously in the system for a combined throughput of ~5898 MBPS.
+2. MEDIUM: comprised of medium-speed MDMA, multiple low-speed MDMAs, and several low-speed
+    peripheral DMAs running simultaneously in the system for a combined throughput of ~3304 MBPS.
+3. LOW:  comprised  of  low-speed MDMA  and  several  low-speed  peripheral DMAs  running
+   simultaneously in the system for a combined throughput of ~456 MBPS.
+To estimate the DMA dynamic current (IDD_INT_DMA_DR_DYN) in the application, the combined data
+bandwidth of all the DMAs running in the system determines which profile to select as the closest match to
+the actual application and use as the IDD_INT_DMA_DR_DYN component for the IDD_INT_TOT calculation.
+
+High DMA Configuration
+The following peripheral and memory DMAs are active in this configuration:
+   •  8 SPORTS @62.5MHz in RX mode with PRI/SEC enabled (writing data to L2)
+   •  8 SPORTS @62.5MHz in TX mode with PRI/SEC enabled (reading data from L2)
+   •  SPI2/SPI1 in quad mode, SPI0 in dual mode TX operation @62.5MHz (reading data from L2)
+   •  LP TX mode @125MHz (reading data from L2)
+   •  1x medium speed MDMA transferring data from L1 to L2
+   •  1x medium speed MDMA transferring data from L2 to L1
+   •  1x medium speed MDMA transferring data from DDR to L1
+   •  1x high speed MDMA transferring data from L1 to DDR
+In this configuration, the IDD_INT_DMA_DR_DYN component (see the VDD_INT DMA Usage tab of the power
+calculator) is 240 mA.
+
+Medium DMA Configuration
+The following peripheral and memory DMAs are active in this configuration:
+   •  8 SPORTS @62.5MHz in RX mode with PRI/SEC enabled (writing data to L2)
+   •  8 SPORTS @62.5MHz in TX mode with PRI/SEC enabled (reading data from L2)
+   •  SPI2/SPI1 in quad mode, SPI0 in dual mode TX operation @62.5MHz (reading data from L2)
+   •  LP TX mode @125MHz (reading data from L2)
+   •  1x medium speed MDMA transferring data from L1 to L2
+   •  1x medium speed MDMA transferring data from L2 to L1
+In this configuration, the IDD_INT_DMA_DR_DYN component (see the VDD_INT DMA Usage tab of the power
+calculator) is 150 mA.
+
+Low DMA Configuration
+The following peripheral and memory DMAs are active in this configuration:
+   •  8 SPORTS @62.5MHz in RX mode with PRI/SEC enabled (writing data to L2)
+Estimating Power for ADSP-2156x SHARC+ Processors (EE-414)                            Page 6 of 18
+
+=== PDF PAGE 7 ===
+   •  8 SPORTS @62.5MHz in TX mode with PRI/SEC enabled (reading data from L2)
+   •  SPI2/SPI1 in quad mode, SPI0 in dual mode TX operation @62.5MHz (reading data from L2)
+   •  LP TX mode @125MHz (reading data from L2)
+In this configuration, the IDD_INT_DMA_DR_DYN component (see the VDD_INT DMA Usage tab of the power
+calculator) is 40 mA.
+        The IDD_INT_DMA_DR_DYN component value specified for each of the configurations
+        above is the delta between IDD_INT current measurements obtained empirically on          the ADSP-2156x EZ-KIT Lite® evaluation platform before and after enabling the
+          indicated DMA activity.
+
+Estimating Accelerator Contribution to Internal Dynamic Current (IDD_INT_ACCL_DYN)
+The high-performance system acceleration engines (FIR and IIR) consume some current in the VDD_INT
+domain. The total accelerator current is defined as the sum of the current consumed by each of the blocks.
+       IDD_INT_ACCL_DYN = IDD_INT_ACCL_FIR_DYN + IDD_INT_ACCL_IIR_DYN
+For a typical FIR use case, the IDD_INT_ACCL_FIR_DYN current is ~55mA. For a typical IIR use case, the
+IDD_INT_ACCL_IIR_DYN current is ~35mA.
+
+Estimating Total Static Current (IDD_INT_STATIC)
+The static current (IDD_INT_STATIC) dissipated across the entire device in the VDD_INT power domain is due to
+transistor leakage. It is present when power is applied to the power domains, even when all the internal
+clocks are shut off (by gating/cutting the SYS_CLKIN to the ADSP-2156x processor) and the device is held
+in reset. As such, static current is solely a function of junction temperature (TJ) and voltage (VDD_INT).
+Unlike dynamic current, it does not need to be adjusted for discrete core activity levels. IDD_INT_STATIC can
+be obtained by looking up the value corresponding to the application conditions (such as at a specific
+VDD_INT and TJ) in the Static Current table in the processor data sheet.
+             The IDD_INT_STATIC specifications in the Static Current table in the data sheet
+                are maximum specifications that account for the wafer fabrication process.
+Since the static power component is constant for a given voltage and temperature, it is simply added to the
+total estimated dynamic current when calculating the total power consumption due to the core logic of the
+processor. When developing power supply and thermal relief designs, ensure that the highest expected
+junction temperature and voltage is used when extracting data from the Static Current table.
+
+
+
+
+
+Estimating Power for ADSP-2156x SHARC+ Processors (EE-414)                            Page 7 of 18
+
+=== PDF PAGE 8 ===
+Estimating External Power Consumption (PDD_EXT, PDD_REF and PDD_DMC)
+Total external power consumption (PDD_EXT_TOT, dissipated in the VDD_EXT and VDD_DMC power domains)
+depends on several parameters:
+   • O – number of output pins associated with the interface
+   •  TR – toggle ratio (percentage of pins that switch any given cycle)
+   •   f – maximum frequency at which the output pins can switch
+   •  VDD_EXT or VDD_DMC – voltage swing of the output pins
+   •  CL – load capacitance of the output pins
+   • U – utilization factor (percentage of time that the peripheral is on and running)
+               In addition to the input capacitance of each device connected to an
+               output, the total capacitance (CL) must include the capacitance of the              processor pin (COUT), which is driving the load.
+The worst-case external pin power scenario occurs when the load capacitor charges and discharges
+continuously, requiring the pin to toggle each cycle in terms of external supply power, over the maximum
+VDD_EXT voltage swing (as specified in the data sheet). The maximum switching frequency of a peripheral
+clock can be considered as f. Since the state of a data pin can change only once per clock cycle, the maximum
+toggling frequency in that case is f/2. When considering the full current profile for the VDD_EXT power
+domain, there are several peripherals that can contribute to it; each must be considered separately and then
+summed together to form the single IDD_EXT component of the total estimated power dissipation.
+Equation 2 shows how to calculate the average external current (IDD_EXT) using the above parameters:
+                                IDD_EXT = O x f x VDD_EXT x CL x U x TR
+Equation 2. Total External Current (IDD_EXT) Calculation
+
+Estimated average external power consumption (PDD_EXT) can then be calculated as:
+                                   PDD_EXT = VDD_EXT x IDD_EXT
+Substituting from Equation 2, this calculation becomes:
+                             PDD_EXT = VDD_EXT2 x O x f x CL x U x TR
+Table 1 is an excerpt from the example application use case contained on the VDD_EXT Power Domain tab in
+the power calculator. It shows the Link Port interface portion to illustrate the concept more clearly.
+
+                                                                  Pin
+                                                                     Toggle                                                                                                   Utilization                                                                           VDD_REF                                                                                                              current   VDD_EXT                                                                                                                                          VDD_REF                                                                                                                                                          PDD_EXT                                                                                                                                                                        PDD_REF                                                                               Ratio        Peripheral       Frequency in Hz (f) NumberPinsof(O)Output Capacitancein Farads                                                                                                       (U)                                                                                                   per IO (mA)                                                                                                                              (mW)                                  Notes                                                                                                                                          (V)                                                                                                                                                      (V)                                                                                                                  (mW)                                                                             (TR)   Factor                                                                            (CL)
+     Link Port - Data pins         6.25E+07              8            3.00E-11      0.25        1.00              0.8            3.30       1.80        40.838         11.520    62.5MHz max frequency cycle, 8-bit data (8 pins @ 0.25 toggle ratio)
+
+Table 1. VDD_EXT Power Consumption Example
+
+As with estimating the IDD_EXT current, the IDD_DMC current consumption for the on-chip DDR3 controller
+(DMC0) can be estimated depending on the number of pins toggling and the toggle rate. VDD_DMC is used
+for the voltage swing (obtain the maximum VDD_DMC specification from the data sheet). The VDD_DMC Power
+Domain tab in the power calculator includes a table like the one referenced by Table 1. The DDR pins are
+grouped by function (for example, address, data, control, and clock) for the user to customize based on the
+application.
+
+Estimating Power for ADSP-2156x SHARC+ Processors (EE-414)                            Page 8 of 18
+
+=== PDF PAGE 9 ===
+Estimating I/O Reference Power Consumption (PDD_REF)
+The I/O reference supply power consumption (PDD_REF) depends on the frequency of I/O switching as
+depicted in Table 2.
+
+ Frequency of I/O switching    VDD_REF current per I/O
+ (MHz)                   (mA)
+
+ Up to 32                        0.4
+
+ 33 to 62.5                       0.8
+
+ 63 to 125                       1.1
+
+Table 2. VDD_REF current per I/O
+
+The additional contribution for the VDD_REF current is due to the internal oscillator (5 mA) and the OTP (18
+mA), which can be taken as it is for calculation purposes.
+
+General Guidelines for Power Supply and Thermal Relief Designs
+While estimating average total power associated with a given application, power supply and thermal relief
+designs must always consider the worst-case scenario in order to prevent operational failures due to the
+processor being operated out-of-spec as a result of a sagging power rail or an out-of-bounds junction
+temperature. The following sections provide some advice for supporting this methodology.
+
+Power Supply Sizing
+Following recommendations relate to estimating the power supply sizing.
+DO:
+   •  Use the maximum expected voltages associated with all the influencing power domains involved in
+       each of the look-up tables and computations discussed throughout this EE-note
+   •  Use the junction temperature associated with the maximum ambient temperature (TA) that the
+       application is expected to be subjected to for all temperature-related look-ups and computations
+       discussed throughout this EE-note
+   •  Use the highest ASF possible for the application being run
+   •  Calculate power dissipation from each unique voltage domain separately
+
+DO NOT:
+   •  Use typical IDD, nominal voltage, or room temperature specifications
+   •  Use total device power alone
+
+Recommendations for Thermal Relief
+Following recommendations can be used when evaluating thermal relief solutions.
+
+
+Estimating Power for ADSP-2156x SHARC+ Processors (EE-414)                            Page 9 of 18
+
+=== PDF PAGE 10 ===
+DO:
+   •  Use nominal voltages
+   •  Use the junction temperature (Tj) that the processor is expected to be subjected to
+   •  Use the Full-on-Typical (or lower) ASF to match realistic application code activity levels
+   •  Calculate total thermal power for all voltage domains
+DO NOT:
+   •  Use typical IDD specifications or room temperature when calculating thermal power
+   •  Use maximum voltage (this is not realistic, as any transient will then exceed the maximum voltage
+        specification)
+
+Example Application Using the Power Calculator
+This section provides an example application to illustrate how to use the associated power calculator tool.
+There are three tabs in the power calculator that contain color-coded cells along with the guidance to
+populate the yellow cells with the needed system settings. It lets the calculator automatically populate the
+green cells with either data from other tabs on the spreadsheet or with a calculated result from the user
+inputs. Some of the yellow cells are free form, whereas others are selectable via a pull-down. The following
+sections describe what user input is required on each tab to arrive at the overall power dissipation estimation.
+
+Power Estimation Tab
+The first tab in the power calculator spreadsheet is the Power Estimation tab. This is the main interface for
+the power calculator, where input is required to properly model the intended system. On this tab, the user
+must provide all the information regarding the power supplies and intended clock rates throughout the
+system, as well as the other influences on the overall power dissipation discussed throughout this EE-note
+(for example, core activity and DMA rates). This tab works in conjunction with the other tabs in the
+spreadsheet to provide the total power dissipation for the application as a function of all the configurable
+system-dependent parameters.
+The default Power Estimation tab is pre-filled with data pertaining to the following conditions. The example
+application explained further is derived out of this default Power Estimation tab.
+    Junction temperature at 125°C, to capture data at a worst-case temperature
+   SHARC+ core running at 1GHz speed, with all other clocks at their maximum supported speeds
+   A typical load profile of 70-30 considered (SHARC0 executes floating-point multiplication,
+         addition, subtraction and store instructions 70% of the time (30% NOPs))
+   Both FIR and IIR accelerators in use
+   DDR in use. Hence, the variant ADSP-21569 is considered.
+   DMA bandwidth considered HIGH
+   Link Port, 8x SPORT, 3x SPI considered as peripherals in usage and actively consuming I/O power
+
+             Data for any use case/application can be generated easily by modifying
+               the default settings and configurations.
+
+
+Estimating Power for ADSP-2156x SHARC+ Processors (EE-414)                           Page 10 of 18
+
+=== PDF PAGE 11 ===
+Set the Power Domains and Junction Temperature
+The first step is to set the power domains and junction temperature to the maximum levels expected by the
+application. For example, consider a design that utilizes the following:
+   •  VDD_INT = 1.0 V
+   •  VDD_EXT = 3.3 V
+   •  VDD_REF = 1.8 V
+   •  VDD_DMC = 1.35 V
+   •  TJ = 125oC
+The VDD_INT domain and TJ values are used as inputs to look-up tables on other tabs in the power calculator
+to extract the needed current dissipation data for the calculation. Select the values using the pull-down menus
+in the Operating Conditions table on the Power Estimation tab based on the discrete levels defined in the
+Static and Dynamic Current tables in the processor data sheet.
+              The Static and Dynamic Current tables included in the power calculator are from the
+                 referenced processor data sheet. Always verify that the data in the calculator matches               what is in the current data sheet to ensure that the proper specifications are being
+                 included.
+Configure the other relevant power domains on the Power Estimation tab. Manually input the appropriate
+values for the VDD_EXT (in the VDD_EXT section), VDD_REF (in the VDD_REF section) and VDD_DMC (in the VDD_DMC
+section) domains into the relevant yellow cells. The calculator computes the current and/or power in the
+associated green cells.
+               There is no error-checking built into the calculator for the range of these power
+               domains. A Configuration Warning is associated with each of these yellow cells                  indicating that the values input must be verified against the processor data sheet.
+The VDD_EXT, VDD_REF and VDD_DMC cells are influenced by activity on the VDD_EXT & VDD_REF Power and
+VDD_DMC Power tabs, respectively.
+
+Set the Clocks
+Input all the clocking information that defines the dynamic currents expected throughout the system. For
+example, consider a design that utilizes the following:
+   •  fCCLK_SHARC0= 1000 MHz
+   •  fDCLK  = 500 MHz
+   •   fSYSCLK = 500 MHz
+   •   fSCLK0 = 125 MHz
+   •   fSCLK1 = 250 MHz
+   •  fOCLK = 125 MHz
+Manually input the values into the corresponding yellow cells in the Clock Domains & DMA Rates table.
+The calculator computes the associated dynamic current in the adjacent green cells.
+              There is no error-checking built into the calculator for the range of these
+               operating frequencies. A Configuration Warning is associated with each               of these yellow cells indicating that the values input must be verified
+                against the processor data sheet.
+
+Estimating Power for ADSP-2156x SHARC+ Processors (EE-414)                           Page 11 of 18
+
+=== PDF PAGE 12 ===
+Set the Activity Scaling Factors (ASFs)
+As discussed in Using ASFs to Establish Application-Specific Total Average Power Profile, analyze the
+application to determine the core loads to associate with the application. This step establishes the dynamic
+power dissipation component for each core, which is handled in the yellow cells in the CORE0 Average
+ASF tables in the VDD_INT section of the Power Estimation tab. The proper input for these cells is a fractional
+number from 0.0 to 1.0 indicating the percentage of time spent by the application at that discrete ASF level.
+The calculator outputs the Average ASF (as described by Equation 1) in the green cell based on the data on
+the Core Activity Factors tab.
+              There is no error-checking built into the calculator for the sum of these
+               percentages. A hover message indicating that the “Sum of these fractions              should be 1” appears, in order to advise the user when inputting data in this
+                section.
+            The ASF tables included in the power calculator are from the referenced
+               processor data sheet. Always verify that the data in the calculator matches             what is in the current data sheet to ensure that the proper specifications
+               are being included.
+A power supply design should use a maximum power dissipation profile accounting for the worst-case
+scenario. However, to establish an average power profile, the calculator is built to account for all the discrete
+ASF levels defined by the processor data sheet. The yellow cells can be populated to reflect the actual system
+model.
+For example, after analyzing the application, it is determined that the following describes the core activity
+levels:
+   •  SHARC+ Core0: 100% typical application (70-30 profile)
+When input into the calculator, the corresponding average ASFs are computed as follows:
+   •  ASFSHARC0 = 1.00
+The ASF is then used by the calculator to compute the dynamic current component for the SHARC+ Core0
+in the green cells in the Contribution (mA) column in the Clock Domains & DMA Rates table.
+
+Set the Accelerator Resource Usage
+The system accelerator engines (FIR, IIR) dissipate some dynamic power in the VDD_INT domain as part of
+the total internal dynamic current (IDD_INT_TOT) equation in the processor data sheet. This power is accounted
+for in the VDD_INT section of the Power Estimation tab in a series of pull-down yellow cells in the Resource
+Usage table. The selectable mode options for each row provide a look-up value into associated tables on
+VDD_INT Accelerators in the calculator.
+Only the Typical usage setting is available, as discussed in Estimating Accelerator Contribution to Internal
+Dynamic Current (IDD_INT_ACCL_DYN).
+For example, if the system is using both accelerators: the total contribution would be:
+       IDD_INT_ACCL_DYN = IDD_INT_ACCL_FIR_DYN + IDD_INT_ACCL_IIR_DYN = 55mA + 35mA = 90mA.
+
+
+
+
+Estimating Power for ADSP-2156x SHARC+ Processors (EE-414)                           Page 12 of 18
+
+=== PDF PAGE 13 ===
+Select Appropriate DMA Activity Level
+The final user input required on the Power Estimation tab is the DMA/Peripheral Usage row in the Clock
+Domains & DMA Rates table in the VDD_INT section. It is here that the user must select from the three defined
+profiles discussed in Estimating DMA Dynamic Current (IDD_INT_DMA_DR_DYN) (HIGH, MEDIUM, or LOW)
+as the closest match to the data activity in the system. When selected using the yellow pull-down, the
+corresponding look-up value from the IDD_INT_DMA_DR_DYN column on the VDD_INT DMA Usage tab is
+populated in the corresponding green cell in the Contribution (mA) column.
+When considering serial peripherals, along with DDR access and additional MDMA, a HIGH profile is
+selected (5898 MBPS). The value for DMA contribution is:
+       IDD_INT_DMA_DR_DYN = 240 mA
+
+VDD_EXT & VDD_REF Power Domain Tab
+The VDD_EXT & VDD_REF Power Domain tab is used to calculate the contribution to power from the Link
+Ports, SPORTs and SPI peripherals.
+
+Calculating VDD_EXT Power
+Using the VDD_EXT & VDD_REF Power Domain tab, identify:
+   •  Each VDD_EXT power domain peripheral that is in use in the system, modelling its power profile as a
+       function of how often it is on
+   •  How many pins switch
+   •  The load capacitance associated with the pins
+   •  The voltage swing on the pins
+   •  The frequency at which the pins can switch
+As was the case with the Power Estimation tab, the yellow cells are those requiring user input, and the green
+cells are those populated by the calculator.
+The VDD EXT column is automatically populated from the Power Estimation tab; the user must fill in all the
+yellow cells. Consider an application that uses the Link Port, eight serial ports (SPORTs) and three SPIs.
+For a rough estimation, external frame syncs for SPORTs and low slave selects for SPIs are considered.
+Most of the columns are easy to populate with the appropriate clock frequencies. However, some frequencies
+are a function of how the peripheral is configured: the pin capacitance from the design, and the application’s
+use of the peripheral (see Estimating External Power Consumption (PDD_EXT and PDD_DMC)), the Number of
+Output pins and the Utilization Factor.
+With the above peripheral configuration information, Table 3 could represent such a system after the user:
+  inputs the proper number of output pins (O)
+  makes a reasonable guess as to the number of pins switching any given cycle (TR)
+  populates the frequency (f) and load capacitance (CL), and then
+  supplies information about the percentage of the time the peripheral is enabled (U)
+
+
+
+
+
+Estimating Power for ADSP-2156x SHARC+ Processors (EE-414)                           Page 13 of 18
+
+=== PDF PAGE 14 ===
+                                                                  Pin
+                                                                     Toggle                                   Number                                                        of                                                   Output Capacitance                                                                                                   Utilization                                                                           VDD_REF                                                                                                              current   VDD_EXT                                                                                                                                          VDD_REF                                                                                                                                                          PDD_EXT                                                                                                                                                                        PDD_REF        Peripheral       Frequency in Hz (f)                                                                                                                                                                                     Notes                                                                               Ratio                                                                         in Farads                                                                                     Factor                                                                                                       (U)                                                                                                   per IO (mA)                                               Pins                                                         (O)                                                                                                                                          (V)                                                                                                                                                      (V)                                                                                                                  (mW)                                                                                                                              (mW)                                                                             (TR)                                                                            (CL)
+     Link Port - Data pins         6.25E+07              8            3.00E-11      0.25        1.00              0.8            3.30       1.80        40.838         11.520    62.5MHz max frequency cycle, 8-bit data (8 pins @ 0.25 toggle ratio)
+       Link Port - Clock           1.25E+08              1            3.00E-11       1         1.00              1.1            3.30       1.80        40.838          1.980     125Mhz operation
+    SPORT0-7 -Data pins         3.13E+07             16            3.00E-11      0.25        1.00              0.4            3.30       1.80        40.838         11.520    31.25MHz max frequency cycle, 2 pins per SPORT x 8 (16 pins @ 0.25 toggle                                                                                                                                                                                                                               ratio)
+     SPORT0-7 - Clock          6.25E+07              8            3.00E-11       1         1.00              0.8            3.30       1.80       163.350        11.520    62.5Mhz operation
+       SPI2 - Data pins           3.13E+07              4            3.00E-11      0.25        1.00              0.4            3.30       1.80        10.209          2.880     31.25MHz max frequency cycle, Quad mode (4 pins @ 0.25 toggle ratio)
+        SPI2 - Clock             6.25E+07              1            3.00E-11       1         1.00              0.8            3.30       1.80        20.419          1.440     62.5Mhz operation
+       SPI1 - Data pins           3.13E+07              4            3.00E-11      0.25        1.00              0.4            3.30       1.80        10.209          2.880     31.25MHz max frequency cycle, Quad mode (4 pins @ 0.25 toggle ratio)
+         SPI1- Clock             6.25E+07              1            3.00E-11       1         1.00              0.8            3.30       1.80        20.419          1.440     62.5Mhz operation
+      SPI10- Data pins          3.13E+07              2            3.00E-11      0.25        1.00              0.4            3.30       1.80         5.105          1.440     31.25MHz max frequency cycle, Dual mode (2 pins @ 0.25 toggle ratio)
+         SPI0- Clock             6.25E+07              1            3.00E-11       1         1.00              0.8            3.30       1.80        20.419          1.440     62.5Mhz operation
+
+
+
+
+
+                                                                                                              Total External Power Dissipation (mW)          372.64
+                                                                                                              Total VREF Dissipation (mW)                   89.460
+
+Table 3. Example VDD_EXT Peripheral Usage
+
+The PDD_EXT (mW) column contains the results of the calculator applying Equation 2 to the input data in the
+other columns. The sum of the power contributions from each of the individual peripheral components is
+calculated at the bottom of the column. Peripherals can be added or deleted from this profile by inserting or
+removing rows.
+
+Calculating VDD_REF Power
+The VDD_REF power is automatically calculated in the same spreadsheet as VDD_EXT power, since both are
+related to I/O switching of peripherals. The calculation is done by referring to Table 4 for each I/O pin.
+
+
+Frequency of I/O        VDD_REF current per
+switching (MHz)         IO (mA)
+
+Up to 32Mhz                                0.4
+From 33Mhz to 62.5Mhz                     0.8
+From 63Mhz to 125Mhz                     1.1
+Table 4: I/O VREF Current for PDD_REF Calculation
+
+VDD_DMC Power Domain Tab
+The VDD_DMC Power Domain tab must be used when using DDR in the application. The concepts from
+VDD_EXT Power Domain Tab apply to this tab as well. However, the table is slightly different because it is
+modeling a single interface that has numerous groups of pins that need to be treated differently based on
+factors that do not remain consistent across the interface. Like the VDD_EXT Power Domain tab, there are
+green cells that are either populated by the calculator from elsewhere or are the output of a computation.
+The user must populate the yellow cells with information regarding the configuration of the DDR controller.
+As for the green cells on the VDD_DMC Power Domain tab, the power supply information for the VDD_DMC (V)
+column is automatically extracted from the Power Estimation tab, as is the Frequency in Hz (f) column.
+Note that the calculator automatically applies the fDCLK rate to the clock (CLK) and Address pins [15:0]
+rows, as these pins can switch at this rate in a worst-case scenario.
+As indicated in Set the Clocks, the DDR clock was configured to be 500 MHz on the Power Estimation tab.
+Therefore, Table 5 could be an example model for the DDR interface for this application after the pin
+capacitance and other inputs are finalized by the user.
+
+
+Estimating Power for ADSP-2156x SHARC+ Processors (EE-414)                           Page 14 of 18
+
+=== PDF PAGE 15 ===
+                                                          Pin
+                                 Number of   Capacitance in     Toggle
+ Peripheral         Frequency in Hz (f) Output Pins (O)   Farads (CL)     Ratio (TR)    Utilization (U)   VDDDR (V)   Pout (mW)                     Reasoning
+           Address                                                                                             DCLK_FREQ operation;Worst case execution --> State of pin              pins         2.50E+08            16            5.00E-12           0.25             1.00           1.35         9.11                                                                                                                  changes roughly every one fourth max frequency cycle (togle               [15:0]                                                                                                                                                             ratio:0.5)
+          Data pins                                                                                                   2x DCLK_FREQ operation, Assume DDR configured for write
+                           5.00E+08            16            5.00E-12           1              1.00           1.35         72.90    operation;Worst case execution --> State of pin changes twice               [15:0]
+  DDR3L                                                                                                                     every clock cycle (togle ratio:1)
+                                                                                                            DCLK_FREQ/Burst Mode operation,Assume DDR configured
+                                                                                                                                                            for write operation; Worst case execution --> State of pin             CTRL         2.50E+08            15            5.00E-12           0.25             1.00           1.35         8.54                                                                                                                  changes roughly every one fourth max frequency cycle (togle
+                                                                                                                                                       ratio:0.25)
+                                                                                             DCLK_FREQ operation;Clk and the differnetial clock signal
+              CLK          5.00E+08             2             5.00E-12           1              1.00           1.35         9.11     ;Worst case execution --> State of pin changes twice every
+                                                                                                                                      clock cycle (togle ratio:1)
+
+Table 5. Example VDD_DMC Use Case
+
+Because typical DDR accesses are sequential in nature, it is unlikely that the number of address pins toggling
+any maximum frequency cycle would exceed 25% (four pins). The worst-case model assumes the interface
+is always running (U = 1.00). For average power dissipation, there could be low-power modes employed,
+making a fractional Utilization Factor possible, which is supported by the calculator.
+
+Summarizing the Process of Estimating Power
+Use the following steps as an example to estimate total overall power in an ADSP-2156x processor design.
+
+Step 1: Obtain the Internal Static Current Component (IDD_INT_STATIC)
+Use the maximum power rail (VDD_INT) and junction temperature (TJ) values for the application to look up
+the appropriate maximum IDD_INT_STATIC specification from the Static Current table in the processor data
+sheet. In the example discussed in Set the Power Domains and Junction Temperature, VDD_INT = 1.0 V and
+TJ = 125 oC; therefore, the associated value from the VDD_INT Maximum Static Current tab is 761.98 mA.
+
+Step 2: Obtain Baseline Core Dynamic Currents (IDD_INT_CCLK_SHARC0_DYN)
+Use the same VDD_INT power rail and the expected core clock frequency (fCCLK) to look up the appropriate
+values in the Dynamic Current tables in the processor data sheet for each core. In the example discussed in
+Set the Clocks, VDD_INT = 1.0 V and the core is running at 1000 MHz; therefore, the associated values from
+the equations in Core Dynamic Current (also in the Dynamic Current data sheet tables) are:
+   •   IDD_INT_ CCLK_SHARC0_DYN = 0.713 x VDD_INT x fCCLK_SHARC0  0.713 x 1.0 x 1000 = 713 mA
+
+Step 3: Model Application to Establish Activity Scale Factors (ASFSHARC0)
+Using the definitions of the scale factors in the Activity Scaling Factors tables in the data sheet, model the
+application for each core to determine the processor load as a result of the code being executed. For a
+maximum calculation, use the worst-case ASF at any given time. Calculate an average ASF, as described
+in the Using ASFs section. From the example provided in Set the Activity Scaling Factors (ASFs):
+   •  ASFSHARC0 = 1.00
+
+Step 4: Apply ASFs to Core Dynamic Components
+Apply the calculated average ASF or the worst-case ASF to the core dynamic component for each core as a
+simple multiplication:
+   •   IDD_INT_ CCLK_SHARC0_DYN = IDD_INT_ CCLK_SHARC0_DYN x ASFSHARC0 713 x 1.00 = 713 mA
+
+Estimating Power for ADSP-2156x SHARC+ Processors (EE-414)                           Page 15 of 18
+
+=== PDF PAGE 16 ===
+Step 5: Calculate the System Clock Tree Core Dynamic Currents
+The dynamic current dissipated in the VDD_INT domain as a result of the clocks toggling inside the processor
+are a function of the internal voltage (in Volts) and the frequency of each clock (in MHz), as governed by
+the equations in the processor data sheet. Using the example from Estimating System Clock Tree Currents:
+   •  IDD_INT_DCLK_DYN = 0.125 x fDCLK x VDD_INT 0.125 x 500 x 1.0 = 62.50 mA
+   •   IDD_INT_SYSCLK_DYN = 0.626 x fSYSCLK x VDD_INT  0.626 x 500 x 1.0 = 313.00 mA
+   •   IDD_INT_SCLK0_DYN = 0.23 x fSCLK0 x VDD_INT  0.23 x 125 x 1.0 = 28.75 mA
+   •   IDD_INT_SCLK1_DYN = 0.02 x fSCLK1 x VDD_INT  0.02 x 250 x 1.0 = 5.00 mA
+   •  IDD_INT_OCLK_DYN = 0.048 x fOCLK x VDD_INT  0.048 x 125 x 1.0 = 6.00 mA
+
+Step 6: Choose a DMA Profile to Obtain Core Dynamic DMA Current (IDD_INT_DMA_DR_DYN)
+Calculate the total system DMA bandwidth during peak activity and select the profile that is the closest
+match. The example in Select Appropriate DMA Activity Level sets the DMA profile to HIGH, therefore:
+    •   IDD_INT_DMA_DR_DYN =240 mA
+
+Step 7: Account for Core Dynamic Currents from Accelerator Blocks (IDD_INT_ACCL_DYN)
+Each of these blocks dissipates power in the VDD_INT domain and must be considered when estimating the
+total core dynamic current. The example discussed in Set the Peripheral Resource Usage has the system
+acceleration engine enabled, therefore:
+    •   IDD_INT_ACCL_DYN = 90mA
+
+Step 8: Calculate Total Internal Power Dissipation (PDD_INT_TOT)
+Add the static internal current (Step 1) component to the sum of all the dynamic internal current components
+(Step 4 through Step 7) to get the total current in the VDD_INT domain (IDD_INT_TOT):
+IDD_INT_TOT =  IDD_INT_STATIC +  IDD_INT_CCLK_SHARC0_DYN +  IDD_INT_DCLK_DYN +  IDD_INT_SYSCLK_DYN +
+               IDD_INT_SCLK0_DYN + IDD_INT_SCLK1_DYN + IDD_INT_OCLK_DYN + IDD_INT_ACCL_DYN          +
+              IDD_INT_DMA_DR_DYN
+IDD_INT_TOT = 761.98+ 713.00 + 62.50 + 313.00 + 28.75 + 5.00 + 6.00 + 90.00 + 240 = 2220.23mA
+With the total IDD_INT_TOT current calculated, estimate the total power (PDD_INT_TOT):
+   •  PDD_INT_TOT = IDD_INT_TOT x VDD_INT  2224.36 mA x 1.0 V = 2220.23mW
+
+Step 9: Calculate External Power Dissipation (PDD_EXT_TOT)
+The total external power dissipation (PDD_EXT_TOT) is comprised of the power dissipated in each of the two
+critical power domains (VDD_EXT, VDD_DMC) as well as from VDD_REF domain.
+
+Calculate Power Dissipated in the VDD_EXT and VDD_REF Domain (PDD_EXT & PDD_REF)
+Model the application using the concepts discussed in Estimating External Power Consumption (PDD_EXT,
+PDD_REF and PDD_DMC) to estimate the power dissipated in the VDD_EXT domain (PDD_EXT) and VDD_REF domain
+(PDD_REF). From the example discussed in VDD_EXT & VDD_REF Power Domain Tab:
+   •  PDD_EXT = 372.64mW
+   •  PDD_REF = 89.460mW
+
+
+
+Estimating Power for ADSP-2156x SHARC+ Processors (EE-414)                           Page 16 of 18
+
+=== PDF PAGE 17 ===
+Calculate Power Dissipated in the VDD_DMC Domain (PDD_DMC)
+Model the application using the concepts discussed in Estimating External Power Consumption (PDD_EXT
+and PDD_DMC) to estimate the power dissipated in the VDD_DMC domain (PDD_DMC). From the example
+discussed in VDD_DMC Power Domain Tab:
+   •  PDD_DMC = 99.67mW
+
+Step 10: Calculate Total Power Dissipation (PDD_TOT)
+Finally, with all of the core and system elements properly modelled, calculate the total power dissipation as
+the sum of the internal (PDD_INT_TOT) and external (PDD_EXT_TOT) power dissipation components:
+                             PDD_EXT_ TOT = PDD_EXT + PDD_REF + PDD_DMC
+   •  PDD_TOT = PDD_INT_TOT + PDD_EXT_TOT  2220.23+ 372.64+89.46+ 99.67= 2782mW = ~2.782W
+                  Due to rounding in the calculations in the example, the values output in
+                         the green cells of the power calculator may differ slightly from those                         presented.
+
+
+
+
+
+Estimating Power for ADSP-2156x SHARC+ Processors (EE-414)                           Page 17 of 18
+
+=== PDF PAGE 18 ===
+References
+[1]  ADSP-2156x SHARC+ Single Core High Performance Data Sheet (up to 1 GHz). Rev. 0, March 2020. Analog Devices,
+      Inc.
+[2]  EE-392: Estimating Power for ADSP-SC58x/2158x SHARC+ Processors. Rev. 1, October 2016. Analog Devices, Inc.
+[3]  ADSP-2156x SHARC+ Processor Hardware Reference. Revision 0.3, March 2020. Analog Devices, Inc.
+[4]  SHARC+ Core Programming Reference. Revision 1.3, August 2020. Analog Devices, Inc.
+
+Document History
+
+  Revision                              Description
+
+  Rev 1 – December 2019                     Initial Release.
+          by Prasanth Rajagopal
+
+  Rev 2  - March 2021 by               Updated the Power Domains topic. Added Low Power Features section.
+          Prasanth Rajagopal
+
+
+
+
+
+Estimating Power for ADSP-2156x SHARC+ Processors (EE-414)                           Page 18 of 18

@@ -1,0 +1,487 @@
+{
+  "executed_utc": "2026-09-07T12:25:03.725680+00:00",
+  "python": "3.14.3",
+  "pymupdf": "1.28.0",
+  "scope": "Local source integrity, document consistency and arithmetic only",
+  "checks": [
+    {
+      "name": "source_manifest_ids",
+      "status": "PASS",
+      "details": [
+        "ADC",
+        "ADCEVAL",
+        "AMP",
+        "AMPEVAL",
+        "ANOM",
+        "BOOT",
+        "DSP",
+        "DSPPOWER",
+        "HRM",
+        "INDUCTOR",
+        "JTAG",
+        "MIC",
+        "POWER",
+        "REF733",
+        "SOM",
+        "SOMSCH"
+      ]
+    },
+    {
+      "name": "source_MIC",
+      "status": "PASS",
+      "details": {
+        "path": "datasheets/microphone/im73a135_datasheet_v1_20.pdf",
+        "pages": 18,
+        "bytes": 2526561,
+        "sha256": "c45dffc1cd10abcca82df0fd62f502564e5c5b67e69324756e06286228e0993a",
+        "identity_prefix_matches": true
+      }
+    },
+    {
+      "name": "source_ADC",
+      "status": "PASS",
+      "details": {
+        "path": "datasheets/adc/adau1978_datasheet_rev_b.pdf",
+        "pages": 44,
+        "bytes": 1771627,
+        "sha256": "5b80650206aba0345f6acb32d50cd5c3515575e3647846c55d3c497ce260f838",
+        "identity_prefix_matches": true
+      }
+    },
+    {
+      "name": "source_DSP",
+      "status": "PASS",
+      "details": {
+        "path": "datasheets/dsp/adsp-2156x_datasheet_rev_d.pdf",
+        "pages": 102,
+        "bytes": 3141921,
+        "sha256": "0c908438ea8f71ccd559f44db26e7715fcd93dbf1d962c36e9a790e09efca85e",
+        "identity_prefix_matches": true
+      }
+    },
+    {
+      "name": "source_AMP",
+      "status": "PASS",
+      "details": {
+        "path": "datasheets/amplifier/tas6424-q1_datasheet_rev_b.pdf",
+        "pages": 68,
+        "bytes": 2189719,
+        "sha256": "4cbfe2ed1be614928d9331e77c96462f67b9bd2937af82550bc90fcfb526404e",
+        "identity_prefix_matches": true
+      }
+    },
+    {
+      "name": "source_ANOM",
+      "status": "PASS",
+      "details": {
+        "path": "datasheets/dsp/adsp-2156x_anomalies.pdf",
+        "pages": 12,
+        "bytes": 218533,
+        "sha256": "84b9653c85367a246898e06bcf11d766a51d092811350ce3c5973db7b2d26a58",
+        "identity_prefix_matches": true
+      }
+    },
+    {
+      "name": "source_POWER",
+      "status": "PASS",
+      "details": {
+        "path": "datasheets/dsp/ee-470.pdf",
+        "pages": 14,
+        "bytes": 2307629,
+        "sha256": "99f1ef29705ec864f259cba3ad6f4562d4034f8241f3b2b8a30aaeefde40c061",
+        "identity_prefix_matches": true
+      }
+    },
+    {
+      "name": "source_BOOT",
+      "status": "PASS",
+      "details": {
+        "path": "datasheets/dsp/ee447v01.pdf",
+        "pages": 23,
+        "bytes": 630909,
+        "sha256": "cf1d9af86d9a6fa2602ca6982f2bae772ed92e25db2cf3acf1cdb3928180ee9a",
+        "identity_prefix_matches": true
+      }
+    },
+    {
+      "name": "source_DSPPOWER",
+      "status": "PASS",
+      "details": {
+        "path": "datasheets/dsp/ee414.pdf",
+        "pages": 18,
+        "bytes": 535007,
+        "sha256": "6d309560a7e412206e4df91ba0c9c51a4c9020ad7ab61b192841269c7d58ae92",
+        "identity_prefix_matches": true
+      }
+    },
+    {
+      "name": "source_SOM",
+      "status": "PASS",
+      "details": {
+        "path": "datasheets/dsp/ev-21569-som-manual.pdf",
+        "pages": 31,
+        "bytes": 4511318,
+        "sha256": "64bd8b12a4157eda689ebc57ed860e2f9ced0d5bb75527f44b09f596f0d6bb85",
+        "identity_prefix_matches": true
+      }
+    },
+    {
+      "name": "source_SOMSCH",
+      "status": "PASS",
+      "details": {
+        "path": "references/ev-21569-som/ev-21569-som-schematic.pdf",
+        "pages": 12,
+        "bytes": 4363722,
+        "sha256": "4d17b931291563f925ed3cb1bf14d7b02e0546d92f48c58a2e54da07c3cec9ea",
+        "identity_prefix_matches": true
+      }
+    },
+    {
+      "name": "source_ADCEVAL",
+      "status": "PASS",
+      "details": {
+        "path": "datasheets/adc/ug-600.pdf",
+        "pages": 27,
+        "bytes": 2206963,
+        "sha256": "ee5894a024b0e2a60bd68766723c8e9ec04ecb758a2581eb20b3c1b3b8931078",
+        "identity_prefix_matches": true
+      }
+    },
+    {
+      "name": "source_AMPEVAL",
+      "status": "PASS",
+      "details": {
+        "path": "datasheets/amplifier/slou453a.pdf",
+        "pages": 32,
+        "bytes": 15360331,
+        "sha256": "0db0bc6e0f7fb5e079abe112c5fb52a308bbf9231026096adf09bbaf1e35b767",
+        "identity_prefix_matches": true
+      }
+    },
+    {
+      "name": "source_INDUCTOR",
+      "status": "PASS",
+      "details": {
+        "path": "datasheets/amplifier/sloa242a.pdf",
+        "pages": 10,
+        "bytes": 612657,
+        "sha256": "dee93b9cf35b75c0f3b2df98132ac655db5859e56fe9e209b22b5b4bbed4abc1",
+        "identity_prefix_matches": true
+      }
+    },
+    {
+      "name": "source_HRM",
+      "status": "PASS",
+      "details": {
+        "path": "datasheets/dsp/adsp-2156x_hwr.pdf",
+        "pages": 2453,
+        "bytes": 12507068,
+        "sha256": "96545b862402a7fd803d3aa69d42e7bc81f9b966309702f114de7ff7f4680867",
+        "identity_prefix_matches": true
+      }
+    },
+    {
+      "name": "source_JTAG",
+      "status": "PASS",
+      "details": {
+        "path": "datasheets/dsp/ee-68.pdf",
+        "pages": 20,
+        "bytes": 301045,
+        "sha256": "70709c2d172600992103c92adb0ad554bdfc03f14de5d0948f091bd21bb5bea3",
+        "identity_prefix_matches": true
+      }
+    },
+    {
+      "name": "source_REF733",
+      "status": "PASS",
+      "details": {
+        "path": "references/tas6424-q1/tida-00733_design_guide.pdf",
+        "pages": 46,
+        "bytes": 8072965,
+        "sha256": "1278083936cd0c87c22bb4c45a3d39340fd9e1643b0e3b9ac52dcae2f2bea3da",
+        "identity_prefix_matches": true
+      }
+    },
+    {
+      "name": "dsp_400_ball_dual_list",
+      "status": "PASS",
+      "details": {
+        "numerical_entries": 400,
+        "alphabetical_entries": 400,
+        "unique_balls_numerical": 400,
+        "unique_balls_alphabetical": 400,
+        "differences": [],
+        "boundary": "Same-document text consistency; not independent package or symbol certification"
+      }
+    },
+    {
+      "name": "dsp_boot_debug_base_signals",
+      "status": "PASS",
+      "details": {
+        "expected": {
+          "A08": "SYS_BMODE2",
+          "B09": "SYS_BMODE1",
+          "B10": "SYS_BMODE0",
+          "A09": "SYS_HWRST",
+          "C10": "SYS_RESOUT",
+          "A11": "SYS_FAULT",
+          "N01": "SYS_CLKIN0",
+          "L01": "SYS_XTAL0",
+          "B11": "JTG_TCK",
+          "C12": "JTG_TMS",
+          "C13": "JTG_TDI",
+          "C11": "JTG_TDO",
+          "A10": "JTG_TRST",
+          "R01": "PA_04",
+          "N03": "PA_00",
+          "P03": "PA_01",
+          "T02": "PA_05",
+          "P02": "PA_02",
+          "R03": "PA_03",
+          "T03": "PA_06",
+          "V01": "PA_07"
+        },
+        "boundary": "Peripheral mux functions checked manually against signal tables"
+      }
+    },
+    {
+      "name": "calculation_landmarks",
+      "status": "PASS",
+      "details": "Arithmetic reproduces report examples; no execution-throughput or hardware-margin test"
+    },
+    {
+      "name": "phase0_unknown_and_conflict_row_coverage",
+      "status": "PASS",
+      "details": {
+        "unknown_ids": [
+          "U01",
+          "U02",
+          "U03",
+          "U04",
+          "U05",
+          "U06",
+          "U07",
+          "U08",
+          "U09",
+          "U10",
+          "U11",
+          "U12",
+          "U13",
+          "U14",
+          "U15",
+          "U16",
+          "U17",
+          "U18",
+          "U19",
+          "U20",
+          "U21",
+          "U22",
+          "U23",
+          "U24",
+          "U25",
+          "U26",
+          "U27",
+          "U28",
+          "U29",
+          "U30",
+          "U31",
+          "U32",
+          "U33",
+          "U34",
+          "U35",
+          "U36",
+          "U37",
+          "U38",
+          "U39",
+          "U40",
+          "U41",
+          "U42",
+          "U43",
+          "U44"
+        ],
+        "conditional_conflict_ids": [
+          "X01",
+          "X02",
+          "X03",
+          "X04",
+          "X05"
+        ],
+        "boundary": "Coverage only; classifications assessed in report"
+      }
+    },
+    {
+      "name": "four_component_recommendations",
+      "status": "PASS",
+      "details": [
+        "PROVISIONALLY APPROVED",
+        "PROVISIONALLY APPROVED",
+        "PROVISIONALLY APPROVED",
+        "BLOCKED BY MISSING EVIDENCE"
+      ]
+    },
+    {
+      "name": "single_final_phase1_gate",
+      "status": "PASS",
+      "details": "PHASE 1: BLOCKED"
+    },
+    {
+      "name": "local_markdown_links",
+      "status": "PASS",
+      "details": []
+    },
+    {
+      "name": "no_phase1_kicad_artifacts",
+      "status": "PASS",
+      "details": []
+    }
+  ],
+  "calculations": {
+    "clocks": {
+      "4": {
+        "sample_rate_hz": 96000,
+        "slot_count": 4,
+        "slot_bits": 32,
+        "bclk_hz": 12288000,
+        "frame_hz": 96000,
+        "period_ns": 81.38020833333333,
+        "half_period_ns_ideal_50_percent": 40.690104166666664
+      },
+      "8": {
+        "sample_rate_hz": 96000,
+        "slot_count": 8,
+        "slot_bits": 32,
+        "bclk_hz": 24576000,
+        "frame_hz": 96000,
+        "period_ns": 40.690104166666664,
+        "half_period_ns_ideal_50_percent": 20.345052083333332
+      }
+    },
+    "packed_4x24_bclk_hz_not_approved_amp_mode": 9216000,
+    "amp_512fs_mclk_hz_exceeds_25MHz": 49152000,
+    "latency": {
+      "adc_typical_us": 239.42083333333335,
+      "amplifier_us_from_12_frames": 125.0,
+      "sum_us_screening_only": 364.42083333333335
+    },
+    "interface_screening": {
+      "adc_to_external_sport_setup_ns_128fs": 20.690104166666664,
+      "external_sport_fs_to_adc_setup_ns_128fs": 19.690104166666664,
+      "external_sport_to_amp_setup_ns_128fs": 21.690104166666664,
+      "external_sport_to_amp_setup_ns_256fs": 1.3450520833333321,
+      "dsp_voh_minus_adc_vih_at_3p6_v": -0.1200000000000001,
+      "dsp_voh_minus_amp_vih_at_3p5_v": -0.04999999999999982,
+      "dsp_voh_minus_receiver_vih_at_shared_3p47_v": -0.028999999999999915,
+      "receiver_max_voltage_at_zero_raw_high_margin": 3.428571428571429,
+      "dsp_voh_minus_receiver_vih_at_3p3_plus_1_percent_v": 0.0669000000000004,
+      "boundary": "Screening only; no load/skew/jitter/noise or hold closure; DSP external SPORT timing used"
+    },
+    "microphone": {
+      "normal_equivalent_input_noise_dBSPLA": 21,
+      "low_power_equivalent_input_noise_dBSPLA": 23,
+      "normal_noise_uVrmsA": 2.818382931264455,
+      "signal_at_94dBSPL_mVrms": 12.589254117941675,
+      "linear_extrapolation_at_135dBSPL_Vrms_not_clean_headroom": 1.4125375446227544
+    },
+    "adc_input_referred_noise_uVrmsA_typical": 7.096267784671506,
+    "workload_envelope_not_benchmarked": [
+      {
+        "assumptions": {
+          "references": 2,
+          "errors": 2,
+          "outputs": 4,
+          "Lw": 64,
+          "Ls": 64
+        },
+        "mac_equivalents_per_sample": 2560,
+        "mac_equivalents_per_second": 245760000,
+        "cycles_per_mac_equivalent_at_70_percent_of_1GHz": 2.8483072916666665,
+        "coefficient_bytes": 4096,
+        "filtered_history_bytes": 4096,
+        "subtotal_KiB": 8.0
+      },
+      {
+        "assumptions": {
+          "references": 2,
+          "errors": 2,
+          "outputs": 4,
+          "Lw": 128,
+          "Ls": 128
+        },
+        "mac_equivalents_per_sample": 5120,
+        "mac_equivalents_per_second": 491520000,
+        "cycles_per_mac_equivalent_at_70_percent_of_1GHz": 1.4241536458333333,
+        "coefficient_bytes": 8192,
+        "filtered_history_bytes": 8192,
+        "subtotal_KiB": 16.0
+      },
+      {
+        "assumptions": {
+          "references": 2,
+          "errors": 2,
+          "outputs": 4,
+          "Lw": 256,
+          "Ls": 256
+        },
+        "mac_equivalents_per_sample": 10240,
+        "mac_equivalents_per_second": 983040000,
+        "cycles_per_mac_equivalent_at_70_percent_of_1GHz": 0.7120768229166666,
+        "coefficient_bytes": 16384,
+        "filtered_history_bytes": 16384,
+        "subtotal_KiB": 32.0
+      }
+    ],
+    "cycles_per_sample": {
+      "1GHz": 10416.666666666666,
+      "800MHz": 8333.333333333334
+    },
+    "audio_dma_bytes_per_second_per_direction": 1536000,
+    "audio_dma_bytes_per_second_both_directions": 3072000,
+    "blocks": [
+      {
+        "frames": 1,
+        "duration_us": 10.416666666666666,
+        "duplex_pingpong_bytes": 64
+      },
+      {
+        "frames": 4,
+        "duration_us": 41.666666666666664,
+        "duplex_pingpong_bytes": 256
+      },
+      {
+        "frames": 8,
+        "duration_us": 83.33333333333333,
+        "duplex_pingpong_bytes": 512
+      },
+      {
+        "frames": 16,
+        "duration_us": 166.66666666666666,
+        "duplex_pingpong_bytes": 1024
+      },
+      {
+        "frames": 32,
+        "duration_us": 333.3333333333333,
+        "duplex_pingpong_bytes": 2048
+      }
+    ],
+    "dsp_core_mA_incomplete_worst_corner_subtotal": 2060.4975,
+    "ideal_unboosted_12V_4ohm_sine_ceiling_W_not_delivered_power": 18.0,
+    "adc_10uF_discharge_example": {
+      "64k_only_seconds_to_0p48_from_1p8": 0.8459237375886844,
+      "with_3k_bleeder_seconds": 0.037877182280090356,
+      "bleeder_current_mA_at_1p8": 0.6000000000000001,
+      "boundary": "Nominal RC example, not a guaranteed reset interval"
+    }
+  },
+  "not_executed": [
+    "Hardware measurements",
+    "SPICE or IBIS simulation",
+    "Acoustic characterization",
+    "DSP/FxLMS benchmark",
+    "Thermal simulation",
+    "Boot programming"
+  ],
+  "erc_drc": "NOT APPLICABLE: no KiCad hardware created or modified",
+  "engineering_phase_gate": "PHASE 1: BLOCKED",
+  "audit_status": "PASS",
+  "audit_status_meaning": "Document/arithmetic audit only; does not supersede engineering phase gate"
+}

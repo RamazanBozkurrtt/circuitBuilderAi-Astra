@@ -1,0 +1,486 @@
+
+=== PDF PAGE 1 ===
+                                                               Application Report
+                                                       SLOA242A–June 2017–Revised September 2019
+
+  Inductor Selection Guide for 2.1 MHz Class-D Amplifiers
+
+
+Gregg Scott ............................................................................................... Mid-Power Audio Amplifiers
+
+
+                                   ABSTRACT
+
+        All automotive Class-D audio amplifier designs require a filter on the output of the amplifier to remove the
+      fundamental switching frequency. New technologies, like the 2.1-MHz high switching frequency used on
+       TI’s latest automotive Class-D audio amplifiers, drive significant changes in the inductor requirements for
+      the LC filter. A traditional 400-kHz Class-D automotive audio amplifier typically uses a 10 µH, while the
+      2.1-MHz higher switching frequency amplifier design can take advantage of a much smaller and lighter-
+      weight inductor in the range of 3.3-µH (assuming that each amplifier provides equivalent output power).
+     The important parameters are discussed to understand their effects on determining the proper inductor
+     needed for high frequency class-D amplifiers.
+
+
+
+                                                   Contents
+      1      Inductor Parameters......................................................................................................... 2
+      2     Determine the Proper Inductance Value.................................................................................. 2
+      3      Selection Guide .............................................................................................................. 7
+      4     References ................................................................................................................... 9
+
+                                                           List of Figures
+      1    LC Filter for BD Mode (Half is Shown).................................................................................... 2
+      2     Frequency Response of a Type 2 Filter (3.3-µH Inductor, 1-µF Capacitor, 4-Ω Load)............................. 3
+      3      Inductance vs DC Current.................................................................................................. 4
+      4     Temperature Rise vs DC Current.......................................................................................... 4
+      5     Core Material................................................................................................................. 5
+      6      Inductor THD FFT ........................................................................................................... 5
+      7    THD vs Power................................................................................................................ 6
+      8    THD+N vs Output Power with 4-Ω load................................................................................... 7
+      9    THD+N vs Output Power with 2-Ω load................................................................................... 8
+
+                                                           List of Tables
+      1      Inductor Specifications...................................................................................................... 7
+
+
+
+
+
+SLOA242A–June 2017–Revised September 2019                          Inductor Selection Guide for 2.1 MHz Class-D Amplifiers      1
+Submit Documentation Feedback
+                                                 Copyright © 2017–2019, Texas Instruments Incorporated
+
+=== PDF PAGE 2 ===
+Inductor Parameters                                                                                    www.ti.com
+
+1    Inductor Parameters
+
+
+1.1   Inductance
+
+     An inductor is a component that both stores the AC energy passing through it in its magnetic field, as well
+      as resists change to the passing current level. The Inductance value influences the rate of change of
+       current through the inductor.
+
+1.2  DC Resistance (DCR)
+
+      This is the DC resistance of the internal conductor and is directly related to DC current losses. This is the
+       largest contributor to efficiency loss in class-D amplifiers.
+
+1.3   Saturation Current
+
+     The saturation current is the amount of current specified as a maximum or typical value flowing through
+      the inductor which will induce a specified drop in inductance of the inductor. This is not the maximum
+       current allowed to flow through the inductor. It is a single point on the L vs. I graph.
+
+1.4  Temperature Rise Current
+
+     The temperature rise current is the amount of current (Max or Typical) flowing through the inductor which
+      induces a specified increase in the temperature of the inductor. This is typically specified as a 40°C rise
+      above ambient. This is not the maximum current allowed to flow through the inductor. It is a point on the
+     Temp vs. I graph
+
+1.5  L vs I Graph
+
+      Using the L vs I graph or Inductance (L) versus Current (I) graph is helpful in understanding how the
+       inductor reacts with audio signals over the power range of the amplifier as well as in a current limit event.
+
+2    Determine the Proper Inductance Value
+
+      There are several application notes already written on determining the proper inductance value for class-D
+       amplifiers, such as, SLOA119 and SLAA701. Refer to these documents to determine the LC filter values.
+
+     The 2.1-MHz high switching frequency devices use BD modulation, resulting in the single-ended circuit
+     shown in Figure 1
+      (see SLAA701 for derivation).
+
+                                                 LBTL
+
+
+
+                                                             +
+                               +    C = Cg
+                                                       RL =                                                                    VOUT
+                                                                  RBTL/ 2                                              Vin
+                                                                                                           -
+                                                        -
+
+
+
+                           Figure 1. LC Filter for BD Mode (Half is Shown)
+
+
+
+
+
+2       Inductor Selection Guide for 2.1 MHz Class-D Amplifiers                   SLOA242A–June 2017–Revised September 2019
+                                                                                             Submit Documentation Feedback
+                                                 Copyright © 2017–2019, Texas Instruments Incorporated
+
+=== PDF PAGE 3 ===
+www.ti.com                                                                 Determine the Proper Inductance Value
+
+     The 2.1-MHz switching frequency of these devices allow for a higher cutoff frequency to be used than with
+     500 kHz class-D amplifiers. This higher cutoff frequency requires a lower inductance value resulting in an
+       inductor that can be physically smaller.
+
+      Using the calculations in the referenced application notes, the values for the LC filter are 3.3-µH inductor
+     and 1-µF capacitor on each leg of the device. Assuming a 4-Ω load, this gives a cutoff frequency of 116
+      kHz. With a 2-Ω load this gives a cutoff frequency of 64 kHz. The capacitor value chosen is optimized for
+      both 4-Ω and 2-Ω loads. This means that the response is slightly over-damped for a 2-Ω load and slightly
+      under-damped for a 4-Ω load as illustrated in Figure 2.
+
+     A minimum inductance value is provided in the data sheets. This is due to higher ripple currents with lower
+      values of inductance which may interfere with the current protections. This value should not be violated
+      under all operating conditions over current and temperature.
+
+
+
+
+
+       Figure 2. Frequency Response of a Type 2 Filter (3.3-µH Inductor, 1-µF Capacitor, 4-Ω Load)
+
+
+
+
+
+SLOA242A–June 2017–Revised September 2019                          Inductor Selection Guide for 2.1 MHz Class-D Amplifiers      3
+Submit Documentation Feedback
+                                                 Copyright © 2017–2019, Texas Instruments Incorporated
+
+=== PDF PAGE 4 ===
+Determine the Proper Inductance Value                                                                   www.ti.com
+
+2.1   Inductance vs. DC Current
+
+     The graph in Figure 3 shows the relationship between inductance and DC current for a typical 3.3 µH low
+       permeability inductor. The inductance starts falling off as current rises. Conversely, a high permeability
+      switched mode power supply (SMPS) inductor holds the inductance as current increases and eventually
+      drops off at saturation. A SMPS needs the inductance to be stable to provide regulation and stability of the
+      system. For audio amplifiers, this is not the case and low permeability inductors provide higher saturation
+       current for a smaller size inductor (this is explained further in the core material section of this app note).
+     The inductance vs. DC current graph is important in inductor choice as the designer must ensure that the
+      inductance does not go below the 2 µH minimum inductance at the highest expected current.
+
+                                         4
+
+
+
+
+                                         3
+                                                                                 (PH)
+
+                                         2
+                                                                                                                                                                                                                 Inductance
+
+                                         1
+
+
+
+
+                                         0
+                                          0           2           4           6           8
+                                               DC Current (A)
+
+                                 Figure 3. Inductance vs DC Current
+
+
+2.2  Temp vs. I Graph
+
+     The temperature vs. I graph is shown in Figure 4. The temperature rise in the inductor is primarily due to
+      the copper loses in the magnet wire. The wire has a resistance at DC (DCR), and it also has a resistance
+       at higher AC frequencies that increases due to skin effect (ACR). The wire in inductors for the 2.1 MHz
+      high frequency class-D amplifiers have a small diameter so the ACR can be neglected. The current rating
+     due to temperature should be decided by the system designer. The temperature rise has a long time
+       constant, so the average current or average power should be used and is system dependent.
+
+                                        50
+
+
+
+                                        40
+
+
+
+                                        30
+                                                                   (qC)
+                                 'T
+                                        20
+
+
+
+                                        10
+
+
+
+                                         0
+                                          0           2           4           6           8
+                                               DC Current (A)
+
+                              Figure 4. Temperature Rise vs DC Current
+
+
+     The DCR does play a role in the maximum output power that can be delivered to the speaker. In a BTL
+      class-D amplifier, there are two inductors in series with the speaker that form a voltage divider. This
+      reduces the signal level at the speaker terminals. The DCR needs to be chosen to allow for the required
+      power level to be delivered to the speaker.
+
+
+
+
+4       Inductor Selection Guide for 2.1 MHz Class-D Amplifiers                   SLOA242A–June 2017–Revised September 2019
+                                                                                             Submit Documentation Feedback
+                                                 Copyright © 2017–2019, Texas Instruments Incorporated
+
+=== PDF PAGE 5 ===
+www.ti.com                                                                 Determine the Proper Inductance Value
+
+2.3  Core Material
+
+     The core material plays the crucial part in how the inductor behaves over the operating current and
+      temperature ranges. It is important to understand the differences and tradeoffs with these materials. The
+       materials can be separated into three types: low, medium, and high permeability (perm). A metal alloy
+       material is classified as a low perm material whereas ferrites fall into medium and high perm.
+
+     The metal alloy materials have a low perm, where the inductance starts to drop with current but saturates
+       at a high current. They are also very stable over temperature. Whereas ferrites tend to hold their
+      inductance until they saturate typically at a lower current. Ferrites also are sensitive temperature. As
+      temperature increases the saturation current decreases. Therefore, the filter design must take the worst
+      case temperature into account.
+
+                                                             Initial Inductance
+
+
+
+
+                                                                                            High
+                                      10 μ H                                       Medium
+                                                                              Low
+                                             Low             Q = 35
+
+
+
+                                       Q = 60
+
+
+                                       5 μ H
+
+
+
+
+                                                             Core Saturation
+
+
+
+                                                            4 Amps              8 Amps
+
+                                       Figure 5. Core Material
+
+
+     A low permeability inductor results in a decreased B field in the inductor core and thus lower harmonics
+      introduced by the inductor. The inductor harmonics are shown in Figure 6. Lower harmonics results in
+       better THD and make low permeability inductors preferable for audio applications. Since low permeability
+       inductors are preferred in this application, it is important to consider the decreasing inductance as current
+        is increased. An inductor should be chosen such that the LC filter does not saturate to near zero
+      inductance. Large current spikes causes the amplifier to prematurely trip the current limit or the over
+       current shutdown protection.
+
+
+
+
+
+                                     Figure 6. Inductor THD FFT
+
+
+SLOA242A–June 2017–Revised September 2019                          Inductor Selection Guide for 2.1 MHz Class-D Amplifiers      5
+Submit Documentation Feedback
+                                                 Copyright © 2017–2019, Texas Instruments Incorporated
+
+=== PDF PAGE 6 ===
+Determine the Proper Inductance Value                                                                   www.ti.com
+
+2.4   Linearity
+
+     The linearity of the inductor is not on most inductor data sheets. The linearity is determined by measuring
+      the total harmonic distortion plus noise (THD+n) of the amplifier versus output power. The linearity of the
+       inductor is due to the material that used in the core and the volume of the core material. See Figure 7 for
+     an explanation of the THD+n versus output power curve.
+
+
+
+
+
+                                      Figure 7. THD vs Power
+
+
+
+
+
+6       Inductor Selection Guide for 2.1 MHz Class-D Amplifiers                   SLOA242A–June 2017–Revised September 2019
+                                                                                             Submit Documentation Feedback
+                                                 Copyright © 2017–2019, Texas Instruments Incorporated
+
+=== PDF PAGE 7 ===
+www.ti.com                                                                                                Selection Guide
+
+3    Selection Guide
+
+     The selection guide has been created by collecting the data sheets and measuring the THD+n for the
+       inductors. The ranking is determined by the goal of the design. The goals are separated for output power
+       into a load, THD, and physical dimensions.
+
+                                     Table 1. Inductor Specifications
+
+                                                                          Dimensions
+                            Part Number                      Inductance                                                                    L x W x H (mm)            LSAT (A)               LTEMP (A)         DCR (mΩ)
+
+        ABCO LPHM4020T-3R3M-R                              3.3 µH              4.0 x 4.0 x 2.0                3.8                     3.5                    57.0
+
+           Cyntec VCHW042A MS6                                  3.3 µH               4.2 x 4 x 2.1                 5.0                     4.9                    38.0
+
+           Cyntec VCMV052G-MN2                                  3.3 µH            5.45 x 5.25 x 2.8               5.3                     5.5                    33.0
+
+           Cyntec VCMT063T MN5                                  3.3 µH            7 x 6.6 x 2.8                 7.5                     7.5                    22.5
+
+           Cyntec VAMV06077E-3R3MM2-79                      3.3 µH x 2            6.9 x 7.6 x 7.3             13                     5.7                    16.0
+
+            Coilmaster CMI-CMMPPF322530QL-3R3M                3.3 µH               3.2 x 2.5 x 3                 3.6                     3.5                    35.0
+
+            Coilmaster CMI-CMMPP4030HL-3R3M                    3.3 µH              4.4 x 4.4 x 3.0                7.5                     4.6                    42.0
+
+           Murata DFE322520FD-3R3M                             3.3 µH               3.2 x 2.5 x 2                 3.9                     3.3                    51.0
+
+           Murata DFEG0730D-3R3M                               3.3 µH             7 x 6.6 x 3                  7.1                     6.7                    24.0
+
+           Murata FDSD0420-H-3R3M                               3.3 µH               4.2 x4.2 x 2                 4.9                     3.4                    59.0
+
+          Sagami DBL8087H-3R3M-R1                           3.3 µH x 2            8.0 x 8.0 x 9.0                3.9                     7.2                    18.0
+
+           Sunlord ASWPA6055S3R3MT1                           3.3 µH              6.0 x 6.0 x 5.5                6.6                     4.0                    21.0
+
+           Sunlord ASWPA4035S3R3MT                             3.3 µH             4.0 x 0 4.0 x 3.5               3.8                     2.9                    53.0
+
+          Sumida C2DEPIH80D90NP-3R3MC                     3.3 µH x 2            8.0 x 8.0 x 9.0                9.0                     6.2                    10.7
+
+           Taiyo Yuden NRS5040T-3R3M                            3.3 µH              4.9 x 4.9 x 4.0                4.0                     3.3                    27.0
+
+           Taiyo Yuden NRS8040T-3R6NJGJV                       3.6 µH              8.0 x 8.0 x 4.0                6.8                     6.0                    15.0
+
+          Wurth 784 383 560 33                                    3.3 µH              4.0 x 4.0 x 2.0                5.5                     3.6                    39.9
+
+
+
+
+
+                           Figure 8. THD+N vs Output Power with 4-Ω load
+
+
+
+
+
+SLOA242A–June 2017–Revised September 2019                          Inductor Selection Guide for 2.1 MHz Class-D Amplifiers      7
+Submit Documentation Feedback
+                                                 Copyright © 2017–2019, Texas Instruments Incorporated
+
+=== PDF PAGE 8 ===
+Selection Guide                                                                                        www.ti.com
+
+
+
+
+
+                           Figure 9. THD+N vs Output Power with 2-Ω load
+
+
+
+
+
+8       Inductor Selection Guide for 2.1 MHz Class-D Amplifiers                   SLOA242A–June 2017–Revised September 2019
+                                                                                             Submit Documentation Feedback
+                                                 Copyright © 2017–2019, Texas Instruments Incorporated
+
+=== PDF PAGE 9 ===
+www.ti.com                                                                                                Selection Guide
+
+3.1  Rank
+
+      Ranking is based on the customer specifications and the system needs. Testing has been provided to
+      help in choosing or ranking inductors. The inductors are evaluated for their overall current handling
+       capability, minimum inductance curves, and linearity to determine whether these inductors are
+     recommended for driving 2 Ωloads and 4 Ωloads. A chart is created to compare the inductors that were
+       tested. The THD vs Power graphs are created for 4 Ω and 2 Ω loads. The size and price of the inductors
+     may need to be evaluated before making their final selection. Although the price of the inductors has not
+     been part of this study, typically, the smaller the inductor the lower the cost. This may not hold true in all
+      cases.
+
+4    References
+
+      Cyntec: http://www.cyntec.com/productList.aspx?id=7
+
+      Murata: http://www.murata.com/en-global/products/inductor
+
+      Sagami: http://www.sagami-elec.co.jp/en/product/list.php?srchtype=cat&cat=07&catk=03
+
+      Sunlord: http://www.sunlordinc.com/
+
+      Taiyo Yuden: http://www.t-yuden.com/ut/product/category/inductor/
+
+      Toko: http://www.toko.co.jp/products/en/index2.html
+
+      Wurth: http://www.we-online.com/web/en/all_electronic_components/Start_PB.php
+
+      Sumida: http://products.sumida.com/ProductsInfo/?lang=en
+
+     ABCO: http://www.abco.co.kr
+
+       Coilmaster: http://www.coilmaster.com/index_eng.php
+
+5    Trademarks
+        All trademarks are the property of their respective owners.
+
+                                    Revision History
+NOTE: Page numbers for previous revisions may differ from page numbers in the current version.
+
+Changes from Original (June 2017) to A Revision  ......................................................................................................... Page
+
+•  Changed the document title To: Inductor Selection Guide for 2.1 MHz Class-D Amplifiers .................................... 1
+•  Changed the Abstract statement........................................................................................................ 1
+•  Changed Table 1..........................................................................................................................  7
+•  Changed Figure 8.........................................................................................................................  7
+•  Added Figure 9 ............................................................................................................................  8
+•  Changed the Rank section............................................................................................................... 9
+•  Changed the References section ....................................................................................................... 9
+
+
+
+
+
+SLOA242A–June 2017–Revised September 2019                                                             Revision History      9
+Submit Documentation Feedback
+                                                 Copyright © 2017–2019, Texas Instruments Incorporated
+
+=== PDF PAGE 10 ===
+                          IMPORTANT NOTICE AND DISCLAIMER
+
+
+TI PROVIDES TECHNICAL AND RELIABILITY DATA (INCLUDING DATASHEETS), DESIGN RESOURCES (INCLUDING REFERENCE
+DESIGNS), APPLICATION OR OTHER DESIGN ADVICE, WEB TOOLS, SAFETY INFORMATION, AND OTHER RESOURCES “AS IS”
+AND WITH ALL FAULTS, AND DISCLAIMS ALL WARRANTIES, EXPRESS AND IMPLIED, INCLUDING WITHOUT LIMITATION ANY
+IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE OR NON-INFRINGEMENT OF THIRD
+PARTY INTELLECTUAL PROPERTY RIGHTS.
+
+These resources are intended for skilled developers designing with TI products. You are solely responsible for (1) selecting the appropriate
+TI products for your application, (2) designing, validating and testing your application, and (3) ensuring your application meets applicable
+standards, and any other safety, security, or other requirements. These resources are subject to change without notice. TI grants you
+permission to use these resources only for development of an application that uses the TI products described in the resource. Other
+reproduction and display of these resources is prohibited. No license is granted to any other TI intellectual property right or to any third
+party intellectual property right. TI disclaims responsibility for, and you will fully indemnify TI and its representatives against, any claims,
+damages, costs, losses, and liabilities arising out of your use of these resources.
+
+TI’s products are provided subject to TI’s Terms of Sale (www.ti.com/legal/termsofsale.html) or other applicable terms available either on
+ti.com or provided in conjunction with such TI products. TI’s provision of these resources does not expand or otherwise alter TI’s applicable
+warranties or warranty disclaimers for TI products.
+
+
+                            Mailing Address: Texas Instruments, Post Office Box 655303, Dallas, Texas 75265
+                                          Copyright © 2019, Texas Instruments Incorporated

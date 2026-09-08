@@ -1,0 +1,696 @@
+
+=== PDF PAGE 1 ===
+IM73A135V01
+IP57 dust and water resistant analog XENSIVTM MEMS microphone
+
+Description
+The IM73A135V01 is designed for applications which require a microphone with high SNR (low self-noise), low
+distortion (high AOP), which is also IP57 robust to dust and water.
+Best-in-class Signal to Noise Ratio (SNR) of 73dB(A) enables far field and low volume audio pick-up. The flat
+frequency response ( 20Hz low-frequency roll-off) and tight manufacturing tolerance improve the performance
+of multi-microphone array applications.
+The high performance analog microphone ASIC contains an extremely low noise preamplifier and a high
+performance differential output amplifier. Different power modes can be selected in order to suit specific
+current consumption requirements.
+Each IM73A135V01 microphone is calibrated with an advanced Infineon calibration algorithm, resulting in small
+sensitivity tolerances (± 1dB).
+
+Features
+
+•   Component level IP57 water and dust resistant       •   Power optimized modes determined by VDD level
+•   Signal to noise ratio of 73dB(A) SNR                       •   Package dimensions: 4mm x 3mm x 1.2mm
+•   Acoustic overload point at 135dBSPL                     •    Differential output
+•    Flat frequency response with low frequency roll off  •   Omnidirectional pickup pattern
+    at 20Hz
+
+Typical applications
+
+•    Active Noise Cancellation (ANC) headphones and     •   High quality audio capturing
+    wireless earbuds                                                     -   Conference systems
+•   Devices with Voice User Interface (VUI)                        -   Cameras and camcorders
+      -   Smart speakers                                            •    Industrial or home monitoring with audio pattern
+      -  Home automation                                detection
+      -   IoT devices
+
+Ordering information
+
+Table 1          Ordering information
+Product name           Package               Marking                Ordering code
+IM73A135V01             PG-LLGA-5-2              I73A03                 SP003803274
+
+
+
+
+
+Datasheet                     Please read the Important Notice and Warnings at the end of this document                  V 1.20
+www.infineon.com                                                                                           2021-07-07
+
+=== PDF PAGE 2 ===
+IM73A135V01
+IP57 dust and water resistant analog XENSIVTM MEMS microphone
+
+Block diagram
+
+Block diagram
+
+
+
+                                                                   VDD
+
+
+                                                                        POWER
+                                                            CALIBRATION      BAND GAP        LDO       MODE
+                                                                              DETECTOR
+
+
+                                       MEMS BIAS
+                                        CHARGE PUMP
+
+
+
+              MEMBRANE 1                                                                            AMP             OUT+
+                  STATOR
+
+              MEMBRANE 2
+  MEMS                                                             AMP               OUT-
+
+                   ASIC
+
+
+                                                                        GROUND
+
+
+Figure 1         IM73A135V01 block diagram
+
+Product validation
+Technology qualified for industrial applications.
+Ready for validation in industrial applications according to the relevant tests of IEC 60747 and 60749 or
+alternatively JEDEC47/20/22.
+
+Environmental robustness
+Infineon’s latest Sealed Dual Membrane MEMS technology delivers high ingress protection (IP57) at a
+microphone level. The sealed MEMS design prevents water or dust from entering between membrane
+and backplate, preventing mechanical blockage or electric leakage issues commonly observed in MEMS
+microphones. Microphones built with the sealed dual membrane technology can be used to create IP68 devices,
+requiring only minimal mesh protection.
+
+Table 2          Environmental robustness
+Test Standard                         Test Condition
+IP5x dust resistance1)                   Arizona dust A4 coarse, vertical orientation , sound hole upwards, 10
+                                         cycles (15 minutes sedimentation, 6 sec blowing)
+IPx7 water immersion2)               Temporary immersion in 1 meter of water for 30 minutes.
+                                   Microphone tested 2 hours after removal
+
+
+
+
+1   The number "5" stands for the dust ingress rating or the capacity to withstand the effects of fine, abrasive
+     dust particles.
+2   The number "7" identifies the level of liquid protection.
+
+Datasheet                                                2                                                  V 1.20
+                                                                                                                 2021-07-07
+
+=== PDF PAGE 3 ===
+IM73A135V01
+IP57 dust and water resistant analog XENSIVTM MEMS microphone
+
+Table of contents
+
+Table of contents
+
+
+             Description . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .1
+
+             Features . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 1
+
+              Typical applications . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 1
+
+             Ordering information . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 1
+
+             Block diagram . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 2
+
+            Product validation  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 2
+
+            Environmental robustness . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 2
+
+             Table of contents . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+
+1            Typical performance characteristics . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4
+
+2            Acoustic characteristics . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 6
+2.1           Free field frequency response . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .7
+
+3              Electrical characteristics and parameters . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 8
+3.1           Absolute maximum ratings . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 8
+3.2             Electrical parameters . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 8
+3.3             Electrical characteristics . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 10
+
+4           Package information . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 11
+
+5            Footprint and stencil recommendation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 12
+
+6           Packing information . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .13
+
+7           Reflow soldering and board assembly . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 14
+
+8              Reliability specifications . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .16
+
+             Revision history . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 17
+
+             Disclaimer . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 18
+
+
+
+
+
+Datasheet                                                3                                                  V 1.20
+                                                                                                                 2021-07-07
+
+=== PDF PAGE 4 ===
+IM73A135V01
+IP57 dust and water resistant analog XENSIVTM MEMS microphone
+
+Typical performance characteristics
+
+1           Typical performance characteristics
+Test conditions(unless otherwise specified): VDD = 2.75V, TA= 25°C, output unloaded
+
+
+
+
+
+                                                   Figure 3          Typical free field ultrasonicFigure 2          Typical amplitude response
+                                                                response
+
+
+
+
+
+                                                   Figure 5          Typical noise floorFigure 4          Typical group delay and phase
+                                                                (unweighted)                response
+
+
+
+
+
+                                                   Figure 7          Typical THD vs frequencyFigure 6          Typical THD vs SPL
+
+
+
+
+
+Datasheet                                                4                                                  V 1.20
+                                                                                                                 2021-07-07
+
+=== PDF PAGE 5 ===
+IM73A135V01
+IP57 dust and water resistant analog XENSIVTM MEMS microphone
+
+Typical performance characteristics
+
+
+
+
+
+                                                   Figure 9          Typical PSRRFigure 8          Typical IDD vs VDD
+
+
+
+
+
+Datasheet                                                5                                                  V 1.20
+                                                                                                                 2021-07-07
+
+=== PDF PAGE 6 ===
+IM73A135V01
+IP57 dust and water resistant analog XENSIVTM MEMS microphone
+
+Acoustic characteristics
+
+2           Acoustic characteristics
+Test conditions (unless otherwise specified in the table): VDD = 2.75V, TA = 25°C, 55% R.H., audio bandwidth 20Hz
+to 20kHz, output unloaded
+
+Table 3          IM73A135V01 acoustic specifications
+Parameter                       Symbol       Values        Unit  Note or Test Condition
+                                             Min.  Typ.  Max.
+Sensitivity                                        -39    -38    -37   dBV   1kHz, 94 dB SPL, all
+                                                                            operating modes
+Low Frequency Cutoff Point                   fC LP          20          Hz   -3dB point relative to 1kHz
+Acoustic overload  Normal mode       AOPNP         135        dBSPL THD = 10%.
+point               Low power mode    AOPLP         130
+Signal to Noise    Normal mode       SNRNP         73          dB(A)  A-Weighted
+ratio               Low power mode    SNRLP         71
+Noise floor        Normal mode                       -111         dBV(A)  A-Weighted
+               Low power mode                    -109
+Total harmonic    Normal  94dBSPL   THDNP           0.5      %    Measuring 2nd to 5th
+distortion       mode                                                  harmonics, 1kHz                        132dBSPL                    1.0
+                        135dBSPL                   10.0
+               Low    94dBSPL   THDLP           0.5
+                power                        124dBSPL                    1.0              mode
+                        130dBSPL                   10.0
+Phase Response   75Hz                             12                 °
+                1kHz                              2
+                3kHz                                    -2
+Group Delay       250Hz                            52           µs
+                 600Hz                             7
+                1kHz                              2
+                4kHz                                   0.5
+Directivity                                        Omnidirectional           Pickup pattern
+Polarity                                            Increasing Vout            Increasing SPL
+
+
+
+
+
+Datasheet                                                6                                                  V 1.20
+                                                                                                                 2021-07-07
+
+=== PDF PAGE 7 ===
+IM73A135V01
+IP57 dust and water resistant analog XENSIVTM MEMS microphone
+
+Acoustic characteristics
+
+2.1           Free field frequency response
+
+
+
+
+
+Figure 10        IM73A135V01 free field frequency response
+
+Table 4          IM73A135V01 free field frequency response, normalised to 1kHz sensitivity value.
+        Frequency (Hz)                Upper Limit (dB)               Lower Limit (dB)
+              20                                     -1.5                                    -4.5
+              50                                 +0.5                                    -1.5
+              800                             +1                                    -1
+             1000                             0                              0
+             1200                            +1                                    -1
+             6000                            +2                                    -1
+             8000                            +4                                    -1
+             15000                            +9                              0
+
+
+
+
+
+Datasheet                                                7                                                  V 1.20
+                                                                                                                 2021-07-07
+
+=== PDF PAGE 8 ===
+IM73A135V01
+IP57 dust and water resistant analog XENSIVTM MEMS microphone
+
+Electrical characteristics and parameters
+
+3            Electrical characteristics and parameters
+
+3.1           Absolute maximum ratings
+Stresses at or above the listed maximum ratings may affect device reliability or cause permanent device
+damage. Functional device operation at these conditions is not guaranteed.
+
+Table 5           Absolute maximum ratings
+
+Parameter                        Symbol               Values       Unit  Note / Test
+                                                                              Condition                                                        Min.    Max.
+Supply voltage                          VDDmax                         3.0      V
+Storage temperature                       TS                -40     100      °C
+Operating temperature                    TA                -40      85      °C
+
+3.2            Electrical parameters
+
+Table 6          IM73A135V01 electrical parameters
+
+                                                   Values
+          Parameter            Symbol                          Unit    Note / Test Condition
+                                             Min.   Typ.   Max.
+Supply voltage     Normal                                         A 100nF bypass                                                    2.3    2.75     3.0
+               mode                                                      capacitor(CVDD) should be
+                                                                          placed close to the               Low power      VDD                          V
+                                                                    microphone VDD pin               mode                                                 1.52     1.6     1.8                                                                               to ensure best SNR
+                                                                      performance
+VDD ramp-up time                                                        VDD reaches its final value                                                          5    ms                                                                              within ± 10 % tolerance
+Output load          Cload              Ca, Cb                   100
+                                                             pF
+                                   Cd                    100
+                       Rload              Rp, Rn             25          kΩ
+Input VCM         Normal                                                  Input VCM is the voltage at                                                 1.17     1.3    1.43               mode                                                  the input pins of the audio
+                                  Vcm                           V    front end if not driven               Low power                                               0.765   0.85   0.935               mode
+
+
+
+
+
+Datasheet                                                8                                                  V 1.20
+                                                                                                                 2021-07-07
+
+=== PDF PAGE 9 ===
+IM73A135V01
+IP57 dust and water resistant analog XENSIVTM MEMS microphone
+
+Electrical characteristics and parameters
+
+
+
+                    VDD
+
+
+
+
+                                            Ca     CVDD
+                       VDD                     Rp
+                          OUT+
+                                            Cd           VCM
+                             OUT-
+                      GND                     Rn
+                               MIC                                            Cb
+
+
+
+
+
+Figure 11        Output load configuration
+
+
+
+
+
+Datasheet                                                9                                                  V 1.20
+                                                                                                                 2021-07-07
+
+=== PDF PAGE 10 ===
+IM73A135V01
+IP57 dust and water resistant analog XENSIVTM MEMS microphone
+
+Electrical characteristics and parameters
+
+3.3            Electrical characteristics
+Test conditions (unless otherwise specified in the table): VDD = 2.75V, TA = 25°C, 55% R.H.
+
+Table 7          IM73A135V01 electrical characteristics
+
+                                                   Values
+          Parameter            Symbol                          Unit    Note / Test Condition
+                                             Min.   Typ.   Max.
+Current           Normal
+                                        IDDNP            170    230consumption     mode
+                                                          µA   Input ≤ 94 dBSPL
+               Low power
+                                          IDDLP             70     80               mode
+Start-up time                                                                    Start-up time in all
+                                                   tstartup            10     30    ms   operating modes after
+                                                                      VDDmin is applied
+Mode switching time                                                 Time of undefined output
+                                      tModeChange           10         ms                                                                                         after mode change detected
+Brown out voltage                                                 Brown out is triggered for
+                                      VBrownOut             1.2           V                                                                               voltage below VBrownOut
+Vout DC-voltage    Normal
+                                   VOUT_DC_NP           1.35               mode
+                                                              V
+               Low power
+                                    VOUT_DC_LP            0.9               mode
+Power supply      Normal                                                VDD=2.75V + 100mVpp
+rejection ratio in   mode                                                sinewave (PSR=1/Apower;
+                                   PSRRInBand_band (differential)                                   80                Apower = Transfer function
+                                      NP                                  VDD → Differential Output of
+                                                                              ASIC)
+                                                        dB
+               Low power                                             VDD=1.6V + 100mVpp
+               mode                                                sinewave (PSR=1/Apower;
+                                   PSRRInBand_                                                   80                Apower = Transfer function
+                                            LP                                  VDD → Differential Output of
+                                                                              ASIC)
+Power supply      Normal                                              VDD= 2.75 V + 100mVpp                               PSRRCM_NP          65rejection ratio     mode                                                sinewave
+                                                        dBcommon mode               Low power                                           VDD= 1.6 V + 100mVpp                                PSRRCM_LP           60               mode                                                sinewave
+Output impedance  Normal
+                                       Zout_NP                  250   Ω               mode
+               Low power
+                                         Zout_LP                   500   Ω               mode
+
+
+
+
+
+Datasheet                                                10                                                 V 1.20
+                                                                                                                 2021-07-07
+
+=== PDF PAGE 11 ===
+IM73A135V01
+IP57 dust and water resistant analog XENSIVTM MEMS microphone
+
+Package information
+
+4          Package information
+
+
+
+
+
+Figure 12        IM73A135V01 package drawing
+
+Table 8          IM73A135V01 pin configuration
+   Pin Number          Name           Description
+        1                 Output +            Differential Output +
+        2                   VDD           Power supply
+        3                 Output -            Differential Output -
+        4               GND          Ground
+        5               GND          Ground
+
+
+
+
+
+Datasheet                                                11                                                 V 1.20
+                                                                                                                 2021-07-07
+
+=== PDF PAGE 12 ===
+IM73A135V01
+IP57 dust and water resistant analog XENSIVTM MEMS microphone
+
+Footprint and stencil recommendation
+
+5           Footprint and stencil recommendation
+
+The acoustic port hole diameter in the PCB should be larger than the acoustic port hole diameter of the MEMS
+Microphone to ensure optimal performance. A PCB sound port size of radius 0.4 mm (diameter 0.8mm) is
+recommended.
+The board pad and stencil aperture recommendations shown in Figure 13 are based on Solder Mask Defined
+(SMD) pads. The specific design rules of the board manufacturer should be considered for individual design
+optimizations or adaptations.
+
+
+
+
+
+Figure 13        IM73A135V01 footprint and stencil recommendation
+
+
+
+
+
+Datasheet                                                12                                                 V 1.20
+                                                                                                                 2021-07-07
+
+=== PDF PAGE 13 ===
+IM73A135V01
+IP57 dust and water resistant analog XENSIVTM MEMS microphone
+
+Packing information
+
+6          Packing information
+For shipping and assembly the Infineon microphones are packed in product specific tape-and-reel carriers. A
+detailed drawing of the carrier can be seen in Figure 14.
+
+
+
+
+
+Figure 14        IM73A135V01 tape and reel packing information
+
+
+
+
+
+Datasheet                                                13                                                 V 1.20
+                                                                                                                 2021-07-07
+
+=== PDF PAGE 14 ===
+IM73A135V01
+IP57 dust and water resistant analog XENSIVTM MEMS microphone
+
+Reflow soldering and board assembly
+
+7          Reflow soldering and board assembly
+
+Infineon MEMS microphones are qualified in accordance with the IPC/JEDEC J-STD-020D-01. The moisture
+sensitivity level of MEMS microphones is rated as MSL1. For PCB assembly of the MEMS microphone the widely
+used reflow soldering using a forced convection oven is recommended.
+The soldering profile should be in accordance with the recommendations of the solder paste manufacturer
+to reach an optimal solder joint quality. The reflow profile shown in Figure 15 is recommended for board
+manufacturing with Infineon MEMS microphones.
+
+
+
+
+
+Figure 15       Recommended reflow profile
+
+Table 9          Reflow profile limits
+
+          Profile feature                 Pb-Free assembly            Sn-Pb Eutectic assembly
+Temperature Min (Tsmin)                        150 °C                          100 °C
+Temperature Max (Tsmax)                       200 °C                          150 °C
+Time (Tsmin to Tsmax) (ts)                      60-120 seconds                   60-120 seconds
+Ramp-up rate (TL to TP)                    3 °C/second max.                 3 °C/second max.
+Liquidous temperature (TL)                     217 °C                          183 °C
+Time (tL) maintained above TL                60-150 seconds                   60-150 seconds
+Peak Temperature (Tp)                      260°C +0°C/-5°C                   235°C +0°C/-5°C
+Time within 5°C of actual peak
+                       3)                           20-40 seconds                     10-30 secondstemperature (tp)
+Ramp-down rate                         6 °C/second max.                 6 °C/second max.
+Time 25°C to peak temperature              8 minutes max.                  6 minutes max.
+
+Note:       For further information please consult the 'General recommendation for assembly of Infineon
+           packages' document which is available on the Infineon Technologies web page
+
+
+3    Tolerance for peak profile temperature (Tp) is defined as a supplier minimum and a user maximum
+
+Datasheet                                                14                                                 V 1.20
+                                                                                                                 2021-07-07
+
+=== PDF PAGE 15 ===
+IM73A135V01
+IP57 dust and water resistant analog XENSIVTM MEMS microphone
+
+Reflow soldering and board assembly
+
+The MEMS microphones can be handled using industry standard pick and place equipment. Care should be
+taken to avoid damage to the microphone structure as follows:
+•   Do not pick the microphone with vacuum tools which make contact with the microphone acoustic port
+    hole.
+•   The microphone acoustic port hole should not be exposed to vacuum, this can destroy or damage the
+   MEMS.
+•   Do not blow air into the microphone acoustic port hole. If an air blow cleaning process is used, the port
+    hole must be sealed to prevent particle contamination.
+•     It is recommended to perform the PCB assembly in a clean room environment in order to avoid
+    microphone contamination.
+•    Air blow and ultrasonic cleaning procedures shall not be applied to MEMS Microphones. A no-clean paste
+     is recommended for the assembly to avoid subsequent cleaning steps. The microphone MEMS can be
+    severely damaged by cleaning substances.
+•   To prevent the blocking or partial blocking of the sound port during PCB assembly, it is recommended to
+    cover the sound port with protective tape during PCB sawing or system assembly.
+•   Do not use excessive force to place the microphone on the PCB. The use of industry standard pick and place
+    tools is recommended in order to limit the mechanical force exerted on the package.
+
+
+
+
+
+Datasheet                                                15                                                 V 1.20
+                                                                                                                 2021-07-07
+
+=== PDF PAGE 16 ===
+IM73A135V01
+IP57 dust and water resistant analog XENSIVTM MEMS microphone
+
+Reliability specifications
+
+8            Reliability specifications
+The microphone sensitivity after stress must deviate by no more than 3dB from the initial value.
+
+Table 10           Reliability specification
+Test                           Abbreviation  Test Condition                Standard
+Low Temperature Operating Life      LTOL      Ta=-40°C, VDD=3.6V, 1000 hours   JESD22-A108
+Low Temperature Storage Life         LTSL      Ta=-40°C, 1000 hours           JESD22-A119
+High Temperature Operation Life     HTOL     Ta=+125°C, VDD=3.6V, 1000 hours JESD22-A108
+High Temperature Storage Life       HTSL                                  JESD22-A103                                               Ta=+125°C, 1000 hours
+
+Temperature Cycling             PC + TC    Pre conditioning MSL-1          JESD22-A113
+                                           1000 cycles, -40°C to +125°C, 30   JESD22-A104
+                                            minutes per cycle
+Temperature Humidity Bias        PC + THB    Pre conditioning MSL-1          JESD22-A113
+                                               Ta=+85°C, R.H = 85%, VDD=3.6V,   JESD22-A101
+                                           1000 hours
+Vibration Test                      VVF     20Hz to 2000Hz with a peak       IEC 60068-2-6
+                                                  acceleration of 20g in X, Y, and
+                                       Z for 4 minutes each, total 4
+                                                    -cycles
+Mechanical Shock               MS      10000g/0.1msec direction ±x,y,z,  IEC 60068-2-27
+                                           5 shocks in each direction, 5
+                                            shocks in total
+Reflow Solder4)                    RS      3 reflow cycles, peak            IPC-JEDEC J-
+                                             temperature = +260°C           STD-020D-01
+Electrostatic Discharge -System     ESD - SLT   3 discharges of ±8kV direct        IEC-61000-4-2
+Level Test                                      contact to lid while Vdd is
+                                               supplied according to the
+                                                operational modes; (Vdd ground
+                                                                is separated from earth ground)
+Electrostatic Discharge - Human    ESD - HBM   1 pulse of ±2kV between all I/O   JEDEC-JS001
+Body Model                                    pin combinations
+Electrostatic Discharge - Charged   ESD - CDM   3 discharges of ±500V direct     JEDEC JS-002
+Device Model                                   contact to I/O pins.
+Latch up                         LU       Trigger current from ±200mA     JESD78
+
+
+
+
+
+4   The microphone sensitivity must deviate by no more than 1dB from the initial value after 3 reflow cycles.
+
+Datasheet                                                16                                                 V 1.20
+                                                                                                                 2021-07-07
+
+=== PDF PAGE 17 ===
+IM73A135V01
+IP57 dust and water resistant analog XENSIVTM MEMS microphone
+
+Revision history
+
+Revision history
+
+Document     Date of        Description of changes
+version        release
+V 1.00          2021-01-07      Initial release
+V 1.10          2021-04-19    Updated Typical performance characteristics
+V 1.20          2021-07-07    Updated Figure 11 title
+
+
+
+
+
+Datasheet                                                17                                                 V 1.20
+                                                                                                                 2021-07-07
+
+=== PDF PAGE 18 ===
+Trademarks
+All referenced product or service names and trademarks are the property of their respective owners.
+
+
+
+
+Edition 2021-07-07              IMPORTANT NOTICE                           WARNINGS
+Published by                     The information given in this document shall in no   Due to technical requirements products may contain
+                                    event be regarded as a guarantee of conditions or    dangerous substances. For information on the typesInfineon Technologies AG                                         characteristics (“Beschaffenheitsgarantie”).                  in question please contact your nearest Infineon
+81726 Munich, Germany                                   With respect to any examples, hints or any typical    Technologies office.
+                                     values stated herein and/or any information regarding    Except as otherwise explicitly approved by Infineon
+© 2021 Infineon Technologies AG     the application of the product, Infineon Technologies    Technologies  in a  written document signed by
+                                   hereby disclaims any and all warranties and liabilities    authorized representatives of Infineon Technologies,
+All Rights Reserved.                                        of any kind, including without limitation warranties of    Infineon Technologies’ products may not be used in
+                                    non-infringement of intellectual property rights of any    any applications where a failure of the product or
+Do you have a question about any     third party.                                         any consequences of the use thereof can reasonably
+aspect of this document?              In addition, any information given in this document is   be expected to result in personal injury.
+Email: erratum@infineon.com        subject to customer’s compliance with its obligations
+                                       stated  in  this document and any  applicable  legal
+                                     requirements,  norms  and  standards  concerning
+Document reference                 customer’s products and any use of the product of
+IFX-mcx1539678668960              Infineon Technologies in customer’s applications.
+                                The data contained in this document  is exclusively
+                                   intended  for  technically  trained   staff.   It   is  the
+                                         responsibility of customer’s technical departments to
+                                     evaluate the suitability of the product for the intended
+                                       application and  the completeness  of  the  product
+                                     information given in this document with respect to such
+                                        application.
