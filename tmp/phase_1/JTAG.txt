@@ -1,0 +1,992 @@
+
+=== PDF PAGE 1 ===
+Engineer-to-Engineer Note           EE-68
+
+
+                     Technical notes on using Analog Devices DSPs, processors and development tools
+                                Visit our Web resources http://www.analog.com/ee-notes and http://www.analog.com/processors or
+                           e-mail processor.support@analog.com or processor.tools.support@analog.com for technical support.a
+
+Analog Devices JTAG Emulation Technical Reference
+
+Contributed by David M. Doyle                                                          Rev 10 – April 15, 2008
+
+Introduction
+This document provides technical information to properly design a JTAG emulator interface for Analog
+Devices, Inc. (ADI) processor targets, which are all referred to as digital signal processors (DSPs) in this
+document. For an introduction to the IEEE 1149.1 (JTAG) standard, see Appendix E: Introduction to
+IEEE Std. 1149.1 (JTAG) Boundary Scan.
+
+ADI designs, manufactures, and sells several different types of JTAG emulators for use with ADI DSP
+targets supporting an embedded JTAG emulator port. This document has been revised to only support the
+current line of ADI emulators. This product line includes the HPPCI, HPUSB, and USB emulators.
+
+Previous versions of this document supported ADI JTAG emulator legacy products such as Mountain-
+ICE, Summit-ICE, Trek-ICE, Apex-ICE, and EZ-ICE. For information about JTAG emulators not
+supported  by   this  document,   contact  ADI’s  DSP  development   tools   technical   support
+(processor.tools.support@analog.com) for an older version of this document that has legacy JTAG
+emulator information.
+
+      Do not use older versions of EE-68 for new target designs. Periodically, check ADI’s Web site for
+        the latest version of this document. Targets designed using an older version of EE-68 should onlyL       be updated if there are problems performing JTAG emulation.
+
+       http://www.analog.com/ee-notes/
+
+
+Table of Contents
+
+Introduction .................................................................................................................................................................................................1
+
+Table of  Contents......................................................................................................................................................................................1
+
+List of Figures ..........................................................................................................................................................................................2
+
+List of  Tables.............................................................................................................................................................................................2
+
+JTAG Emulator Interface  Design.......................................................................................................................................................3
+
+JTAG Emulator Target  Header..............................................................................................................................................................3
+
+Local Boundary Scan  Controller.......................................................................................................................................................3
+
+   Special Case Pin 5  BTMS..................................................................................................................................................................3
+
+     BTMS Pin VDDIO Auto-Detect Function ................................................................................................................................4
+
+     BTMS Pin Boundary Scan  Function..........................................................................................................................................4
+
+
+
+ Copyright 2004-2008, Analog Devices, Inc. All rights reserved. Analog Devices assumes no responsibility for customer product design or the use or application of
+customers’ products or for any infringements of patents or rights of others which may result from Analog Devices assistance. All trademarks and logos are property
+ of their respective holders. Information furnished by Analog Devices applications and development tools engineers is believed to be accurate and reliable, however
+no responsibility is assumed by Analog Devices regarding technical accuracy and topicality of the content provided in Analog Devices Engineer-to-Engineer Notes.
+
+=== PDF PAGE 2 ===
+       a
+JTAG Emulator Pod Mechanical  Requirements.............................................................................................................................5
+
+  JTAG Emulator Header Clearance  Requirements...................................................................................................................5
+
+Target JTAG Emulator Pod Interface Design  Requirements..............................................................................................6
+
+JTAG Emulator Interface PCB Layout .............................................................................................................................................6
+
+JTAG Emulator Power  Sequence............................................................................................................................................................6
+
+JTAG Emulator Pod Electrical  Requirements.............................................................................................................................6
+
+  HPPCI JTAG Emulator Automatic Voltage Sense Pod  Logic...........................................................................................7
+
+  JTAG Emulator Pod I/O  Characteristics.................................................................................................................................7
+
+  JTAG Emulator Pod  Timing................................................................................................................................................................8
+
+Conclusion ......................................................................................................................................................................................................9
+
+Appendix A: Target JTAG Interface Design - Single DSP Target without Boundary  Scan..........................10
+
+Appendix B: Target JTAG Interface Design - Multiple DSP Target without Boundary  Scan.....................11
+
+Appendix C: Target JTAG Interface Design - Single DSP Target with Boundary  Scan.................................13
+
+Appendix D: Target JTAG Interface Design - Multiple DSP Target with Boundary  Scan............................15
+
+Appendix E: Introduction to IEEE Std. 1149.1 (JTAG) Boundary  Scan..................................................................18
+
+  IEEE Std. 1149.1 (JTAG)  Specification...............................................................................................................................18
+
+  Boundary Scan: What is  It?.........................................................................................................................................................18
+
+References ....................................................................................................................................................................................................19
+
+Document  History......................................................................................................................................................................................19
+
+
+List of Figures
+
+Figure 1. JTAG emulator target header  interface...............................................................................................................3
+Figure 2. JTAG emulator header keep-out  area......................................................................................................................5
+Figure 3. HPPCI JTAG emulator pod  dimensions......................................................................................................................5
+Figure 4. JTAG HPUSB JTAG emulator pod  dimensions..........................................................................................................5
+Figure 5. JTAG emulator pod timing  waveform........................................................................................................................8
+Figure 6. Single DSP target without a local boundary scan  controller...........................................................10
+Figure 7. Multiple DSP target without a local boundary scan  controller......................................................12
+Figure 8. Single DSP target with a local boundary scan  controller..................................................................14
+Figure 9. Multiple DSP target with a local boundary scan controller .............................................................17
+Figure 10. Boundary scan implementation  diagram.............................................................................................................18
+
+
+List of Tables
+
+Table 1. JTAG emulator header signal  descriptions..........................................................................................................4
+Table 2. JTAG emulator pod I/O  characteristics.................................................................................................................7
+Table 3. JTAG emulator pod timing information ...................................................................................................................9
+
+
+
+
+
+Analog Devices JTAG Emulation Technical Reference (EE-68)                              Page 2 of 20
+
+=== PDF PAGE 3 ===
+       a
+JTAG Emulator Interface Design
+All ADI JTAG emulators interface with the DSP
+using  a  14-pin JTAG  emulator  header. The
+header provides a connection interface for the
+JTAG emulator pod. The header can also be used
+to connect an optional local (embedded on the
+user target) boundary scan controller to the DSP
+when the JTAG emulator is not attached.                Figure 1. JTAG emulator target header interface
+
+All ADI JTAG emulators use a superset of the
+IEEE 1149.1 standard to send and receive data                                     Local Boundary Scan Controller
+from  the DSP JTAG  emulation  port. JTAG
+emulators use an additional signal called EMU~ as       Referring to Figure 1, the set of signals on the
+a JTAG emulation status flag from the DSP. This      odd-numbered side of the connector can be used
+signal is a vendor-specific signal, which is not      by targets which have an optional local boundary
+part of the IEEE 1149.1 specification.                 scan  controller.  These  signals  include  the
+                                                   boundary-scan    controller   JTAG    signals
+The following pages define in detail the design                                                  BTMS/VDDIO, BTCK, BTDI, and BTRST~. Each of
+requirements   for   supporting  ADI  JTAG                                                        these signals is described in Table 1.
+emulators. This information includes functional,
+electrical,  and  mechanical  requirements  for                   If  you   are  unfamiliar  with   local
+interfacing  a  target  design  with  a  JTAG             boundary scan and how it may apply to        L
+emulator.                                                 your   design,   see   Appendix   E:
+                                                                Introduction   to  IEEE   Std.  1149.1
+                                                   (JTAG) Boundary Scan.
+JTAG Emulator Target Header
+                                                          Special Case Pin 5 BTMS
+Referring  to Figure 1 and Table 1, the JTAG
+                                                    Pin 5 BTMS/VDDIO is a dual-purpose pin on theemulator header has 14 pins. You must supply
+                                         HPPCI JTAG emulator. First,  it allows you tothis header on your target to communicate with
+                                                        route an optional local boundary scan controllerthe JTAG emulator. The JTAG emulator target
+header interface is a standard dual-row 0.025”      TMS signal to the target DSP TMS signal when the
+                                      JTAG ICE is not attached to the JTAG headermale square-post header, employing 0.1” x 0.1”
+                                                and a jumper is installed between pins 5 and 6 ofspacing, with a minimum post length of 0.235”.
+                                                        the JTAG header. Second, this pin is used by thePin 3 of  the JTAG emulator cable header  is
+                                      JTAG ICE to auto detect the targets DSP I/Okeyed to prevent accidental insertion of the pod
+                                                       voltage (VDDIO) up to 5 V. The JTAG ICE useswith the target backwards. You should clip pin 3
+                                                        the sensed voltage to establish input and outputon your target board header to allow insertion of
+                                                       voltage levels for the DSP JTAG signals. Pullthe JTAG emulator cable female header.
+                                                                this pin up to VDDIO using a 4.7-KΩ resistor. Do
+      The JTAG  emulator  14-pin  female                                                      not connect it directly to the VDDIO plane.
+       header position 3 connects to a wire inL        the JTAG cable, which returns to ground             Only   the  HPPCI  JTAG  emulator
+         at the emulator.                                       supports automatic voltage sensing with        L                                                              pin 5. The USB and HPUSB JTAG
+                                                             emulator’s pin 5 only supports the BTMS
+                                                                     functionality.
+
+
+
+Analog Devices JTAG Emulation Technical Reference (EE-68)                              Page 3 of 20
+
+=== PDF PAGE 4 ===
+       a
+
+
+ Pin   Signal        Description                                   Emulator      Target
+
+ 1   GND          Digital ground                                       Passive         Passive
+
+ 2    EMU~      JTAG emulation flag                                  Input          Output {open drain} {active
+                                                                                     low}
+                                                                                 {active low}
+
+ 3    KEY         Header alignment position -- pin must be clipped on   GROUND    No Connect
+                         target header
+
+ 4   GND          Digital ground                                       Passive         Passive
+
+ 5    VDDIO       Automatic voltage sense (VDDIO)                     Input           Passive
+
+          or                          or                                                      or
+
+     BTMS        Target local boundary scan controller                               Output
+
+                JTAG TAP test mode select
+
+ 6    TMS       JTAG TAP test mode select                         Output          Input
+
+ 7    BTCK        Target local boundary scan controller JTAG TAP test  No Connect     Output
+                      clock
+
+ 8    TCK       JTAG TAP test clock                              Output          Input
+
+ 9    BTRST~      Target local boundary scan controller             No Connect     Output
+
+                JTAG TAP test reset                                                     {active low}
+
+ 10   TRST~     JTAG TAP test reset                               Output          Input {active low}
+
+ 11   BTDI         Target local boundary scan controller JTAG TAP test  No Connect     Output
+                       data in
+
+ 12   TDI        JTAG TAP test data in                             Output          Input
+
+ 13   GND          Digital ground                                       Passive         Passive
+
+ 14   TDO       JTAG TAP test data out                               Input          Output
+
+Table 1. JTAG emulator header signal descriptions
+
+BTMS Pin VDDIO Auto-Detect Function                     target local boundary scan controller BTMS signal
+The HPPCI JTAG emulator can automatically       without any pull-up resistor required.
+sense a DSP IO voltage (VDDIO) up to 5 V. The                                                    VDDIO  is the  target DSP I/O voltage
+HPPCI JTAG emulator uses the VDDIO voltage it                                                               supply, not the DSP core voltage supply.senses from the BTMS/VDDIO pin to adjust the L                                                        Ensure that you connect VDDIO to the
+JTAG emulator interface input signal thresholds                                                                  correct voltage plane when using the
+and output signal drive levels to those shown in                                              HPPCI VDDIO auto-sense function.
+Table 2. You must pull pin 5 (BTMS/VDDIO) up to
+the DSP I/O voltage (VDDIO) with a 4.7-KΩ     BTMS Pin Boundary Scan Function
+resistor when using the HPPCI JTAG emulator.         Pin 5 can be used to route an optional local
+                                                boundary scan controller TMS signal to the target
+When  using  the HPUSB  and USB JTAG                                     DSP TMS signal when the JTAG ICE  is not
+emulators which do not support VDDIO auto-                                                       attached to the JTAG header and a jumper  is
+sensing, you can connect pin 5 directly to the
+
+
+
+Analog Devices JTAG Emulation Technical Reference (EE-68)                              Page 4 of 20
+
+=== PDF PAGE 5 ===
+       a
+installed between  pins 5 and 6  of  the JTAG
+header.
+
+You may connect an HPUSB or USB JTAG
+emulator to a  target designed for the HPPCI
+JTAG emulator with  the VDDIO  auto-sensing
+logic. The HPUSB or USB JTAG emulator does
+not connect pin 5 back at the emulator, so the
+target  or emulator  will  not be harmed. The
+voltage thresholds for your target when using the        Figure 2. JTAG emulator header keep-out area
+HPUSB  or USB JTAG  emulators  are  set
+manually by  the  user  in  the VisualDSP++®
+Session Wizard.                                                                                                                                                                                                                                                                                           0.20"
+
+     When using the HPPCI JTAG emulator,
+
+                                                                                                                                                                   0.43"       you need to control the BTMS signal at                                  0.28"      ANALOGL                                                                                             DEVICES        pin 5 so that it is not being driven by the
+        local boundary scan controller when the                                                                           0.29"
+     JTAG ICE  is attached  to the header.                                                                     0.20"
+        Failure to isolate the BTMS signal when                                                     0.70"
+        the JTAG ICE is connected could result                                                    1.19"
+        in unpredictable behavior by the JTAG
+      ICE due to possible incorrect voltage
+        sensing on pin 5. As shown in Figure 8
+       and Figure 9, you can isolate the BTMS
+                                                          Figure 3. HPPCI JTAG emulator pod dimensions        signal using a jumper or a buffer. When
+        using  a  buffer,   its  output  must  be
+        disabled  when  the  JTAG  ICE   is
+        connected.
+
+
+JTAG Emulator Pod Mechanical
+Requirements
+This    section    explains    the   mechanical
+specifications for the JTAG emulator pod.
+
+
+JTAG Emulator Header Clearance Requirements
+Provide a clearance of at least 0.30” and 0.10”
+around the length and width of the header. Refer        Figure 4. JTAG HPUSB JTAG emulator pod
+to  Figure 2  for  information  about  the  pod       dimensions
+connector keep out area.
+                                                    Refer to Figure 3 for height clearance restriction
+       Allow for height clearance above the        information regarding the HPPCI JTAG emulator
+        header for attaching and detaching the        cable. Refer to Figure 4 for any height clearanceL
+      JTAG emulator cable from your target.           restriction information for the HPUSB and USB
+                                      JTAG emulators.
+
+
+Analog Devices JTAG Emulation Technical Reference (EE-68)                              Page 5 of 20
+
+=== PDF PAGE 6 ===
+       a
+Target JTAG Emulator Pod         JTAG Emulator Power Sequence
+Interface Design Requirements                                             Your JTAG emulator should be powered on, and
+This section defines how to design the JTAG       connected to a host PC, prior to attaching it to a
+emulator  pod  interface  for  different  target        target JTAG emulator header. All ADI high-
+platforms. The targets include single or multiple       performance JTAG emulator products can be
+DSP targets with or without local boundary scan       attached or removed from a powered “hot” target
+logic.                                               without any power restrictions.
+Refer to the following Appendix sections of this             Avoid emulation errors by ensuring that
+document  regarding  the JTAG  emulator pod               the emulation software is not started or        [
+interface design requirements  for the type of              executing when power is not applied to
+target you are designing.                                        the target, or when attaching the JTAG
+                                                           emulator  to a  target with or without
+  Appendix A: Target JTAG Interface Design -                                                         power.
+    Single DSP Target without Boundary Scan
+                                             You must  install a 4.7-KΩ pull-down
+  Appendix B: Target JTAG Interface Design -                                                                       resistor on the TRST~ net going to the   Multiple DSP Target without Boundary Scan L                                           DSP  per  appendixes A  through  D,
+  Appendix C: Target JTAG Interface Design -              except for targets that use boundary scan
+    Single DSP Target with Boundary Scan                      logic AND do not control the TRST/~
+                                                                     signal.  Appendix D: Target JTAG Interface Design -
+   Multiple DSP Target with Boundary Scan                 For targets that use boundary scan logic
+                                    AND do not control the TRST~ signal,
+                                                    do not pull down the TRST~ signal. Use
+JTAG Emulator Interface PCB                    of   this   resistor  could  prevent  the
+                                                       boundary scan logic from moving theLayout
+                                                                       tap. A jumper should be installed for the
+Treat all JTAG emulator signals (TCK, TMS, TDI,              TRST~, signal across the JTAG emulator
+TDO, EMU~, and TRST~) as critical route signals.              header TRST~ and BTRST~ pins before
+Pay special attention when routing these signals              applying power to the target. Install this
+on your target. Specify a controlled impedance             jumper whenever the JTAG emulator is
+requirement between 50 Ω and 75 Ω. Minimize               not  attached  to  the JTAG  emulator
+cross-talk and inductance on these signal lines by              header after power has been applied to
+using a solid ground plane and routing the JTAG               the  target.  This jumper  prevents  the
+emulator signals away from high-frequency nets,          JTAG TAP in the DSP from getting
+especially clock lines. Keep these routes as short                “lost” in an un-recoverable state.
+as possible, and equal in length when possible.
+
+These lines must be clean. You may need to
+provide series terminations for very long TDO and    JTAG Emulator Pod Electrical
+EMU~ routes. See appendixes A through D for     Requirements
+information regarding series terminations.
+                                                   This section explains the electrical specifications
+                                                           for the JTAG emulator pod.
+
+
+
+
+
+Analog Devices JTAG Emulation Technical Reference (EE-68)                              Page 6 of 20
+
+=== PDF PAGE 7 ===
+       a
+HPPCI JTAG Emulator Automatic Voltage Sense        voltage plane with a 4.7-KΩ  resistor. Do not
+Pod Logic                                           connect the BTMS/VDDIO pin directly to the VDDIO
+                                                      voltage plane. See Appendixes A through D forThe HPPCI JTAG  emulator pod  uses  pin 5
+(BTMS/VDDIO) of the JTAG emulator header to      more information regarding the BTMS/VDDIO pin.
+automatically sense the target I/O voltage. The
+                                     JTAG Emulator Pod I/O Characteristicsvoltage  sensing  logic  controls which  voltage
+threshold values the JTAG emulator uses for      The JTAG emulator pod is tolerant up to 5V DC.
+JTAG  signals  received from  the  target. The          It  will work with  all Analog Devices JTAG
+voltage sensing logic also sets the drive levels for       family DSPs with JTAG I/O voltages of 5 V,
+JTAG signals sent to the target.                         3.3 V, 2.5 V, and 1.8 V. The pod will drive 5-V
+                                                            targets with 3.3-V logic levels, which are wellYour target DSP IO voltage (VDDIO) may or may
+                                                      within  the 5-V  logic  threshold  requirements.not be the same voltage used by the DSP core.
+                                                  Table 2 includes all the I/O characteristics for theEnsure that you are using the correct DSP supply
+                                     JTAG emulator pod.voltage for VDDIO when configuring your target
+for the HPPCI JTAG emulator automatic voltage
+sense. You must pull the signal up to the correct
+
+ Pin  JTAG     VDDIO    Cin     Cout   VIH     VIL    VOH   VOL     IOL   IOH
+       Emulator
+                 (VDC)      (pF)     (pF)    (VDC)    (VDC)   (VDC)   (VDC)    (mA)   (mA)
+        Signal
+
+ 2    EMU~       5 / 3.3      6                  2.0         0.8          -             -              -           -
+
+ 6    TMS        5 / 3.3                6.5        -              -          2.3        0.7       12      12
+
+ 8    TCK         5 / 3.3                6.5        -              -          2.3        0.7       12      12
+
+ 10   TRST~       5 / 3.3                6.5        -              -          2.3        0.7       12      12
+
+ 12    TDI         5 / 3.3                6.5        -              -          2.3        0.7       12      12
+
+ 14   TDO        5 / 3.3      6                  2.0         0.8          -             -              -           -
+
+ 2    EMU~        2.5        6                  1.7         0.7          -             -              -           -
+
+ 6    TMS          2.5                    6.5        -              -          1.8        0.6       8       8
+
+ 8    TCK          2.5                    6.5        -              -          1.8        0.6       8       8
+
+ 10   TRST~        2.5                    6.5        -              -          1.8        0.6       8       8
+
+ 12    TDI           2.5                    6.5        -              -          1.8        0.6       8       8
+
+ 14   TDO          2.5        6                  1.7         0.7          -             -              -           -
+
+ 2    EMU~        1.8        6                  1.2         0.6          -             -              -           -
+
+ 6    TMS          1.8                    6.5        -              -          1.3        0.5       4       4
+
+ 8    TCK          1.8                    6.5        -              -          1.3        0.5       4       4
+
+ 10   TRST~        1.8                    6.5        -              -          1.3        0.5       4       4
+
+ 12    TDI           1.8                    6.5        -              -          1.3        0.5       4       4
+
+ 14   TDO          1.8        6                  1.2         0.6          -             -              -           -
+
+Table 2. JTAG emulator pod I/O characteristics
+
+
+
+Analog Devices JTAG Emulation Technical Reference (EE-68)                              Page 7 of 20
+
+=== PDF PAGE 8 ===
+       a
+JTAG Emulator Pod Timing                        and TRST~), and setup and hold requirements for
+                                      JTAG emulator input signals (TDO, and EMU~).This section details important timing information
+                                                  Table 3 also defines the frequency of operationregarding JTAG  signals  at  the  target JTAG
+                                                    range  for  high  performance JTAG  emulatoremulator header. Figure 5 diagrams switching
+                                                        products. The table parameter reference numbersand timing relationships for JTAG signals at the
+                                            maps to the timing diagram reference numberstarget JTAG emulator header.
+                                            shown in Figure 5.
+Table 3  defines  switching parameters  for  the
+JTAG emulator output signals (TCK, TMS, TDI,
+
+
+
+
+
+Figure 5. JTAG emulator pod timing waveform
+
+Use this information to determine your target’s       than  the values  in  the  table.  If you have a
+maximum routing lengths, net loading, and load      complex  JTAG  emulation  path  with  long
+capacitance which can be tolerated for JTAG       propagation delays, perform a timing analysis on
+emulation signal routes.                             your target’s JTAG paths. Use this analysis to
+                                                    determine whether your target JTAG emulationThe maximum  frequency numbers shown  in
+                                                      paths have sufficient timing margin to operate atTable 3 are only guaranteed when your target
+                                                        the desired JTAG TCK frequency.meets the setup and hold requirements defined in
+Table 3. When calculating your setup and hold     When performing a timing analysis, the timing
+margins, be sure to include the TDO and EMU~      margin must be a positive number. As a general
+delay parameters from the target DSP data sheet.        rule, the desired margin should be at least 10% of
+If your target does not meet the setup and hold       a full TCK clock period. However, be aware when
+requirements specified in Table 3, you will have      you are doing your analysis, the delay numbers
+to  operate  the JTAG  emulator  at  a  lower       given are based on worst-case delay. Typically,
+frequency for reliable performance.                      logic will tend to run somewhere in the middle
+                                                between minimum and maximum delay, although          If  you  cannot  operate  the  JTAG
+                                                                this cannot be guaranteed.  If your margin  is        emulator  using  the  lowest  availableL                                                 negative, but very close (< 1 ns), you may want        frequency,  check  your   target   for
+                                                           to try using typical numbers in your analysis to         incorrect wiring, or redesign your target
+                                                      see whether you still have a negative margin.         to reduce delays. Try to reduce trace
+         lengths, reduce electrical loads, and use          If you  still calculate a negative margin using
+         faster buffers.                                    typical  values,  try  selecting  a  slower  TCK
+                                                    frequency if available, or make changes to yourThe setup and hold time requirements are based
+                                                             target to reduce the JTAG emulator path delays.on the worst-case maximum delay of the JTAG
+emulator hardware. Typically, the setup and hold
+time requirements will be considerably smaller
+
+
+Analog Devices JTAG Emulation Technical Reference (EE-68)                              Page 8 of 20
+
+=== PDF PAGE 9 ===
+       a
+
+
+  #   Parameter   Product   Frequency     Description                         Min. Freq.    Max. Freq.
+                                                                                             (ns)            (ns)
+
+  1   tcTCK      HPPCI   10↔50 MHz  TCK period                             19.9           100.1
+
+  1   tcTCK     HPUSB  5↔50 MHz   TCK period                             19.9           200.1
+
+  1   tcTCK     USB      10 MHz     TCK period                             99.1           100.1
+
+  2  twTCKH    HPPCI   10↔50 MHz  TCK high pulse width                   9.95           50.05
+
+  2  twTCKH    HPUSB  5↔50 MHz   TCK high pulse width                   9.95          100.05
+
+  2  twTCKH   USB      10 MHz     TCK high pulse width                   49.95          50.05
+
+  3  twTCKL    HPPCI   10↔50 MHz  TCK low pulse width                    9.95           50.05
+
+  3  twTCKL    HPUSB  5↔50 MHz   TCK low pulse width                    9.95          100.05
+
+  3  twTCKL    USB      10 MHz     TCK low pulse width                   49.95          50.05
+
+  4   tdTMS      HPPCI   10↔50 MHz   Delay TMS/TDI/TRST~ from TCK ↓                  3
+
+  4   tdTMS     HPUSB  5↔50 MHz    Delay TMS/TDI/TRST~ from TCK ↓                  3
+
+  4   tdTMS     USB      10 MHz       Delay TMS/TDI/TRST~ from TCK ↓                  3
+
+  5   tsuTDO     HPPCI    10 MHz       Setup time TDO/EMU~ to TCK ↑         14.1
+
+  5   tsuTDO     HPPCI    25 MHz       Setup time TDO/EMU~ to TCK ↑        1
+
+  5   tsuTDO     HPPCI    33 MHz       Setup time TDO/EMU~ to TCK ↑         8.4
+
+  5   tsuTDO     HPPCI    50 MHz       Setup time TDO/EMU~ to TCK ↑         9.9
+
+  5   tsuTDO    HPUSB   5-50 MHz     Setup time TDO/EMU~ to TCK ↑        2
+
+  5   tsuTDO    USB      10 MHz       Setup time TDO/EMU~ to TCK ↑        2
+
+  6   thTDO      HPPCI    10-50 MHz    Hold time TDO/EMU~ from TCK ↑      0
+
+  6   thTDO     HPUSB   5-50 MHz     Hold time TDO/EMU~ from TCK ↑      0
+
+  6   thTDO     USB      10 MHz       Hold time TDO/EMU~ from TCK ↑      0
+
+Table 3. JTAG emulator pod timing information
+
+Conclusion
+The recommendations in this document should
+make designing the JTAG emulation interface
+for your target straight forward. Having a well-
+designed JTAG emulator interface on your target
+will allow you to rapidly begin development and
+testing your  application,  instead  of spending
+valuable time debugging the JTAG emulation
+port. Check  the ADI DSP  Tools Web  site
+periodically for updates to this document.
+
+
+
+Analog Devices JTAG Emulation Technical Reference (EE-68)                              Page 9 of 20
+
+=== PDF PAGE 10 ===
+       a
+Appendix A: Target JTAG                         Figure 6  shows   series   terminating
+Interface Design - Single DSP                        resistors for the TDO and EMU~ signals        L                                                          going  to  the JTAG  emulator. TheseTarget without Boundary Scan
+                                                                       resistors are optional. Use terminators if
+This section describes how to design the JTAG               the TDO or EMU~ routes are longer than
+emulator pod interface for single DSP targets             6 inches between the DSP and the JTAG
+without a local boundary scan controller.                      emulator header.
+As shown in Figure 6, single DSP targets without      The terminator resistor value is generally equal
+a  local boundary scan  controller,  or do  not        to the impedance of the printed circuit board
+include  the DSP  in  a  local  boundary  scan       (ZPCB) minus the output impedance of the TDO or
+controller chain, should  tie  all boundary scan      EMU~ signal I/O driver (ZDriver). Initially, set these
+pins (except for pin 5) to ground when using the        resistors to zero ohms. Change the value of the
+HPPCI JTAG emulator. Pin 5, the BTMS/VDDIO       termination resistance  ZTerminator, to ZPCB minus
+signal, is required by the HPPCI JTAG emulator         ZDriver if signal integrity problems are observed
+pod to automatically sense the DSP I/O voltage      when  using  the JTAG  emulator. Tuning  the
+(VDDIO).                                              termination resistor value to something slightly
+                                                             less  than  or  greater  than  ZTerminator may  beSingle DSP  targets  with  routing  distances
+                                                          required, depending on  the  condition  of  thebetween the JTAG emulator header and the DSP
+                                                             signals. Place the termination resistors as close toof  less  than  six  (6)  inches do  not  require
+                                                        the DSP as possible.buffering.
+                                                            Previous  versions  of  this  document        Buffer  your  target  if  the  worst-case
+                                                                  called for pull-up resistors on TMS, TCK,        route  distance  between  the  JTAG        LL                                                and TDI. The strong drive strength of the        emulator header and the DSP is greater
+                                     CMOS  buffers used  in  the emulator        than six (6) inches, regardless of the
+                                                    makes this unnecessary.       number of DSPs in the scan chain path.
+
+Figure 6 shows  the  connections between  the
+JTAG emulator header and the DSP for a single
+DSP  target  without  a  local  boundary  scan
+controller.
+
+
+
+
+
+Figure 6. Single DSP target without a local boundary scan controller
+
+
+Analog Devices JTAG Emulation Technical Reference (EE-68)                             Page 10 of 20
+
+=== PDF PAGE 11 ===
+       a
+Appendix B: Target JTAG                         Figure 7  shows   series   terminating
+Interface Design - Multiple DSP                     resistors for the TDO and EMU~ signals        L                                                         going  to  the JTAG  emulator. TheseTarget without Boundary Scan
+                                                                      resistors are optional. Use terminators if
+This section describes how to design the JTAG               the TDO  or EMU~  routes between  the
+emulator pod interface for multiple DSP targets               buffers and the JTAG emulator header
+without a local boundary scan controller.                        are longer than 6 inches.
+As shown  in  Figure 7,  targets with  multiple      The terminator resistor value is generally equal
+DSPs in the chain and without a local boundary        to the impedance of the printed circuit board
+should tie all boundary scan pins (except pin 5)       (ZPCB) minus the output impedance of the TDO or
+to  ground  when  using  the  HPPCI JTAG      EMU~ signal I/O driver (ZDriver). Initially, set these
+emulator.  Pin 5,  the  BTMS/VDDIO  signal,   is        resistors to zero ohms. Change the value of the
+required by the HPPCI JTAG emulator pod to       termination resistance  ZTerminator, to ZPCB minus
+automatically  sense  the  DSP  I/O  voltage         ZDriver if signal integrity problems are observed
+(VDDIO).                                    when  using  the JTAG  emulator. Tuning  the
+                                                       termination resistor value to something slightlyAs shown in Figure 7, targets with more than one
+                                                             less  than  or  greater  than  ZTerminator may  beDSP in the scan path, which do not use a local
+                                                         required, depending on  the  condition  of  theboundary  scan  controller,  require  buffering.
+                                                            signals. Place the termination resistors as close toFigure 7 shows  the  connections between  the
+                                                        the DSP as possible.JTAG emulator header and buffers for a multiple
+DSP  target  without  a  local  boundary  scan           To minimize signal skew, ensure that
+controller.                                                      buffers for the TMS, TDI, TRST~, TDO,        L                                                      and EMU~ signals come from a singleFor 5-V targets, buffer the TCK signal with a
+                                                           package. For TCK signals, use a driverlow-skew, high fan-out, minimal input-to-output
+                                                           with a high fan-out. The drivers shoulddelay,   dual   1-to-5   clock    driver   type
+                                                come from a single dedicated packageIDT49FCT805 (or equivalent), and buffer the
+                                                                     that  is  not used by  other TMS, TDI,TMS, TDI, TRST~, TDO, and EMU~ signals with a
+                                                         TRST~, TDO, or EMU~ signals.type 74AC11244 buffer (or equivalent).
+                                                Route  all  traces between the JTAG emulatorFor 3.3-V low-voltage  targets, buffer the TCK
+                                                   header and the DSP as a group, using equalsignal with a low-skew, high fan-out, minimal
+                                                       lengths when possible. Provide good crosstalkinput-to-output delay, dual 1-to-5 clock driver
+                                                            isolation from other signal nets especially clocks.type  IDT49FCT3805E  (or  equivalent),  and
+buffer  the  TMS,  TDI, TRST~,  TDO, and EMU~       Limit the number of loads (DSPs) for the TMS,
+signals with a  type 74AVC16244  buffer  (or       TRST~, and EMU~ buffered signals to eight (8).
+equivalent).                                         Limit the number of loads for the TCK buffered
+                                                          signals  to one  (1).  Additional  loads (DSPs)For  2.5-V / 1.8-V  very  low  voltage  targets,
+                                                   should use another buffer to support up to eightbuffer the TCK signal with a low-skew, high fan-
+                                                           (8) more devices.out, minimal input-to-output delay, single 1-to-5
+clock driver type IDT5T9050 (or equivalent),              Previous  versions  of  this  document
+and buffer the TMS, TDI, TRST~, TDO, and EMU~                called for pull-up resistors on TMS, TCK,        Lsignals with a  type 74AVC16244  buffer  (or             and TDI. The strong drive strength of the
+equivalent).                              CMOS  buffers used  in  the emulator
+                                                   makes this unnecessary.
+
+
+
+Analog Devices JTAG Emulation Technical Reference (EE-68)                             Page 11 of 20
+
+=== PDF PAGE 12 ===
+       a
+Using more than sixteen (16) physical devices in       header and buffers. If this is not possible, try
+one scan chain is not recommended. The best       adding jumpers to reduce the number of devices
+approach for large numbers (>16) of physical        in one chain at a time for debug purposes. Pay
+devices  is  to  break  the  chain  into  smaller        special attention to PCB routing to minimize
+independent chains, each with  its own JTAG       transmission line effects.
+
+
+                                                                                                                                TCK   TMS  TDI   TRST  TDO  EMU                 TCK   TMS  TDI   TRST  TDO  EMU
+
+
+
+
+
+Figure 7. Multiple DSP target without a local boundary scan controller
+
+
+
+
+
+Analog Devices JTAG Emulation Technical Reference (EE-68)                             Page 12 of 20
+
+=== PDF PAGE 13 ===
+       a
+Appendix C: Target JTAG                           the local boundary scan controller and
+Interface Design - Single DSP                      the JTAG emulator are not being used.
+                                                            Figure 8 shows how TRST~ should beTarget with Boundary Scan
+                                                                 controlled when the target uses a local
+This section describes how to design the JTAG             boundary scan controller.
+emulator pod interface for single DSP targets
+                                                                     If  your  target  has  a  local  boundary  scan
+with a local boundary scan controller.
+                                                           controller and your target does not control the
+Single DSP  targets with  local boundary scan      BTRST~  signal, you  will need  to  control  the
+controller   logic  should  connect  the   local      BTRST~  signal  with  additional  logic.  This
+boundary scan signal pins to the JTAG emulator       additional logic must guarantee that the BTRST~
+header pins shown in Figure 8.                          signal is only pulsed low during power-on reset.
+                                                                           It should be driven high all other times duringIf your target has an optional local boundary scan
+                                                           local boundary scan. This will prevent holdingcontroller,  and  you  attach  a HPPCI JTAG
+                                                        the BTRST~ signal low continuously during localemulator, you will need to isolate the BTMS signal
+                                                 boundary scans.from the BTMS/VDDIO voltage pin before starting
+the emulator  software. Referring  to Figure 8,      Keep the DSP TAP constantly in reset with the
+during JTAG emulation you can isolate pin 5 on      BTRST~ signal forced to ground with a jumper or
+the HPPCI JTAG emulator header from the local       pull-down  resistor  to  prevent  the DSP from
+boundary scan controller logic using a jumper or       executing a local boundary scan.
+three-state buffer.
+                                                   The  4.7-KΩ  pull-down  resistor  on
+      You must provide a method to isolate             TRST~ shown in Figure 8 should not be        L        the BTMS signal on your target from the              used  for  targets which have a  localL
+       BTMS/VDDIO pin on the JTAG emulator              boundary scan  controller and do not
+        header when the HPPCI JTAG emulator                drive TRST~. The DSP JTAG TAP will
+          is connected. Isolation must be effective              be kept constantly in reset when using a
+        before  the  HPPCI  JTAG  emulator              pull-down  resistor   if   it  cannot  be
+        software is invoked. This isolation will                overdriven.
+        prevent   the   local  boundary   scan
+                                                     Figure 8 shows  the  connections between  the         controller BTMS signal from confusing
+                                      JTAG emulator header and the DSP for a single        the automatic voltage sensing logic in
+                                      DSP target with a local boundary scan controller.        the HPPCI JTAG emulator pod.
+                                                       Jumpers can be substituted with zeroConnections  are  made  between  the   local
+                                            ohm resistors on production boards. Ifboundary  scan  controller  and  the DSP  by L                                                     you plan to use the same board revisioninstalling or removing jumpers between the local
+                                                                    for debugging and production, designboundary scan controller JTAG signals and the
+                                                         your target with a dual footprint. TheDSP  JTAG  emulation   signals.  The   local
+                                                             dual footprint should accommodate theboundary scan signals include BTMS, BTCK, BTDI,
+                                                           header described in Figure 1 for debugand BTRST~. DSP JTAG emulation signals TMS,
+                                                               boards, and surface mount resistors forTCK, TDI, and TRST~ connect to local boundary
+                                                             production boards.scan  signals  using  jumpers  on  the JTAG
+emulator header shown in Figure 8.                    Single DSP  targets  with  routing  distances
+                                                between the JTAG emulator header and the DSP       TRST~ must be pulsed low at power-up
+                                                       of  less  than  six  (6)  inches do  not  require      when  using  a  local  boundary  scanL                                                  buffering.         controller, and should be kept low when
+
+
+Analog Devices JTAG Emulation Technical Reference (EE-68)                             Page 13 of 20
+
+=== PDF PAGE 14 ===
+       a
+        Buffer  your  target  if  the  worst-case      The terminator resistor value is generally equal
+        route  distance  between  the  JTAG        to the impedance of the printed circuit boardL        emulator header and the DSP is greater        (ZPCB) minus the output impedance of the TDO or
+        than six (6) inches, regardless of the      EMU~ signal I/O driver (ZDriver). Initially, set these
+       number of DSPs in the scan chain path.          resistors to zero ohms. Change the value of the
+                                                       termination resistance  ZTerminator, to ZPCB minus        Figure 8  shows   series   terminating
+                                                                     ZDriver if signal integrity problems are observed         resistors for the TDO and EMU~ signalsL                                     when  using  the JTAG  emulator. Tuning  the       going  to  the JTAG  emulator. These
+                                                       termination resistor value to something slightly         resistors are optional. Use terminators if
+                                                             less  than  or  greater  than  ZTerminator may  be        the TDO or EMU~ routes are longer than
+                                                          required, depending on  the  condition  of  the       6 inches between the DSP and the JTAG
+                                                             signals. Place the termination resistors as close to        emulator header.
+                                                        the DSP as possible.
+
+                                                            Previous  versions  of  this  document
+                                                                  called for pull-up resistors on TMS, TCK,        L                                                       and TDI. The strong drive strength of the
+                                     CMOS  buffers used  in  the emulator
+                                                    makes this unnecessary.
+
+
+
+
+
+                                                                 Target DSP VDDIO
+
+          Buffer Enable Logic        BTMSOE                                                                       1        2
+                                                                4.7K             GND            EMU                                        Target DSP
+                                                           no pin (key)   3        4  GND
+
+                                                                       5        6
+    Boundary Scan Controller                                   BTMS/VDDIO             TMS                                         Target DSP
+                                                                       7        8                                    Boundary Scan Controller                  BTCK              TCK
+                                                                                                                                                                                  Target DSP
+      Power Up Reset Logic        PONRST                                        9        10
+                                                     BTRST              TRST                                        Target DSP
+                             BSCRST
+  Boundary Scan Reset Logic                                                    11       12
+                                   Boundary Scan Controller                      BTDI                  TDI                                          Target DSP
+                                                                       13       14  TDO                                                GND
+                                                                                                                                                                                 Target DSP
+
+                                                                                                                                                           4.7K
+
+
+
+Figure 8. Single DSP target with a local boundary scan controller
+
+
+
+
+
+Analog Devices JTAG Emulation Technical Reference (EE-68)                             Page 14 of 20
+
+=== PDF PAGE 15 ===
+       a
+Appendix D: Target JTAG             DSP  JTAG  emulation   signals.  The   local
+Interface Design - Multiple DSP         boundary scan signals include BTMS, BTCK, BTDI,
+                                                and BTRST~. DSP JTAG emulation signals TMS,Target with Boundary Scan
+                                                     TCK, TDI, and TRST~ connect to local boundary
+This section describes how to design the JTAG       scan  signals  using  jumpers  on  the JTAG
+emulator pod interface for multiple DSP targets       emulator header shown in Figure 9.
+with a local boundary scan controller.
+                                                     TRST~ must be pulsed low at power-up
+Multiple DSP targets with local boundary scan            when  using  a  local  boundary  scan        Lcontroller   logic  should  connect  the   local                 controller, and should be kept low when
+boundary scan signal pins to the JTAG emulator               the local boundary scan controller and
+header pins shown in Figure 9.                                  the JTAG emulator are not being used.
+                                                            Figure 9 shows how TRST~ should be       Jumpers can be substituted with zero
+                                                                 controlled when the target uses a local      ohm resistors on production boards. IfL                                                 boundary scan controller.       you plan to use the same board revision
+         for debugging and production, design          If  your  target  has  a  local  boundary  scan
+       your target with a dual footprint. The        controller and your target does not control the
+        dual footprint should accommodate the      BTRST~  signal, you  will need  to  control  the
+        header described in Figure 1 for debug      BTRST~  signal  with  additional  logic.  This
+        boards, and surface mount resistors for        additional logic must guarantee that the BTRST~
+        production boards.                              signal is only pulsed low during power-on reset.
+                                                                           It should be driven high all other times duringIf your target has an optional local boundary scan
+                                                           local boundary scan. This will prevent holdingcontroller,  and  you  attach  a HPPCI JTAG
+                                                        the BTRST~ signal low continuously during localemulator, you will need to isolate the BTMS signal
+                                                 boundary scans.from the BTMS/VDDIO voltage pin before starting
+the  emulator  software.  Referring  to  Figure 9      Keeping the DSP TAP constantly in reset with
+during JTAG emulation, you can isolate pin 5 on       the BTRST~ signal forced to ground with a jumper
+the HPPCI JTAG emulator header from the local       or pull-down resistor will prevent the DSP from
+boundary scan controller logic using a jumper or       executing a local boundary scan.
+three-state buffer.
+                                                   The  4.7-KΩ  pull-down  resistor  on
+      You must provide a method to isolate             TRST~ shown in Figure 9 should not be        L        the BTMS signal on your target from the              used  for  targets  that  have  a  localL
+       BTMS/VDDIO pin on the JTAG emulator              boundary scan  controller and do not
+        header when the HPPCI JTAG emulator                drive TRST~. The DSP JTAG TAP will
+          is connected. Isolation must be effective              be kept constantly in reset when using a
+        before  the  HPPCI  JTAG  emulator              pull-down  resistor   if   it  cannot  be
+        software is invoked. This isolation will                overdriven.
+        prevent   the   local  boundary   scan
+                                         As shown in Figure 9, targets with more than one         controller BTMS signal from confusing
+                                      DSP in the scan path, which do use a local        the automatic voltage sensing logic in
+                                                 boundary  scan  controller,  require  buffering.        the HPPCI JTAG emulator pod.
+                                                     Figure 9 shows  the  connections between  the
+Connections  are  made  between  the   local     JTAG emulator header and buffers for a multiple
+boundary  scan  controller  and  the DSP  by     DSP target with a local boundary scan controller.
+installing or removing jumpers between the local
+boundary scan controller JTAG signals and the
+
+
+Analog Devices JTAG Emulation Technical Reference (EE-68)                             Page 15 of 20
+
+=== PDF PAGE 16 ===
+       a
+For 5-V targets, buffer the TCK signal with a low-        signals. Place the termination resistors as close to
+skew,  high  fan-out,  minimal  input-to-output       the DSP as possible.
+delay,   dual   1-to-5   clock    driver   type                                               To minimize signal skew, ensure that
+IDT49FCT805 (or equivalent), and buffer the                                                                 buffers for the TMS, TDI, TRST~, TDO,TMS, TDI, TRST~, TDO, and EMU~ signals with a L                                                       and EMU~ signals come from a single
+type 74AC11244 buffer (or equivalent).                                                            package. For TCK signals, use a driver
+For 3.3-V low-voltage  targets, buffer the TCK              with a high fan-out. The drivers should
+signal with a low-skew, high fan-out, minimal            come from a single dedicated package
+input-to-output delay, dual 1-to-5 clock driver                 that  is  not used by  other TMS, TDI,
+type  IDT49FCT3805E  (or  equivalent),  and              TRST~, TDO, or EMU~ signals.
+buffer  the  TMS,  TDI, TRST~,  TDO, and EMU~                                                Route  all  traces between the JTAG emulator
+signals with a  type 74AVC16244  buffer  (or                                                    header and the DSP as a group, using equal
+equivalent).                                                        lengths when possible. Provide good crosstalk
+For 2.5-V / 1.8-V very low voltage targets, buffer        isolation from other signal nets especially clocks.
+the TCK signal with a low-skew, high fan-out,                                                    Limit the number of loads (DSPs) for the TMS,
+minimal  input-to-output  delay,  single  1-to-5                                                  TRST~, and EMU~ buffered signals to eight (8).
+clock driver type IDT5T9050 (or equivalent),                                                    Limit the number of loads for the TCK buffered
+and buffer the TMS, TDI, TRST~, TDO, and EMU~                                                          signals  to one  (1).  Additional  loads (DSPs)
+signals with a  type 74AVC16244  buffer  (or                                                    should use another buffer to support up to eight
+equivalent).                                                           (8) more devices.
+        Figure 9  shows   series   terminating                                                            Previous  versions  of  this  document
+         resistors for the TDO and EMU~ signalsL                                                          called for pull-up resistors on TMS, TCK,       going  to  the JTAG  emulator. These L                                                       and TDI. The strong drive strength of the
+         resistors are optional. Use terminators if                                     CMOS  buffers used  in  the emulator
+        the TDO  or EMU~  routes between  the                                                    makes this unnecessary.
+        buffers and the JTAG emulator header
+        are longer than 6 inches.                    Using more than sixteen (16) physical devices in
+                                                one scan chain is not recommended. The best
+The terminator resistor value is generally equal                                                  approach for large numbers (>16) of physical
+to the impedance of the printed circuit board                                                      devices  is  to  break  the  chain  into  smaller
+(ZPCB) minus the output impedance of the TDO or                                                    independent chains, each with  its own JTAG
+EMU~ signal I/O driver (ZDriver). Initially, set these                                                    header and buffers. If this is not possible, try
+resistors to zero ohms. Change the value of the                                                   adding jumpers to reduce the number of devices
+termination resistance  ZTerminator to ZPCB minus                                                           in one chain at a time for debug purposes. Pay
+ZDriver if signal integrity problems are observed                                                          special attention to PCB routing to minimize
+when  using  the JTAG  emulator. Tuning  the                                                       transmission line effects.
+termination resistor value to something slightly
+less  than  or  greater  than  ZTerminator may  be
+required, depending on  the  condition  of  the
+
+
+
+
+
+Analog Devices JTAG Emulation Technical Reference (EE-68)                             Page 16 of 20
+
+=== PDF PAGE 17 ===
+       a
+
+
+                                                                         TCK   TMS  TDI   TRST  TDO  EMU                 TCK   TMS  TDI   TRST  TDO  EMU
+
+
+
+
+
+Figure 9. Multiple DSP target with a local boundary scan controller
+
+
+
+
+
+Analog Devices JTAG Emulation Technical Reference (EE-68)                             Page 17 of 20
+
+=== PDF PAGE 18 ===
+       a
+Appendix E: Introduction to               include the boundary scan cells for all or some of
+IEEE Std. 1149.1 (JTAG)                   a device’s pins (user defined) which is connected
+                                                           to other devices (user defined) on the PCB.Boundary Scan
+This section is a brief introduction to the IEEE
+1149.1 (JTAG) specification and the concept of
+Boundary  Scan  for  customers who may  be
+unfamiliar with these topics.
+
+
+IEEE Std. 1149.1 (JTAG) Specification
+As printed circuit boards became very dense with
+complex fine pitched components in PGA and
+BGA packages, traditional testing methods using
+bed of nails and  in-circuit  tests became very
+difficult if not impossible. A new method needed
+to be developed to allow testing these complex
+dense PCBs. To solve this problem, in the 1980s
+the Joint Test Action Group (JTAG) developed                                                          Figure 10. Boundary scan implementation diagram
+the  IEEE   Std.  1149.1   standard   utilizing
+Boundary-scan for testing connections on printed       Figure 10 shows  a  diagram  of how  a  part
+circuit  boards  at  the  device  pin  level. The      implementing IEEE Std. 1149.1 would connect
+standard  was   ratified,  adopted  and   first       the individual boundary scan cells, and the JTAG
+introduced in 1990. Several subsequent revisions        controller logic. The pins TDI, TCK, TMS, TDO, and
+to the specification have been adopted including       optional TRST~  provide  the  test  access  port
+in  1993  revision  1149.1a,  and  in  1994  a      (TAP) for shifting (TCK) data in (TDI) and data
+supplement to the specification for a boundary       out  (TDO)  controlled by  (TMS). The  external
+scan   descriptive   language  (BSDL)   was       device which drives the TCK, TMS, and TDI pins
+introduced.  Companies  which  integrated  the      can also reset the TAP controller by driving the
+IEEE Std. 1149.1 standard into their products       optional TRST~  pin. Data  is  returned  to  the
+(ICs)  for board and component  testing, have       external device controlling the operation of the
+gone  further  using JTAG  for  programming     TAP with the TDO pin.
+FPGAs, downloading micro-code, and in-circuit
+                                              Along with boundary scan operations, Analogemulation, etc.
+                                                  Devices  uses  the TAP  controller  to  access
+                                                      dedicated internal registers with JTAG scan cells
+Boundary Scan: What is It?                                                           to shift data in and out of the DSP, providing a
+Boundary scan provides a method for testing       port for emulation. Analog Devices does include
+interconnects on a PCB without having to use       the optional TRST~ pin in all their current DSP
+physical probes like a bed of nails. By using     JTAG TAP  logic and  also uses a  dedicated
+internal boundary scan cells with multiplexing       emulation  control  pin  (EMU~)  which  is  not
+and latching capabilities, data can be shifted in       defined as part of the IEEE Std. 1149.1 standard.
+and out of device interconnects in a serial format.                                                                     If you desire more information on how the IEEE
+Each  boundary  scan   cell  using   its  own                                                          Std. 1149.1 standard works, you can visit their
+multiplexer and latch logic  is connected to a                                    Web site at http://standards.ieee.org/.
+device  pin, and  all boundary scan  cells  are
+connected forming a serial chain. The chain will
+
+
+Analog Devices JTAG Emulation Technical Reference (EE-68)                             Page 18 of 20
+
+=== PDF PAGE 19 ===
+       a
+References
+The IEEE 1149.1 JTAG standard is sponsored by the Test Technology Standards Committee of the IEEE
+Computer Society, and published by the IEEE.
+
+To order a copy, call IEEE at 1-800-678-4333 in the US and Canada (1-908-981-1393 outside of the US
+and Canada). You can also visit the IEEE standards web site at http://standards.ieee.org/
+
+
+Document History
+
+ Revision                         Description
+
+ Rev 10 – April 15th, 2008         Major update with the following changes:
+         by D. Doyle
+                                   Corrected Note 10, switching the buffer part numbers for 5V and 3.3V
+
+                            Removed Notation table, and broke up the 4 different Target types (Single or Multi DSP
+                                   with or without local boundary scan) into Appendixes A through D with individual
+                         JTAG Interface design instructions.
+
+                                Updated Figures 5, 6, 7, and 8 showing TRST/ pulled low to ground with a 4.7KΩ
+                                            resistor.
+
+                                Noted the special case of not using a pull down resistor when an on-board boundary
+                                   scan controller is being used and TRST/ is not controlled.
+
+                                Updated Figure 2, 3, and 4 showing the physical location of pin 1 on the probe header.
+
+                             Added tables of contents, list of figures, and list of tables at beginning of document to
+                             make navigating to target applicable document information sections easier.
+
+                            Removed the requirement for jumpers or zero ohm resistors on the JTAG header for
+                                         targets that do not implement their own boundary scan controller.
+
+                             Added Appendix E to provide an introduction to the IEEE Std. 1149.1 (JTAG) Standard
+                                        for customers unfamiliar with the specification.
+
+ Rev 9 – October 18th, 2004        Major update. Incremented revision code to Rev 9 due to revision system change
+         by D. Doyle
+                            Removed all obsolete Legacy information. Simplified and combined drawings and
+                                        tables when possible. Re-wrote most sections in more concise format
+
+ Rev 2.6 – July 9th, 2003           Updated all document discussions for the TRST~ signal and JTAG Emulation header
+         by D. Doyle              jumper requirements. Most sections of the document were affected. Changed keep out
+                                     clearance requirements for larger HPPCI pod.
+
+ Rev 2.5 – March 20th, 2003        Divided document into discussion of Legacy ICE products and our new HPPCI ICE
+         by D. Doyle                product. Added HPPCI information
+
+ Rev 2.4 – December 3rd, 2002      Updated all sections and added timing information
+         by D. Doyle
+
+
+
+Analog Devices JTAG Emulation Technical Reference (EE-68)                             Page 19 of 20
+
+=== PDF PAGE 20 ===
+       a
+
+ Rev 2.3 – August 2001            Update to power up sections
+         by D. Doyle
+
+ Rev 2.2 – March 2001            Update to target connections
+         by D. Doyle
+
+ Rev 2.1 – August 2000            Update for 2.5 logic
+         by D. Doyle
+
+ Rev 2.0 – February 2000           General update
+         by D. Doyle
+
+ Rev 1.0 – December 1999             Initial release
+         by D. Doyle
+
+
+
+
+
+Analog Devices JTAG Emulation Technical Reference (EE-68)                             Page 20 of 20
