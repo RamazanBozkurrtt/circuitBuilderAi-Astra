@@ -1,0 +1,262 @@
+[
+  {
+    "reference": "J1",
+    "value": "XT30PW-M30.G.Y",
+    "mpn": "XT30PW-M30.G.Y",
+    "manufacturer": "AMASS",
+    "package": "2-pin keyed horizontal THT; 3.0 mm tails",
+    "footprint": "",
+    "evidence": "https://www.china-amass.com/biao/273.html",
+    "dnp": false
+  },
+  {
+    "reference": "F1",
+    "value": "10 A / 125 VDC",
+    "mpn": "0451010.MRL",
+    "manufacturer": "Littelfuse",
+    "package": "6.10 x 2.69 mm Nano2; nonpolar",
+    "footprint": "Fuse:Fuse_Littelfuse-NANO2-451_453",
+    "evidence": "https://www.littelfuse.com/assetdocs/fuse-451-and-453-datasheet?assetguid=533cd5cc-956c-4243-867f-6ab5a62f6ba1",
+    "dnp": false
+  },
+  {
+    "reference": "Q1",
+    "value": "CSD19537Q3",
+    "mpn": "CSD19537Q3",
+    "manufacturer": "Texas Instruments",
+    "package": "SON 3.3 x 3.3 mm; drain pins 5-8/EP represented by common pad 5",
+    "footprint": "Package_SON:VSON-8_3.3x3.3mm_P0.65mm_NexFET",
+    "evidence": "https://www.ti.com/lit/ds/symlink/csd19537q3.pdf",
+    "dnp": false
+  },
+  {
+    "reference": "Q2",
+    "value": "BSS138LT1G",
+    "mpn": "BSS138LT1G",
+    "manufacturer": "onsemi",
+    "package": "SOT-23 CASE318 style21",
+    "footprint": "Package_TO_SOT_SMD:SOT-23",
+    "evidence": "https://www.onsemi.com/download/data-sheet/pdf/bss138lt1-d.pdf",
+    "dnp": false
+  },
+  {
+    "reference": "U1",
+    "value": "TPS26630RGER",
+    "mpn": "TPS26630RGER",
+    "manufacturer": "Texas Instruments",
+    "package": "RGE0024H VQFN-24 + EP25",
+    "footprint": "Package_DFN_QFN:Texas_RGE0024H_VQFN-24-1EP_4x4mm_P0.5mm_EP2.7x2.7mm",
+    "evidence": "https://www.ti.com/lit/ds/symlink/tps2663.pdf",
+    "dnp": false
+  },
+  {
+    "reference": "C1",
+    "value": "1 uF / 50 V",
+    "mpn": "C3216X7R1H105K160AB",
+    "manufacturer": "TDK",
+    "package": "1206 X7R +/-10%",
+    "footprint": "Capacitor_SMD:C_1206_3216Metric",
+    "evidence": "https://product.tdk.com/en/documents/chara_sheet/C3216X7R1H105K160AB.pdf",
+    "dnp": false
+  },
+  {
+    "reference": "C2",
+    "value": "1 uF / 50 V",
+    "mpn": "C3216X7R1H105K160AB",
+    "manufacturer": "TDK",
+    "package": "1206 X7R +/-10%",
+    "footprint": "Capacitor_SMD:C_1206_3216Metric",
+    "evidence": "https://product.tdk.com/en/documents/chara_sheet/C3216X7R1H105K160AB.pdf",
+    "dnp": false
+  },
+  {
+    "reference": "C3",
+    "value": "1 uF / 50 V",
+    "mpn": "C3216X7R1H105K160AB",
+    "manufacturer": "TDK",
+    "package": "1206 X7R +/-10%",
+    "footprint": "Capacitor_SMD:C_1206_3216Metric",
+    "evidence": "https://product.tdk.com/en/documents/chara_sheet/C3216X7R1H105K160AB.pdf",
+    "dnp": false
+  },
+  {
+    "reference": "D1",
+    "value": "DNP - BIDIR TVS",
+    "mpn": "",
+    "manufacturer": "",
+    "package": "Reserved DO-214AB/SMC; nonpolar; no device selected",
+    "footprint": "Diode_SMD:D_SMC",
+    "evidence": "Phase 3 section 4.2",
+    "dnp": true
+  },
+  {
+    "reference": "C4",
+    "value": "470 uF / 25 V",
+    "mpn": "25ZLH470MEFC10X12.5",
+    "manufacturer": "Rubycon",
+    "package": "10 x 12.5 mm; pitch 5 mm; +/-20%; polarized",
+    "footprint": "Capacitor_THT:CP_Radial_D10.0mm_P5.00mm",
+    "evidence": "https://www.rubycon.co.jp/wp-content/uploads/catalog-aluminum/ZLH.pdf",
+    "dnp": false
+  },
+  {
+    "reference": "R1",
+    "value": "316k 0.1%",
+    "mpn": "TNPW0805316KBYEA",
+    "manufacturer": "Vishay",
+    "package": "0805; 0.1%; 10 ppm/K; 150 V; 0.14 W general mode",
+    "footprint": "Resistor_SMD:R_0805_2012Metric",
+    "evidence": "https://www.vishay.com/docs/28758/tnpw_e3.pdf",
+    "dnp": false
+  },
+  {
+    "reference": "R2",
+    "value": "13.3k 0.1%",
+    "mpn": "TNPW080513K3BYEA",
+    "manufacturer": "Vishay",
+    "package": "0805; 0.1%; 10 ppm/K; 150 V; 0.14 W general mode",
+    "footprint": "Resistor_SMD:R_0805_2012Metric",
+    "evidence": "https://www.vishay.com/docs/28758/tnpw_e3.pdf",
+    "dnp": false
+  },
+  {
+    "reference": "R3",
+    "value": "30.4k 0.1%",
+    "mpn": "TNPW080530K4BYEA",
+    "manufacturer": "Vishay",
+    "package": "0805; 0.1%; 10 ppm/K; 150 V; 0.14 W general mode",
+    "footprint": "Resistor_SMD:R_0805_2012Metric",
+    "evidence": "https://www.vishay.com/docs/28758/tnpw_e3.pdf",
+    "dnp": false
+  },
+  {
+    "reference": "C5",
+    "value": "47 nF / 50 V C0G",
+    "mpn": "C1206C473J5GACTU",
+    "manufacturer": "KEMET",
+    "package": "1206 C0G +/-5%",
+    "footprint": "Capacitor_SMD:C_1206_3216Metric",
+    "evidence": "https://content.kemet.com/datasheets/KEM_C1003_C0G_SMD.pdf",
+    "dnp": false
+  },
+  {
+    "reference": "R4",
+    "value": "3.24k 0.1%",
+    "mpn": "TNPW08053K24BYEA",
+    "manufacturer": "Vishay",
+    "package": "0805; 0.1%; 10 ppm/K; 150 V; 0.14 W general mode",
+    "footprint": "Resistor_SMD:R_0805_2012Metric",
+    "evidence": "https://www.vishay.com/docs/28758/tnpw_e3.pdf",
+    "dnp": false
+  },
+  {
+    "reference": "U2",
+    "value": "TPS3760A012DYYR",
+    "mpn": "TPS3760A012DYYR",
+    "manufacturer": "Texas Instruments",
+    "package": "DYY0014A SOT-23-THIN-14, 0.5 mm pitch; footprint assignment deferred",
+    "footprint": "",
+    "evidence": "https://www.ti.com/lit/ds/symlink/tps3760.pdf",
+    "dnp": false
+  },
+  {
+    "reference": "R5",
+    "value": "115k 0.1%",
+    "mpn": "TNPW0805115KBYEA",
+    "manufacturer": "Vishay",
+    "package": "0805; 0.1%; 10 ppm/K; 150 V; 0.14 W general mode",
+    "footprint": "Resistor_SMD:R_0805_2012Metric",
+    "evidence": "https://www.vishay.com/docs/28758/tnpw_e3.pdf",
+    "dnp": false
+  },
+  {
+    "reference": "R6",
+    "value": "10.0k 0.1%",
+    "mpn": "TNPW080510K0BYEA",
+    "manufacturer": "Vishay",
+    "package": "0805; 0.1%; 10 ppm/K; 150 V; 0.14 W general mode",
+    "footprint": "Resistor_SMD:R_0805_2012Metric",
+    "evidence": "https://www.vishay.com/docs/28758/tnpw_e3.pdf",
+    "dnp": false
+  },
+  {
+    "reference": "C6",
+    "value": "100 nF / 50 V C0G",
+    "mpn": "C1210C104J5GACTU",
+    "manufacturer": "KEMET",
+    "package": "1210 C0G +/-5%",
+    "footprint": "Capacitor_SMD:C_1210_3225Metric",
+    "evidence": "https://content.kemet.com/datasheets/KEM_C1003_C0G_SMD.pdf",
+    "dnp": false
+  },
+  {
+    "reference": "R7",
+    "value": "10.0k 0.1%",
+    "mpn": "TNPW080510K0BYEA",
+    "manufacturer": "Vishay",
+    "package": "0805; 0.1%; 10 ppm/K; 150 V; 0.14 W general mode",
+    "footprint": "Resistor_SMD:R_0805_2012Metric",
+    "evidence": "https://www.vishay.com/docs/28758/tnpw_e3.pdf",
+    "dnp": false
+  },
+  {
+    "reference": "TP1",
+    "value": "12V_PROTECTED",
+    "mpn": "",
+    "manufacturer": "",
+    "package": "Bare PCB pad; no purchased part",
+    "footprint": "TestPoint:TestPoint_Pad_D2.0mm",
+    "evidence": "",
+    "dnp": false
+  },
+  {
+    "reference": "TP2",
+    "value": "PGOOD_SENSE",
+    "mpn": "",
+    "manufacturer": "",
+    "package": "Bare PCB pad; no purchased part",
+    "footprint": "TestPoint:TestPoint_Pad_D2.0mm",
+    "evidence": "",
+    "dnp": false
+  },
+  {
+    "reference": "TP3",
+    "value": "PGOOD_12V",
+    "mpn": "",
+    "manufacturer": "",
+    "package": "Bare PCB pad; no purchased part",
+    "footprint": "TestPoint:TestPoint_Pad_D2.0mm",
+    "evidence": "",
+    "dnp": false
+  },
+  {
+    "reference": "TP4",
+    "value": "EFUSE_FLT_N",
+    "mpn": "",
+    "manufacturer": "",
+    "package": "Bare PCB pad; no purchased part",
+    "footprint": "TestPoint:TestPoint_Pad_D2.0mm",
+    "evidence": "",
+    "dnp": false
+  },
+  {
+    "reference": "TP5",
+    "value": "12V_IN",
+    "mpn": "",
+    "manufacturer": "",
+    "package": "Bare PCB pad; no purchased part",
+    "footprint": "TestPoint:TestPoint_Pad_D2.0mm",
+    "evidence": "",
+    "dnp": false
+  },
+  {
+    "reference": "TP6",
+    "value": "POWER_GND",
+    "mpn": "",
+    "manufacturer": "",
+    "package": "Bare PCB pad; no purchased part",
+    "footprint": "TestPoint:TestPoint_Pad_D2.0mm",
+    "evidence": "",
+    "dnp": false
+  }
+]

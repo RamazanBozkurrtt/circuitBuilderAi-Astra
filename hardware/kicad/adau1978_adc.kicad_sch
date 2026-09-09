@@ -1,0 +1,48 @@
+(kicad_sch
+	(version 20260306)
+	(generator "eeschema")
+	(generator_version "10.0")
+	(uuid "e7cd032c-fbfc-484c-a9ff-a0a5855875a9")
+	(paper "A3")
+	(title_block
+		(title "4 - ADAU1978 ADC")
+		(date "2026-09-09")
+		(rev "4A-BLOCKED")
+		(company "circuitBuilderAi-Astra")
+		(comment 1 "Hierarchy only. Not approved for electrical implementation or fabrication.")
+	)
+	(lib_symbols)
+	(text "4 - ADAU1978 ADC"
+		(exclude_from_sim no)
+		(at 25 30 0)
+		(effects
+			(font
+				(size 2 2)
+			)
+			(justify left bottom)
+		)
+		(uuid "0b80ecfc-5394-4041-9856-066278b079bf")
+	)
+	(text "INTENTIONALLY UNIMPLEMENTED - hierarchy placeholder only."
+		(exclude_from_sim no)
+		(at 25 50 0)
+		(effects
+			(font
+				(size 2 2)
+			)
+			(justify left bottom)
+		)
+		(uuid "4c595525-1dc2-46d8-9478-808dc5c92ce0")
+	)
+	(text "No components, nets, or speculative hierarchical signals. Implementation requires later phase authorization."
+		(exclude_from_sim no)
+		(at 25 65 0)
+		(effects
+			(font
+				(size 1.5 1.5)
+			)
+			(justify left bottom)
+		)
+		(uuid "54bcd1d0-b1c3-4014-8007-5bc491df834d")
+	)
+)

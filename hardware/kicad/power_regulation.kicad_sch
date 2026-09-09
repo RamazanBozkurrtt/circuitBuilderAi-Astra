@@ -1,0 +1,48 @@
+(kicad_sch
+	(version 20260306)
+	(generator "eeschema")
+	(generator_version "10.0")
+	(uuid "f112a293-11b0-41c6-a5f9-a9a8679bfc7b")
+	(paper "A3")
+	(title_block
+		(title "2 - Power Regulation / Sequencing")
+		(date "2026-09-09")
+		(rev "4A-BLOCKED")
+		(company "circuitBuilderAi-Astra")
+		(comment 1 "Hierarchy only. Not approved for electrical implementation or fabrication.")
+	)
+	(lib_symbols)
+	(text "INTENTIONALLY UNIMPLEMENTED - hierarchy placeholder only."
+		(exclude_from_sim no)
+		(at 25 50 0)
+		(effects
+			(font
+				(size 2 2)
+			)
+			(justify left bottom)
+		)
+		(uuid "2fe3194f-039d-4b99-963a-c5793b7b283b")
+	)
+	(text "2 - Power Regulation / Sequencing"
+		(exclude_from_sim no)
+		(at 25 30 0)
+		(effects
+			(font
+				(size 2 2)
+			)
+			(justify left bottom)
+		)
+		(uuid "5752135b-fe3c-4d02-bc90-a40cb80a76f5")
+	)
+	(text "No components, nets, or speculative hierarchical signals. Implementation requires later phase authorization."
+		(exclude_from_sim no)
+		(at 25 65 0)
+		(effects
+			(font
+				(size 1.5 1.5)
+			)
+			(justify left bottom)
+		)
+		(uuid "d817ea39-62d0-4c9c-ba60-ec83e5db334d")
+	)
+)

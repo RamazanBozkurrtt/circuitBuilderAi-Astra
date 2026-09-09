@@ -1,0 +1,48 @@
+(kicad_sch
+	(version 20260306)
+	(generator "eeschema")
+	(generator_version "10.0")
+	(uuid "538b53b4-ce7a-4346-bdf9-46ca727f9a0e")
+	(paper "A3")
+	(title_block
+		(title "3 - Microphones / AFE")
+		(date "2026-09-09")
+		(rev "4A-BLOCKED")
+		(company "circuitBuilderAi-Astra")
+		(comment 1 "Hierarchy only. Not approved for electrical implementation or fabrication.")
+	)
+	(lib_symbols)
+	(text "3 - Microphones / AFE"
+		(exclude_from_sim no)
+		(at 25 30 0)
+		(effects
+			(font
+				(size 2 2)
+			)
+			(justify left bottom)
+		)
+		(uuid "558ff9e1-f980-410e-b85d-ae828be71970")
+	)
+	(text "No components, nets, or speculative hierarchical signals. Implementation requires later phase authorization."
+		(exclude_from_sim no)
+		(at 25 65 0)
+		(effects
+			(font
+				(size 1.5 1.5)
+			)
+			(justify left bottom)
+		)
+		(uuid "b9f8ce36-3ad0-49dd-8400-e39e95dfdd52")
+	)
+	(text "INTENTIONALLY UNIMPLEMENTED - hierarchy placeholder only."
+		(exclude_from_sim no)
+		(at 25 50 0)
+		(effects
+			(font
+				(size 2 2)
+			)
+			(justify left bottom)
+		)
+		(uuid "c42cec2d-0838-4a67-9847-054fdae61dad")
+	)
+)

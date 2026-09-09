@@ -1,0 +1,22 @@
+{
+  "hierarchy_check": "PASS (placeholders only)",
+  "erc": "PASS (zero violations; no circuit populated)",
+  "schematic_files": [
+    "adau1978_adc.kicad_sch",
+    "adsp21569_dsp.kicad_sch",
+    "circuitBuilderAi-Astra.kicad_sch",
+    "microphones_afe.kicad_sch",
+    "power_input.kicad_sch",
+    "power_regulation.kicad_sch",
+    "system_interfaces.kicad_sch",
+    "tas6424e_amplifier.kicad_sch"
+  ],
+  "components_added": 0,
+  "pgood_falling_nominal_V": 10.508071428571428,
+  "pgood_falling_upper_bound_V": 10.779954954954952,
+  "allowed_protected_rail_minimum_V": 10.4,
+  "output_at_10V8_4A_53mohm_efuse_only_V": 10.588000000000001,
+  "other_path_drop_in_that_counterexample_V": 0,
+  "threshold_bound_includes_pin_leakage": false,
+  "engineering_gate": "PHASE 4A: BLOCKED"
+}

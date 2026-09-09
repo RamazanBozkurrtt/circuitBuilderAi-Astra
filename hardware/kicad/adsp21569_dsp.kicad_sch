@@ -1,0 +1,48 @@
+(kicad_sch
+	(version 20260306)
+	(generator "eeschema")
+	(generator_version "10.0")
+	(uuid "7fce75a4-7104-4a51-961a-88a5b6f9e914")
+	(paper "A3")
+	(title_block
+		(title "5 - ADSP-21569 DSP / Boot / Debug / Clocks")
+		(date "2026-09-09")
+		(rev "4A-BLOCKED")
+		(company "circuitBuilderAi-Astra")
+		(comment 1 "Hierarchy only. Not approved for electrical implementation or fabrication.")
+	)
+	(lib_symbols)
+	(text "No components, nets, or speculative hierarchical signals. Implementation requires later phase authorization."
+		(exclude_from_sim no)
+		(at 25 65 0)
+		(effects
+			(font
+				(size 1.5 1.5)
+			)
+			(justify left bottom)
+		)
+		(uuid "87917745-bc4c-4879-83f3-b2fac5debbfe")
+	)
+	(text "INTENTIONALLY UNIMPLEMENTED - hierarchy placeholder only."
+		(exclude_from_sim no)
+		(at 25 50 0)
+		(effects
+			(font
+				(size 2 2)
+			)
+			(justify left bottom)
+		)
+		(uuid "c307da54-aadc-4321-a2b3-914030fb5a22")
+	)
+	(text "5 - ADSP-21569 DSP / Boot / Debug / Clocks"
+		(exclude_from_sim no)
+		(at 25 30 0)
+		(effects
+			(font
+				(size 2 2)
+			)
+			(justify left bottom)
+		)
+		(uuid "f9792ab1-c868-46b8-b763-cd24e6048daf")
+	)
+)

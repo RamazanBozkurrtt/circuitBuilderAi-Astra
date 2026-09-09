@@ -1,0 +1,48 @@
+(kicad_sch
+	(version 20260306)
+	(generator "eeschema")
+	(generator_version "10.0")
+	(uuid "90cdd5df-1173-4abd-99cc-ac4ba18db2d1")
+	(paper "A3")
+	(title_block
+		(title "6 - TAS6424E-Q1 Amplifier")
+		(date "2026-09-09")
+		(rev "4A-BLOCKED")
+		(company "circuitBuilderAi-Astra")
+		(comment 1 "Hierarchy only. Not approved for electrical implementation or fabrication.")
+	)
+	(lib_symbols)
+	(text "No components, nets, or speculative hierarchical signals. Implementation requires later phase authorization."
+		(exclude_from_sim no)
+		(at 25 65 0)
+		(effects
+			(font
+				(size 1.5 1.5)
+			)
+			(justify left bottom)
+		)
+		(uuid "107cd34e-0750-460e-a92a-699cc797c772")
+	)
+	(text "6 - TAS6424E-Q1 Amplifier"
+		(exclude_from_sim no)
+		(at 25 30 0)
+		(effects
+			(font
+				(size 2 2)
+			)
+			(justify left bottom)
+		)
+		(uuid "7501c38d-25fb-4e26-9053-4ab264a7409b")
+	)
+	(text "INTENTIONALLY UNIMPLEMENTED - hierarchy placeholder only."
+		(exclude_from_sim no)
+		(at 25 50 0)
+		(effects
+			(font
+				(size 2 2)
+			)
+			(justify left bottom)
+		)
+		(uuid "a3a907af-f16f-451e-b870-00f5bc9b2d7c")
+	)
+)

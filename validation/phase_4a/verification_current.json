@@ -1,0 +1,108 @@
+{
+  "ERC": {
+    "version": "10.0.5",
+    "sheets": 8,
+    "violations": 0,
+    "ignored_checks": [
+      {
+        "description": "Global label only appears once in the schematic",
+        "key": "single_global_label"
+      },
+      {
+        "description": "Four connection points are joined together",
+        "key": "four_way_junction"
+      },
+      {
+        "description": "SPICE model issue",
+        "key": "simulation_model_issue"
+      },
+      {
+        "description": "Assigned footprint doesn't match footprint filters",
+        "key": "footprint_filter"
+      }
+    ]
+  },
+  "scope": "Existing hierarchy reused; six later sheets byte-identical; no PCB",
+  "net_and_symbol_audit": "PASS: all 15 connected nets, 19 intentional NC pins, critical pin maps and five hierarchical ports",
+  "threshold_bounds_V": {
+    "PGOOD_fall": {
+      "min": 9.8703136978022,
+      "max": 10.130114102602601
+    },
+    "PGOOD_rise": {
+      "min": 10.066951579920081,
+      "max": 10.333487996496496
+    },
+    "PGOOD_hysteresis": {
+      "min": 0.19663788211788216,
+      "max": 0.20337389389389385
+    },
+    "UVLO_rise": {
+      "min": 9.582514481224496,
+      "max": 10.173066239870533
+    },
+    "UVLO_fall": {
+      "min": 8.87588056136861,
+      "max": 9.562891987815275
+    },
+    "OVP_rise": {
+      "min": 13.792560352232245,
+      "max": 14.60609354938596
+    },
+    "OVP_fall": {
+      "min": 12.776849267264579,
+      "max": 13.72890324724171
+    }
+  },
+  "margins_V": {
+    "normal_hold": 0.26988589739739943,
+    "normal_assert": 0.0665120035035045,
+    "before_UVLO": 0.3074217099869241,
+    "OVP_above_normal": 0.5925603522322458
+  },
+  "ILIM_A": {
+    "nominal": 5.555555555555555,
+    "min": 5.161505161505162,
+    "max": 5.950394839283728
+  },
+  "transient": {
+    "simulator": "ngspice-47",
+    "scope": "Behavioral contract fixture; ideal threshold switches and imposed dVdT slew, not a silicon/PVT model or implemented downstream latch",
+    "events": {
+      "nominal": {
+        "assert_s": [
+          0.121296643,
+          1.66129664
+        ],
+        "deassert_s": 0.47005,
+        "deassert_protected_V": 9.9995462
+      },
+      "high_bound": {
+        "assert_s": [
+          0.121446509,
+          1.66144651
+        ],
+        "deassert_s": 0.45705,
+        "deassert_protected_V": 10.1295462
+      },
+      "low_bound": {
+        "assert_s": [
+          0.121196643,
+          1.66119664
+        ],
+        "deassert_s": 0.48305,
+        "deassert_protected_V": 9.86954621
+      }
+    },
+    "UVLO_open_s": 0.55375,
+    "recovery_max_slew_V_per_s": 1063.793500000118,
+    "normal_hold_min_V": 10.3999992
+  },
+  "artifact_sha256": {
+    "hardware/kicad/circuitBuilderAi-Astra.kicad_sch": "69dddfbba7d5f470be1d16f4b6c85ce79f4e24021972b865f483d5cb5e586e78",
+    "hardware/kicad/power_input.kicad_sch": "6e74969bb83f69bbcae42919153d6ad4c8dfa3ce180e1b16d6e4f9d67e169c38",
+    "hardware/kicad/Astra_Power.kicad_sym": "1c5575af1d21fb6952dbb7fac2ca6e1905a8be3cc65cd4de1cac4b8ba00f7efd",
+    "hardware/kicad/sym-lib-table": "e8cc8cf7d7b5bd9b35d35b0ec13686a969d44932f405551856041821746152fd",
+    "validation/phase_4a/power_input_transient.cir": "0c016dfb90039f8cd566fd58622f92f1e7305fd437bd543eeaa10277efd0682d"
+  }
+}

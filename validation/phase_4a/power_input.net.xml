@@ -1,0 +1,1293 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<export version="E">
+  <design>
+    <source>C:\Users\ramaz\source\repos\circuitBuilderAi-Astra\hardware\kicad\circuitBuilderAi-Astra.kicad_sch</source>
+    <date>2026-09-09T15:26:56</date>
+    <tool>Eeschema 10.0.5</tool>
+    <sheet number="1" name="/" tstamps="/">
+      <title_block>
+        <title>circuitBuilderAi-Astra - Schematic Hierarchy</title>
+        <company>circuitBuilderAi-Astra</company>
+        <rev>4A</rev>
+        <date>2026-09-09</date>
+        <source>circuitBuilderAi-Astra.kicad_sch</source>
+        <comment number="1" value="Sheet 1 only. Later circuitry and PCB implementation are not authorized."/>
+        <comment number="2" value=""/>
+        <comment number="3" value=""/>
+        <comment number="4" value=""/>
+        <comment number="5" value=""/>
+        <comment number="6" value=""/>
+        <comment number="7" value=""/>
+        <comment number="8" value=""/>
+        <comment number="9" value=""/>
+      </title_block>
+    </sheet>
+    <sheet number="2" name="/1 - Power Input / Protection/" tstamps="/1f0f028c-cc82-4829-b29a-4f3c20360e24/">
+      <title_block>
+        <title>1 - Power Input / Protection</title>
+        <company>circuitBuilderAi-Astra</company>
+        <rev>4A</rev>
+        <date>2026-09-09</date>
+        <source>power_input.kicad_sch</source>
+        <comment number="1" value="Phase 3 + Phase 3A contract. Sheet 1 only; not a board-release approval."/>
+        <comment number="2" value=""/>
+        <comment number="3" value=""/>
+        <comment number="4" value=""/>
+        <comment number="5" value=""/>
+        <comment number="6" value=""/>
+        <comment number="7" value=""/>
+        <comment number="8" value=""/>
+        <comment number="9" value=""/>
+      </title_block>
+    </sheet>
+    <sheet number="3" name="/2 - Power Regulation / Sequencing/" tstamps="/c46ad3ab-53c4-4782-9638-c5343c581d6a/">
+      <title_block>
+        <title>2 - Power Regulation / Sequencing</title>
+        <company>circuitBuilderAi-Astra</company>
+        <rev>4A-BLOCKED</rev>
+        <date>2026-09-09</date>
+        <source>power_regulation.kicad_sch</source>
+        <comment number="1" value="Hierarchy only. Not approved for electrical implementation or fabrication."/>
+        <comment number="2" value=""/>
+        <comment number="3" value=""/>
+        <comment number="4" value=""/>
+        <comment number="5" value=""/>
+        <comment number="6" value=""/>
+        <comment number="7" value=""/>
+        <comment number="8" value=""/>
+        <comment number="9" value=""/>
+      </title_block>
+    </sheet>
+    <sheet number="4" name="/3 - Microphones / AFE/" tstamps="/1ab89939-a625-4f41-b578-258505850a22/">
+      <title_block>
+        <title>3 - Microphones / AFE</title>
+        <company>circuitBuilderAi-Astra</company>
+        <rev>4A-BLOCKED</rev>
+        <date>2026-09-09</date>
+        <source>microphones_afe.kicad_sch</source>
+        <comment number="1" value="Hierarchy only. Not approved for electrical implementation or fabrication."/>
+        <comment number="2" value=""/>
+        <comment number="3" value=""/>
+        <comment number="4" value=""/>
+        <comment number="5" value=""/>
+        <comment number="6" value=""/>
+        <comment number="7" value=""/>
+        <comment number="8" value=""/>
+        <comment number="9" value=""/>
+      </title_block>
+    </sheet>
+    <sheet number="5" name="/4 - ADAU1978 ADC/" tstamps="/fd740298-4d28-41f6-827f-27ac60902cc7/">
+      <title_block>
+        <title>4 - ADAU1978 ADC</title>
+        <company>circuitBuilderAi-Astra</company>
+        <rev>4A-BLOCKED</rev>
+        <date>2026-09-09</date>
+        <source>adau1978_adc.kicad_sch</source>
+        <comment number="1" value="Hierarchy only. Not approved for electrical implementation or fabrication."/>
+        <comment number="2" value=""/>
+        <comment number="3" value=""/>
+        <comment number="4" value=""/>
+        <comment number="5" value=""/>
+        <comment number="6" value=""/>
+        <comment number="7" value=""/>
+        <comment number="8" value=""/>
+        <comment number="9" value=""/>
+      </title_block>
+    </sheet>
+    <sheet number="6" name="/5 - ADSP-21569 DSP / Boot / Debug / Clocks/" tstamps="/7f4a8f18-8381-4d14-9f7b-38db0ee8a570/">
+      <title_block>
+        <title>5 - ADSP-21569 DSP / Boot / Debug / Clocks</title>
+        <company>circuitBuilderAi-Astra</company>
+        <rev>4A-BLOCKED</rev>
+        <date>2026-09-09</date>
+        <source>adsp21569_dsp.kicad_sch</source>
+        <comment number="1" value="Hierarchy only. Not approved for electrical implementation or fabrication."/>
+        <comment number="2" value=""/>
+        <comment number="3" value=""/>
+        <comment number="4" value=""/>
+        <comment number="5" value=""/>
+        <comment number="6" value=""/>
+        <comment number="7" value=""/>
+        <comment number="8" value=""/>
+        <comment number="9" value=""/>
+      </title_block>
+    </sheet>
+    <sheet number="7" name="/6 - TAS6424E-Q1 Amplifier/" tstamps="/9b945bc4-cf34-403d-b81c-785e511fd739/">
+      <title_block>
+        <title>6 - TAS6424E-Q1 Amplifier</title>
+        <company>circuitBuilderAi-Astra</company>
+        <rev>4A-BLOCKED</rev>
+        <date>2026-09-09</date>
+        <source>tas6424e_amplifier.kicad_sch</source>
+        <comment number="1" value="Hierarchy only. Not approved for electrical implementation or fabrication."/>
+        <comment number="2" value=""/>
+        <comment number="3" value=""/>
+        <comment number="4" value=""/>
+        <comment number="5" value=""/>
+        <comment number="6" value=""/>
+        <comment number="7" value=""/>
+        <comment number="8" value=""/>
+        <comment number="9" value=""/>
+      </title_block>
+    </sheet>
+    <sheet number="8" name="/7 - Connectors / System Interfaces/" tstamps="/653d9b94-c194-4a43-8edd-e99f517cb74d/">
+      <title_block>
+        <title>7 - Connectors / System Interfaces</title>
+        <company>circuitBuilderAi-Astra</company>
+        <rev>4A-BLOCKED</rev>
+        <date>2026-09-09</date>
+        <source>system_interfaces.kicad_sch</source>
+        <comment number="1" value="Hierarchy only. Not approved for electrical implementation or fabrication."/>
+        <comment number="2" value=""/>
+        <comment number="3" value=""/>
+        <comment number="4" value=""/>
+        <comment number="5" value=""/>
+        <comment number="6" value=""/>
+        <comment number="7" value=""/>
+        <comment number="8" value=""/>
+        <comment number="9" value=""/>
+      </title_block>
+    </sheet>
+  </design>
+  <components>
+    <comp ref="C1">
+      <value>1 uF / 50 V</value>
+      <footprint>Capacitor_SMD:C_1206_3216Metric</footprint>
+      <datasheet>https://product.tdk.com/en/documents/chara_sheet/C3216X7R1H105K160AB.pdf</datasheet>
+      <fields>
+        <field name="MPN">C3216X7R1H105K160AB</field>
+        <field name="Manufacturer">TDK</field>
+        <field name="Package">1206 X7R +/-10%</field>
+        <field name="Footprint">Capacitor_SMD:C_1206_3216Metric</field>
+        <field name="Datasheet">https://product.tdk.com/en/documents/chara_sheet/C3216X7R1H105K160AB.pdf</field>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Astra_Power" part="C" description="Unpolarized capacitor"/>
+      <property name="MPN" value="C3216X7R1H105K160AB"/>
+      <property name="Manufacturer" value="TDK"/>
+      <property name="Package" value="1206 X7R +/-10%"/>
+      <property name="Sheetname" value="1 - Power Input / Protection"/>
+      <property name="Sheetfile" value="power_input.kicad_sch"/>
+      <sheetpath names="/1 - Power Input / Protection/" tstamps="/1f0f028c-cc82-4829-b29a-4f3c20360e24/"/>
+      <tstamps>c9527c54-90f1-5e39-bd3e-870d21b061d9</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C2">
+      <value>1 uF / 50 V</value>
+      <footprint>Capacitor_SMD:C_1206_3216Metric</footprint>
+      <datasheet>https://product.tdk.com/en/documents/chara_sheet/C3216X7R1H105K160AB.pdf</datasheet>
+      <fields>
+        <field name="MPN">C3216X7R1H105K160AB</field>
+        <field name="Manufacturer">TDK</field>
+        <field name="Package">1206 X7R +/-10%</field>
+        <field name="Footprint">Capacitor_SMD:C_1206_3216Metric</field>
+        <field name="Datasheet">https://product.tdk.com/en/documents/chara_sheet/C3216X7R1H105K160AB.pdf</field>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Astra_Power" part="C" description="Unpolarized capacitor"/>
+      <property name="MPN" value="C3216X7R1H105K160AB"/>
+      <property name="Manufacturer" value="TDK"/>
+      <property name="Package" value="1206 X7R +/-10%"/>
+      <property name="Sheetname" value="1 - Power Input / Protection"/>
+      <property name="Sheetfile" value="power_input.kicad_sch"/>
+      <sheetpath names="/1 - Power Input / Protection/" tstamps="/1f0f028c-cc82-4829-b29a-4f3c20360e24/"/>
+      <tstamps>5552a6cc-784a-5458-b165-4d1ef8fedc6c</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C3">
+      <value>1 uF / 50 V</value>
+      <footprint>Capacitor_SMD:C_1206_3216Metric</footprint>
+      <datasheet>https://product.tdk.com/en/documents/chara_sheet/C3216X7R1H105K160AB.pdf</datasheet>
+      <fields>
+        <field name="MPN">C3216X7R1H105K160AB</field>
+        <field name="Manufacturer">TDK</field>
+        <field name="Package">1206 X7R +/-10%</field>
+        <field name="Footprint">Capacitor_SMD:C_1206_3216Metric</field>
+        <field name="Datasheet">https://product.tdk.com/en/documents/chara_sheet/C3216X7R1H105K160AB.pdf</field>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Astra_Power" part="C" description="Unpolarized capacitor"/>
+      <property name="MPN" value="C3216X7R1H105K160AB"/>
+      <property name="Manufacturer" value="TDK"/>
+      <property name="Package" value="1206 X7R +/-10%"/>
+      <property name="Sheetname" value="1 - Power Input / Protection"/>
+      <property name="Sheetfile" value="power_input.kicad_sch"/>
+      <sheetpath names="/1 - Power Input / Protection/" tstamps="/1f0f028c-cc82-4829-b29a-4f3c20360e24/"/>
+      <tstamps>ccead170-ea0d-516b-bd8f-1630ca217dbb</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C4">
+      <value>470 uF / 25 V</value>
+      <footprint>Capacitor_THT:CP_Radial_D10.0mm_P5.00mm</footprint>
+      <datasheet>https://www.rubycon.co.jp/wp-content/uploads/catalog-aluminum/ZLH.pdf</datasheet>
+      <fields>
+        <field name="MPN">25ZLH470MEFC10X12.5</field>
+        <field name="Manufacturer">Rubycon</field>
+        <field name="Package">10 x 12.5 mm; pitch 5 mm; +/-20%; polarized</field>
+        <field name="Footprint">Capacitor_THT:CP_Radial_D10.0mm_P5.00mm</field>
+        <field name="Datasheet">https://www.rubycon.co.jp/wp-content/uploads/catalog-aluminum/ZLH.pdf</field>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Astra_Power" part="C_Polarized" description="Polarized capacitor"/>
+      <property name="MPN" value="25ZLH470MEFC10X12.5"/>
+      <property name="Manufacturer" value="Rubycon"/>
+      <property name="Package" value="10 x 12.5 mm; pitch 5 mm; +/-20%; polarized"/>
+      <property name="Sheetname" value="1 - Power Input / Protection"/>
+      <property name="Sheetfile" value="power_input.kicad_sch"/>
+      <sheetpath names="/1 - Power Input / Protection/" tstamps="/1f0f028c-cc82-4829-b29a-4f3c20360e24/"/>
+      <tstamps>af55341d-0b4e-566d-86fc-5f7cefaad61e</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C5">
+      <value>47 nF / 50 V C0G</value>
+      <footprint>Capacitor_SMD:C_1206_3216Metric</footprint>
+      <datasheet>https://content.kemet.com/datasheets/KEM_C1003_C0G_SMD.pdf</datasheet>
+      <fields>
+        <field name="MPN">C1206C473J5GACTU</field>
+        <field name="Manufacturer">KEMET</field>
+        <field name="Package">1206 C0G +/-5%</field>
+        <field name="Footprint">Capacitor_SMD:C_1206_3216Metric</field>
+        <field name="Datasheet">https://content.kemet.com/datasheets/KEM_C1003_C0G_SMD.pdf</field>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Astra_Power" part="C" description="Unpolarized capacitor"/>
+      <property name="MPN" value="C1206C473J5GACTU"/>
+      <property name="Manufacturer" value="KEMET"/>
+      <property name="Package" value="1206 C0G +/-5%"/>
+      <property name="Sheetname" value="1 - Power Input / Protection"/>
+      <property name="Sheetfile" value="power_input.kicad_sch"/>
+      <sheetpath names="/1 - Power Input / Protection/" tstamps="/1f0f028c-cc82-4829-b29a-4f3c20360e24/"/>
+      <tstamps>b1e304bf-3080-5d0c-9d25-f7f8aa9c0bf8</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C6">
+      <value>100 nF / 50 V C0G</value>
+      <footprint>Capacitor_SMD:C_1210_3225Metric</footprint>
+      <datasheet>https://content.kemet.com/datasheets/KEM_C1003_C0G_SMD.pdf</datasheet>
+      <fields>
+        <field name="MPN">C1210C104J5GACTU</field>
+        <field name="Manufacturer">KEMET</field>
+        <field name="Package">1210 C0G +/-5%</field>
+        <field name="Footprint">Capacitor_SMD:C_1210_3225Metric</field>
+        <field name="Datasheet">https://content.kemet.com/datasheets/KEM_C1003_C0G_SMD.pdf</field>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Astra_Power" part="C" description="Unpolarized capacitor"/>
+      <property name="MPN" value="C1210C104J5GACTU"/>
+      <property name="Manufacturer" value="KEMET"/>
+      <property name="Package" value="1210 C0G +/-5%"/>
+      <property name="Sheetname" value="1 - Power Input / Protection"/>
+      <property name="Sheetfile" value="power_input.kicad_sch"/>
+      <sheetpath names="/1 - Power Input / Protection/" tstamps="/1f0f028c-cc82-4829-b29a-4f3c20360e24/"/>
+      <tstamps>fef04f4b-98f5-583e-8cd3-fe48a2062072</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="D1">
+      <value>DNP - BIDIR TVS</value>
+      <footprint>Diode_SMD:D_SMC</footprint>
+      <datasheet>Phase 3 section 4.2</datasheet>
+      <fields>
+        <field name="MPN"/>
+        <field name="Manufacturer"/>
+        <field name="Package">Reserved DO-214AB/SMC; nonpolar; no device selected</field>
+        <field name="Footprint">Diode_SMD:D_SMC</field>
+        <field name="Datasheet">Phase 3 section 4.2</field>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Astra_Power" part="D_TVS" description="Bidirectional transient-voltage-suppression diode"/>
+      <property name="MPN" value=""/>
+      <property name="Manufacturer" value=""/>
+      <property name="Package" value="Reserved DO-214AB/SMC; nonpolar; no device selected"/>
+      <property name="Sheetname" value="1 - Power Input / Protection"/>
+      <property name="Sheetfile" value="power_input.kicad_sch"/>
+      <property name="dnp"/>
+      <sheetpath names="/1 - Power Input / Protection/" tstamps="/1f0f028c-cc82-4829-b29a-4f3c20360e24/"/>
+      <tstamps>616c2d95-398e-583b-ad4e-123092a5a3b3</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="F1">
+      <value>10 A / 125 VDC</value>
+      <footprint>Fuse:Fuse_Littelfuse-NANO2-451_453</footprint>
+      <datasheet>https://www.littelfuse.com/assetdocs/fuse-451-and-453-datasheet?assetguid=533cd5cc-956c-4243-867f-6ab5a62f6ba1</datasheet>
+      <fields>
+        <field name="MPN">0451010.MRL</field>
+        <field name="Manufacturer">Littelfuse</field>
+        <field name="Package">6.10 x 2.69 mm Nano2; nonpolar</field>
+        <field name="Footprint">Fuse:Fuse_Littelfuse-NANO2-451_453</field>
+        <field name="Datasheet">https://www.littelfuse.com/assetdocs/fuse-451-and-453-datasheet?assetguid=533cd5cc-956c-4243-867f-6ab5a62f6ba1</field>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Astra_Power" part="Fuse" description="Fuse"/>
+      <property name="MPN" value="0451010.MRL"/>
+      <property name="Manufacturer" value="Littelfuse"/>
+      <property name="Package" value="6.10 x 2.69 mm Nano2; nonpolar"/>
+      <property name="Sheetname" value="1 - Power Input / Protection"/>
+      <property name="Sheetfile" value="power_input.kicad_sch"/>
+      <sheetpath names="/1 - Power Input / Protection/" tstamps="/1f0f028c-cc82-4829-b29a-4f3c20360e24/"/>
+      <tstamps>a6d7ea24-0b24-53ee-b7a9-a4897a2d2e19</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="J1">
+      <value>XT30PW-M30.G.Y</value>
+      <datasheet>https://www.china-amass.com/biao/273.html</datasheet>
+      <fields>
+        <field name="MPN">XT30PW-M30.G.Y</field>
+        <field name="Manufacturer">AMASS</field>
+        <field name="Package">2-pin keyed horizontal THT; 3.0 mm tails</field>
+        <field name="Footprint"/>
+        <field name="Datasheet">https://www.china-amass.com/biao/273.html</field>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Astra_Power" part="Power_Input_2pin" description=""/>
+      <property name="MPN" value="XT30PW-M30.G.Y"/>
+      <property name="Manufacturer" value="AMASS"/>
+      <property name="Package" value="2-pin keyed horizontal THT; 3.0 mm tails"/>
+      <property name="Sheetname" value="1 - Power Input / Protection"/>
+      <property name="Sheetfile" value="power_input.kicad_sch"/>
+      <sheetpath names="/1 - Power Input / Protection/" tstamps="/1f0f028c-cc82-4829-b29a-4f3c20360e24/"/>
+      <tstamps>51b9fd3e-0454-561e-a97b-f5d0b6886c89</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="Q1">
+      <value>CSD19537Q3</value>
+      <footprint>Package_SON:VSON-8_3.3x3.3mm_P0.65mm_NexFET</footprint>
+      <datasheet>https://www.ti.com/lit/ds/symlink/csd19537q3.pdf</datasheet>
+      <fields>
+        <field name="MPN">CSD19537Q3</field>
+        <field name="Manufacturer">Texas Instruments</field>
+        <field name="Package">SON 3.3 x 3.3 mm; drain pins 5-8/EP represented by common pad 5</field>
+        <field name="Footprint">Package_SON:VSON-8_3.3x3.3mm_P0.65mm_NexFET</field>
+        <field name="Datasheet">https://www.ti.com/lit/ds/symlink/csd19537q3.pdf</field>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Astra_Power" part="CSD19537Q3" description="50A Id, 100V Vds, NexFET N-Channel Power MOSFET, 13mOhm Ron, Qg Typ 16.0nC, VSON8 3.3x3.3mm"/>
+      <property name="MPN" value="CSD19537Q3"/>
+      <property name="Manufacturer" value="Texas Instruments"/>
+      <property name="Package" value="SON 3.3 x 3.3 mm; drain pins 5-8/EP represented by common pad 5"/>
+      <property name="Sheetname" value="1 - Power Input / Protection"/>
+      <property name="Sheetfile" value="power_input.kicad_sch"/>
+      <sheetpath names="/1 - Power Input / Protection/" tstamps="/1f0f028c-cc82-4829-b29a-4f3c20360e24/"/>
+      <tstamps>6fb10801-4ac7-5097-90df-87bd7522311a</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="4"/>
+            <pin num="5"/>
+            <pin num="1"/>
+            <pin num="2"/>
+            <pin num="3"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="Q2">
+      <value>BSS138LT1G</value>
+      <footprint>Package_TO_SOT_SMD:SOT-23</footprint>
+      <datasheet>https://www.onsemi.com/download/data-sheet/pdf/bss138lt1-d.pdf</datasheet>
+      <fields>
+        <field name="MPN">BSS138LT1G</field>
+        <field name="Manufacturer">onsemi</field>
+        <field name="Package">SOT-23 CASE318 style21</field>
+        <field name="Footprint">Package_TO_SOT_SMD:SOT-23</field>
+        <field name="Datasheet">https://www.onsemi.com/download/data-sheet/pdf/bss138lt1-d.pdf</field>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Astra_Power" part="BSS138LT1G" description="50V Vds, 0.22A Id, N-Channel MOSFET, SOT-23"/>
+      <property name="MPN" value="BSS138LT1G"/>
+      <property name="Manufacturer" value="onsemi"/>
+      <property name="Package" value="SOT-23 CASE318 style21"/>
+      <property name="Sheetname" value="1 - Power Input / Protection"/>
+      <property name="Sheetfile" value="power_input.kicad_sch"/>
+      <sheetpath names="/1 - Power Input / Protection/" tstamps="/1f0f028c-cc82-4829-b29a-4f3c20360e24/"/>
+      <tstamps>0027faa4-5f52-5e4c-b6cb-72d90fe870cb</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="3"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R1">
+      <value>316k 0.1%</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
+      <datasheet>https://www.vishay.com/docs/28758/tnpw_e3.pdf</datasheet>
+      <fields>
+        <field name="MPN">TNPW0805316KBYEA</field>
+        <field name="Manufacturer">Vishay</field>
+        <field name="Package">0805; 0.1%; 10 ppm/K; 150 V; 0.14 W general mode</field>
+        <field name="Footprint">Resistor_SMD:R_0805_2012Metric</field>
+        <field name="Datasheet">https://www.vishay.com/docs/28758/tnpw_e3.pdf</field>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Astra_Power" part="R" description="Resistor"/>
+      <property name="MPN" value="TNPW0805316KBYEA"/>
+      <property name="Manufacturer" value="Vishay"/>
+      <property name="Package" value="0805; 0.1%; 10 ppm/K; 150 V; 0.14 W general mode"/>
+      <property name="Sheetname" value="1 - Power Input / Protection"/>
+      <property name="Sheetfile" value="power_input.kicad_sch"/>
+      <sheetpath names="/1 - Power Input / Protection/" tstamps="/1f0f028c-cc82-4829-b29a-4f3c20360e24/"/>
+      <tstamps>eff27ca0-415c-591f-8ed5-6f206db8edf1</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R2">
+      <value>13.3k 0.1%</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
+      <datasheet>https://www.vishay.com/docs/28758/tnpw_e3.pdf</datasheet>
+      <fields>
+        <field name="MPN">TNPW080513K3BYEA</field>
+        <field name="Manufacturer">Vishay</field>
+        <field name="Package">0805; 0.1%; 10 ppm/K; 150 V; 0.14 W general mode</field>
+        <field name="Footprint">Resistor_SMD:R_0805_2012Metric</field>
+        <field name="Datasheet">https://www.vishay.com/docs/28758/tnpw_e3.pdf</field>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Astra_Power" part="R" description="Resistor"/>
+      <property name="MPN" value="TNPW080513K3BYEA"/>
+      <property name="Manufacturer" value="Vishay"/>
+      <property name="Package" value="0805; 0.1%; 10 ppm/K; 150 V; 0.14 W general mode"/>
+      <property name="Sheetname" value="1 - Power Input / Protection"/>
+      <property name="Sheetfile" value="power_input.kicad_sch"/>
+      <sheetpath names="/1 - Power Input / Protection/" tstamps="/1f0f028c-cc82-4829-b29a-4f3c20360e24/"/>
+      <tstamps>9c4c9d92-aa6d-5d22-9ce3-678084a44d58</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R3">
+      <value>30.4k 0.1%</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
+      <datasheet>https://www.vishay.com/docs/28758/tnpw_e3.pdf</datasheet>
+      <fields>
+        <field name="MPN">TNPW080530K4BYEA</field>
+        <field name="Manufacturer">Vishay</field>
+        <field name="Package">0805; 0.1%; 10 ppm/K; 150 V; 0.14 W general mode</field>
+        <field name="Footprint">Resistor_SMD:R_0805_2012Metric</field>
+        <field name="Datasheet">https://www.vishay.com/docs/28758/tnpw_e3.pdf</field>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Astra_Power" part="R" description="Resistor"/>
+      <property name="MPN" value="TNPW080530K4BYEA"/>
+      <property name="Manufacturer" value="Vishay"/>
+      <property name="Package" value="0805; 0.1%; 10 ppm/K; 150 V; 0.14 W general mode"/>
+      <property name="Sheetname" value="1 - Power Input / Protection"/>
+      <property name="Sheetfile" value="power_input.kicad_sch"/>
+      <sheetpath names="/1 - Power Input / Protection/" tstamps="/1f0f028c-cc82-4829-b29a-4f3c20360e24/"/>
+      <tstamps>dbc46284-2302-567a-93a8-08aca84a000a</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R4">
+      <value>3.24k 0.1%</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
+      <datasheet>https://www.vishay.com/docs/28758/tnpw_e3.pdf</datasheet>
+      <fields>
+        <field name="MPN">TNPW08053K24BYEA</field>
+        <field name="Manufacturer">Vishay</field>
+        <field name="Package">0805; 0.1%; 10 ppm/K; 150 V; 0.14 W general mode</field>
+        <field name="Footprint">Resistor_SMD:R_0805_2012Metric</field>
+        <field name="Datasheet">https://www.vishay.com/docs/28758/tnpw_e3.pdf</field>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Astra_Power" part="R" description="Resistor"/>
+      <property name="MPN" value="TNPW08053K24BYEA"/>
+      <property name="Manufacturer" value="Vishay"/>
+      <property name="Package" value="0805; 0.1%; 10 ppm/K; 150 V; 0.14 W general mode"/>
+      <property name="Sheetname" value="1 - Power Input / Protection"/>
+      <property name="Sheetfile" value="power_input.kicad_sch"/>
+      <sheetpath names="/1 - Power Input / Protection/" tstamps="/1f0f028c-cc82-4829-b29a-4f3c20360e24/"/>
+      <tstamps>6901296a-b95d-5b57-baf3-f6a733a977f4</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R5">
+      <value>115k 0.1%</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
+      <datasheet>https://www.vishay.com/docs/28758/tnpw_e3.pdf</datasheet>
+      <fields>
+        <field name="MPN">TNPW0805115KBYEA</field>
+        <field name="Manufacturer">Vishay</field>
+        <field name="Package">0805; 0.1%; 10 ppm/K; 150 V; 0.14 W general mode</field>
+        <field name="Footprint">Resistor_SMD:R_0805_2012Metric</field>
+        <field name="Datasheet">https://www.vishay.com/docs/28758/tnpw_e3.pdf</field>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Astra_Power" part="R" description="Resistor"/>
+      <property name="MPN" value="TNPW0805115KBYEA"/>
+      <property name="Manufacturer" value="Vishay"/>
+      <property name="Package" value="0805; 0.1%; 10 ppm/K; 150 V; 0.14 W general mode"/>
+      <property name="Sheetname" value="1 - Power Input / Protection"/>
+      <property name="Sheetfile" value="power_input.kicad_sch"/>
+      <sheetpath names="/1 - Power Input / Protection/" tstamps="/1f0f028c-cc82-4829-b29a-4f3c20360e24/"/>
+      <tstamps>54188da9-c095-5488-93cb-6471969601fb</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R6">
+      <value>10.0k 0.1%</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
+      <datasheet>https://www.vishay.com/docs/28758/tnpw_e3.pdf</datasheet>
+      <fields>
+        <field name="MPN">TNPW080510K0BYEA</field>
+        <field name="Manufacturer">Vishay</field>
+        <field name="Package">0805; 0.1%; 10 ppm/K; 150 V; 0.14 W general mode</field>
+        <field name="Footprint">Resistor_SMD:R_0805_2012Metric</field>
+        <field name="Datasheet">https://www.vishay.com/docs/28758/tnpw_e3.pdf</field>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Astra_Power" part="R" description="Resistor"/>
+      <property name="MPN" value="TNPW080510K0BYEA"/>
+      <property name="Manufacturer" value="Vishay"/>
+      <property name="Package" value="0805; 0.1%; 10 ppm/K; 150 V; 0.14 W general mode"/>
+      <property name="Sheetname" value="1 - Power Input / Protection"/>
+      <property name="Sheetfile" value="power_input.kicad_sch"/>
+      <sheetpath names="/1 - Power Input / Protection/" tstamps="/1f0f028c-cc82-4829-b29a-4f3c20360e24/"/>
+      <tstamps>1841ce43-d059-5e04-960b-b8566f9d2c57</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R7">
+      <value>10.0k 0.1%</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
+      <datasheet>https://www.vishay.com/docs/28758/tnpw_e3.pdf</datasheet>
+      <fields>
+        <field name="MPN">TNPW080510K0BYEA</field>
+        <field name="Manufacturer">Vishay</field>
+        <field name="Package">0805; 0.1%; 10 ppm/K; 150 V; 0.14 W general mode</field>
+        <field name="Footprint">Resistor_SMD:R_0805_2012Metric</field>
+        <field name="Datasheet">https://www.vishay.com/docs/28758/tnpw_e3.pdf</field>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Astra_Power" part="R" description="Resistor"/>
+      <property name="MPN" value="TNPW080510K0BYEA"/>
+      <property name="Manufacturer" value="Vishay"/>
+      <property name="Package" value="0805; 0.1%; 10 ppm/K; 150 V; 0.14 W general mode"/>
+      <property name="Sheetname" value="1 - Power Input / Protection"/>
+      <property name="Sheetfile" value="power_input.kicad_sch"/>
+      <sheetpath names="/1 - Power Input / Protection/" tstamps="/1f0f028c-cc82-4829-b29a-4f3c20360e24/"/>
+      <tstamps>f534ffa3-daae-527c-9985-8ec4954b666b</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="TP1">
+      <value>12V_PROTECTED</value>
+      <footprint>TestPoint:TestPoint_Pad_D2.0mm</footprint>
+      <fields>
+        <field name="MPN"/>
+        <field name="Manufacturer"/>
+        <field name="Package">Bare PCB pad; no purchased part</field>
+        <field name="Footprint">TestPoint:TestPoint_Pad_D2.0mm</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Astra_Power" part="TestPoint" description="test point"/>
+      <property name="MPN" value=""/>
+      <property name="Manufacturer" value=""/>
+      <property name="Package" value="Bare PCB pad; no purchased part"/>
+      <property name="Sheetname" value="1 - Power Input / Protection"/>
+      <property name="Sheetfile" value="power_input.kicad_sch"/>
+      <property name="exclude_from_bom"/>
+      <sheetpath names="/1 - Power Input / Protection/" tstamps="/1f0f028c-cc82-4829-b29a-4f3c20360e24/"/>
+      <tstamps>29a53df6-91aa-5bb7-9ba4-5e541d8e7bf0</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="TP2">
+      <value>PGOOD_SENSE</value>
+      <footprint>TestPoint:TestPoint_Pad_D2.0mm</footprint>
+      <fields>
+        <field name="MPN"/>
+        <field name="Manufacturer"/>
+        <field name="Package">Bare PCB pad; no purchased part</field>
+        <field name="Footprint">TestPoint:TestPoint_Pad_D2.0mm</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Astra_Power" part="TestPoint" description="test point"/>
+      <property name="MPN" value=""/>
+      <property name="Manufacturer" value=""/>
+      <property name="Package" value="Bare PCB pad; no purchased part"/>
+      <property name="Sheetname" value="1 - Power Input / Protection"/>
+      <property name="Sheetfile" value="power_input.kicad_sch"/>
+      <property name="exclude_from_bom"/>
+      <sheetpath names="/1 - Power Input / Protection/" tstamps="/1f0f028c-cc82-4829-b29a-4f3c20360e24/"/>
+      <tstamps>74062e4a-ddce-5d90-bf9c-5505bf327319</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="TP3">
+      <value>PGOOD_12V</value>
+      <footprint>TestPoint:TestPoint_Pad_D2.0mm</footprint>
+      <fields>
+        <field name="MPN"/>
+        <field name="Manufacturer"/>
+        <field name="Package">Bare PCB pad; no purchased part</field>
+        <field name="Footprint">TestPoint:TestPoint_Pad_D2.0mm</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Astra_Power" part="TestPoint" description="test point"/>
+      <property name="MPN" value=""/>
+      <property name="Manufacturer" value=""/>
+      <property name="Package" value="Bare PCB pad; no purchased part"/>
+      <property name="Sheetname" value="1 - Power Input / Protection"/>
+      <property name="Sheetfile" value="power_input.kicad_sch"/>
+      <property name="exclude_from_bom"/>
+      <sheetpath names="/1 - Power Input / Protection/" tstamps="/1f0f028c-cc82-4829-b29a-4f3c20360e24/"/>
+      <tstamps>8b412b4f-c0ce-5dda-a96f-dbbb6778e5a4</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="TP4">
+      <value>EFUSE_FLT_N</value>
+      <footprint>TestPoint:TestPoint_Pad_D2.0mm</footprint>
+      <fields>
+        <field name="MPN"/>
+        <field name="Manufacturer"/>
+        <field name="Package">Bare PCB pad; no purchased part</field>
+        <field name="Footprint">TestPoint:TestPoint_Pad_D2.0mm</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Astra_Power" part="TestPoint" description="test point"/>
+      <property name="MPN" value=""/>
+      <property name="Manufacturer" value=""/>
+      <property name="Package" value="Bare PCB pad; no purchased part"/>
+      <property name="Sheetname" value="1 - Power Input / Protection"/>
+      <property name="Sheetfile" value="power_input.kicad_sch"/>
+      <property name="exclude_from_bom"/>
+      <sheetpath names="/1 - Power Input / Protection/" tstamps="/1f0f028c-cc82-4829-b29a-4f3c20360e24/"/>
+      <tstamps>ae4e7599-0813-5334-9629-5b24aa7251db</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="TP5">
+      <value>12V_IN</value>
+      <footprint>TestPoint:TestPoint_Pad_D2.0mm</footprint>
+      <fields>
+        <field name="MPN"/>
+        <field name="Manufacturer"/>
+        <field name="Package">Bare PCB pad; no purchased part</field>
+        <field name="Footprint">TestPoint:TestPoint_Pad_D2.0mm</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Astra_Power" part="TestPoint" description="test point"/>
+      <property name="MPN" value=""/>
+      <property name="Manufacturer" value=""/>
+      <property name="Package" value="Bare PCB pad; no purchased part"/>
+      <property name="Sheetname" value="1 - Power Input / Protection"/>
+      <property name="Sheetfile" value="power_input.kicad_sch"/>
+      <property name="exclude_from_bom"/>
+      <sheetpath names="/1 - Power Input / Protection/" tstamps="/1f0f028c-cc82-4829-b29a-4f3c20360e24/"/>
+      <tstamps>ba8ebc21-dfc7-50b5-9373-bfc50b4b0d26</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="TP6">
+      <value>POWER_GND</value>
+      <footprint>TestPoint:TestPoint_Pad_D2.0mm</footprint>
+      <fields>
+        <field name="MPN"/>
+        <field name="Manufacturer"/>
+        <field name="Package">Bare PCB pad; no purchased part</field>
+        <field name="Footprint">TestPoint:TestPoint_Pad_D2.0mm</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Astra_Power" part="TestPoint" description="test point"/>
+      <property name="MPN" value=""/>
+      <property name="Manufacturer" value=""/>
+      <property name="Package" value="Bare PCB pad; no purchased part"/>
+      <property name="Sheetname" value="1 - Power Input / Protection"/>
+      <property name="Sheetfile" value="power_input.kicad_sch"/>
+      <property name="exclude_from_bom"/>
+      <sheetpath names="/1 - Power Input / Protection/" tstamps="/1f0f028c-cc82-4829-b29a-4f3c20360e24/"/>
+      <tstamps>b381ffbb-cdeb-5b2a-b933-c0511c45aae5</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="U1">
+      <value>TPS26630RGER</value>
+      <footprint>Package_DFN_QFN:Texas_RGE0024H_VQFN-24-1EP_4x4mm_P0.5mm_EP2.7x2.7mm</footprint>
+      <datasheet>https://www.ti.com/lit/ds/symlink/tps2663.pdf</datasheet>
+      <fields>
+        <field name="MPN">TPS26630RGER</field>
+        <field name="Manufacturer">Texas Instruments</field>
+        <field name="Package">RGE0024H VQFN-24 + EP25</field>
+        <field name="Footprint">Package_DFN_QFN:Texas_RGE0024H_VQFN-24-1EP_4x4mm_P0.5mm_EP2.7x2.7mm</field>
+        <field name="Datasheet">https://www.ti.com/lit/ds/symlink/tps2663.pdf</field>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Astra_Power" part="TPS26630RGER" description=""/>
+      <property name="MPN" value="TPS26630RGER"/>
+      <property name="Manufacturer" value="Texas Instruments"/>
+      <property name="Package" value="RGE0024H VQFN-24 + EP25"/>
+      <property name="Sheetname" value="1 - Power Input / Protection"/>
+      <property name="Sheetfile" value="power_input.kicad_sch"/>
+      <sheetpath names="/1 - Power Input / Protection/" tstamps="/1f0f028c-cc82-4829-b29a-4f3c20360e24/"/>
+      <tstamps>97fff217-3b5f-512f-ac23-34903d4d0ef3</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+            <pin num="5"/>
+            <pin num="3"/>
+            <pin num="4"/>
+            <pin num="6"/>
+            <pin num="7"/>
+            <pin num="19"/>
+            <pin num="8"/>
+            <pin num="20"/>
+            <pin num="21"/>
+            <pin num="25"/>
+            <pin num="22"/>
+            <pin num="23"/>
+            <pin num="9"/>
+            <pin num="24"/>
+            <pin num="10"/>
+            <pin num="17"/>
+            <pin num="18"/>
+            <pin num="15"/>
+            <pin num="16"/>
+            <pin num="14"/>
+            <pin num="12"/>
+            <pin num="13"/>
+            <pin num="11"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="U2">
+      <value>TPS3760A012DYYR</value>
+      <datasheet>https://www.ti.com/lit/ds/symlink/tps3760.pdf</datasheet>
+      <fields>
+        <field name="MPN">TPS3760A012DYYR</field>
+        <field name="Manufacturer">Texas Instruments</field>
+        <field name="Package">DYY0014A SOT-23-THIN-14, 0.5 mm pitch; footprint assignment deferred</field>
+        <field name="Footprint"/>
+        <field name="Datasheet">https://www.ti.com/lit/ds/symlink/tps3760.pdf</field>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Astra_Power" part="TPS3760A012DYYR" description=""/>
+      <property name="MPN" value="TPS3760A012DYYR"/>
+      <property name="Manufacturer" value="Texas Instruments"/>
+      <property name="Package" value="DYY0014A SOT-23-THIN-14, 0.5 mm pitch; footprint assignment deferred"/>
+      <property name="Sheetname" value="1 - Power Input / Protection"/>
+      <property name="Sheetfile" value="power_input.kicad_sch"/>
+      <sheetpath names="/1 - Power Input / Protection/" tstamps="/1f0f028c-cc82-4829-b29a-4f3c20360e24/"/>
+      <tstamps>7b6f4495-80ae-571b-a00b-a34cf7723707</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="3"/>
+            <pin num="2"/>
+            <pin num="4"/>
+            <pin num="5"/>
+            <pin num="8"/>
+            <pin num="7"/>
+            <pin num="11"/>
+            <pin num="13"/>
+            <pin num="12"/>
+            <pin num="14"/>
+            <pin num="6"/>
+            <pin num="9"/>
+            <pin num="10"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+  </components>
+  <libparts>
+    <libpart lib="Astra_Power" part="BSS138LT1G">
+      <description>50V Vds, 0.22A Id, N-Channel MOSFET, SOT-23</description>
+      <docs>https://www.onsemi.com/pub/Collateral/BSS138-D.PDF</docs>
+      <fields>
+        <field name="Reference">Q</field>
+        <field name="Value">BSS138</field>
+        <field name="Footprint">Package_TO_SOT_SMD:SOT-23</field>
+        <field name="Datasheet">https://www.onsemi.com/pub/Collateral/BSS138-D.PDF</field>
+        <field name="Description">50V Vds, 0.22A Id, N-Channel MOSFET, SOT-23</field>
+      </fields>
+      <pins>
+        <pin num="1" name="G" type="input"/>
+        <pin num="2" name="S" type="passive"/>
+        <pin num="3" name="D" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Astra_Power" part="C">
+      <description>Unpolarized capacitor</description>
+      <fields>
+        <field name="Reference">C</field>
+        <field name="Value">C</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description">Unpolarized capacitor</field>
+      </fields>
+      <pins>
+        <pin num="1" name="" type="passive"/>
+        <pin num="2" name="" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Astra_Power" part="CSD19537Q3">
+      <description>50A Id, 100V Vds, NexFET N-Channel Power MOSFET, 13mOhm Ron, Qg Typ 16.0nC, VSON8 3.3x3.3mm</description>
+      <docs>http://www.ti.com/lit/ds/symlink/csd19537q3.pdf</docs>
+      <fields>
+        <field name="Reference">Q</field>
+        <field name="Value">CSD19537Q3</field>
+        <field name="Footprint">Package_SON:VSON-8_3.3x3.3mm_P0.65mm_NexFET</field>
+        <field name="Datasheet">http://www.ti.com/lit/ds/symlink/csd19537q3.pdf</field>
+        <field name="Description">50A Id, 100V Vds, NexFET N-Channel Power MOSFET, 13mOhm Ron, Qg Typ 16.0nC, VSON8 3.3x3.3mm</field>
+      </fields>
+      <pins>
+        <pin num="1" name="S" type="passive"/>
+        <pin num="2" name="S" type="passive"/>
+        <pin num="3" name="S" type="passive"/>
+        <pin num="4" name="G" type="input"/>
+        <pin num="5" name="D" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Astra_Power" part="C_Polarized">
+      <description>Polarized capacitor</description>
+      <fields>
+        <field name="Reference">C</field>
+        <field name="Value">C_Polarized</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description">Polarized capacitor</field>
+      </fields>
+      <pins>
+        <pin num="1" name="" type="passive"/>
+        <pin num="2" name="" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Astra_Power" part="D_TVS">
+      <description>Bidirectional transient-voltage-suppression diode</description>
+      <fields>
+        <field name="Reference">D</field>
+        <field name="Value">D_TVS</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description">Bidirectional transient-voltage-suppression diode</field>
+      </fields>
+      <pins>
+        <pin num="1" name="A1" type="passive"/>
+        <pin num="2" name="A2" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Astra_Power" part="Fuse">
+      <description>Fuse</description>
+      <fields>
+        <field name="Reference">F</field>
+        <field name="Value">Fuse</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description">Fuse</field>
+      </fields>
+      <pins>
+        <pin num="1" name="" type="passive"/>
+        <pin num="2" name="" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Astra_Power" part="Power_Input_2pin">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">Power_Input_2pin</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="+" type="passive"/>
+        <pin num="2" name="-" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Astra_Power" part="R">
+      <description>Resistor</description>
+      <fields>
+        <field name="Reference">R</field>
+        <field name="Value">R</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description">Resistor</field>
+      </fields>
+      <pins>
+        <pin num="1" name="" type="passive"/>
+        <pin num="2" name="" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Astra_Power" part="TPS26630RGER">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">TPS26630RGER</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="IN" type="power_in"/>
+        <pin num="2" name="IN" type="power_in"/>
+        <pin num="3" name="B_GATE" type="output"/>
+        <pin num="4" name="DRV" type="output"/>
+        <pin num="5" name="IN_SYS" type="power_in"/>
+        <pin num="6" name="UVLO" type="input"/>
+        <pin num="7" name="OVP" type="input"/>
+        <pin num="8" name="GND" type="power_in"/>
+        <pin num="9" name="dVdT" type="passive"/>
+        <pin num="10" name="ILIM" type="passive"/>
+        <pin num="11" name="MODE" type="input"/>
+        <pin num="12" name="~{SHDN}" type="input"/>
+        <pin num="13" name="IMON" type="output"/>
+        <pin num="14" name="~{FLT}" type="open_collector"/>
+        <pin num="15" name="PGTH" type="input"/>
+        <pin num="16" name="PGOOD_NATIVE" type="open_collector"/>
+        <pin num="17" name="OUT" type="power_out"/>
+        <pin num="18" name="OUT" type="passive"/>
+        <pin num="19" name="NC" type="no_connect"/>
+        <pin num="20" name="NC" type="no_connect"/>
+        <pin num="21" name="NC" type="no_connect"/>
+        <pin num="22" name="NC" type="no_connect"/>
+        <pin num="23" name="NC" type="no_connect"/>
+        <pin num="24" name="NC" type="no_connect"/>
+        <pin num="25" name="EP_GND" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Astra_Power" part="TPS3760A012DYYR">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">TPS3760A012DYYR</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="VDD" type="power_in"/>
+        <pin num="2" name="NC" type="no_connect"/>
+        <pin num="3" name="SENSE" type="input"/>
+        <pin num="4" name="NC" type="no_connect"/>
+        <pin num="5" name="NC" type="no_connect"/>
+        <pin num="6" name="~{RESET}" type="open_collector"/>
+        <pin num="7" name="NC" type="no_connect"/>
+        <pin num="8" name="GND" type="power_in"/>
+        <pin num="9" name="CTR/~{MR}" type="passive"/>
+        <pin num="10" name="CTS" type="passive"/>
+        <pin num="11" name="NC" type="no_connect"/>
+        <pin num="12" name="NC" type="no_connect"/>
+        <pin num="13" name="GND" type="passive"/>
+        <pin num="14" name="NC" type="no_connect"/>
+      </pins>
+    </libpart>
+    <libpart lib="Astra_Power" part="TestPoint">
+      <description>test point</description>
+      <fields>
+        <field name="Reference">TP</field>
+        <field name="Value">TestPoint</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description">test point</field>
+      </fields>
+      <pins>
+        <pin num="1" name="1" type="passive"/>
+      </pins>
+    </libpart>
+  </libparts>
+  <libraries>
+    <library logical="Astra_Power">
+      <uri>${KIPRJMOD}/Astra_Power.kicad_sym</uri>
+    </library>
+  </libraries>
+  <nets>
+    <net code="1" name="/1 - Power Input / Protection/3V8_PRE" class="Default">
+      <node ref="R7" pin="1" pintype="passive+no_connect"/>
+    </net>
+    <net code="2" name="/1 - Power Input / Protection/12V_IN" class="Default">
+      <node ref="F1" pin="1" pintype="passive"/>
+      <node ref="J1" pin="1" pinfunction="+_1" pintype="passive"/>
+      <node ref="TP5" pin="1" pinfunction="1_1" pintype="passive"/>
+    </net>
+    <net code="3" name="/1 - Power Input / Protection/12V_PROTECTED" class="Default">
+      <node ref="C3" pin="1" pintype="passive"/>
+      <node ref="C4" pin="1" pintype="passive"/>
+      <node ref="C6" pin="1" pintype="passive"/>
+      <node ref="R5" pin="1" pintype="passive"/>
+      <node ref="TP1" pin="1" pinfunction="1_1" pintype="passive"/>
+      <node ref="U1" pin="17" pinfunction="OUT_17" pintype="power_out"/>
+      <node ref="U1" pin="18" pinfunction="OUT_18" pintype="passive"/>
+      <node ref="U2" pin="1" pinfunction="VDD_1" pintype="power_in"/>
+    </net>
+    <net code="4" name="/1 - Power Input / Protection/B_GATE" class="Default">
+      <node ref="Q1" pin="4" pinfunction="G_4" pintype="input"/>
+      <node ref="Q2" pin="3" pinfunction="D_3" pintype="passive"/>
+      <node ref="U1" pin="3" pinfunction="B_GATE_3" pintype="output"/>
+    </net>
+    <net code="5" name="/1 - Power Input / Protection/DRV" class="Default">
+      <node ref="Q2" pin="1" pinfunction="G_1" pintype="input"/>
+      <node ref="U1" pin="4" pinfunction="DRV_4" pintype="output"/>
+    </net>
+    <net code="6" name="/1 - Power Input / Protection/EFUSE_FLT_N" class="Default">
+      <node ref="TP4" pin="1" pinfunction="1_1" pintype="passive"/>
+      <node ref="U1" pin="14" pinfunction="~{FLT}_14" pintype="open_collector"/>
+    </net>
+    <net code="7" name="/1 - Power Input / Protection/EFUSE_IN" class="Default">
+      <node ref="C2" pin="1" pintype="passive"/>
+      <node ref="Q1" pin="5" pinfunction="D_5" pintype="passive"/>
+      <node ref="U1" pin="1" pinfunction="IN_1" pintype="power_in"/>
+      <node ref="U1" pin="2" pinfunction="IN_2" pintype="power_in"/>
+    </net>
+    <net code="8" name="/1 - Power Input / Protection/IN_SYS" class="Default">
+      <node ref="C1" pin="1" pintype="passive"/>
+      <node ref="D1" pin="1" pinfunction="A1_1" pintype="passive"/>
+      <node ref="F1" pin="2" pintype="passive"/>
+      <node ref="Q1" pin="1" pinfunction="S_1" pintype="passive"/>
+      <node ref="Q1" pin="2" pinfunction="S_2" pintype="passive"/>
+      <node ref="Q1" pin="3" pinfunction="S_3" pintype="passive"/>
+      <node ref="Q2" pin="2" pinfunction="S_2" pintype="passive"/>
+      <node ref="R1" pin="1" pintype="passive"/>
+      <node ref="U1" pin="5" pinfunction="IN_SYS_5" pintype="power_in"/>
+    </net>
+    <net code="9" name="/1 - Power Input / Protection/OVP_SET" class="Default">
+      <node ref="R2" pin="2" pintype="passive"/>
+      <node ref="R3" pin="1" pintype="passive"/>
+      <node ref="U1" pin="7" pinfunction="OVP_7" pintype="input"/>
+    </net>
+    <net code="10" name="/1 - Power Input / Protection/PGOOD_12V" class="Default">
+      <node ref="R7" pin="2" pintype="passive"/>
+      <node ref="TP3" pin="1" pinfunction="1_1" pintype="passive"/>
+      <node ref="U2" pin="6" pinfunction="~{RESET}_6" pintype="open_collector"/>
+    </net>
+    <net code="11" name="/1 - Power Input / Protection/PGOOD_SENSE" class="Default">
+      <node ref="R5" pin="2" pintype="passive"/>
+      <node ref="R6" pin="1" pintype="passive"/>
+      <node ref="TP2" pin="1" pinfunction="1_1" pintype="passive"/>
+      <node ref="U2" pin="3" pinfunction="SENSE_3" pintype="input"/>
+    </net>
+    <net code="12" name="/1 - Power Input / Protection/POWER_GND" class="Default">
+      <node ref="C1" pin="2" pintype="passive"/>
+      <node ref="C2" pin="2" pintype="passive"/>
+      <node ref="C3" pin="2" pintype="passive"/>
+      <node ref="C4" pin="2" pintype="passive"/>
+      <node ref="C5" pin="2" pintype="passive"/>
+      <node ref="C6" pin="2" pintype="passive"/>
+      <node ref="D1" pin="2" pinfunction="A2_2" pintype="passive"/>
+      <node ref="J1" pin="2" pinfunction="-_2" pintype="passive"/>
+      <node ref="R3" pin="2" pintype="passive"/>
+      <node ref="R4" pin="2" pintype="passive"/>
+      <node ref="R6" pin="2" pintype="passive"/>
+      <node ref="TP6" pin="1" pinfunction="1_1" pintype="passive"/>
+      <node ref="U1" pin="15" pinfunction="PGTH_15" pintype="input"/>
+      <node ref="U1" pin="25" pinfunction="EP_GND_25" pintype="passive"/>
+      <node ref="U1" pin="8" pinfunction="GND_8" pintype="power_in"/>
+      <node ref="U2" pin="13" pinfunction="GND_13" pintype="passive"/>
+      <node ref="U2" pin="8" pinfunction="GND_8" pintype="power_in"/>
+    </net>
+    <net code="13" name="/1 - Power Input / Protection/UVLO_SET" class="Default">
+      <node ref="R1" pin="2" pintype="passive"/>
+      <node ref="R2" pin="1" pintype="passive"/>
+      <node ref="U1" pin="6" pinfunction="UVLO_6" pintype="input"/>
+    </net>
+    <net code="14" name="Net-(U1-ILIM)" class="Default">
+      <node ref="R4" pin="1" pintype="passive"/>
+      <node ref="U1" pin="10" pinfunction="ILIM_10" pintype="passive"/>
+    </net>
+    <net code="15" name="Net-(U1-dVdT)" class="Default">
+      <node ref="C5" pin="1" pintype="passive"/>
+      <node ref="U1" pin="9" pinfunction="dVdT_9" pintype="passive"/>
+    </net>
+    <net code="16" name="unconnected-(U1-IMON-Pad13)" class="Default">
+      <node ref="U1" pin="13" pinfunction="IMON_13" pintype="output+no_connect"/>
+    </net>
+    <net code="17" name="unconnected-(U1-MODE-Pad11)" class="Default">
+      <node ref="U1" pin="11" pinfunction="MODE_11" pintype="input+no_connect"/>
+    </net>
+    <net code="18" name="unconnected-(U1-NC-Pad19)" class="Default">
+      <node ref="U1" pin="19" pinfunction="NC_19" pintype="no_connect"/>
+    </net>
+    <net code="19" name="unconnected-(U1-NC-Pad20)" class="Default">
+      <node ref="U1" pin="20" pinfunction="NC_20" pintype="no_connect"/>
+    </net>
+    <net code="20" name="unconnected-(U1-NC-Pad21)" class="Default">
+      <node ref="U1" pin="21" pinfunction="NC_21" pintype="no_connect"/>
+    </net>
+    <net code="21" name="unconnected-(U1-NC-Pad22)" class="Default">
+      <node ref="U1" pin="22" pinfunction="NC_22" pintype="no_connect"/>
+    </net>
+    <net code="22" name="unconnected-(U1-NC-Pad23)" class="Default">
+      <node ref="U1" pin="23" pinfunction="NC_23" pintype="no_connect"/>
+    </net>
+    <net code="23" name="unconnected-(U1-NC-Pad24)" class="Default">
+      <node ref="U1" pin="24" pinfunction="NC_24" pintype="no_connect"/>
+    </net>
+    <net code="24" name="unconnected-(U1-PGOOD_NATIVE-Pad16)" class="Default">
+      <node ref="U1" pin="16" pinfunction="PGOOD_NATIVE_16" pintype="open_collector+no_connect"/>
+    </net>
+    <net code="25" name="unconnected-(U1-~{SHDN}-Pad12)" class="Default">
+      <node ref="U1" pin="12" pinfunction="~{SHDN}_12" pintype="input+no_connect"/>
+    </net>
+    <net code="26" name="unconnected-(U2-CTR/~{MR}-Pad9)" class="Default">
+      <node ref="U2" pin="9" pinfunction="CTR/~{MR}_9" pintype="passive+no_connect"/>
+    </net>
+    <net code="27" name="unconnected-(U2-CTS-Pad10)" class="Default">
+      <node ref="U2" pin="10" pinfunction="CTS_10" pintype="passive+no_connect"/>
+    </net>
+    <net code="28" name="unconnected-(U2-NC-Pad2)" class="Default">
+      <node ref="U2" pin="2" pinfunction="NC_2" pintype="no_connect"/>
+    </net>
+    <net code="29" name="unconnected-(U2-NC-Pad4)" class="Default">
+      <node ref="U2" pin="4" pinfunction="NC_4" pintype="no_connect"/>
+    </net>
+    <net code="30" name="unconnected-(U2-NC-Pad5)" class="Default">
+      <node ref="U2" pin="5" pinfunction="NC_5" pintype="no_connect"/>
+    </net>
+    <net code="31" name="unconnected-(U2-NC-Pad7)" class="Default">
+      <node ref="U2" pin="7" pinfunction="NC_7" pintype="no_connect"/>
+    </net>
+    <net code="32" name="unconnected-(U2-NC-Pad11)" class="Default">
+      <node ref="U2" pin="11" pinfunction="NC_11" pintype="no_connect"/>
+    </net>
+    <net code="33" name="unconnected-(U2-NC-Pad12)" class="Default">
+      <node ref="U2" pin="12" pinfunction="NC_12" pintype="no_connect"/>
+    </net>
+    <net code="34" name="unconnected-(U2-NC-Pad14)" class="Default">
+      <node ref="U2" pin="14" pinfunction="NC_14" pintype="no_connect"/>
+    </net>
+  </nets>
+</export>

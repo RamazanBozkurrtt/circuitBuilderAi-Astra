@@ -1,0 +1,49 @@
+Phase 4A contract-level transient testbench (NOT manufacturer transistor models)
+* Sheet 1 only. Models the frozen thresholds and a controlled OUT slew.
+* 3V8_PRE is an external test fixture; no Sheet 2 circuit is implemented.
+* Ideal hysteretic comparators: their DC limits come from datasheet tables.
+* Pin leakage is swept separately by verify_phase_4a_current.py.
+* No claim of measured silicon, fault-delay PVT, thermal or surge validation.
+* 0.4 V path-drop screen. Slow ramps isolate ordering from unspecified near-trip delay.
+Vsource insys 0 PWL(0 0 10m 0 125m 11.5 300m 11.5 330m 10.8 430m 10.8 1.51 0 1.55 0 1.665 11.5 1.9 11.5)
+* Worst-high UVLO falling (9.563 V), largest rising (10.173 V).
+* These combined interval endpoints are a conservative fixture, not one physical die.
+Vone one 0 1
+Suv one uv_ok insys 0 UVSW
+Ruvpull uv_ok 0 1k
+.model UVSW SW(Ron=0.001 Roff=1e12 Vt=9.868 Vh=0.305)
+* Output follows enabled input with the datasheet nominal controlled slew:
+* gain(dVdT)*I(dVdT)/C(dVdT) = 25*2u/47n = 1063.83 V/s.
+* Integrator + bounded feedback models slew only, not the internal FET physics.
+Btarget target 0 V=(v(uv_ok)>0.5 ? max(v(insys)-0.4,0) : 0)
+Bcharge 0 protected I=max(-0.5,min(0.5,(v(target)-v(protected))*100))
+Cbulk protected 0 470u IC=0
+* Native PGTH is fixed low in the schematic: recovery never bypasses this ramp.
+Rtop protected sense 115k
+Rbottom sense 0 10k
+* System supervisor is powered by protected. Fixture pullup waits for VDD >=3 V.
+Bpre pre 0 V=(v(protected)>3 ? 3.8 : 0)
+Rpull pre pgood_nom 10k
+Binvert invert 0 V=-v(sense)
+Sreset pgood_nom 0 invert 0 PGRESET
+.model PGRESET SW(Ron=10 Roff=1e12 Vt=-0.808 Vh=0.008)
+* Envelope comparators directly on OUT demonstrate worst-case interval limits.
+Rpull_hi pre pgood_hi 10k
+Bneg neg 0 V=-v(protected)
+Shi pgood_hi 0 neg 0 PGHI
+.model PGHI SW(Ron=10 Roff=1e12 Vt=-10.2315 Vh=0.1015)
+Rpull_lo pre pgood_lo 10k
+Slo pgood_lo 0 neg 0 PGLO
+.model PGLO SW(Ron=10 Roff=1e12 Vt=-9.9685 Vh=0.0985)
+* Sheet 1 safe-state REQUEST only. Physical latch/mute circuitry is on later sheets.
+Bsafe safe_request 0 V=(v(pgood_lo)<1 ? 1 : 0)
+.tran 100u 1.9 0 100u uic
+.control
+set noaskquit
+set wr_singlescale
+set wr_vecnames
+run
+wrdata transient_waveforms.txt v(insys) v(protected) v(sense) v(pgood_nom) v(pgood_hi) v(pgood_lo) v(uv_ok) v(safe_request)
+quit
+.endc
+.end

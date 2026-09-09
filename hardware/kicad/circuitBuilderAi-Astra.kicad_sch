@@ -1,0 +1,515 @@
+(kicad_sch
+	(version 20260306)
+	(generator "eeschema")
+	(generator_version "10.0")
+	(uuid "a89958ad-9daf-4465-87fb-0da6e733aead")
+	(paper "A3")
+	(title_block
+		(title "circuitBuilderAi-Astra - Schematic Hierarchy")
+		(date "2026-09-09")
+		(rev "4A")
+		(company "circuitBuilderAi-Astra")
+		(comment 1 "Sheet 1 only. Later circuitry and PCB implementation are not authorized.")
+	)
+	(lib_symbols)
+	(text "PLACEHOLDER - not implemented in Phase 4A"
+		(exclude_from_sim no)
+		(at 230 174 0)
+		(effects
+			(font
+				(size 1.5 1.5)
+			)
+			(justify left bottom)
+		)
+		(uuid "2294893d-540b-4c3e-a891-c46523e09b1f")
+	)
+	(text "PLACEHOLDER - not implemented in Phase 4A"
+		(exclude_from_sim no)
+		(at 30 127 0)
+		(effects
+			(font
+				(size 1.5 1.5)
+			)
+			(justify left bottom)
+		)
+		(uuid "29cfcfdc-fd79-43ca-9dc3-5001f60ef575")
+	)
+	(text "PLACEHOLDER - not implemented in Phase 4A"
+		(exclude_from_sim no)
+		(at 30 174 0)
+		(effects
+			(font
+				(size 1.5 1.5)
+			)
+			(justify left bottom)
+		)
+		(uuid "3ea7c8d9-8e99-49ec-8891-0ae8342e1303")
+	)
+	(text "IMPLEMENTED - Phase 3A PGOOD correction"
+		(exclude_from_sim no)
+		(at 30 80 0)
+		(effects
+			(font
+				(size 1.5 1.5)
+			)
+			(justify left bottom)
+		)
+		(uuid "4d8d810e-4fcc-4233-b684-1b152ce6b632")
+	)
+	(text "PLACEHOLDER - not implemented in Phase 4A"
+		(exclude_from_sim no)
+		(at 230 127 0)
+		(effects
+			(font
+				(size 1.5 1.5)
+			)
+			(justify left bottom)
+		)
+		(uuid "62d792ae-8451-40b9-8ad6-4eecae68fa1e")
+	)
+	(text "PLACEHOLDER - not implemented in Phase 4A"
+		(exclude_from_sim no)
+		(at 230 80 0)
+		(effects
+			(font
+				(size 1.5 1.5)
+			)
+			(justify left bottom)
+		)
+		(uuid "7df0fadb-b9f9-465c-9558-88fd546a1275")
+	)
+	(text "Phase 3 section 14: seven logical sheets. Root is KiCad page 1; logical sheets 1-7 are pages 2-8."
+		(exclude_from_sim no)
+		(at 25 35 0)
+		(effects
+			(font
+				(size 1.5 1.5)
+			)
+			(justify left bottom)
+		)
+		(uuid "854ef17f-185e-4598-acfb-75fccfcb8c76")
+	)
+	(text "Sheet 1 interfaces terminate here until later-phase authorization. No PCB created."
+		(exclude_from_sim no)
+		(at 25 43 0)
+		(effects
+			(font
+				(size 1.5 1.5)
+			)
+			(justify left bottom)
+		)
+		(uuid "85fe6fb8-1943-44b2-bba5-10fe824e05d4")
+	)
+	(text "PHASE 4A - Sheet 1 implemented to Phase 3A; Sheets 2-7 remain placeholders."
+		(exclude_from_sim no)
+		(at 25 25 0)
+		(effects
+			(font
+				(size 2 2)
+			)
+			(justify left bottom)
+		)
+		(uuid "ab1911b8-20b9-43ef-80a7-6def60e55c3d")
+	)
+	(text "PLACEHOLDER - not implemented in Phase 4A"
+		(exclude_from_sim no)
+		(at 30 221 0)
+		(effects
+			(font
+				(size 1.5 1.5)
+			)
+			(justify left bottom)
+		)
+		(uuid "c6895c84-dd12-43c8-9d61-058182801039")
+	)
+	(no_connect
+		(at 195 77.7)
+		(uuid "1afecc3e-c976-5f87-9ca9-5604050e144d")
+	)
+	(no_connect
+		(at 195 85.32)
+		(uuid "411a48b7-836f-5e5d-af4c-07c583b05346")
+	)
+	(no_connect
+		(at 195 81.51)
+		(uuid "634bd143-bc5b-5f39-8ca6-f845f1931ee2")
+	)
+	(no_connect
+		(at 195 73.89)
+		(uuid "a2b99974-4bfc-56b8-9cfd-ef190ef9f797")
+	)
+	(no_connect
+		(at 195 70.08)
+		(uuid "b0716101-aa48-5395-8551-2ccd386cdb3b")
+	)
+	(sheet
+		(at 25 112)
+		(size 170 27)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(stroke
+			(width 0)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0)
+		)
+		(uuid "1ab89939-a625-4f41-b578-258505850a22")
+		(property "Sheetname" "3 - Microphones / AFE"
+			(at 25 110.5 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "microphones_afe.kicad_sch"
+			(at 25 140.5 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "circuitBuilderAi-Astra"
+				(path "/a89958ad-9daf-4465-87fb-0da6e733aead"
+					(page "4")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 25 65)
+		(size 170 27)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(stroke
+			(width 0)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0)
+		)
+		(uuid "1f0f028c-cc82-4829-b29a-4f3c20360e24")
+		(property "Sheetname" "1 - Power Input / Protection"
+			(at 25 63.5 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "power_input.kicad_sch"
+			(at 25 93.5 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(pin "12V_PROTECTED" output
+			(at 195 70.08 0)
+			(uuid "08af0102-cb4d-516f-801e-20f48599cb11")
+			(effects
+				(font
+					(size 1.016 1.016)
+				)
+				(justify right)
+			)
+		)
+		(pin "POWER_GND" passive
+			(at 195 73.89 0)
+			(uuid "e515fde3-cc67-5672-977b-d3c7208263c1")
+			(effects
+				(font
+					(size 1.016 1.016)
+				)
+				(justify right)
+			)
+		)
+		(pin "3V8_PRE" input
+			(at 195 77.7 0)
+			(uuid "e4c7ae4d-c9b4-5239-aa3d-a5a92d0a4616")
+			(effects
+				(font
+					(size 1.016 1.016)
+				)
+				(justify right)
+			)
+		)
+		(pin "PGOOD_12V" output
+			(at 195 81.51 0)
+			(uuid "e6848171-635f-5125-aa33-86045523387c")
+			(effects
+				(font
+					(size 1.016 1.016)
+				)
+				(justify right)
+			)
+		)
+		(pin "EFUSE_FLT_N" output
+			(at 195 85.32 0)
+			(uuid "17fbc831-3426-5d0b-bc0b-d37d913740d6")
+			(effects
+				(font
+					(size 1.016 1.016)
+				)
+				(justify right)
+			)
+		)
+		(instances
+			(project "circuitBuilderAi-Astra"
+				(path "/a89958ad-9daf-4465-87fb-0da6e733aead"
+					(page "2")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 25 206)
+		(size 170 27)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(stroke
+			(width 0)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0)
+		)
+		(uuid "653d9b94-c194-4a43-8edd-e99f517cb74d")
+		(property "Sheetname" "7 - Connectors / System Interfaces"
+			(at 25 204.5 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "system_interfaces.kicad_sch"
+			(at 25 234.5 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "circuitBuilderAi-Astra"
+				(path "/a89958ad-9daf-4465-87fb-0da6e733aead"
+					(page "8")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 25 159)
+		(size 170 27)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(stroke
+			(width 0)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0)
+		)
+		(uuid "7f4a8f18-8381-4d14-9f7b-38db0ee8a570")
+		(property "Sheetname" "5 - ADSP-21569 DSP / Boot / Debug / Clocks"
+			(at 25 157.5 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "adsp21569_dsp.kicad_sch"
+			(at 25 187.5 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "circuitBuilderAi-Astra"
+				(path "/a89958ad-9daf-4465-87fb-0da6e733aead"
+					(page "6")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 225 159)
+		(size 170 27)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(stroke
+			(width 0)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0)
+		)
+		(uuid "9b945bc4-cf34-403d-b81c-785e511fd739")
+		(property "Sheetname" "6 - TAS6424E-Q1 Amplifier"
+			(at 225 157.5 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "tas6424e_amplifier.kicad_sch"
+			(at 225 187.5 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "circuitBuilderAi-Astra"
+				(path "/a89958ad-9daf-4465-87fb-0da6e733aead"
+					(page "7")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 225 65)
+		(size 170 27)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(stroke
+			(width 0)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0)
+		)
+		(uuid "c46ad3ab-53c4-4782-9638-c5343c581d6a")
+		(property "Sheetname" "2 - Power Regulation / Sequencing"
+			(at 225 63.5 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "power_regulation.kicad_sch"
+			(at 225 93.5 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "circuitBuilderAi-Astra"
+				(path "/a89958ad-9daf-4465-87fb-0da6e733aead"
+					(page "3")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 225 112)
+		(size 170 27)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(stroke
+			(width 0)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0)
+		)
+		(uuid "fd740298-4d28-41f6-827f-27ac60902cc7")
+		(property "Sheetname" "4 - ADAU1978 ADC"
+			(at 225 110.5 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "adau1978_adc.kicad_sch"
+			(at 225 140.5 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "circuitBuilderAi-Astra"
+				(path "/a89958ad-9daf-4465-87fb-0da6e733aead"
+					(page "5")
+				)
+			)
+		)
+	)
+	(sheet_instances
+		(path "/"
+			(page "1")
+		)
+	)
+)
