@@ -7,9 +7,9 @@
 	(title_block
 		(title "circuitBuilderAi-Astra - Schematic Hierarchy")
 		(date "2026-09-09")
-		(rev "4A")
+		(rev "4B-BLOCKED")
 		(company "circuitBuilderAi-Astra")
-		(comment 1 "Sheet 1 only. Later circuitry and PCB implementation are not authorized.")
+		(comment 1 "Sheet 2 partially entered; Phase 4B BLOCKED. Later circuitry remains unimplemented.")
 	)
 	(lib_symbols)
 	(text "PLACEHOLDER - not implemented in Phase 4A"
@@ -67,9 +67,9 @@
 		)
 		(uuid "62d792ae-8451-40b9-8ad6-4eecae68fa1e")
 	)
-	(text "PLACEHOLDER - not implemented in Phase 4A"
+	(text "4B BLOCKED - rails entered; safe-state / shutdown incomplete"
 		(exclude_from_sim no)
-		(at 230 80 0)
+		(at 225 56 0)
 		(effects
 			(font
 				(size 1.5 1.5)
@@ -89,7 +89,7 @@
 		)
 		(uuid "854ef17f-185e-4598-acfb-75fccfcb8c76")
 	)
-	(text "Sheet 1 interfaces terminate here until later-phase authorization. No PCB created."
+	(text "Sheet 1 / Sheet 2 power interfaces connected. Future consumer interfaces terminate here. No PCB."
 		(exclude_from_sim no)
 		(at 25 43 0)
 		(effects
@@ -100,7 +100,7 @@
 		)
 		(uuid "85fe6fb8-1943-44b2-bba5-10fe824e05d4")
 	)
-	(text "PHASE 4A - Sheet 1 implemented to Phase 3A; Sheets 2-7 remain placeholders."
+	(text "Sheet 1: Phase 4A PASS. Sheet 2: Phase 4B BLOCKED, partial entry. Sheets 3-7: placeholders."
 		(exclude_from_sim no)
 		(at 25 25 0)
 		(effects
@@ -123,24 +123,98 @@
 		(uuid "c6895c84-dd12-43c8-9d61-058182801039")
 	)
 	(no_connect
-		(at 195 77.7)
-		(uuid "1afecc3e-c976-5f87-9ca9-5604050e144d")
+		(at 395 73.89)
+		(uuid "124e0e4a-3614-5609-b259-dd40e2be39b9")
 	)
 	(no_connect
-		(at 195 85.32)
-		(uuid "411a48b7-836f-5e5d-af4c-07c583b05346")
+		(at 225 92.94)
+		(uuid "38cba4bf-cd50-52d8-9f71-5960cc705847")
 	)
 	(no_connect
-		(at 195 81.51)
-		(uuid "634bd143-bc5b-5f39-8ca6-f845f1931ee2")
+		(at 395 70.08)
+		(uuid "4bd9ca72-01ec-5e69-8f17-9f67e7d04bc0")
 	)
 	(no_connect
-		(at 195 73.89)
-		(uuid "a2b99974-4bfc-56b8-9cfd-ef190ef9f797")
+		(at 395 100.56)
+		(uuid "73049347-ed4d-5ccf-862b-a6b4582f2821")
 	)
 	(no_connect
-		(at 195 70.08)
-		(uuid "b0716101-aa48-5395-8551-2ccd386cdb3b")
+		(at 395 77.7)
+		(uuid "82ec9dbc-90f4-5eee-87f8-d35f4d0c29e5")
+	)
+	(no_connect
+		(at 395 89.13)
+		(uuid "9ecc7ae4-e6c4-51c4-be14-916761ccd55b")
+	)
+	(no_connect
+		(at 395 96.75)
+		(uuid "afe08232-f1e4-50ab-b464-9566c21f6401")
+	)
+	(no_connect
+		(at 395 85.32)
+		(uuid "cf587745-b1e8-55ea-845f-b501b82cc9fb")
+	)
+	(no_connect
+		(at 395 81.51)
+		(uuid "e39b70fe-6d52-55ce-85c0-96b8284b93f1")
+	)
+	(no_connect
+		(at 395 92.94)
+		(uuid "fc60a8dc-9e09-58d2-9ec1-88cdcf056f66")
+	)
+	(no_connect
+		(at 225 89.13)
+		(uuid "fedd110c-03fb-5944-a026-e713e5300318")
+	)
+	(wire
+		(pts
+			(xy 195 85.32) (xy 225 85.32)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0275e77a-6687-5ec1-8346-791728abff2e")
+	)
+	(wire
+		(pts
+			(xy 195 73.89) (xy 225 73.89)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2092d9a8-fd41-52e2-a16c-2e375a22753b")
+	)
+	(wire
+		(pts
+			(xy 195 81.51) (xy 225 81.51)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "625cb0ad-b874-5bde-a7b6-b58d32bd2a75")
+	)
+	(wire
+		(pts
+			(xy 195 77.7) (xy 225 77.7)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "bff25142-9f55-5bfb-81f1-0753d41bc0c0")
+	)
+	(wire
+		(pts
+			(xy 195 70.08) (xy 225 70.08)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e91fbcfa-c1b0-5d7f-a73e-1502748ef830")
 	)
 	(sheet
 		(at 25 112)
@@ -419,7 +493,7 @@
 	)
 	(sheet
 		(at 225 65)
-		(size 170 27)
+		(size 170 38.1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
@@ -444,7 +518,7 @@
 			)
 		)
 		(property "Sheetfile" "power_regulation.kicad_sch"
-			(at 225 93.5 0)
+			(at 225 104.6 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -452,6 +526,150 @@
 					(size 1.27 1.27)
 				)
 				(justify left top)
+			)
+		)
+		(pin "12V_PROTECTED" input
+			(at 225 70.08 180)
+			(uuid "fc46a49b-f9c2-56aa-a64b-53870f309d70")
+			(effects
+				(font
+					(size 1.016 1.016)
+				)
+			)
+		)
+		(pin "POWER_GND" passive
+			(at 225 73.89 180)
+			(uuid "ea4776e1-4c2a-5bcb-a825-73a6736736f5")
+			(effects
+				(font
+					(size 1.016 1.016)
+				)
+			)
+		)
+		(pin "3V8_PRE" output
+			(at 225 77.7 180)
+			(uuid "71147688-71bc-5d29-a9bd-2e8f36d81aeb")
+			(effects
+				(font
+					(size 1.016 1.016)
+				)
+			)
+		)
+		(pin "PGOOD_12V" input
+			(at 225 81.51 180)
+			(uuid "e225775e-dfc6-5b2e-95a2-1bc8087b66b3")
+			(effects
+				(font
+					(size 1.016 1.016)
+				)
+			)
+		)
+		(pin "EFUSE_FLT_N" input
+			(at 225 85.32 180)
+			(uuid "ac7c8334-bbec-57ad-a51a-3c687a64f0e9")
+			(effects
+				(font
+					(size 1.016 1.016)
+				)
+			)
+		)
+		(pin "DSP_WDI" input
+			(at 225 89.13 180)
+			(uuid "3eb56604-f8da-59dd-8d09-b67ad65b880a")
+			(effects
+				(font
+					(size 1.016 1.016)
+				)
+			)
+		)
+		(pin "AFE_EN_CMD" input
+			(at 225 92.94 180)
+			(uuid "96dc2595-55d7-5b0c-ba0b-6eea7b9ee0bf")
+			(effects
+				(font
+					(size 1.016 1.016)
+				)
+			)
+		)
+		(pin "1V8_DSP_REF_ANA" output
+			(at 395 70.08 0)
+			(uuid "41b48f56-ed34-51af-a7f0-454eeb65dddd")
+			(effects
+				(font
+					(size 1.016 1.016)
+				)
+			)
+		)
+		(pin "1V0_DSP_CORE" output
+			(at 395 73.89 0)
+			(uuid "03e4f066-b703-5d96-8067-b446c7350638")
+			(effects
+				(font
+					(size 1.016 1.016)
+				)
+			)
+		)
+		(pin "1V35_DSP_DMC" output
+			(at 395 77.7 0)
+			(uuid "54cf4f83-f179-5d5c-8a70-905d62956774")
+			(effects
+				(font
+					(size 1.016 1.016)
+				)
+			)
+		)
+		(pin "3V3_SYS" output
+			(at 395 81.51 0)
+			(uuid "c7583aaf-2c03-588d-a868-7efaa4bdccea")
+			(effects
+				(font
+					(size 1.016 1.016)
+				)
+			)
+		)
+		(pin "3V3_ADC_A" output
+			(at 395 85.32 0)
+			(uuid "4ddbc53d-248f-551c-8805-f1b138fb150b")
+			(effects
+				(font
+					(size 1.016 1.016)
+				)
+			)
+		)
+		(pin "2V8_MIC" output
+			(at 395 89.13 0)
+			(uuid "e222ab08-74eb-5a73-abc0-88c2acf03ed7")
+			(effects
+				(font
+					(size 1.016 1.016)
+				)
+			)
+		)
+		(pin "5V_AFE" output
+			(at 395 92.94 0)
+			(uuid "d0f5d90b-e8a5-5ee4-9dde-bbd4a30b06e9")
+			(effects
+				(font
+					(size 1.016 1.016)
+				)
+			)
+		)
+		(pin "RAILS_OK" output
+			(at 395 96.75 0)
+			(uuid "d856633b-95dc-5a8e-a3d3-822990f8c180")
+			(effects
+				(font
+					(size 1.016 1.016)
+				)
+			)
+		)
+		(pin "SYS_HWRST" bidirectional
+			(at 395 100.56 0)
+			(uuid "6f9441d8-ba14-5c92-a163-31be76e8a858")
+			(effects
+				(font
+					(size 1.016 1.016)
+				)
 			)
 		)
 		(instances

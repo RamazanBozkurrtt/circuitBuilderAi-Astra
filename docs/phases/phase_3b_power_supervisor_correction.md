@@ -3,6 +3,8 @@
 Date: 2026-09-13  
 Scope: downstream rail supervision, sequencing, reset, and watchdog contract only. No KiCad file was created or modified.
 
+**Phase 3D amendment (2026-09-13):** the [final Sheet 2 audit](phase_3d_final_power_contract_audit.md) retains every LTC2964 divider and fault threshold below, but corrects the realized 1.8 V, core, and DMC regulator ranges. The resulting release margins are +19.462 mV, +20.072 mV, and +13.314 mV respectively; the Phase 3C `3V3_SYS` margin remains +54.202 mV. The tables below preserve the Phase 3B decision basis and are historical where they use the then-approved regulator ranges.
+
 ## 1. Discovered contradiction and root cause
 
 Phase 4B found that the Phase 3 `TPS386000RGPR` analysis bounded only the falling threshold. The device adds positive-going hysteresis before releasing each reset output. TI specifies a 396-404 mV negative threshold and 3.5 mV typical, 10 mV maximum positive hysteresis, with no guaranteed positive minimum. The prior contract therefore could detect an undervoltage but could not guarantee that a valid rail would ever cross the worst-case release boundary [SUPV pp.7, 9, 23].
@@ -59,7 +61,7 @@ Every channel has a positive guaranteed release allowance and a separate positiv
 ## 5. Startup, reset, brownout, and recovery contract
 
 1. Phase 3A `PGOOD_12V` becomes valid only after `12V_PROTECTED` crosses its guaranteed rising boundary. It enables `1V8_DSP_REF_ANA`; the hardware-safe latch remains asserted.
-2. LTC2964 V1 observes the 1.8 V rail. Its real-time open-drain `OUT1` releases at the corrected threshold and enables `1V0_DSP_CORE`, `1V35_DSP_DMC`, `3V3_SYS`, `3V3_ADC_A`, and `2V8_MIC`.
+2. LTC2964 V1 observes the 1.8 V rail. Its real-time open-drain `OUT1` releases at the corrected threshold and directly enables `1V0_DSP_CORE`, `1V35_DSP_DMC`, `3V3_ADC_A`, and `2V8_MIC`. Per Phase 3C, `3V3_SYS` enables through its local `OUT1 AND PGOOD_12V` gate.
 3. V2, V3, and V4 verify the three remaining DSP rails. The common open-drain `RST` remains asserted while any channel is invalid.
 4. Tie LTC2964 `RT` to VCC for the manufacturer-guaranteed 160-240 ms release delay. All four rails must remain valid for this full interval; any invalid channel restarts the timer. The open-drain `RST` output then releases the separate `RAILS_OK` node.
 5. `RAILS_OK` enables TPS3431. Its open-drain `ENOUT`, wired with `WDO` at `SYS_HWRST`, adds 170-230 ms, so DSP reset releases 330-470 ms after all rail thresholds became valid. This provides deterministic anti-chatter behavior and covers the 3 ms maximum clock-fanout startup. DSP boot then begins. ADC and amplifier initialization proceeds under the existing Phase 3 safe-state sequence; no amplifier PLAY state is restored automatically.
@@ -76,7 +78,7 @@ Use `TPS3431SDRBR`, powered from `3V3_SYS` with 0.1 uF bypass. Its `EN` input is
 - Create or verify the LTC2964 symbol against this UDC pin map: 1 RDIS, 2 MR, 3 DVCC, 4 VCC, 5 RST, 6 GND, 7 OUT1, 8 OUT2, 9 OUT3, 10 OUT4, 11 RT, 12 PG4, 13 PG3, 14 PG2, 15 PG1, 16 REF, 17 V4, 18 V3, 19 V2, 20 V1, exposed pad 21 GND. Connect pad 21 to ground even though the datasheet permits it to be open.
 - Tie RDIS, MR, and RT to VCC; tie DVCC to ground; tie PG1-PG4 to REF; add the four exact 0.1% dividers above and Kelvin-ground their bottoms. Realize the V3 16.08 kohm top value as series 15.8 kohm and 280 ohm, both 0.1%. Pull OUT1 to `3V8_PRE` through 10.0 kohm. Pull RST to `3V3_SYS` through 10.0 kohm and name this isolated node `RAILS_OK`; do not connect it directly to `SYS_HWRST`. Leave OUT2-OUT4 unconnected except optional labeled test points.
 - Verify the TPS3431 symbol against: 1 VDD, 2 CWD, 3 EN, 4 GND, 5 SET1, 6 WDI, 7 WDO, 8 ENOUT; connect the thermal pad to ground. Leave CWD unconnected, drive EN from RAILS_OK, tie SET1 to VDD, tie ENOUT and WDO at SYS_HWRST, and populate the bypass/pullup in section 6.
-- Preserve the hardware-safe latch dominance: low `PGOOD_12V`, eFuse FLT, low LTC2964 RST, or low TPS3431 WDO asserts safe state. Recovery may restart rails through the sequence but may not restore amplifier PLAY.
+- Preserve the Phase 3C local `OUT1 AND PGOOD_12V` gate on the `3V3_SYS` enable; do not join the two open-drain status nodes. Preserve the hardware-safe latch dominance: low `PGOOD_12V`, eFuse FLT, low LTC2964 RST, or low TPS3431 WDO asserts safe state. Recovery may restart rails through the sequence but may not restore amplifier PLAY.
 - ERC and bench/transient validation remain Phase 4B work. Bench validation must sweep input/load/temperature corners and show all four monitored rails cross their release thresholds and assert reset before their device minima.
 
 ## 8. Evidence and gate

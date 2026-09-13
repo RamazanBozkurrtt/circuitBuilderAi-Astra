@@ -1,1 +1,1 @@
-(sym_lib_table (version 7) (lib (name "Astra_Power") (type "KiCad") (uri "${KIPRJMOD}/Astra_Power.kicad_sym") (options "") (descr "Phase 4A verified local symbols")))
+(sym_lib_table (version 7) (lib (name "Astra_Power") (type "KiCad") (uri "${KIPRJMOD}/Astra_Power.kicad_sym") (options "") (descr "Phase 4A verified local symbols")) (lib (name "Astra_Sequencing") (type "KiCad") (uri "${KIPRJMOD}/Astra_Sequencing.kicad_sym") (options "") (descr "Phase 4B manufacturer pin-verified Sheet 2 symbols")))

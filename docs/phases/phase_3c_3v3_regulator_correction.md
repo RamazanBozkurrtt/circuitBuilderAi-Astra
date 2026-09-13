@@ -3,9 +3,11 @@
 Date: 2026-09-13  
 Scope: correction of the `3V3_SYS` regulator branch only. No KiCad file was created or modified, and Phase 4B was not resumed.
 
+**Phase 3D amendment (2026-09-13):** the [final Sheet 2 audit](phase_3d_final_power_contract_audit.md) changes the pre-rail static range to 3.746849-3.841293 V inside a 3.700-3.900 V approved operating band. The `3V3_SYS` TPS62135 input, divider, static range, and supervision margins below remain unchanged. Only the enable-gate high-level arithmetic is updated to the corrected pre operating minimum.
+
 ## 1. Original contradiction
 
-Phase 3 selected TPS62135 in forced-PWM mode for `3V8_PRE -> 3V3_SYS` and treated the output as 3.267-3.333 V. Phase 4B found that this range was not manufacturer-backed. TI guarantees the TPS62135 feedback-voltage accuracy of +/-1% in PWM mode only when `VIN >= VOUT + 1 V`. The approved `3V8_PRE` range is 3.762-3.838 V, only about 0.5 V above the 3.3 V output. Even its maximum input cannot meet the condition for any output near 3.3 V [TI TPS62135, SLVSBH3B Rev.B, section 7.5 p.6 and sections 9.4.1-9.4.3 pp.10-11](https://www.ti.com/lit/ds/symlink/tps62135.pdf).
+Phase 3 selected TPS62135 in forced-PWM mode for `3V8_PRE -> 3V3_SYS` and treated the output as 3.267-3.333 V. Phase 4B found that this range was not manufacturer-backed. TI guarantees the TPS62135 feedback-voltage accuracy of +/-1% in PWM mode only when `VIN >= VOUT + 1 V`. The then-approved `3V8_PRE` range was 3.762-3.838 V, only about 0.5 V above the 3.3 V output. Even its maximum input could not meet the condition for any output near 3.3 V [TI TPS62135, SLVSBH3B Rev.B, section 7.5 p.6 and sections 9.4.1-9.4.3 pp.10-11](https://www.ti.com/lit/ds/symlink/tps62135.pdf).
 
 The 100%-duty discussion explains typical low-headroom operation but does not replace the missing guaranteed accuracy limit. The old branch therefore had an `UNKNOWN` guaranteed minimum, and its Phase 3B supervisor-release margin could not be claimed.
 
@@ -17,7 +19,7 @@ The regulator was applied in a permitted operating mode but outside the conditio
 
 | Option | Finding | Decision |
 | --- | --- | --- |
-| Keep `3V8_PRE -> TPS62135 -> 3V3_SYS` | The input remains at least 0.419 V short of the condition even if the lowest corrected output corner is used: `3.762 < 3.256299 + 1`. No substitute low-headroom accuracy guarantee is published. | Reject. |
+| Keep `3V8_PRE -> TPS62135 -> 3V3_SYS` | Under the then-approved range, the input remained at least 0.419 V short of the condition even if the lowest corrected output corner was used: `3.762 < 3.256299 + 1`. No substitute low-headroom accuracy guarantee is published. | Reject. |
 | Feed TPS62135 from `12V_PROTECTED` | The approved 10.4-13.2 V input is inside the 3-17 V recommended range. At the maximum corrected output, the accuracy condition requires only 4.337821 V, leaving 6.062179 V of additional margin at the 10.4 V minimum input. TI also shows a 12 V to 3.3 V TPS62135 application and publishes 3.3 V/12 V forced-PWM characterization [BUCK pp.4-6, 15, 18, 25, 30]. | **Select.** |
 | Replace TPS62135 with a low-headroom buck or LDO from `3V8_PRE` | Feasible in principle, but it adds a new component contract and offers no correctness advantage after the existing converter is moved to its explicitly guaranteed 12 V operating condition. | Do not select. |
 | Raise `3V8_PRE` | It would have to exceed 4.337821 V at its minimum corner and would change the input, loss, and startup contracts of every existing 3.8 V-fed branch. | Reject; disproportionate and creates downstream re-verification. |
@@ -39,7 +41,7 @@ Retain exact orderable `TPS62135RGXR` in the RGX 11-pin VQFN package and change 
 - place at least 10 uF nominal X7R/X5R input capacitance rated at least 25 V directly at VIN-GND and guarantee at least 3 uF effective after DC bias and tolerance;
 - provide at least 22 uF effective X7R/X5R local output capacitance after DC bias and tolerance. Directly connected effective output capacitance must remain at or below the datasheet's 200 uF limit; any additional distributed capacitance must satisfy TI's series-resistance/multiple-load guidance.
 
-The AND gate's supply range is 1.6-5.5 V and both inputs accept up to 5.5 V. The two inputs are either pulled to `3V8_PRE` or asserted low. The most conservative published LV1T high threshold is 2.11 V, below the 3.762 V minimum high level. With the output load limited to the 1.0 Mohm pulldown plus the TPS62135 100 nA maximum EN leakage, it is below 20 uA: TI guarantees `VOH >= VCC-0.1 V` and `VOL <= 0.1 V`. Thus EN is at least 3.662 V when enabled, well above its 0.83 V maximum rising threshold, and at most 0.1 V when disabled, below its 0.67 V minimum falling threshold [TI SN74LV1T08, SCLS739F Rev.F, sections 6.1-6.5 pp.5-7](https://www.ti.com/lit/ds/symlink/sn74lv1t08.pdf).
+The AND gate's supply range is 1.6-5.5 V and both inputs accept up to 5.5 V. The two inputs are either pulled to `3V8_PRE` or asserted low. The most conservative published LV1T high threshold is 2.11 V, below the Phase 3D 3.700 V operating minimum. With the output load limited to the 1.0 Mohm pulldown plus the TPS62135 100 nA maximum EN leakage, it is below 20 uA: TI guarantees `VOH >= VCC-0.1 V` and `VOL <= 0.1 V`. Thus EN is at least 3.600 V when enabled, well above its 0.83 V maximum rising threshold, and at most 0.1 V when disabled, below its 0.67 V minimum falling threshold [TI SN74LV1T08, SCLS739F Rev.F, sections 6.1-6.5 pp.5-7](https://www.ti.com/lit/ds/symlink/sn74lv1t08.pdf).
 
 The local gate also prevents a new power-down overstress. `PGOOD_12V` must fall by 9.870 V at the latest approved falling corner, so the gate drives EN low while TPS62135 VIN is still far above the 3.8 V enable level. If `3V8_PRE` is absent, the AND output is not driven high and the 1.0 Mohm resistor holds EN low. The TPS62135 `EN <= VIN + 0.3 V` absolute limit is therefore preserved through normal startup and the approved shutdown/brownout sequence.
 

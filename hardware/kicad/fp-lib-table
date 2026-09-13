@@ -1,0 +1,1 @@
+(fp_lib_table (version 7) (lib (name "Astra_Sequencing") (type "KiCad") (uri "${KIPRJMOD}/Astra_Sequencing.pretty") (options "") (descr "Verified Sheet 2 package definition; no PCB")))

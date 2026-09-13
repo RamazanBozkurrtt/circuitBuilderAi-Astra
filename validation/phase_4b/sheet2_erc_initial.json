@@ -1,0 +1,1867 @@
+{
+    "$schema": "https://schemas.kicad.org/erc.v1.json",
+    "coordinate_units": "mm",
+    "date": "2026-09-13T15:36:46",
+    "ignored_checks": [
+        {
+            "description": "Global label only appears once in the schematic",
+            "key": "single_global_label"
+        },
+        {
+            "description": "Four connection points are joined together",
+            "key": "four_way_junction"
+        },
+        {
+            "description": "SPICE model issue",
+            "key": "simulation_model_issue"
+        },
+        {
+            "description": "Assigned footprint doesn't match footprint filters",
+            "key": "footprint_filter"
+        }
+    ],
+    "included_severities": [
+        "error",
+        "warning"
+    ],
+    "kicad_version": "10.0.6",
+    "sheets": [
+        {
+            "path": "/",
+            "uuid_path": "/a89958ad-9daf-4465-87fb-0da6e733aead",
+            "violations": [
+                {
+                    "description": "Symbol pin or wire end off connection grid",
+                    "items": [
+                        {
+                            "description": "Yatay Yol, uzunluk 0.3000 mm",
+                            "pos": {
+                                "x": 1.95,
+                                "y": 0.7008
+                            },
+                            "uuid": "e91fbcfa-c1b0-5d7f-a73e-1502748ef830"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "endpoint_off_grid"
+                },
+                {
+                    "description": "Symbol pin or wire end off connection grid",
+                    "items": [
+                        {
+                            "description": "Yatay Yol, uzunluk 0.3000 mm",
+                            "pos": {
+                                "x": 1.95,
+                                "y": 0.7389
+                            },
+                            "uuid": "2092d9a8-fd41-52e2-a16c-2e375a22753b"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "endpoint_off_grid"
+                },
+                {
+                    "description": "Symbol pin or wire end off connection grid",
+                    "items": [
+                        {
+                            "description": "Yatay Yol, uzunluk 0.3000 mm",
+                            "pos": {
+                                "x": 1.95,
+                                "y": 0.777
+                            },
+                            "uuid": "bff25142-9f55-5bfb-81f1-0753d41bc0c0"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "endpoint_off_grid"
+                },
+                {
+                    "description": "Symbol pin or wire end off connection grid",
+                    "items": [
+                        {
+                            "description": "Yatay Yol, uzunluk 0.3000 mm",
+                            "pos": {
+                                "x": 1.95,
+                                "y": 0.8151
+                            },
+                            "uuid": "625cb0ad-b874-5bde-a7b6-b58d32bd2a75"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "endpoint_off_grid"
+                },
+                {
+                    "description": "Symbol pin or wire end off connection grid",
+                    "items": [
+                        {
+                            "description": "Yatay Yol, uzunluk 0.3000 mm",
+                            "pos": {
+                                "x": 1.95,
+                                "y": 0.8532
+                            },
+                            "uuid": "0275e77a-6687-5ec1-8346-791728abff2e"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "endpoint_off_grid"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'TestPoint' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerTP5 [TestPoint]",
+                            "pos": {
+                                "x": 0.4064,
+                                "y": 0.6096
+                            },
+                            "uuid": "ba8ebc21-dfc7-50b5-9373-bfc50b4b0d26"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'Fuse' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerF1 [Fuse]",
+                            "pos": {
+                                "x": 0.5842,
+                                "y": 0.6096
+                            },
+                            "uuid": "a6d7ea24-0b24-53ee-b7a9-a4897a2d2e19"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'Resistor_SMD' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerR1 [R]",
+                            "pos": {
+                                "x": 0.6096,
+                                "y": 1.397
+                            },
+                            "uuid": "eff27ca0-415c-591f-8ed5-6f206db8edf1"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'Resistor_SMD' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerR2 [R]",
+                            "pos": {
+                                "x": 0.6096,
+                                "y": 1.6002
+                            },
+                            "uuid": "9c4c9d92-aa6d-5d22-9ce3-678084a44d58"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'Resistor_SMD' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerR3 [R]",
+                            "pos": {
+                                "x": 0.6096,
+                                "y": 1.8034
+                            },
+                            "uuid": "dbc46284-2302-567a-93a8-08aca84a000a"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'Capacitor_SMD' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerC1 [C]",
+                            "pos": {
+                                "x": 0.7874,
+                                "y": 0.7366
+                            },
+                            "uuid": "c9527c54-90f1-5e39-bd3e-870d21b061d9"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'Diode_SMD' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerD1 [D_TVS]",
+                            "pos": {
+                                "x": 1.016,
+                                "y": 0.7366
+                            },
+                            "uuid": "616c2d95-398e-583b-ad4e-123092a5a3b3"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'Package_SON' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerQ1 [CSD19537Q3]",
+                            "pos": {
+                                "x": 1.3208,
+                                "y": 0.5842
+                            },
+                            "uuid": "6fb10801-4ac7-5097-90df-87bd7522311a"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'Package_TO_SOT_SMD' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerQ2 [BSS138LT1G]",
+                            "pos": {
+                                "x": 1.4224,
+                                "y": 0.8636
+                            },
+                            "uuid": "0027faa4-5f52-5e4c-b6cb-72d90fe870cb"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'Resistor_SMD' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerR5 [R]",
+                            "pos": {
+                                "x": 1.524,
+                                "y": 2.3622
+                            },
+                            "uuid": "54188da9-c095-5488-93cb-6471969601fb"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'Resistor_SMD' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerR6 [R]",
+                            "pos": {
+                                "x": 1.524,
+                                "y": 2.6162
+                            },
+                            "uuid": "1841ce43-d059-5e04-960b-b8566f9d2c57"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'Capacitor_SMD' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerC2 [C]",
+                            "pos": {
+                                "x": 1.5748,
+                                "y": 0.7366
+                            },
+                            "uuid": "5552a6cc-784a-5458-b165-4d1ef8fedc6c"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'TestPoint' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerTP2 [TestPoint]",
+                            "pos": {
+                                "x": 1.905,
+                                "y": 2.4892
+                            },
+                            "uuid": "74062e4a-ddce-5d90-bf9c-5505bf327319"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'Capacitor_SMD' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerC6 [C]",
+                            "pos": {
+                                "x": 1.9812,
+                                "y": 2.667
+                            },
+                            "uuid": "fef04f4b-98f5-583e-8cd3-fe48a2062072"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'Package_DFN_QFN' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerU1 [TPS26630RGER]",
+                            "pos": {
+                                "x": 2.159,
+                                "y": 0.9652
+                            },
+                            "uuid": "97fff217-3b5f-512f-ac23-34903d4d0ef3"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'Capacitor_SMD' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerC5 [C]",
+                            "pos": {
+                                "x": 2.2352,
+                                "y": 1.6256
+                            },
+                            "uuid": "b1e304bf-3080-5d0c-9d25-f7f8aa9c0bf8"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'Resistor_SMD' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerR4 [R]",
+                            "pos": {
+                                "x": 2.5908,
+                                "y": 1.6256
+                            },
+                            "uuid": "6901296a-b95d-5b57-baf3-f6a733a977f4"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'TestPoint' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerTP4 [TestPoint]",
+                            "pos": {
+                                "x": 2.8194,
+                                "y": 1.5494
+                            },
+                            "uuid": "ae4e7599-0813-5334-9629-5b24aa7251db"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'TestPoint' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerTP6 [TestPoint]",
+                            "pos": {
+                                "x": 2.8194,
+                                "y": 1.7526
+                            },
+                            "uuid": "b381ffbb-cdeb-5b2a-b933-c0511c45aae5"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'Capacitor_SMD' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerC3 [C]",
+                            "pos": {
+                                "x": 2.8448,
+                                "y": 0.7366
+                            },
+                            "uuid": "ccead170-ea0d-516b-bd8f-1630ca217dbb"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'Capacitor_THT' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerC4 [C_Polarized]",
+                            "pos": {
+                                "x": 3.175,
+                                "y": 0.7366
+                            },
+                            "uuid": "af55341d-0b4e-566d-86fc-5f7cefaad61e"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'Resistor_SMD' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerR7 [R]",
+                            "pos": {
+                                "x": 3.2258,
+                                "y": 2.3622
+                            },
+                            "uuid": "f534ffa3-daae-527c-9985-8ec4954b666b"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'TestPoint' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerTP1 [TestPoint]",
+                            "pos": {
+                                "x": 3.5052,
+                                "y": 0.6096
+                            },
+                            "uuid": "29a53df6-91aa-5bb7-9ba4-5e541d8e7bf0"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'TestPoint' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerTP3 [TestPoint]",
+                            "pos": {
+                                "x": 3.5052,
+                                "y": 2.413
+                            },
+                            "uuid": "8b412b4f-c0ce-5dda-a96f-dbbb6778e5a4"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'Capacitor_SMD' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerC201 [C]",
+                            "pos": {
+                                "x": 0.3683,
+                                "y": 0.762
+                            },
+                            "uuid": "97925de8-99e5-5eba-9165-9d2ff41f3707"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'Capacitor_SMD' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerC202 [C]",
+                            "pos": {
+                                "x": 0.3683,
+                                "y": 1.1176
+                            },
+                            "uuid": "bea3ad96-0224-5dac-920b-97d1f936b437"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'Capacitor_SMD' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerC231 [C]",
+                            "pos": {
+                                "x": 0.3683,
+                                "y": 2.2098
+                            },
+                            "uuid": "7d259586-f385-503e-b138-fc1a9627ce3f"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'Capacitor_SMD' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerC233 [C]",
+                            "pos": {
+                                "x": 0.3683,
+                                "y": 2.54
+                            },
+                            "uuid": "61f56150-5764-5d90-b5c1-8941962fc4fd"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'Capacitor_SMD' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerC261 [C]",
+                            "pos": {
+                                "x": 0.3683,
+                                "y": 3.7846
+                            },
+                            "uuid": "66945ea6-f8bb-5c77-b77d-1e46c44fa66f"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'Capacitor_SMD' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerC281 [C]",
+                            "pos": {
+                                "x": 0.3683,
+                                "y": 4.8006
+                            },
+                            "uuid": "aeef8d9d-e5ed-58e6-8ea0-52a5f819acc1"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'Resistor_SMD' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerR281 [R]",
+                            "pos": {
+                                "x": 0.3683,
+                                "y": 5.1816
+                            },
+                            "uuid": "f73eea31-e2c9-5ae3-a637-f68cc7e7c8fc"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'Package_SO' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerU204 [TPS7A4901DGNR]",
+                            "pos": {
+                                "x": 1.0033,
+                                "y": 2.2098
+                            },
+                            "uuid": "2c7705a7-a1a6-58aa-88e6-fe4170d71cbd"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'Package_TO_SOT_SMD' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerU207 [TPS7A2033PDBVR]",
+                            "pos": {
+                                "x": 1.0033,
+                                "y": 3.7846
+                            },
+                            "uuid": "e0417f7d-f67a-575f-a72f-4d19ff9efab9"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'Package_DFN_QFN' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerU209 [LTC2964HUDC_PBF]",
+                            "pos": {
+                                "x": 1.0033,
+                                "y": 4.953
+                            },
+                            "uuid": "7e55ae06-cd56-53ab-a80c-180813073210"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'Capacitor_SMD' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerC203 [C]",
+                            "pos": {
+                                "x": 1.5621,
+                                "y": 1.2954
+                            },
+                            "uuid": "37a545ed-a80a-5326-ae95-98a99e098c85"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'Inductor_SMD' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerL201 [L]",
+                            "pos": {
+                                "x": 1.6637,
+                                "y": 0.6731
+                            },
+                            "uuid": "161486dc-d6a5-5f34-86e3-e39e786a6481"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'Resistor_SMD' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerR231 [R]",
+                            "pos": {
+                                "x": 1.6637,
+                                "y": 2.2606
+                            },
+                            "uuid": "88b28cf2-6703-5e3f-9714-16d266ec0317"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'Resistor_SMD' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerR233 [R]",
+                            "pos": {
+                                "x": 1.6637,
+                                "y": 2.5908
+                            },
+                            "uuid": "17d6fcc1-8fe0-535a-b315-4cfccc149177"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'Capacitor_SMD' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerC262 [C]",
+                            "pos": {
+                                "x": 1.6637,
+                                "y": 3.7846
+                            },
+                            "uuid": "3b2eeccf-42a6-5a29-baf3-0af19e45fc2c"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'Resistor_SMD' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerR282 [R]",
+                            "pos": {
+                                "x": 1.6637,
+                                "y": 5.1816
+                            },
+                            "uuid": "cc9b4ec4-64f1-5c5a-b38f-9621d516d8df"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'Resistor_SMD' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerR201 [R]",
+                            "pos": {
+                                "x": 1.7399,
+                                "y": 0.9398
+                            },
+                            "uuid": "7fab67ed-fa5b-5e5f-bb0d-208c7b7a6572"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'Capacitor_SMD' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerC204 [C]",
+                            "pos": {
+                                "x": 1.8669,
+                                "y": 1.2954
+                            },
+                            "uuid": "fcefda2c-bbbb-52fd-853f-856e2f369e14"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'Resistor_SMD' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerR232 [R]",
+                            "pos": {
+                                "x": 2.0701,
+                                "y": 2.2606
+                            },
+                            "uuid": "d9c2da0c-d77a-5978-b069-6cef23376ff2"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'Capacitor_SMD' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerC234 [C]",
+                            "pos": {
+                                "x": 2.0701,
+                                "y": 2.5908
+                            },
+                            "uuid": "a813b31e-8c5e-56d3-8ca0-c45e98bb8bbd"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'Capacitor_SMD' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerC263 [C]",
+                            "pos": {
+                                "x": 2.0701,
+                                "y": 3.7846
+                            },
+                            "uuid": "8cb2ea68-37d1-5bbd-aa03-5a0b9269ed75"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'Resistor_SMD' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerR202 [R]",
+                            "pos": {
+                                "x": 2.1463,
+                                "y": 0.9398
+                            },
+                            "uuid": "f400e9cf-8cd6-5fb6-b4c2-550cd20f973d"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'Capacitor_SMD' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerC206 [C]",
+                            "pos": {
+                                "x": 2.4765,
+                                "y": 1.2954
+                            },
+                            "uuid": "7c257b9d-2a19-5efc-a23b-560c3fd77757"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'Capacitor_SMD' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerC232 [C]",
+                            "pos": {
+                                "x": 2.4765,
+                                "y": 2.2606
+                            },
+                            "uuid": "5a5f3419-5409-5d81-a02f-16e95f4fbd7e"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'Resistor_SMD' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerR234 [R]",
+                            "pos": {
+                                "x": 2.4765,
+                                "y": 2.5908
+                            },
+                            "uuid": "59bc24ed-7765-540c-a337-a7e85045cb3f"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'Capacitor_SMD' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerC236 [C]",
+                            "pos": {
+                                "x": 2.4765,
+                                "y": 2.921
+                            },
+                            "uuid": "c485a70d-bba1-53e6-8f71-e87a1d7f68fa"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'Resistor_SMD' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerR261 [R]",
+                            "pos": {
+                                "x": 2.4765,
+                                "y": 3.7846
+                            },
+                            "uuid": "c17027dd-8daf-58a3-921d-e83f9c43512d"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'Resistor_SMD' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerR291 [R]",
+                            "pos": {
+                                "x": 2.7051,
+                                "y": 4.8006
+                            },
+                            "uuid": "e6ed18ae-137b-5f85-b3f2-617997955289"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'Resistor_SMD' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerR292 [R]",
+                            "pos": {
+                                "x": 2.7051,
+                                "y": 5.3086
+                            },
+                            "uuid": "30ee75f7-6f5e-5b7e-a1f3-bd6db332c218"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'Capacitor_SMD' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerC211 [C]",
+                            "pos": {
+                                "x": 3.0099,
+                                "y": 0.762
+                            },
+                            "uuid": "ef9a9703-7bb4-5956-8458-3ea6e1a26f29"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'Capacitor_SMD' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerC212 [C]",
+                            "pos": {
+                                "x": 3.0099,
+                                "y": 1.1176
+                            },
+                            "uuid": "cf755254-c951-51d5-95fe-f9b9c1d1cf94"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'Capacitor_SMD' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerC241 [C]",
+                            "pos": {
+                                "x": 3.0099,
+                                "y": 2.2098
+                            },
+                            "uuid": "81712cd4-7515-5b39-b255-9e4c66634684"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'Capacitor_SMD' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerC243 [C]",
+                            "pos": {
+                                "x": 3.0099,
+                                "y": 2.54
+                            },
+                            "uuid": "427f05db-d7d8-52db-ba14-c44d3a370fc7"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'Capacitor_SMD' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerC271 [C]",
+                            "pos": {
+                                "x": 3.0099,
+                                "y": 3.7846
+                            },
+                            "uuid": "17ecd261-9fe7-53e2-a464-7c248ad68958"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'Resistor_SMD' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerR294 [R]",
+                            "pos": {
+                                "x": 3.3655,
+                                "y": 4.8006
+                            },
+                            "uuid": "e6902d23-0b7f-5369-bb17-cb9fa190356f"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'Resistor_SMD' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerR295 [R]",
+                            "pos": {
+                                "x": 3.3655,
+                                "y": 5.3086
+                            },
+                            "uuid": "1d3cfb73-a7d4-5f3a-8968-3d74767da60b"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'Package_SO' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerU205 [TPS7A4901DGNR]",
+                            "pos": {
+                                "x": 3.6449,
+                                "y": 2.2098
+                            },
+                            "uuid": "2e4dc37b-1b77-5328-a3dd-88760a777daf"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'Package_TO_SOT_SMD' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerU208 [TPS7A2028PDBVR]",
+                            "pos": {
+                                "x": 3.6449,
+                                "y": 3.7846
+                            },
+                            "uuid": "b6ba3ad3-d2ab-54e5-aaec-b163d24d49cc"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'Resistor_SMD' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerR297 [R]",
+                            "pos": {
+                                "x": 4.0259,
+                                "y": 4.8006
+                            },
+                            "uuid": "ea935691-0355-56c9-b09c-6a60a291cee1"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'Resistor_SMD' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerR303 [R]",
+                            "pos": {
+                                "x": 4.0259,
+                                "y": 5.0546
+                            },
+                            "uuid": "20f19673-9e7d-5d25-9764-76b4b8bc9e35"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'Resistor_SMD' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerR298 [R]",
+                            "pos": {
+                                "x": 4.0259,
+                                "y": 5.3086
+                            },
+                            "uuid": "02ea9210-98da-5cc0-a2af-45c45a6888a0"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'Capacitor_SMD' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerC213 [C]",
+                            "pos": {
+                                "x": 4.2037,
+                                "y": 1.2954
+                            },
+                            "uuid": "e9ab7c38-9366-55d3-80b6-d95f818c7d07"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'Capacitor_SMD' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerC245 [C]",
+                            "pos": {
+                                "x": 4.2037,
+                                "y": 2.921
+                            },
+                            "uuid": "dbe3cc39-26f3-5c81-bc71-779de1734c33"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'Inductor_SMD' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerL202 [L]",
+                            "pos": {
+                                "x": 4.3053,
+                                "y": 0.6731
+                            },
+                            "uuid": "d7c1253b-5508-56ec-bb6a-e238d9b44575"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'Resistor_SMD' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerR241 [R]",
+                            "pos": {
+                                "x": 4.3053,
+                                "y": 2.2606
+                            },
+                            "uuid": "f9235e2b-94a4-536b-88f9-6e8ea916f8b4"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'Resistor_SMD' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerR243 [R]",
+                            "pos": {
+                                "x": 4.3053,
+                                "y": 2.5908
+                            },
+                            "uuid": "1cdd06fe-c657-55a0-afc3-b93cab55305b"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'Capacitor_SMD' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerC272 [C]",
+                            "pos": {
+                                "x": 4.3053,
+                                "y": 3.7846
+                            },
+                            "uuid": "fe3c3742-1f04-54dd-ab7f-392dfabc62c1"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'Resistor_SMD' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerR211 [R]",
+                            "pos": {
+                                "x": 4.3815,
+                                "y": 0.9398
+                            },
+                            "uuid": "f5984613-13ee-5fba-9325-68d5108137a4"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'Capacitor_SMD' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerC214 [C]",
+                            "pos": {
+                                "x": 4.5085,
+                                "y": 1.2954
+                            },
+                            "uuid": "fa16aad8-d5e8-55a3-887f-7895ec247f0f"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'Resistor_SMD' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerR300 [R]",
+                            "pos": {
+                                "x": 4.6863,
+                                "y": 4.8006
+                            },
+                            "uuid": "7354e957-c26b-5de5-ab03-4db947cfce24"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'Resistor_SMD' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerR301 [R]",
+                            "pos": {
+                                "x": 4.6863,
+                                "y": 5.3086
+                            },
+                            "uuid": "e87bfd15-3c98-55ea-8535-c1c33906af50"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'Capacitor_SMD' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerC244 [C]",
+                            "pos": {
+                                "x": 4.7117,
+                                "y": 2.5908
+                            },
+                            "uuid": "b9eea8f7-8718-5131-8d28-f7f3ee982c6c"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'Capacitor_SMD' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerC273 [C]",
+                            "pos": {
+                                "x": 4.7117,
+                                "y": 3.7846
+                            },
+                            "uuid": "b6de68fe-6403-5477-8810-7bd46d101b67"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'Resistor_SMD' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerR212 [R]",
+                            "pos": {
+                                "x": 4.7879,
+                                "y": 0.9398
+                            },
+                            "uuid": "46bede8b-b867-5021-983a-7c85cdf21ce2"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'Capacitor_SMD' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerC215 [C]",
+                            "pos": {
+                                "x": 4.8133,
+                                "y": 1.2954
+                            },
+                            "uuid": "c1d36ab5-c0f2-5fb8-88af-5e0a0d5f9b0f"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'Capacitor_SMD' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerC216 [C]",
+                            "pos": {
+                                "x": 5.1181,
+                                "y": 1.2954
+                            },
+                            "uuid": "04ac6234-1a3d-5ffc-87c5-a8f93324ae72"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'Capacitor_SMD' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerC242 [C]",
+                            "pos": {
+                                "x": 5.1181,
+                                "y": 2.2606
+                            },
+                            "uuid": "e9def2cc-8dfb-5835-90b8-6bfb746d9fc1"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'Resistor_SMD' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerR244 [R]",
+                            "pos": {
+                                "x": 5.1181,
+                                "y": 2.5908
+                            },
+                            "uuid": "a045f6ff-05c1-5e6e-9f5f-340de3624ab8"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'Capacitor_SMD' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerC246 [C]",
+                            "pos": {
+                                "x": 5.1181,
+                                "y": 2.921
+                            },
+                            "uuid": "258ddce9-3bf2-50f6-a4df-b1474c915bbd"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'Resistor_SMD' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerR271 [R]",
+                            "pos": {
+                                "x": 5.1181,
+                                "y": 3.7846
+                            },
+                            "uuid": "7fc9bf0f-372e-5685-9d67-2c0045ffdad3"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'Capacitor_SMD' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerC221 [C]",
+                            "pos": {
+                                "x": 5.6642,
+                                "y": 0.762
+                            },
+                            "uuid": "0094e508-0935-59ff-94d8-2576c4980caf"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'Capacitor_SMD' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerC222 [C]",
+                            "pos": {
+                                "x": 5.6642,
+                                "y": 1.1176
+                            },
+                            "uuid": "35849ccd-0fa9-5587-875b-d58983f546fd"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'Capacitor_SMD' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerC251 [C]",
+                            "pos": {
+                                "x": 5.6642,
+                                "y": 2.2098
+                            },
+                            "uuid": "019f676b-4e33-5e4f-a2ad-0bd3a312ad97"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'Capacitor_SMD' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerC253 [C]",
+                            "pos": {
+                                "x": 5.6642,
+                                "y": 2.54
+                            },
+                            "uuid": "b3f153ec-7db8-5812-bea1-59962db1591b"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'Capacitor_SMD' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerC283 [C]",
+                            "pos": {
+                                "x": 5.6642,
+                                "y": 3.7846
+                            },
+                            "uuid": "6088ad6a-887a-5c29-881d-28dbc1575556"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'Capacitor_SMD' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerC282 [C]",
+                            "pos": {
+                                "x": 5.6642,
+                                "y": 4.9784
+                            },
+                            "uuid": "6de19c82-2652-52a1-a6a3-1a899376c065"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'Resistor_SMD' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerR284 [R]",
+                            "pos": {
+                                "x": 5.6642,
+                                "y": 5.2832
+                            },
+                            "uuid": "90dfa3c1-1565-5466-82d6-657649247827"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'Package_SO' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerU206 [TPS7A4901DGNR]",
+                            "pos": {
+                                "x": 6.2992,
+                                "y": 2.2098
+                            },
+                            "uuid": "503cea47-e00f-5812-ac9c-bb36e8e06e0a"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'Package_TO_SOT_SMD' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerU211 [SN74LV1T08DBVR]",
+                            "pos": {
+                                "x": 6.2992,
+                                "y": 3.7846
+                            },
+                            "uuid": "40f9474b-a950-5fb6-868d-8b6012734637"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'Package_DFN_QFN' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerU210 [TPS3431SDRBR]",
+                            "pos": {
+                                "x": 6.2992,
+                                "y": 4.8514
+                            },
+                            "uuid": "9d7b44be-2ff3-5fda-879d-96dd0d7b6d93"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'Resistor_SMD' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerR310 [R]",
+                            "pos": {
+                                "x": 6.2992,
+                                "y": 6.35
+                            },
+                            "uuid": "dadef445-1ebb-5c62-8ea8-66aefb4b78c8"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'Capacitor_SMD' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerC223 [C]",
+                            "pos": {
+                                "x": 6.858,
+                                "y": 1.2954
+                            },
+                            "uuid": "e7c5cf10-4f02-5b49-bc67-f684c5d7d812"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'Inductor_SMD' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerL203 [L]",
+                            "pos": {
+                                "x": 6.9596,
+                                "y": 0.6731
+                            },
+                            "uuid": "b4ecf0c2-676a-5efa-b920-f03dbeaccf23"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'Resistor_SMD' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerR251 [R]",
+                            "pos": {
+                                "x": 6.9596,
+                                "y": 2.2606
+                            },
+                            "uuid": "7bd1ae96-906a-5610-a661-8a69d6cc500b"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'Resistor_SMD' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerR253 [R]",
+                            "pos": {
+                                "x": 6.9596,
+                                "y": 2.5908
+                            },
+                            "uuid": "11b9d526-0c4c-580c-b133-2a7521d526b7"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'Resistor_SMD' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerR221 [R]",
+                            "pos": {
+                                "x": 7.0358,
+                                "y": 0.9398
+                            },
+                            "uuid": "df7c57d6-db6c-5720-a5dc-cf24015360f4"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'Resistor_SMD' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerR285 [R]",
+                            "pos": {
+                                "x": 7.112,
+                                "y": 3.7846
+                            },
+                            "uuid": "bd1c9537-2c4e-54ef-b61d-f1f6a1d958e3"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'Resistor_SMD' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerR283 [R]",
+                            "pos": {
+                                "x": 7.112,
+                                "y": 4.953
+                            },
+                            "uuid": "57e2e9a1-e85d-5be2-aa4d-1a38fbdff42a"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'Capacitor_SMD' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerC224 [C]",
+                            "pos": {
+                                "x": 7.1628,
+                                "y": 1.2954
+                            },
+                            "uuid": "570332da-af71-5fc3-9fec-83a10a459377"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'Capacitor_SMD' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerC254 [C]",
+                            "pos": {
+                                "x": 7.366,
+                                "y": 2.5908
+                            },
+                            "uuid": "03205b22-844f-56a1-94ee-15f150f46771"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'Resistor_SMD' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerR222 [R]",
+                            "pos": {
+                                "x": 7.4422,
+                                "y": 0.9398
+                            },
+                            "uuid": "93376689-3ddf-5bd3-8023-2564ecb2b20a"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'Capacitor_SMD' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerC226 [C]",
+                            "pos": {
+                                "x": 7.7724,
+                                "y": 1.2954
+                            },
+                            "uuid": "9d7a6332-9d01-5c63-b794-86404e2ab7c7"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'Capacitor_SMD' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerC252 [C]",
+                            "pos": {
+                                "x": 7.7724,
+                                "y": 2.2606
+                            },
+                            "uuid": "cd1f61c4-9f34-5bc6-8f21-7bb56b7b89ec"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'Resistor_SMD' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerR254 [R]",
+                            "pos": {
+                                "x": 7.7724,
+                                "y": 2.5908
+                            },
+                            "uuid": "bc906f0a-e2b1-54ce-8858-332795accdd7"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Mevcut yapılandırma 'Capacitor_SMD' ayak izi kütüphanesini içermiyor",
+                    "items": [
+                        {
+                            "description": "SembollerC256 [C]",
+                            "pos": {
+                                "x": 7.7724,
+                                "y": 2.921
+                            },
+                            "uuid": "a49b4645-5cd4-5922-a9c6-a71911570334"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                }
+            ]
+        },
+        {
+            "path": "/1 - Power Input / Protection/",
+            "uuid_path": "/a89958ad-9daf-4465-87fb-0da6e733aead/1f0f028c-cc82-4829-b29a-4f3c20360e24",
+            "violations": []
+        },
+        {
+            "path": "/2 - Power Regulation / Sequencing/",
+            "uuid_path": "/a89958ad-9daf-4465-87fb-0da6e733aead/c46ad3ab-53c4-4782-9638-c5343c581d6a",
+            "violations": [
+                {
+                    "description": "Open collector ve Power output tipi pimler bağlı",
+                    "items": [
+                        {
+                            "description": "Symbol U201 Pin 4 [FB2, Open collector, Line]",
+                            "pos": {
+                                "x": 1.2319,
+                                "y": 0.7874
+                            },
+                            "uuid": "12917b9c-3b0a-51d7-aae8-16a1ce59fed0"
+                        },
+                        {
+                            "description": "Symbol #FLG02 Pin 1 [Power output, Line]",
+                            "pos": {
+                                "x": 0.2032,
+                                "y": 1.7272
+                            },
+                            "uuid": "aa024cdd-1c01-52d8-96de-dc2892a293c2"
+                        }
+                    ],
+                    "severity": "error",
+                    "type": "pin_to_pin"
+                },
+                {
+                    "description": "Input Power pin not driven by any Output Power pins",
+                    "items": [
+                        {
+                            "description": "Symbol U202 Pin 1 [VIN, Power input, Line]",
+                            "pos": {
+                                "x": 3.4163,
+                                "y": 0.7112
+                            },
+                            "uuid": "abd07d38-d8f5-5f97-883a-d992b717a35c"
+                        }
+                    ],
+                    "severity": "error",
+                    "type": "power_pin_not_driven"
+                },
+                {
+                    "description": "Open collector ve Power output tipi pimler bağlı",
+                    "items": [
+                        {
+                            "description": "Symbol U202 Pin 4 [FB2, Open collector, Line]",
+                            "pos": {
+                                "x": 3.8735,
+                                "y": 0.7874
+                            },
+                            "uuid": "fb59f0c2-16c7-52cf-b3af-cda21ead0884"
+                        },
+                        {
+                            "description": "Symbol #FLG02 Pin 1 [Power output, Line]",
+                            "pos": {
+                                "x": 0.2032,
+                                "y": 1.7272
+                            },
+                            "uuid": "aa024cdd-1c01-52d8-96de-dc2892a293c2"
+                        }
+                    ],
+                    "severity": "error",
+                    "type": "pin_to_pin"
+                },
+                {
+                    "description": "Open collector ve Power output tipi pimler bağlı",
+                    "items": [
+                        {
+                            "description": "Symbol U203 Pin 4 [FB2, Open collector, Line]",
+                            "pos": {
+                                "x": 6.5278,
+                                "y": 0.7874
+                            },
+                            "uuid": "573ff438-8a86-552c-bc01-ef405c6ea27c"
+                        },
+                        {
+                            "description": "Symbol #FLG02 Pin 1 [Power output, Line]",
+                            "pos": {
+                                "x": 0.2032,
+                                "y": 1.7272
+                            },
+                            "uuid": "aa024cdd-1c01-52d8-96de-dc2892a293c2"
+                        }
+                    ],
+                    "severity": "error",
+                    "type": "pin_to_pin"
+                }
+            ]
+        },
+        {
+            "path": "/3 - Microphones / AFE/",
+            "uuid_path": "/a89958ad-9daf-4465-87fb-0da6e733aead/1ab89939-a625-4f41-b578-258505850a22",
+            "violations": []
+        },
+        {
+            "path": "/4 - ADAU1978 ADC/",
+            "uuid_path": "/a89958ad-9daf-4465-87fb-0da6e733aead/fd740298-4d28-41f6-827f-27ac60902cc7",
+            "violations": []
+        },
+        {
+            "path": "/5 - ADSP-21569 DSP / Boot / Debug / Clocks/",
+            "uuid_path": "/a89958ad-9daf-4465-87fb-0da6e733aead/7f4a8f18-8381-4d14-9f7b-38db0ee8a570",
+            "violations": []
+        },
+        {
+            "path": "/6 - TAS6424E-Q1 Amplifier/",
+            "uuid_path": "/a89958ad-9daf-4465-87fb-0da6e733aead/9b945bc4-cf34-403d-b81c-785e511fd739",
+            "violations": []
+        },
+        {
+            "path": "/7 - Connectors / System Interfaces/",
+            "uuid_path": "/a89958ad-9daf-4465-87fb-0da6e733aead/653d9b94-c194-4a43-8edd-e99f517cb74d",
+            "violations": []
+        }
+    ],
+    "source": "circuitBuilderAi-Astra.kicad_sch"
+}
