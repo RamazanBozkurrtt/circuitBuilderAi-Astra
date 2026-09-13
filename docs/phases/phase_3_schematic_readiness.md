@@ -6,6 +6,10 @@ Scope: documentary verification, calculations, component-level electrical archit
 
 Evidence notation such as `DSP p.53` refers to the source IDs and local manufacturer documents in the [component evidence index](../evidence/component_evidence_index.md). `CONFIRMED` means device evidence or an already approved project decision; `PROVISIONAL` is a bounded Phase 3 engineering decision; `UNKNOWN` and `CONFLICTING` retain their Phase 0 meanings.
 
+**Phase 3B amendment (2026-09-13):** the former TPS386000 rail-supervision and watchdog contract was invalid because its guaranteed rising hysteresis was omitted. [Phase 3B](phase_3b_power_supervisor_correction.md) replaces only that contract; the rail voltages, regulators, Phase 3A `PGOOD_12V`, and all unrelated Phase 3 decisions remain unchanged.
+
+**Phase 3C amendment (2026-09-13):** the former `3V8_PRE -> TPS62135 -> 3V3_SYS` contract did not satisfy the input-headroom condition attached to the converter's accuracy guarantee. [Phase 3C](phase_3c_3v3_regulator_correction.md) retains TPS62135 but powers only the `3V3_SYS` instance from `12V_PROTECTED`, uses a lower-impedance 0.1% divider, and supersedes the 3.3 V realized range and associated margin calculations below. All unrelated Phase 3/3A/3B decisions remain unchanged.
+
 ## 1. Executive summary
 
 The four Phase 2 hard schematic-entry blockers have been resolved or bounded without weakening them. The resulting prototype design point is:
@@ -145,11 +149,11 @@ The eFuse, external NFET, connector, copper, and any fuse must be rated for at l
 12V_IN
   -> TPS26630 protection -> 12V_PROTECTED -> TAS6424E PVDD/VBAT
                                       |----> TPS7A4901 -> 5V_AFE
+                                      |----> TPS62135  -> 3V3_SYS
                                       `----> TPS62135  -> 3V8_PRE
                                                         |-> TPS7A4901 -> 1V8_DSP_REF_ANA
                                                         |-> TPS62135  -> 1V0_DSP_CORE
                                                         |-> TPS7A4901  -> 1V35_DSP_DMC
-                                                        |-> TPS62135  -> 3V3_SYS
                                                         |-> TPS7A2033P -> 3V3_ADC_A
                                                         `-> TPS7A2028P -> 2V8_MIC
 ```
@@ -165,7 +169,7 @@ Loads are design allocations, not measured consumption. They include margin and 
 | `1V0_DSP_CORE` | 1.00 V, required 0.95-1.05 V; TPS62135, forced PWM, +/-1%; `R1=42.7 kohm`, `R2=100 kohm`, 0.1%, gives 0.999 V nominal | 3.0 A design maximum. Phase 1 high-corner subtotal was 2.0605 A but incomplete; regulator is 4 A | Moderate sensitivity/high di/dt; compact hot loop and uninterrupted local plane | Enabled only after 1.8 V valid. `CSS=10 nF`; at least 100 uF effective domain bulk plus the per-ball network. PGOOD/supervisor monitored. |
 | `1V8_DSP_REF_ANA` | 1.82 V set point, required 1.71-1.89 V; TPS7A4901 from 3.8 V, 53.6 kohm/100 kohm feedback gives 1.820 V nominal and +/-2.5% overall | 75 mA allocation: VDD_REF model terms, clock fanout/oscillator, OTP allowance, VDD_ANA/HADC/TMU margin | Highest DSP clock/PLL sensitivity; one quiet regulator, VDD_ANA branch through ferrite with local bulk | First DSP rail. Enabled by Phase 3A `PGOOD_12V` after `3V8_PRE` is present; `CNR/SS=47 nF` gives about 65.8 ms nominal soft start; 10 uF input/output and 10 nF feed-forward. VDD_REF has at least 10 nF plus 100 nF and per-ball decoupling [DSP pp.18, 53; HVLDO pp.12-17]. |
 | `1V35_DSP_DMC` | 1.36 V set point, required 1.283-1.418 V; TPS7A4901 from 3.8 V, 14.7 kohm/100 kohm feedback gives 1.359 V nominal and +/-2.5% overall | 50 mA allocation with DMC disabled and no external DDR; startup is rail capacitance only | Quiet/local domain | Enabled after 1.8 V valid; `CNR/SS=47 nF` gives about 65.8 ms nominal soft start. Use 10 uF input/output plus at least 22 uF domain bulk and per-ball capacitors. Discharge is controlled by the ordered shutdown and explicit bleeder/load network. |
-| `3V3_SYS` | 3.30 V; required DSP 3.13-3.47 V, ADC IOVDD 1.62-3.6 V, amplifier 3.0-3.5 V; TPS62135, +/-1%; `R1=371 kohm`, `R2=100 kohm`, 0.1%, gives 3.297 V nominal | 200 mA allocation: DSP I/O, amplifier maximum 18 mA, flash maximum 80 mA write-status/chip-erase case, buffers, pullups, debug | Digital/switching rail; ferrite-isolate only local consumers, never create a different DC logic voltage | Enabled after 1.8 V valid. `CSS=10 nF`; 22 uF effective bulk. Powers DSP VDD_EXT, ADC IOVDD, amplifier VDD, flash, both LVC buffers, I2C/JTAG/UART. Active discharge and supervisor. |
+| `3V3_SYS` | 3.30 V; required DSP 3.13-3.47 V, ADC IOVDD 1.62-3.6 V, amplifier 3.0-3.5 V; TPS62135 forced PWM from `12V_PROTECTED`; guaranteed static 3.256299-3.337821 V; `Rtop=37.1 kohm`, `Rbottom=10.0 kohm`, 0.1%, gives 3.297 V nominal | 200 mA allocation: DSP I/O, amplifier maximum 18 mA, flash maximum 80 mA write-status/chip-erase case, buffers, pullups, debug; regulator rating 4 A | Digital/switching rail; ferrite-isolate only local consumers, never create a different DC logic voltage | Enabled after 1.8 V valid through a local `SN74LV1T08DBVR` implementing `OUT1 AND PGOOD_12V`, with 1.0 Mohm EN pulldown and 0.1 uF gate bypass. `CSS=10 nF`; 1.0 uH nominal/at least 0.8 uH effective inductor; local input capacitor at least 10 uF nominal, 3 uF effective, 25 V; local output bank at least 22 uF effective and no more than 200 uF directly connected. Powers DSP VDD_EXT, ADC IOVDD, amplifier VDD, flash, both LVC buffers, I2C/JTAG/UART. Active discharge and supervisor [Phase 3C](phase_3c_3v3_regulator_correction.md). |
 | `3V3_ADC_A` | 3.30 V; ADAU1978 AVDD required 3.0-3.6 V; `TPS7A2033PDBVR` from 3.8 V, +/-1.5% | 30 mA allocation; ADC AVDD is 14 mA typical | Very sensitive; no digital loads. Optional ferrite before LDO input, solid analog return | Enabled with downstream rails. 10 uF plus 100 nF at regulator; each AVDD pin receives local 100 nF and shared local bulk per ADC guidance. |
 | `2V8_MIC` | 2.80 V; microphone normal mode requires 2.3-3.0 V; `TPS7A2028PDBVR`, +/-1.5% | 5 mA allocation; four microphones require 0.92 mA maximum plus cable/transient margin | Very sensitive; star/ferrite branches to connectors | Enabled with the downstream rails after 1.8 V qualification; AFE remains off until ADC AVDD/VREF is valid. At least 10 uF controller bulk, 1 uF per connector branch, and 100 nF at each microphone as required [MIC]. |
 | `5V_AFE` | 5.00 V, +/-2.5%; TPS7A4901 from protected input, 324 kohm/100 kohm feedback gives about 5.02 V nominal | 50 mA allocation; OPA165x maximum quiescent subtotal is below 28 mA for ten channels | Very sensitive; 10 nF NR/SS and feed-forward, 10 uF input/output; each op amp gets 100 nF plus local 1 uF | Enabled only after ADC AVDD/VREF is valid; disabled before ADC power-down. About 14 ms soft start. Worst allocated LDO dissipation at 13.2 V is 0.41 W. |
@@ -186,26 +190,28 @@ Each power pin receives a local high-frequency ceramic capacitor with the shorte
 
 Use `ADSP-21569BBCZ10`, 1000 MHz, -40 C to +125 C junction, BC-400-3 400-ball CSP_BGA. The base design intentionally retains the 1 GHz option for compute headroom; this does not establish FxLMS feasibility [DSP pp.99-102].
 
-| Domain | Allowed device range | Selected realized range | Supervisor nominal falling threshold |
+| Domain | Allowed device range | Selected realized range | Corrected supervisor nominal threshold |
 | --- | --- | --- | --- |
-| VDD_INT | 0.95-1.05 V | 0.99-1.01 V regulation target | 0.972 V (`14.3k/10.0k`) |
-| VDD_EXT | 3.13-3.47 V | 3.267-3.333 V | 3.192 V (`69.8k/10.0k`) |
-| VDD_REF | 1.71-1.89 V | 1.775-1.866 V | 1.752 V (`33.8k/10.0k`) |
+| VDD_INT | 0.95-1.05 V | 0.99-1.01 V regulation target | 0.9655 V (`9.31k/10.0k`) |
+| VDD_EXT | 3.13-3.47 V | 3.256299-3.337821 V | 3.180 V (`53.6k/10.0k`) |
+| VDD_REF | 1.71-1.89 V | 1.775-1.866 V | 1.745 V (`24.9k/10.0k`) |
 | VDD_ANA | 1.71-1.89 V | same DC rail as VDD_REF after local filter | monitored with VDD_REF; no independent source |
-| VDD_DMC | 1.283-1.418 V DDR3L range | 1.325-1.393 V | 1.300 V (`22.5k/10.0k`) |
+| VDD_DMC | 1.283-1.418 V DDR3L range | 1.325-1.393 V | 1.304 V (`(15.8k+280)/10.0k`) |
 
-The supervisor is powered from `3V8_PRE`, so it can qualify 1.8 V and sequence the downstream rails without a 3.3 V circular dependency. RESET1 alone pulls up to `3V8_PRE` and drives the downstream regulator EN fanout; 3.8 V is within those EN-pin limits. RESET2/3/4 and WDO pull up only to `3V3_SYS` and enter the 3.3 V safe-state/POR logic, so no DSP pin sees 3.8 V. The thresholds use `TPS386000RGPR` 0.4 V inputs and 0.1% dividers. Including the supervisor's 396-404 mV threshold range and worst-direction 0.1% resistor tolerances, their bounded falling thresholds are 0.9611-0.9829 V (core), 3.1546-3.2296 V (3.3 V I/O), 1.7318-1.7723 V (1.8 V reference/analog), and 1.2852-1.3148 V (DMC). Each range remains above the corresponding device minimum and below the selected rail's minimum realized voltage. Channels are assigned: SENSE1=1.8 V, SENSE2=1.0 V, SENSE3=1.35 V, SENSE4L=3.3 V; SENSE4H is grounded. CT pins are open for the specified 14-24 ms release delay. Outputs are open-drain with at least 10 kohm pullups [SUPV pp.4, 6-8, 23, 27-29].
+Use `LTC2964HUDC#PBF`, powered from `3V8_PRE`, for the four rail comparators and common reset. Configure all four channels in +ADJ mode by tying `PG1`-`PG4` directly to `REF`; use the 0.1% top/bottom dividers shown in the table and Kelvin-connect each divider bottom to supervisor ground. The bounded falling and rising thresholds are identical because this device deliberately filters glitches without adding hysteresis: 0.959608-0.971404 V (core), 3.157969-3.202097 V (3.3 V I/O), 1.733427-1.756604 V (1.8 V reference/analog), and 1.295641-1.312379 V (DMC). These ranges include the 497.5-502.5 mV +ADJ threshold, +/-15 nA monitor input current, and worst-direction 0.1% resistor tolerances. The respective guaranteed release margins to the selected rail minima are 18.596, 54.202, 18.396, and 12.621 mV; fault margins above the device minima are 9.608, 27.969, 23.427, and 12.641 mV [SUPV4 pp.2-4, 8-16; Phase 3C].
+
+Assign `V1=1V8_DSP_REF_ANA`, `V2=1V0_DSP_CORE`, `V3=1V35_DSP_DMC`, and `V4=3V3_SYS`. Pull `OUT1` up to `3V8_PRE` with 10.0 kohm and use it as the downstream regulator enable fanout; the `3V3_SYS` branch alone passes `OUT1` and `PGOOD_12V` through the Phase 3C local AND gate before its EN pin. Leave `OUT2`-`OUT4` unconnected except optional test points because the common `RST` provides the required aggregate. Ground `DVCC` for open-drain `RST`, pull `RST` up to `3V3_SYS` with 10.0 kohm, name that separate active-high rail-valid node `RAILS_OK`, and use it to drive the watchdog `EN` and hardware-safe latch. Tie `RDIS` and `MR` to `VCC` so neither function can defeat reset, tie `RT` to `VCC` for the guaranteed 160-240 ms common release delay, bypass `VCC` with at least 0.1 uF, and connect exposed pad 21 to ground. No capacitor is permitted on the PG pins [SUPV4 pp.2-4, 8-16; Phase 3C].
 
 ### 6.2 Power-up sequence
 
 1. Input protection ramps `12V_PROTECTED`; amplifier MUTE and STANDBY remain low through their internal pulldowns and external hardware pulldowns.
 2. `3V8_PRE` starts directly from `12V_PROTECTED`. The Phase 3A TPS3760 output is pulled up to this now-valid rail; once `12V_PROTECTED` passes its bounded rising threshold, `PGOOD_12V` enables `1V8_DSP_REF_ANA`. The 1.8 V rail starts first with a 65.8 ms nominal soft start. The oscillator and fanout start from this rail while the DSP remains held in reset.
-3. After supervisor channel 1 has observed valid 1.8 V for 14-24 ms, RESET1 enables `1V0_DSP_CORE`, `1V35_DSP_DMC`, `3V3_SYS`, `3V3_ADC_A`, and `2V8_MIC`. This follows EE-470's VDD_REF-before-VDD_EXT mitigation [POWER pp.1-9].
+3. When supervisor channel 1 observes valid 1.8 V, its real-time `OUT1` releases and enables `1V0_DSP_CORE`, `1V35_DSP_DMC`, `3V3_ADC_A`, and `2V8_MIC`; `3V3_SYS` enables through its local `OUT1 AND PGOOD_12V` gate. This follows EE-470's VDD_REF-before-VDD_EXT mitigation [POWER pp.1-9; SUPV4 pp.8, 11; Phase 3C].
 4. The 1.0 V and 3.3 V TPS62135 rails use 10 nF soft-start capacitors; both TPS7A49 DSP rails use 47 nF NR/soft-start capacitors. Each realized DSP supply ramp must be at least 100 us.
 5. The LMK clock fanout starts with the 1.8 V rail. `SYS_CLKIN0` becomes valid before reset release. The MCLK translators remain disabled until 3.3 V is valid.
-6. Supervisor outputs for 1.0 V, 1.35 V, and 3.3 V feed the wired hardware POR node. The two successive supervisor release intervals provide at least 28 ms after the 1.8 V threshold, exceeding the fanout's 3 ms maximum startup without an inferred clock-good signal. `SYS_HWRST` remains low until all outputs are released. At 24.576 MHz, the device minimum is only `11/24.576 MHz = 447.6 ns`; the selected delay is much longer [DSP p.53; CLKBUF].
+6. The supervisor's common open-drain `RST` keeps `RAILS_OK` low until all four channels are valid continuously for its guaranteed 160-240 ms release delay. `RAILS_OK` then enables the TPS3431; its open-drain `ENOUT`, wired with `WDO` at `SYS_HWRST`, releases after a further guaranteed 170-230 ms. Reset therefore releases 330-470 ms after all rail thresholds are valid. This exceeds the clock fanout's 3 ms maximum startup without inferring clock validity from regulator timing; at 24.576 MHz, the DSP minimum is only `11/24.576 MHz = 447.6 ns` [DSP p.53; CLKBUF; SUPV4 pp.3, 9, 11, 15; WDT pp.3, 9-13].
 
-The worst static voltage difference is less than 1.56 V (`3.333-1.775`) and an isolated reference/analog rail is at most 1.866 V. Therefore `|VDD_EXT-VDD_REF|` and `|VDD_EXT-VDD_ANA|` remain below 1.89 V for monotonic ramps even if one side is at zero. Overshoot beyond the stated regulator bounds is prohibited [DSP pp.44, 52-53; POWER].
+The worst static voltage difference is less than 1.563 V (`3.337821-1.775=1.562821 V`) and an isolated reference/analog rail is at most 1.866 V. Therefore `|VDD_EXT-VDD_REF|` and `|VDD_EXT-VDD_ANA|` remain below 1.89 V for monotonic ramps even if one side is at zero. Overshoot beyond the stated regulator bounds is prohibited [DSP pp.44, 52-53; POWER].
 
 ### 6.3 Power-down and brownout sequence
 
@@ -220,7 +226,7 @@ TPS62135 active discharge and TPS7A20 active-discharge variants provide a define
 ### 7.1 Root and distribution
 
 - Oscillator: `ASDLJ-D-24.576MHz-X-R-T`, 1.8 V +/-5%, -40 C to +105 C, +/-25 ppm, LVCMOS, 45-55% duty, 1 ms maximum startup, 15 pF load, 150 fs maximum integrated jitter over the stated band. Its OE is pulled up to 1.8 V so it starts with the rail [CLKOSC pp.1-4].
-- Fanout: `LMK1C1103PWR`, powered from `1V8_DSP_REF_ANA`, one input and three 1.8 V LVCMOS outputs, no more than 50 ps output skew, 50 fs maximum additive jitter, 3 ns maximum propagation delay, and 3 ms maximum startup. Tie its active-high `1G` to its own 1.8 V rail through 10 kohm; do not expose this pin to the 3.8 V RESET1/enable node [CLKBUF].
+- Fanout: `LMK1C1103PWR`, powered from `1V8_DSP_REF_ANA`, one input and three 1.8 V LVCMOS outputs, no more than 50 ps output skew, 50 fs maximum additive jitter, 3 ns maximum propagation delay, and 3 ms maximum startup. Tie its active-high `1G` to its own 1.8 V rail through 10 kohm; do not expose this pin to the 3.8 V `OUT1`/enable node [CLKBUF].
 - Output 0 goes through a 22-33 ohm source resistor to ADSP-21569 `SYS_CLKIN0` ball N01. `SYS_XTAL0` is left unconnected for external-clock mode [DSP pp.42, 54, 92; Phase 1 pin map].
 - Outputs 1 and 2 separately feed the A ports of `SN74AXC2T245RSWR`; VCCA=1.8 V, VCCB=3.3 V, DIR1/DIR2 high for A-to-B. B1 drives ADAU1978 MCLKIN pin 7; B2 drives TAS6424E-Q1 MCLK pin 12. OE is pulled high to 1.8 V and is released low only after both rails are valid. The device's Ioff and VCC isolation prevent back-powering [CLKXLAT pp.2-5, 18-23].
 - The oscillator drives only the LMK input. At worst rail bounds, its guaranteed high/low margins are `0.9x1.71 - 0.75x1.89 = 0.1215 V` and `0.25x1.71 - 0.1x1.89 = 0.2385 V`; the LMK's 7 pF input is below the oscillator's 15 pF load limit. Each fanout output then drives one CMOS input. The AXC data-I/O capacitance is 5.1 pF at its stated measurement condition, close to the LMK's 5 pF switching-characterization load; model that exact load and route before closing the schematic review. Use one source resistor per output and no unterminated branched MCLK trace.
@@ -278,9 +284,9 @@ Use one `SN74LVC244APWR` at 3.3 V. Allocate channels so the BCLK and FSYNC sourc
 Worst-case input margins into the buffer are:
 
 - DSP high: `2.4-2.0=0.4 V`; DSP low: `0.8-0.4=0.4 V`;
-- ADC high at minimum 3.267 V IOVDD: `(3.267-0.6)-2.0=0.667 V`; ADC low: `0.8-0.4=0.4 V`.
+- ADC high at minimum 3.256299 V IOVDD: `(3.256299-0.6)-2.0=0.656299 V`; ADC low: `0.8-0.4=0.4 V`.
 
-At light CMOS load the LVC output guarantees at -40 C to +125 C `VOH >= VCC-0.3`; with 3.267 V minimum this is 2.967 V. The worst receiver requirement is `0.7 x 3.333=2.333 V`, leaving 0.634 V. Its `VOL <=0.3 V` leaves at least `0.3 x 3.267-0.3=0.680 V` [LVBUF pp.6-8; ADC pp.5-8; AMPE pp.7-11; DSP pp.44-48].
+At light CMOS load the LVC output guarantees at -40 C to +125 C `VOH >= VCC-0.3`; with 3.256299 V minimum this is 2.956299 V. The worst receiver requirement is `0.7 x 3.337821=2.336475 V`, leaving 0.619824 V. Its `VOL <=0.3 V` leaves at least `0.3 x 3.256299-0.3=0.676890 V` [LVBUF pp.6-8; ADC pp.5-8; AMPE pp.7-11; DSP pp.44-48].
 
 ### 8.2 MCLK, control, memory, and debug
 
@@ -288,12 +294,12 @@ At light CMOS load the LVC output guarantees at -40 C to +125 C `VOH >= VCC-0.3`
 | --- | --- | --- |
 | Clock fanout to DSP | Direct 1.8 V | LMK output to SYS_CLKIN0; worst high margin is `0.8x1.71 - 0.65x1.89 = 0.1395 V`, low margin is `0.35x1.71 - 0.2x1.89 = 0.2205 V`. Keep load 5 pF and edge under device limit. |
 | MCLK to ADC/amplifier | 1.8-to-3.3 V AXC translation | One channel per endpoint; A-to-B, OE high during invalid power. Light-load output margins exceed 0.8 V high and low from CLKXLAT and endpoint thresholds. |
-| I2C/TWI | Direct open-drain on common `3V3_SYS` | DSP master; ADC address 0x11, amplifier address 0x6A. Use 2.2 kohm pullups and limit total bus capacitance to 150 pF for 400 kHz; expose test points. No hot-plug. At the bounded rail, static HIGH margin is at least `3.267-max(2.0, 0.7x3.333)=0.934 V`; with `VOL<=0.4 V`, LOW margin is at least `min(0.8, 0.3x3.267)-0.4=0.4 V`. Pullup current is at most 1.52 mA. |
-| SPI2 boot flash | Buffered 3.3 V, single-SPI | A second `SN74LVC244APWR` buffers DSP CLK/MOSI/CS toward the flash and flash MISO toward the DSP. Both sides share `3V3_SYS`; the buffer converts the DSP's guaranteed 2.4/0.4 V outputs into the rail-relative levels required by the flash and prevents powered-off injection. Buffer outputs leave at least 0.634 V HIGH and 0.5 V LOW margin at either endpoint; flash MISO into the buffer leaves at least `(3.267-0.2)-2.0=1.067 V` HIGH and `0.8-0.2=0.6 V` LOW margin [FLASH p.171; LVBUF]. Its OEs are pulled low/enabled whenever 3.3 V is valid, independent of firmware. Use 22-33-ohm source resistors after the active driver and a 10-kohm CE pullup at the flash. Quad data pins are not part of the boot contract. |
+| I2C/TWI | Direct open-drain on common `3V3_SYS` | DSP master; ADC address 0x11, amplifier address 0x6A. Use 2.2 kohm pullups and limit total bus capacitance to 150 pF for 400 kHz; expose test points. No hot-plug. At the bounded rail, static HIGH margin is at least `3.256299-max(2.0, 0.7x3.337821)=0.919824 V`; with `VOL<=0.4 V`, LOW margin is at least `min(0.8, 0.3x3.256299)-0.4=0.4 V`. Pullup current is at most 1.52 mA. |
+| SPI2 boot flash | Buffered 3.3 V, single-SPI | A second `SN74LVC244APWR` buffers DSP CLK/MOSI/CS toward the flash and flash MISO toward the DSP. Both sides share `3V3_SYS`; the buffer converts the DSP's guaranteed 2.4/0.4 V outputs into the rail-relative levels required by the flash and prevents powered-off injection. Buffer outputs leave at least 0.619824 V HIGH and 0.5 V LOW margin at either endpoint; flash MISO into the buffer leaves at least `(3.256299-0.2)-2.0=1.056299 V` HIGH and `0.8-0.2=0.6 V` LOW margin [FLASH p.171; LVBUF]. Its OEs are pulled low/enabled whenever 3.3 V is valid, independent of firmware. Use 22-33-ohm source resistors after the active driver and a 10-kohm CE pullup at the flash. Quad data pins are not part of the boot contract. |
 | JTAG | Direct 3.3 V target domain | Use the official EV-21569-SOM 10-pin mapping below. The header carries target reference; the probe must not drive an unpowered target. TRST has the EE-68-required 4.7 kohm pulldown [SOMSCH sheet 9; JTAG p.6]. |
 | UART0 | Direct 3.3 V CMOS | Logic-level only. External USB, RS-232, or RS-485 equipment requires an external adapter/transceiver. |
 | Reset/mute/standby | Hardware-dominant open drain | ADC reset and system reset use destination-domain pullups with supervisor/fault pull-down assertion. Amplifier MUTE/STANDBY remain low by internal/external pulldowns; their controlled pullups are released only when both the hardware-safe latch and DSP permit. The DSP never has to source a marginal rail-relative HIGH. |
-| AFE power enable | Buffered 3.3 V to TPS7A49 EN | Allocate one otherwise spare channel of the always-enabled boot `SN74LVC244A` to `AFE_EN_CMD`, with a 100-kohm EN pulldown and hardware-fault open-drain override after the buffer. Worst margins are at least `2.967-2.1=0.867 V` HIGH and `0.4-0.3=0.1 V` LOW; default is off. |
+| AFE power enable | Buffered 3.3 V to TPS7A49 EN | Allocate one otherwise spare channel of the always-enabled boot `SN74LVC244A` to `AFE_EN_CMD`, with a 100-kohm EN pulldown and hardware-fault open-drain override after the buffer. Worst margins are at least `2.956299-2.1=0.856299 V` HIGH and `0.4-0.3=0.1 V` LOW; default is off. |
 
 ## 9. Analog front-end architecture
 
@@ -355,14 +361,14 @@ AC coupling prevents the microphone's 1.35 V DC bias from defining ADC common mo
 
 ## 10. Reset, supervision, and startup architecture
 
-Use `TPS386000RGPR` plus wired open-drain safe-state logic. A supervisor is required because software cannot guarantee rail validity, power-failure response, or the five-domain reset condition.
+Use `LTC2964HUDC#PBF` plus `TPS3431SDRBR` and wired open-drain safe-state logic. The four-channel supervisor provides individual 1.8 V sequencing status and a common rail-valid reset; the separate watchdog preserves catastrophic-software supervision. Software cannot guarantee rail validity, power-failure response, or the five-domain reset condition [Phase 3B](phase_3b_power_supervisor_correction.md).
 
 ### 10.1 Normal startup state machine
 
 1. **Power applied:** TPS26630 validates voltage/polarity and limits inrush; the Phase 3A TPS3760 holds `PGOOD_12V` low. Amplifier MUTE/STANDBY and buffer OEs remain in their passive safe states.
 2. **Regulators start:** `3V8_PRE` starts from the protected rail; valid `PGOOD_12V` then enables 1.8 V; the rail supervisor subsequently enables the remaining DSP/system rails as section 6 defines.
 3. **Clocks valid:** oscillator and LMK fanout settle; DSP clock output is enabled. MCLK translation waits for both 1.8 V and 3.3 V.
-4. **DSP reset:** supervisor releases `SYS_HWRST` only after every monitored rail and clock delay is valid. Any JTAG halt/reset forces the external audio-safe latch.
+4. **DSP reset:** LTC2964 releases `RAILS_OK` only after every monitored rail has remained valid for 160-240 ms; TPS3431 `ENOUT` then adds 170-230 ms before `SYS_HWRST` releases. The 330-470 ms total also covers the bounded clock startup. Any JTAG halt/reset forces the external audio-safe latch.
 5. **DSP boot:** ROM boots SPI2 flash. Earliest code configures safe GPIO, watchdog, CGU, SRU/SPORT, DMA, and TWI; amplifier remains in STANDBY.
 6. **ADC initialization:** release PD/RST, ensure MCLK/BCLK/FSYNC, wait at least 10 ms after DVDD threshold, configure 96 kHz/TDM4/MCLK PLL/HPF-off, poll PLL lock, then power up channels.
 7. **Amplifier initialization:** after its 12 ms I2C startup, write/read back phase, TDM, gain, HPF, OC, and warning settings; run or explicitly bypass diagnostics under the firmware test policy. Outputs remain Hi-Z.
@@ -380,7 +386,7 @@ Use `TPS386000RGPR` plus wired open-drain safe-state logic. A supervisor is requ
 | ADC PLL unlock/data framing error | Maintain amplifier MUTE, reset/reinitialize ADC and SPORT, discard buffers. |
 | Commanded shutdown | Ordered sequence in section 6.3; STANDBY held low at least 15 ms before amplifier supplies disappear. |
 
-TPS386000 watchdog timeout is 450-750 ms. It is a catastrophic-software supervisor, not the real-time ANC deadline monitor; the DSP's internal watchdog and audio-frame deadline logic must react faster. WDO is wired into the safe-state/reset logic [SUPV pp.4, 7-8, 23-29].
+Use `TPS3431SDRBR` at `3V3_SYS` for the catastrophic-software watchdog. Drive `EN` only from the separate LTC2964 `RAILS_OK` node so WDO assertion cannot disable its own timer; tie `SET1` high to prevent firmware from defeating it. Leave `CWD` unconnected for the factory-guaranteed 1.36-1.84 s timeout. Tie open-drain `ENOUT` and `WDO` together at `SYS_HWRST` with one 10.0 kohm pullup to `3V3_SYS`, and feed WDO into the hardware-safe latch. ENOUT holds reset low for 170-230 ms after RAILS_OK; a watchdog timeout holds WDO low for 170-230 ms while EN remains high. Firmware must issue its first valid WDI falling edge within at least `1.36 s - 0.23 s = 1.13 s` after reset release. Bypass `VDD` with 0.1 uF. This watchdog is not the real-time ANC deadline monitor; the DSP's internal watchdog and audio-frame deadline logic must react faster [WDT pp.3, 9-14].
 
 ## 11. Boot, memory, and debug architecture
 
@@ -446,11 +452,11 @@ PCB planning requirements are therefore: dedicated amplifier thermal/heatsink zo
 
 ### Sheet 2 - Power regulation / sequencing
 
-- Major parts: three TPS62135 converters (`3V8_PRE`, `1V0_DSP_CORE`, `3V3_SYS`); three TPS7A4901 (`1V8_DSP_REF_ANA`, `1V35_DSP_DMC`, `5V_AFE`); TPS7A2033P, TPS7A2028P; TPS386000; open-drain safe-state gates.
+- Major parts: three TPS62135 converters (`3V8_PRE`, `1V0_DSP_CORE`, `3V3_SYS`); three TPS7A4901 (`1V8_DSP_REF_ANA`, `1V35_DSP_DMC`, `5V_AFE`); TPS7A2033P, TPS7A2028P; `SN74LV1T08DBVR` local `3V3_SYS` enable gate; `LTC2964HUDC#PBF`; `TPS3431SDRBR`; open-drain safe-state gates.
 - Rails: every rail in section 5.
-- Critical values: buck feedback pairs 442 k/100 k, 42.7 k/100 k, and 371 k/100 k; 10 nF buck soft starts; 47 nF DSP-rail and 10 nF AFE TPS7A49 NR/SS capacitors; supervisor divider/CT values in section 6; DNP capacitance banks and all rail test points.
+- Critical values: buck feedback pairs 442 k/100 k, 42.7 k/100 k, and 37.1 k/10.0 k; the `3V3_SYS` buck alone takes input from `12V_PROTECTED` and uses `OUT1 AND PGOOD_12V` plus a 1.0 Mohm EN pulldown; 10 nF buck soft starts; 47 nF DSP-rail and 10 nF AFE TPS7A49 NR/SS capacitors; supervisor dividers and reset/watchdog configuration in sections 6 and 10; DNP capacitance banks and all rail test points.
 - Interfaces/dependencies: `PGOOD_12V`, regulator EN/PG, POR, ADC reset, buffer OEs, amplifier MUTE/STANDBY.
-- Evidence: BUCK, LDO, HVLDO, SUPV, DSP pp.44, 52-53, POWER.
+- Evidence: BUCK, LDO, HVLDO, SUPV4, WDT, DSP pp.44, 52-53, POWER, [Phase 3B](phase_3b_power_supervisor_correction.md), [Phase 3C](phase_3c_3v3_regulator_correction.md).
 
 ### Sheet 3 - Microphones / AFE
 
@@ -533,7 +539,7 @@ The following analyses are required during Phase 4 but are not invitations to in
 | --- | --- | --- |
 | AFE contract closure | **ACCEPTED PROVISIONALLY** | Bounded 20 Hz-1 kHz ANC development band, 120 dBSPL crest-inclusive input, gain/headroom/noise/pole calculations, exact OPA165x topology/rails, and powered-off sequence make the schematic deterministic. |
 | Clock implementation closure | **RESOLVED** | Exact oscillator, fanout, translators, rails, loading rule, DAI/SPORT allocation, clock arithmetic, timing margins, safe OE, and formal ADC-hold validation method are defined. |
-| Power and sequencing closure | **ACCEPTED PROVISIONALLY** | Input envelope, all rail sources/loads, DMC disposition, supervisor thresholds, reset, startup/shutdown/back-drive behavior and ramp validation are defined. Later passive tuning does not alter the architecture. |
+| Power and sequencing closure | **ACCEPTED PROVISIONALLY** | Input envelope, all rail sources/loads, DMC disposition, Phase 3B-corrected supervisor thresholds, reset, startup/shutdown/back-drive behavior and ramp validation are defined. Later passive tuning does not alter the architecture. |
 | Conditional direct-I/O closure | **RESOLVED** | Direct-drive assumption is replaced by qualified buffering/translation; common-domain buses have explicit voltage limits and margins. |
 
 There are **no remaining blockers to schematic entry** within the Phase 3 prototype bounds. There are substantial blockers to PCB release, acoustic operation, final thermal claims, and product compliance; they are listed in sections 15-16 and may not be treated as completed work.

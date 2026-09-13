@@ -1,0 +1,57 @@
+{
+  "source": "datasheets\\power\\tps386000_datasheet_rev_f.pdf",
+  "sha256": "02e788626e1d8d546ada465dc63703635834e41ee109d6c9fc6970a26fb62e98",
+  "source_identity": "TI TPS386000/TPS386040, SBVS105F, October 2018",
+  "scope": "Static guaranteed-release screen, not simulation or bench validation",
+  "results": [
+    {
+      "rail": "1V8_DSP_REF_ANA",
+      "channel": "SENSE1",
+      "top_ohm_nominal": 33800,
+      "bottom_ohm_nominal": 10000,
+      "phase3_rail_min_V": 1.775,
+      "fall_max_zero_leakage_V": 1.7722537737737736,
+      "rise_max_zero_leakage_V": 1.8161214414414413,
+      "release_margin_zero_leakage_V": -0.041121441441441364,
+      "rise_max_with_25nA_screen_V": 1.8169672864414412,
+      "guaranteed_release": false
+    },
+    {
+      "rail": "1V0_DSP_CORE",
+      "channel": "SENSE2",
+      "top_ohm_nominal": 14300,
+      "bottom_ohm_nominal": 10000,
+      "phase3_rail_min_V": 0.99,
+      "fall_max_zero_leakage_V": 0.9828765965965968,
+      "rise_max_zero_leakage_V": 1.0072052252252253,
+      "release_margin_zero_leakage_V": -0.017205225225225274,
+      "rise_max_with_25nA_screen_V": 1.0075630827252253,
+      "guaranteed_release": false
+    },
+    {
+      "rail": "1V35_DSP_DMC",
+      "channel": "SENSE3",
+      "top_ohm_nominal": 22500,
+      "bottom_ohm_nominal": 10000,
+      "phase3_rail_min_V": 1.325,
+      "fall_max_zero_leakage_V": 1.3148198198198198,
+      "rise_max_zero_leakage_V": 1.3473648648648648,
+      "release_margin_zero_leakage_V": -0.022364864864864886,
+      "rise_max_with_25nA_screen_V": 1.3479279273648648,
+      "guaranteed_release": false
+    },
+    {
+      "rail": "3V3_SYS",
+      "channel": "SENSE4L",
+      "top_ohm_nominal": 69800,
+      "bottom_ohm_nominal": 10000,
+      "phase3_rail_min_V": 3.267,
+      "fall_max_zero_leakage_V": 3.229565485485485,
+      "rise_max_zero_leakage_V": 3.3095052252252253,
+      "release_margin_zero_leakage_V": -0.042505225225225374,
+      "rise_max_with_25nA_screen_V": 3.3112519702252254,
+      "guaranteed_release": false
+    }
+  ],
+  "gate": "PHASE 4B: BLOCKED"
+}

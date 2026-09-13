@@ -1,0 +1,32 @@
+{
+  "gate": "BLOCKED",
+  "scope": "Static feedback-network calculation only; no measured or transient result",
+  "evidence": "datasheets\\power\\tps62135_datasheet_rev_b.pdf",
+  "evidence_sha256": "9b718325c5216c529eaa19730d0deba8dd72518ecb837c90dd6e839d2b8b811d",
+  "3V8_PRE": {
+    "top_ohm": "442000",
+    "bottom_ohm": "100000",
+    "minimum_V": "3.719030940000000000000000000",
+    "maximum_V": "3.869167076136136136136136136",
+    "minimum_at_zero_leakage_V": "3.749940000000000000000000000",
+    "approved_minimum_V": "3.762",
+    "approved_maximum_V": "3.838",
+    "accuracy_headroom_extra_V": "5.530832923863863863863863864",
+    "approved_output_band_preserved": false
+  },
+  "1V0_DSP_CORE": {
+    "top_ohm": "42700",
+    "bottom_ohm": "100000",
+    "minimum_V": "0.9853337582307692307692307691",
+    "maximum_V": "1.012485371382382382382382382",
+    "minimum_at_zero_leakage_V": "0.9883197692307692307692307691",
+    "approved_minimum_V": "0.990",
+    "approved_maximum_V": "1.010",
+    "approved_release_margin_mV": "18.596",
+    "approved_supervisor_rise_max_V": "0.971404",
+    "calculated_release_margin_mV": "13.92975823076923076923076910",
+    "release_margin_preserved": false,
+    "accuracy_headroom_extra_V": "1.706545568617617617617617618",
+    "approved_output_band_preserved": false
+  }
+}
