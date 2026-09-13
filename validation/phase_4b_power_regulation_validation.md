@@ -165,3 +165,193 @@ Modified: `hardware/kicad/power_regulation.kicad_sch`, the hierarchy root `hardw
 Manufacturer sources were consulted only for the Phase 3D-required pin/package/passive/control implementation detail. The LTC2964 official PDF was readable through the manufacturer endpoint in the web tool, but attempts to retain its PDF locally timed out; the same source limitation noted in Phase 3B remains explicit. No alternative regulator was selected. Sheet 1, its symbol library, all later sheets, the existing phase contracts, and the user's pre-existing document edits were not modified. No PCB, placement, routing, Phase 4C, or Git commit was created.
 
 PHASE 4B: BLOCKED
+
+
+## Resumed under Phase 3D + Phase 3E ? 2026-09-13
+
+**Result: BLOCKED before new schematic changes by the exact MCLK/safe-arm dependency.** The previous direct-OUT1 shutdown blocker is resolved at the contract level by Phase 3E. It is not the reason for this new gate. Existing Sheet 2 remains the previously recorded partial entry; none of the new Phase 3E circuitry is claimed as implemented.
+
+### Concrete implementation contradiction: pre-arm ADC checks require a post-arm clock
+
+**CONFLICTING:** while assigning the required tenth SN74LV1T08 (audio/MCLK release) and its startup default, these mandatory dependencies meet at the same signal:
+
+| Controlling requirement | Consequence at the proposed Sheet 2 control interface |
+| --- | --- |
+| [Phase 3E section 6](../docs/phases/phase_3e_shutdown_safe_state_correction.md): audio and MCLK OEs release only through `HW_RUN_LATCHED AND AUDIO_OE_CMD`, with passive-disabled OE/NMOS topology | With the safe latch cleared, setting `AUDIO_OE_CMD=1` cannot enable the ADC MCLK translator or serial-clock buffer. |
+| Phase 3E section 3.4: the deliberate arm edge follows boot and rail/clock/ADC/amplifier checks; section 5.1 step 7 initializes/verifies ADC before `SAFE_ARM_CMD` | Firmware cannot arm first and then perform the required initial ADC checks without changing the prescribed sequence. |
+| [Current Phase 3D section 9.1 item 9](../docs/phases/phase_3d_final_power_contract_audit.md): arming follows successful PLL/configuration checks; [current Phase 3 section 10.1 step 6](../docs/phases/phase_3_schematic_readiness.md): provide MCLK/BCLK/FSYNC and poll PLL lock, **then** pulse `SAFE_ARM_CMD` | The retained ADC check explicitly includes PLL lock, rather than merely an I2C register read. Phase 3E also retains the pre-arm ADC-check requirement. |
+| [ADAU1978 Rev.B](../datasheets/adc/adau1978_datasheet_rev_b.pdf), pp.12?14,29 | Stable input clocks are required for PLL startup. The selected MCLK mode takes its reference from MCLKIN (pin 7); PLL_LOCK is register 0x01 bit 7, reset value zero. |
+
+The dependency is `arm -> enable MCLK -> acquire/check ADC PLL lock -> permission to arm`. Starting from the specified cleared latch, both possible values of `AUDIO_OE_CMD` leave the translated MCLK disabled. Waiting longer cannot supply a missing input clock. The same required reinitialization/rearm relationship applies after the safe latch is cleared by a fault. The root oscillator being operational does not deliver its clock through a disabled translator. No alternate clock mode or clock path is authorized here.
+
+This is an implementation prerequisite conflict, established without a new rail or power-architecture audit. No alternative component or substitute logic was researched or entered to resolve it. It is not a shortage of physical measurements. In accordance with the task's prohibition on new sequencing decisions and AGENTS.md section 25, schematic entry stopped rather than silently changing the arm order or the prescribed OE equation.
+
+**Resolution required:** an authoritative correction must define a realizable relationship between initial ADC clock/PLL validation and hardware-safe arming, including startup and fault recovery, while retaining default mute/standby/analog-off behavior. That sequencing decision cannot be supplied by ERC or a passive-value change. This record does not approve a replacement sequence.
+
+### Checks actually executed on this resume
+
+- Read the five requested governing files and targeted manufacturer sections for new symbol pins, timer/translator/switch behavior, and the concrete ADC clock dependency. No Phase 3B/3C document or evidence-index content was consulted on this resume.
+- Executed [verify_phase3e_startup_dependency.py](phase_4b/verify_phase3e_startup_dependency.py). Its necessary-condition reachability model grants all rails, reset, oscillator and other prerequisites valid, and even permits instantaneous PLL verification once clocks arrive. The only reachable `(HW_RUN_LATCHED, PLL_check_passed)` state is `(0,0)`. This is a contract logic check, **not SPICE, a final implemented-netlist sequencing test, or a physical transient measurement**.
+- KiCad 10.0.6 natively loaded/resaved Sheet 2 and the hierarchy root in a temporary project copy. No temporary saved design was copied back. Fresh ERC and XML export then loaded the unchanged production project. The newly created local-preference cache was removed; all production hardware files remain byte-identical.
+- Compared values, footprints and connected pin/net assignments for **all 124 previously entered Sheet 2 components** against the preserved manifest. They agree. Existing feedback/preload/supervisor networks therefore remain unchanged from the earlier 286-check Phase 3D validation; no new rail-bound or architecture audit was substituted for that result. The existing enable circuitry still needs the Phase 3E replacement and is not certified by this comparison.
+- [Results and per-item ERC dispositions](phase_4b/phase3e_resume/startup_dependency_results.json), [fresh raw ERC](phase_4b/phase3e_resume/existing_sheet2_erc.json), [fresh exported netlist](phase_4b/phase3e_resume/existing_project.net.xml), and [resume baseline hashes](phase_4b/phase3e_resume/resume_baseline.json) preserve the evidence. All previous validation bytes and historical artifacts are hash-checked and preserved.
+
+### Re-evaluation of the previous 3 errors / 5 warnings
+
+Fresh ERC again reports **3 errors and 5 warnings** on the existing partial design. Each remaining item is classified below and individually recorded with its original UUID in the results JSON. None was suppressed, retyped or disconnected to obtain a lower count.
+
+| Remaining ERC item | Classification | Engineering disposition |
+| --- | --- | --- |
+| U201 pin 4 FB2 to ground power output | JUSTIFIED / INTENTIONAL | Phase 3D section 8 mandates grounded FB2 with VSEL low; the Sheet 1 ground power flag triggers the output-type check. |
+| U202 pin 4 FB2 to ground power output | JUSTIFIED / INTENTIONAL | Same mandatory FB2 configuration. |
+| U203 pin 4 FB2 to ground power output | JUSTIFIED / INTENTIONAL | Same mandatory FB2 configuration. |
+| Root `12V_PROTECTED` interface wire endpoint off grid | JUSTIFIED / INTENTIONAL | Preserves the existing Sheet 1 port position; exported connectivity agrees. |
+| Root `POWER_GND` interface wire endpoint off grid | JUSTIFIED / INTENTIONAL | Same retained Sheet 1 geometry and verified connectivity. |
+| Root `3V8_PRE` interface wire endpoint off grid | JUSTIFIED / INTENTIONAL | Same retained Sheet 1 geometry and verified connectivity. |
+| Root `PGOOD_12V` interface wire endpoint off grid | JUSTIFIED / INTENTIONAL | Same retained Sheet 1 geometry and verified connectivity. |
+| Root `EFUSE_FLT_N` interface wire endpoint off grid | JUSTIFIED / INTENTIONAL | Same retained Sheet 1 geometry and verified connectivity. |
+
+Newly FIXED items on this resume: **none**. Unresolved BLOCKING ERC items in this fresh report: **none**. The **blocking contract dependency and incomplete safe-state implementation remain**, irrespective of ERC. This is explicitly not the requested post-completion ERC acceptance: the missing circuitry could not be completed under the contradictory clock/arm requirements.
+
+### Scope, outstanding work and files
+
+No production KiCad file, Sheet 1, later sheet, symbol, footprint, or authoritative phase document was modified. The user's pre-existing document and datasheet changes were preserved. No PCB, placement, routing, Phase 4C work, or Git commit was created.
+
+Modified on this resume: this append-only validation record. Added: `validation/phase_4b/verify_phase3e_startup_dependency.py` and the three reports plus baseline under `validation/phase_4b/phase3e_resume/`. Previous BLOCKED history and artifacts are unchanged.
+
+Still unimplemented: the Phase 3E retained latch/timer, independent microphone/AFE gating, command translator, safe latch/fault aggregation, endpoint-release controls and fourteen paired-domain analog switches. Accordingly, complete startup/shutdown/brownout/watchdog safety, powered-off-domain behavior, and the **20.415?40.946 ms implemented post-reset hold are not verified**. Exact CTS effective-capacitance qualification, populated load totals and the remaining physical validations remain outstanding; absence of hardware is not the cause of this gate.
+
+PHASE 4B: BLOCKED
+
+
+## Resumed under Phase 3D + Phase 3E + Phase 3F - 2026-09-14
+
+**PHASE 4B: PASS for Sheet 2 regulation/sequencing and its controlled interfaces.** Phase 3F resolves the previous MCLK/arming dependency. All prior BLOCKED entries remain historical and are preserved byte-for-byte. No rail, feedback ratio, preload, supervisor threshold or regulator was changed to obtain this result.
+
+### Implemented scope and later-sheet boundary
+
+[Sheet 2](../hardware/kicad/power_regulation.kicad_sch) contains **248 components plus three power flags**: 43 ICs, 3 OE-sink MOSFETs, 3 inductors, 68 resistors, 75 capacitors and 56 test points. The root hierarchy connects the five existing Sheet 1 power/status interfaces. Future endpoint interfaces terminate explicitly at the root.
+
+The requested control and isolation circuits are consolidated on Sheet 2: the command translator, ADC reset assertion buffer, OE sinks and fourteen TMUX2821 devices accompany the rail/sequencing hardware. This implements their approved electrical functions without adding microphone, op-amp, ADC, DSP or amplifier load circuitry. Later implementation must use these existing interface circuits rather than duplicate them from the earlier sheet-plan component lists.
+
+**The Sheet 2-only boundary matters:** ASDLJ/LMK clock generation, SN74AXC2T245 MCLK translation, SN74LVC244A clock/data banks, ADC DVDD CEXT/REXT, ADC PLL registers, flash/boot straps and endpoint clock/DVDD test points remain assigned to later sheets. They were not implemented here. Sheet 2 implements the sources, gate equations, passive defaults and named OE/reset connections that those circuits require. Its drawing records the exact ADC DVDD/reset constraints. The resulting clock/startup verification is a control-interface dependency verification, not a claim that an unimplemented ADC or clock buffer has produced a waveform. No Sheet 3-7 schematic file was modified; no PCB, placement, routing or Phase 4C work occurred.
+
+### Rail, passive and supervision acceptance
+
+The native exported netlist was checked against the Phase 3D contract, including complete series feedback arms, regulator pin assignments, enable nets, polarity, permanent preloads, NR/SS/CFF networks and supply sources.
+
+| Rail | Feedback or fixed setting; permanent preload | Static output bounds, V | Result |
+| --- | --- | --- | --- |
+| `3V8_PRE` | 44.2k / 10.0k; forced PWM | 3.746849-3.841293 | PASS |
+| `1V0_DSP_CORE` | 4.32k / 10.0k; forced PWM | 0.991476-1.013338 | PASS |
+| `3V3_SYS` | 37.1k / 10.0k; forced PWM from `12V_PROTECTED` | 3.256299-3.337821 | PASS |
+| `1V8_DSP_REF_ANA` | (54.2k + 100 ohm) / 100k; 1.69k preload | 1.776066-1.875487 | PASS |
+| `1V35_DSP_DMC` | 14.9k / 100k; 1.24k preload | 1.325693-1.395966 | PASS |
+| `5V_AFE` | 324k / 100k; 4.70k preload | 4.858943-5.157889 | PASS |
+| `3V3_ADC_A` | TPS7A2033PDBVR; 3.01k preload | 3.250500-3.349500 | PASS |
+| `2V8_MIC` | TPS7A2028PDBVR; 2.55k preload | 2.758000-2.842000 | PASS |
+
+All feedback, supervision and preload resistors retain 0.1% tolerance. The five preload minimum currents remain 1.050/1.068/1.033/1.079/1.080 mA. Buck MODE/VSEL/FB2/VOS, 1 uH inductors, 10 nF independent soft starts and specified capacitor banks remain intact. TPS7A49 NR/SS is 47 nF for reference/DMC and 10 nF for AFE; every adjustable LDO retains 10 nF across its complete upper feedback arm. Consumer-side ferrite/decoupling networks remain later-sheet work; their absence does not change a Sheet 2 rail definition.
+
+LTC2964 divider/threshold checks remain unchanged:
+
+| Channel | Upper/lower divider | Rise = fall bounds, V | Release / fault margin, mV |
+| --- | --- | --- | --- |
+| V1, reference | 24.9k / 10.0k | 1.733427-1.756604 | 19.462 / 23.427 |
+| V2, core | 9.31k / 10.0k | 0.959608-0.971404 | 20.072 / 9.608 |
+| V3, DMC | (15.8k + 280 ohm) / 10.0k | 1.295641-1.312379 | 13.314 / 12.641 |
+| V4, system | 53.6k / 10.0k | 3.157969-3.202097 | 54.202 / 27.969 |
+
+Phase 3B/3D margin floors are preserved; the Phase 3C system source/divider architecture is preserved. Phase 3E's 100k destination EN pulldown supersedes the earlier 1M system EN pulldown. The Sheet 1 protected-input thresholds and PGOOD pullup are untouched. R382 supplies the required 10k eFuse-fault pullup on Sheet 2; native connectivity showed that this pullup was not already on Sheet 1.
+
+### Implemented sequencing and safe defaults
+
+- U221 (`U_SEQ_RUN`) and U225 (`U_DOWN_DELAY`) retain commanded service-off independently of DSP/system power. U224's two open-drain channels assert `SYS_HWRST` from the retained state or low PGOOD. No pre-powered output sources current into the system reset node.
+- U211/U212 implement `DOWNSTREAM_EN = OUT1 AND PGOOD_CLEAN AND DOWNSTREAM_RUN_DELAYED`. It drives core, DMC, system and ADC-analog EN, each with a local 100k pulldown. No regulator EN remains directly on `OUT1`. Pre stays enabled directly; reference/analog stays enabled by raw `PGOOD_12V`.
+- U222 is the hardware-safe latch. U214-U216 produce `SAFE_HW_CLEAR_N`; U228 adds continuous `RUN_HEALTH_OK_3V8` to form final `SAFE_CLEAR_N`. Low PGOOD, system reset, eFuse fault, amplifier fault or run health clears authorization. U217 qualifies the deliberate arm edge. Recovery of a fault/health level does not itself SET the latch.
+- U226 implements all eight exact Phase 3F command/status channel assignments, VCCA=`3V3_SYS`, VCCB=`3V8_PRE`, fixed A-to-B direction, grounded OE, both supply bypasses and all stated A/B pulldowns. U223 Schmitt-conditions raw PGOOD/eFuse fault. Raw reset/amplifier-fault nodes have their 10k pullups and 100k pulldowns.
+- U218/U219 implement `ANALOG_PWR_EN = DOWNSTREAM_EN AND HW_RUN_LATCHED AND ANALOG_PWR_CMD_3V8`. Both microphone and AFE EN have separate 100k pulldowns. Either can be forced into the shared analog-OFF state while core/DMC remain enabled; firmware cannot override a cleared safe latch.
+- U227 independently qualifies amplifier MUTE/STANDBY releases with the latch. Their command and release nodes have passive LOW defaults. Clock availability cannot assert either release.
+- U228 implements pre-arm `CLOCK_STARTUP_EN`; U220 implements post-arm `AUDIO_DATA_OE_RELEASE`. Q201 sinks MCLK OE from `RAILS_OK` alone. Q202 sinks the clock-bank OE from `CLOCK_STARTUP_EN`; Q203 sinks the data-bank OE from `AUDIO_DATA_OE_RELEASE`. Each has a 100k gate pulldown and the exact destination-rail 10k OE pullup.
+- U229 implements the two-source open-drain ADC reset: LOW on either `SYS_HWRST` or `ADC_RST_RELEASE_CMD` asserts `ADC_PD_RST_N`. The command defaults LOW. ADC reset release has no safe-latch prerequisite.
+
+| Sheet 2 output | Required later connection; do not duplicate its Sheet 2 pull/sink |
+| --- | --- |
+| `MCLK_OE_N` | SN74AXC2T245 pin 2; pullup already to `1V8_DSP_REF_ANA` |
+| `AUDIO_CLOCK_OE_N` | SN74LVC244A pin 1, BCLK/FSYNC bank; pullup already to `3V3_SYS` |
+| `AUDIO_DATA_OE_N` | SN74LVC244A pin 19, serial-data bank; pullup already to `3V3_SYS` |
+| `ADC_PD_RST_N` | ADAU1978 PD/RST pin 6; reset release only after stable MCLK |
+| `AMP_MUTE_RELEASE`, `AMP_STBY_RELEASE` | Amplifier functional releases; remain LOW before arm |
+| Paired analog interfaces | After existing 100-ohm microphone RF/47-ohm AFE drive resistors, before coupling/ADC inputs; ADC VREF through its paired path |
+
+### Timing, startup dependency and event verification
+
+C340 is the exact **KEMET C1210C224J3GACTU**, 220 nF, 5%, C0G, 25 V, 1210. Its [manufacturer specsheet](../datasheets/power/kemet_C1210C224J3GACTU.pdf), p.1, and [C0G family specification](../datasheets/power/kemet_c0g.pdf), pp.1-2, support 30 ppm/C, zero aging loss and no DC-bias capacitance change. Including initial tolerance and the maximum 100 C displacement from 25 C across -40 to +125 C gives **208.373-231.693 nF**, inside the frozen 198-242 nF acceptance range.
+
+Using TPS3760 Rev.A timing resistance/delay bounds, the frozen effective range reproduces **20.415-40.946 ms** to displayed rounding. The selected part gives **21.484-39.203 ms**, leaving more than 1 ms minimum slack for the nanosecond-scale latch/reset propagation relationship. CTR/MR is intentionally open. The 330 ms minimum reset/boot qualification exceeds the timer's worst 10%-discharge interval. Bench verification of actual reset/rail waveforms remains required.
+
+The checker reconstructs the combinational equations from the **KiCad-exported pins**, checks the latch/timer/translator connections, and topologically sorts the startup dependency graph. The chain is:
+
+`power valid -> reference/OUT1 -> DOWNSTREAM_EN -> monitored rails -> RAILS_OK -> MCLK OE release -> DSP reset/boot -> CLOCK_STARTUP_EN -> ADC reset/startup/PLL validation -> run health + deliberate arm edge -> HW_RUN_LATCHED -> data/analog/amplifier permissions`.
+
+No implemented bootstrap or downstream-enable logic cone contains `HW_RUN_LATCHED`. The graph includes explicitly marked future endpoint/firmware steps, whose required wiring is the Phase 3F interface contract. ADC PLL lock does not require analog power or serial data. Amplifier active clock checks occur after arm in programmed Hi-Z, before analog settling/MUTE/PLAY; STANDBY fault monitoring is not assumed.
+
+**Executed digital event checks:** cold startup, pre-arm clocks with functional releases blocked, explicit health/arm SET, asynchronous clearing by each of the five sources, recovery without automatic rearm, all four individual monitored-rail failures, watchdog reset/reboot, ADC-PLL health withdrawal, and commanded service-off retention after DSP/system power disappears. V1 failure disables downstream power; V2/V3/V4 failure holds reset without circularly disabling their own regulators. Brownout removes downstream enable immediately. Healthy-rail watchdog reset retains MCLK availability while clearing data/analog/amplifier authorization and BCLK/FSYNC release.
+
+Commanded shutdown remains: MUTE/Hi-Z/STANDBY LOW >=15 ms; analog OFF and >=1 ms guard; data OFF and ADC reset; run health LOW; clock-startup command LOW; retained shutdown pulse; post-reset hold; downstream OFF. Pre/reference remain intentionally on in service-off until an external PGOOD-low power cycle; full power-off removes reference last. Abrupt loss does not claim graceful ride-through. The ADC interface note retains CEXT=10 uF X7R, effective maximum <=12 uF, REXT=3.00k 1%, >=50 ms in-place reset, and the stable-clock/DVDD wait before PWUP. These endpoint parts/registers are not entered on Sheet 2.
+
+These are netlist and bounded digital timing/state checks, **not analog SPICE or oscilloscope tests**. ADC-only PLL loss has no direct hardware status pin: Phase 3F's mandatory PLL automute, firmware health withdrawal and watchdog policy remain the exact integration requirement.
+
+### Cross-domain, load and component verification
+
+The fourteen TMUX2821 devices form **13 paired-domain paths**: eight differential legs, one ADC-VREF path, and four microphone paths. Each crossing has two series switches powered from the adjacent rails; both used SELs follow `ANALOG_PWR_EN`. The VREF pair's unused SELs are grounded and unused S/D pins are NC. All VDD pins have 100 nF bypass, all EPs are grounded. Native pin tracing verifies that no analog crossing bypasses either switch.
+
+The microphone/ADC/AFE rail bounds lie inside the switch's 1.8-5.5 V supply range; the pre-domain SEL high is below its 5.5 V fail-safe limit. Powered-off switch isolation, translator supply isolation/Ioff, destination-domain reset/OE pullups, grounded NMOS sources, and the amplifier gate's tolerant inputs prevent an intended powered driver from sourcing an absent domain. Leakage is not claimed to be zero. Future external debug/pullup connections and loaded rail-collapse permutations still require the frozen physical checks.
+
+The implementation screen places all Sheet 2 control-resistor currents conservatively at 3.9 V, even for system-domain and series networks, and adds manufacturer quiescent terms: approximately **7.045 mA** versus the existing 20 mA control allowance. This is a DC allocation screen; transition-current and complete-board workload claims are not inferred. TMUX maxima add 0.28 mA microphone, 0.70 mA ADC and 0.98 mA AFE. Microphone fixed/max-current subtotal is 2.316 mA within 5 mA; AFE quiescent/preload/switch subtotal is 30.091 mA within 50 mA. ADC fixed support, including the future DVDD discharge resistor, is 2.481 mA, leaving 27.519 mA of its existing 30 mA allocation for the ADC and remaining support. Full DSP/ADC/amplifier workload, output-drive and transient totals remain the populated-board audit; frozen allocations were not increased.
+
+All new critical pin numbers, polarities and package assignments were checked against the specific local manufacturer evidence before entry. The cached symbols, instance wiring and footprint pad-number sets were checked after native save:
+
+| New device | Pin/package evidence |
+| --- | --- |
+| SN74LVC1G74DCUR | Rev.G p.4: CLK1/D2, inverted Q3, GND4, Q5, CLR6, PRE7, VCC8; DCU0008A pp.22-24 |
+| SN74LVC2G07DBVR / SN74LVC2G17DBVR | Rev.L / Rev.N p.3: inputs1/3, outputs6/4, GND2/VCC5; DBV SOT-23-6 |
+| SN74LVC2G08DCUR | Rev.N p.3: 1/2->7, 5/6->3, GND4/VCC8; DCU |
+| SN74LXC8T245PWR | Rev.A p.3: exact PW A/B pairs, DIR/OE and all supply/ground pins; PW TSSOP-24 |
+| TPS3760E012DYYR | Rev.A pp.3-5: OV adjustable active-low open-drain option, SENSE3/RESET6/CTS10/CTR9, grounds8/13; DYY0014A pp.41-43 |
+| TMUX2821DSGR | December 2025 p.3: S1/D1=1/2, S2/D2=5/6, SEL1/SEL2=7/3, GND4/VDD8; DSG0008A EP9, p.30 |
+| BSS138LT1G | onsemi Rev.14 pp.1-2: gate1/source2/drain3; SOT-23; OE sink polarity and gate/drain limits |
+| C340 | KEMET part specsheet p.1 plus family C0G pp.1-2; nonpolar 1210/25 V/5% |
+
+The added DYY0014A footprint reproduces TI's 14-pad, 0.5 mm pitch, 3.0 mm row-spacing, 1.05 x 0.30 mm land pattern. It is a package library artifact, not PCB placement or layout. Earlier regulator/supervisor packages and their verified pin maps remain unchanged. All test points now have explicit pad footprints.
+
+### Native KiCad and ERC disposition
+
+Executed KiCad **10.0.6** native `sch upgrade --force` for Sheet 2 and the hierarchy root in a complete temporary project copy, copied back only those authorized schematics, then ran ERC and XML/PDF exports on the final project. **1,734 checks passed** in [verify_sheet2_final.py](phase_4b/verify_sheet2_final.py). [Full results](phase_4b/phase3f_completion/sheet2_verification_results.json), [raw ERC](phase_4b/phase3f_completion/sheet2_erc_final.json), [exported netlist](phase_4b/phase3f_completion/sheet2_project.net.xml), [review PDF](phase_4b/phase3f_completion/sheet2_review.pdf), [component manifest](phase_4b/phase3f_completion/sheet2_components.json), and [pin map](phase_4b/phase3f_completion/sheet2_symbol_pin_audit.json) are retained separately from all earlier artifacts.
+
+Final ERC remains **3 errors / 5 warnings**, with **zero unresolved BLOCKING items**. Every item is individually recorded with its UUID and disposition in the results JSON:
+
+| Item | Classification | Reason |
+| --- | --- | --- |
+| U201 FB2 pin 4 to ground power output | JUSTIFIED / INTENTIONAL | Phase 3D requires grounded FB2 with VSEL low; ground power flag triggers an output-type conflict |
+| U202 FB2 pin 4 to ground power output | JUSTIFIED / INTENTIONAL | Same required manufacturer/configuration connection |
+| U203 FB2 pin 4 to ground power output | JUSTIFIED / INTENTIONAL | Same required manufacturer/configuration connection |
+| Root `12V_PROTECTED` wire endpoint off grid | JUSTIFIED / INTENTIONAL | Original Sheet 1 port position preserved; exported connectivity checked |
+| Root `POWER_GND` wire endpoint off grid | JUSTIFIED / INTENTIONAL | Same preserved geometry and verified connection |
+| Root `3V8_PRE` wire endpoint off grid | JUSTIFIED / INTENTIONAL | Same preserved geometry and verified connection |
+| Root `PGOOD_12V` wire endpoint off grid | JUSTIFIED / INTENTIONAL | Same preserved geometry and verified connection |
+| Root `EFUSE_FLT_N` wire endpoint off grid | JUSTIFIED / INTENTIONAL | Same preserved geometry and verified connection |
+
+No previous raw ERC item is classified FIXED on this resume; their intentional connectivity remains. The missing eFuse pullup was **FIXED by netlist/contract review**, not detected by ERC. No warning/error severity was suppressed and no global exclusion was added. The same four KiCad default ignored checks are recorded; they do not constitute simulation or electrical validation. Source-page/package inspection and review of the exported schematic supplement ERC.
+
+### Reproduction, protected files and remaining validation
+
+From repository root, run `python validation/phase_4b/verify_sheet2_final.py` to reload/save, export and check the final design. Re-entry is reproducible with `build_sheet2_final.py`, then `integrate_sheet2_final.py`, then `verify_sheet2_final.py`, all under `validation/phase_4b/`. Historical scripts reproduce historical states and must not be run to regenerate the final design.
+
+Modified by this resume: `hardware/kicad/power_regulation.kicad_sch`, the hierarchy root, `hardware/kicad/Astra_Sequencing.kicad_sym`, and this append-only validation record. Added: the DYY package library file, KEMET CTS specsheet, three final entry/integration/verification scripts, and `validation/phase_4b/phase3f_completion/` artifacts. The user's pre-existing phase/evidence document changes and untracked manufacturer files were preserved. No Git commit was created.
+
+Baseline hashes confirm **Sheet 1, its symbol library, project settings, and every later schematic are unchanged**. All prior validation bytes are preserved. The root's Sheet 2 box was enlarged/repositioned to make the expanded interface list readable; Sheet 1 geometry was retained. No replacement components or architecture were selected.
+
+Remaining nonblocking future validation: actual rail ramps and >=100 us DSP rise/fall; regulator MLCC effective capacitance/ESR and inductor bias/saturation qualification; loaded ripple/stability/thermal performance; analog switch noise/CMRR/settling/leakage and powered-off permutations; loaded OE edge/timing quality; complete workload-dependent BOM currents; endpoint clock generation, ADC DVDD/reset/PLL sequence and fault response; firmware graceful waits and amplifier active Hi-Z-before-PLAY checks; oscilloscope confirmation of the post-reset hold. These are explicitly unperformed and do not block the completed Sheet 2 schematic merely because hardware or later sheets do not yet exist.
+
+PHASE 4B: PASS

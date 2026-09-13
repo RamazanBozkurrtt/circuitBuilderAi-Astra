@@ -1,0 +1,7224 @@
+{
+  "U201": {
+    "symbol": "TPS62135RGXR",
+    "value": "TPS62135RGXR",
+    "footprint": "Astra_Sequencing:Texas_RGX0011A",
+    "nets": {
+      "1": "12V_PROTECTED",
+      "2": "3V8_PRE_SW",
+      "3": "POWER_GND",
+      "4": "POWER_GND",
+      "5": "3V8_PRE_FB",
+      "6": "3V8_PRE",
+      "7": null,
+      "8": "12V_PROTECTED",
+      "9": "3V8_PRE_SS",
+      "10": "12V_PROTECTED",
+      "11": "POWER_GND"
+    },
+    "attributes": {},
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        77.47,
+        71.12
+      ],
+      "8": [
+        77.47,
+        73.66
+      ],
+      "10": [
+        77.47,
+        76.2
+      ],
+      "11": [
+        77.47,
+        78.74
+      ],
+      "9": [
+        77.47,
+        81.28
+      ],
+      "3": [
+        77.47,
+        83.82
+      ],
+      "2": [
+        123.19,
+        71.12
+      ],
+      "6": [
+        123.19,
+        73.66
+      ],
+      "5": [
+        123.19,
+        76.2
+      ],
+      "4": [
+        123.19,
+        78.74
+      ],
+      "7": [
+        123.19,
+        81.28
+      ]
+    }
+  },
+  "L201": {
+    "symbol": "L",
+    "value": "1u",
+    "footprint": "Inductor_SMD:L_Coilcraft_XAL4020-XXX",
+    "nets": {
+      "1": "3V8_PRE_SW",
+      "2": "3V8_PRE"
+    },
+    "attributes": {
+      "Acceptance": "L_eff >=0.8uH over tolerance/bias; Isat and Irms >=5A; DCR <=30mOhm",
+      "Polarity": "Nonpolar",
+      "Nominal inductance": "1.0 uH",
+      "Candidate MPN": "XAL4020-102MEC; effective-L qualification required"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        162.56,
+        67.31
+      ],
+      "2": [
+        170.18,
+        67.31
+      ]
+    }
+  },
+  "R201": {
+    "symbol": "R",
+    "value": "44.2k",
+    "footprint": "Resistor_SMD:R_0603_1608Metric",
+    "nets": {
+      "1": "3V8_PRE",
+      "2": "3V8_PRE_FB"
+    },
+    "attributes": {
+      "Tolerance": "0.1%",
+      "Power rating": "0.1 W minimum",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        173.99,
+        90.17
+      ],
+      "2": [
+        173.99,
+        97.79
+      ]
+    }
+  },
+  "R202": {
+    "symbol": "R",
+    "value": "10.0k",
+    "footprint": "Resistor_SMD:R_0603_1608Metric",
+    "nets": {
+      "1": "3V8_PRE_FB",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Tolerance": "0.1%",
+      "Power rating": "0.1 W minimum",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        214.63,
+        90.17
+      ],
+      "2": [
+        214.63,
+        97.79
+      ]
+    }
+  },
+  "C201": {
+    "symbol": "C",
+    "value": "10u",
+    "footprint": "Capacitor_SMD:C_1206_3216Metric",
+    "nets": {
+      "1": "12V_PROTECTED",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Voltage rating": "25 V",
+      "Dielectric": "X7R/X5R",
+      "Tolerance": "10%",
+      "Acceptance": "CIN effective >=3uF; local VIN-GND",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        36.83,
+        72.39
+      ],
+      "2": [
+        36.83,
+        80.01
+      ]
+    }
+  },
+  "C202": {
+    "symbol": "C",
+    "value": "10n",
+    "footprint": "Capacitor_SMD:C_0603_1608Metric",
+    "nets": {
+      "1": "3V8_PRE_SS",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Voltage rating": "25 V",
+      "Dielectric": "C0G",
+      "Tolerance": "5%",
+      "Acceptance": "Independent soft start; no external feed-forward",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        36.83,
+        107.95
+      ],
+      "2": [
+        36.83,
+        115.57
+      ]
+    }
+  },
+  "C203": {
+    "symbol": "C",
+    "value": "22u",
+    "footprint": "Capacitor_SMD:C_1206_3216Metric",
+    "nets": {
+      "1": "3V8_PRE",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Voltage rating": "16 V",
+      "Dielectric": "X7R/X5R",
+      "Tolerance": "10%",
+      "Acceptance": "Total COUT: 22..200uF effective; VOS Kelvin at local positive bank",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        156.21,
+        125.73
+      ],
+      "2": [
+        156.21,
+        133.35
+      ]
+    }
+  },
+  "C204": {
+    "symbol": "C",
+    "value": "22u",
+    "footprint": "Capacitor_SMD:C_1206_3216Metric",
+    "nets": {
+      "1": "3V8_PRE",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Voltage rating": "16 V",
+      "Dielectric": "X7R/X5R",
+      "Tolerance": "10%",
+      "Acceptance": "Total COUT: 22..200uF effective; VOS Kelvin at local positive bank",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        186.69,
+        125.73
+      ],
+      "2": [
+        186.69,
+        133.35
+      ]
+    }
+  },
+  "C206": {
+    "symbol": "C",
+    "value": "22u",
+    "footprint": "Capacitor_SMD:C_1206_3216Metric",
+    "nets": {
+      "1": "3V8_PRE",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Voltage rating": "16 V",
+      "Dielectric": "X7R/X5R",
+      "Tolerance": "10%",
+      "Acceptance": "DNP ramp tuning only; do not exceed total 200uF effective",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": true,
+    "pin_positions": {
+      "1": [
+        247.65,
+        125.73
+      ],
+      "2": [
+        247.65,
+        133.35
+      ]
+    }
+  },
+  "TP201": {
+    "symbol": "TestPoint",
+    "value": "3V8_PRE",
+    "footprint": "TestPoint:TestPoint_Pad_D1.0mm",
+    "nets": {
+      "1": "3V8_PRE"
+    },
+    "attributes": {},
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        166.37,
+        53.34
+      ]
+    }
+  },
+  "TP202": {
+    "symbol": "TestPoint",
+    "value": "3V8_PRE_FB",
+    "footprint": "TestPoint:TestPoint_Pad_D1.0mm",
+    "nets": {
+      "1": "3V8_PRE_FB"
+    },
+    "attributes": {},
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        214.63,
+        116.84
+      ]
+    }
+  },
+  "TP203": {
+    "symbol": "TestPoint",
+    "value": "3V8_PRE_SS",
+    "footprint": "TestPoint:TestPoint_Pad_D1.0mm",
+    "nets": {
+      "1": "3V8_PRE_SS"
+    },
+    "attributes": {},
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        36.83,
+        132.08
+      ]
+    }
+  },
+  "U202": {
+    "symbol": "TPS62135RGXR",
+    "value": "TPS62135RGXR",
+    "footprint": "Astra_Sequencing:Texas_RGX0011A",
+    "nets": {
+      "1": "3V8_PRE",
+      "2": "1V0_DSP_CORE_SW",
+      "3": "POWER_GND",
+      "4": "POWER_GND",
+      "5": "1V0_DSP_CORE_FB",
+      "6": "1V0_DSP_CORE",
+      "7": null,
+      "8": "DOWNSTREAM_EN",
+      "9": "1V0_DSP_CORE_SS",
+      "10": "3V8_PRE",
+      "11": "POWER_GND"
+    },
+    "attributes": {},
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        341.63,
+        71.12
+      ],
+      "8": [
+        341.63,
+        73.66
+      ],
+      "10": [
+        341.63,
+        76.2
+      ],
+      "11": [
+        341.63,
+        78.74
+      ],
+      "9": [
+        341.63,
+        81.28
+      ],
+      "3": [
+        341.63,
+        83.82
+      ],
+      "2": [
+        387.35,
+        71.12
+      ],
+      "6": [
+        387.35,
+        73.66
+      ],
+      "5": [
+        387.35,
+        76.2
+      ],
+      "4": [
+        387.35,
+        78.74
+      ],
+      "7": [
+        387.35,
+        81.28
+      ]
+    }
+  },
+  "L202": {
+    "symbol": "L",
+    "value": "1u",
+    "footprint": "Inductor_SMD:L_Coilcraft_XAL4020-XXX",
+    "nets": {
+      "1": "1V0_DSP_CORE_SW",
+      "2": "1V0_DSP_CORE"
+    },
+    "attributes": {
+      "Acceptance": "L_eff >=0.8uH over tolerance/bias; Isat and Irms >=5A; DCR <=30mOhm",
+      "Polarity": "Nonpolar",
+      "Nominal inductance": "1.0 uH",
+      "Candidate MPN": "XAL4020-102MEC; effective-L qualification required"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        426.72,
+        67.31
+      ],
+      "2": [
+        434.34,
+        67.31
+      ]
+    }
+  },
+  "R211": {
+    "symbol": "R",
+    "value": "4.32k",
+    "footprint": "Resistor_SMD:R_0603_1608Metric",
+    "nets": {
+      "1": "1V0_DSP_CORE",
+      "2": "1V0_DSP_CORE_FB"
+    },
+    "attributes": {
+      "Tolerance": "0.1%",
+      "Power rating": "0.1 W minimum",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        438.15,
+        90.17
+      ],
+      "2": [
+        438.15,
+        97.79
+      ]
+    }
+  },
+  "R212": {
+    "symbol": "R",
+    "value": "10.0k",
+    "footprint": "Resistor_SMD:R_0603_1608Metric",
+    "nets": {
+      "1": "1V0_DSP_CORE_FB",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Tolerance": "0.1%",
+      "Power rating": "0.1 W minimum",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        478.79,
+        90.17
+      ],
+      "2": [
+        478.79,
+        97.79
+      ]
+    }
+  },
+  "C211": {
+    "symbol": "C",
+    "value": "10u",
+    "footprint": "Capacitor_SMD:C_1206_3216Metric",
+    "nets": {
+      "1": "3V8_PRE",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Voltage rating": "25 V",
+      "Dielectric": "X7R/X5R",
+      "Tolerance": "10%",
+      "Acceptance": "CIN effective >=3uF; local VIN-GND",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        300.99,
+        72.39
+      ],
+      "2": [
+        300.99,
+        80.01
+      ]
+    }
+  },
+  "C212": {
+    "symbol": "C",
+    "value": "10n",
+    "footprint": "Capacitor_SMD:C_0603_1608Metric",
+    "nets": {
+      "1": "1V0_DSP_CORE_SS",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Voltage rating": "25 V",
+      "Dielectric": "C0G",
+      "Tolerance": "5%",
+      "Acceptance": "Independent soft start; no external feed-forward",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        300.99,
+        107.95
+      ],
+      "2": [
+        300.99,
+        115.57
+      ]
+    }
+  },
+  "C213": {
+    "symbol": "C",
+    "value": "47u",
+    "footprint": "Capacitor_SMD:C_1206_3216Metric",
+    "nets": {
+      "1": "1V0_DSP_CORE",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Voltage rating": "16 V",
+      "Dielectric": "X7R/X5R",
+      "Tolerance": "10%",
+      "Acceptance": "Total directly connected COUT: 100..200uF effective",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        420.37,
+        125.73
+      ],
+      "2": [
+        420.37,
+        133.35
+      ]
+    }
+  },
+  "C214": {
+    "symbol": "C",
+    "value": "47u",
+    "footprint": "Capacitor_SMD:C_1206_3216Metric",
+    "nets": {
+      "1": "1V0_DSP_CORE",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Voltage rating": "16 V",
+      "Dielectric": "X7R/X5R",
+      "Tolerance": "10%",
+      "Acceptance": "Total directly connected COUT: 100..200uF effective",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        450.85,
+        125.73
+      ],
+      "2": [
+        450.85,
+        133.35
+      ]
+    }
+  },
+  "C215": {
+    "symbol": "C",
+    "value": "47u",
+    "footprint": "Capacitor_SMD:C_1206_3216Metric",
+    "nets": {
+      "1": "1V0_DSP_CORE",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Voltage rating": "16 V",
+      "Dielectric": "X7R/X5R",
+      "Tolerance": "10%",
+      "Acceptance": "Total directly connected COUT: 100..200uF effective",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        481.33,
+        125.73
+      ],
+      "2": [
+        481.33,
+        133.35
+      ]
+    }
+  },
+  "C216": {
+    "symbol": "C",
+    "value": "22u",
+    "footprint": "Capacitor_SMD:C_1206_3216Metric",
+    "nets": {
+      "1": "1V0_DSP_CORE",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Voltage rating": "16 V",
+      "Dielectric": "X7R/X5R",
+      "Tolerance": "10%",
+      "Acceptance": "DNP ramp tuning only; do not exceed total 200uF effective",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": true,
+    "pin_positions": {
+      "1": [
+        511.81,
+        125.73
+      ],
+      "2": [
+        511.81,
+        133.35
+      ]
+    }
+  },
+  "TP204": {
+    "symbol": "TestPoint",
+    "value": "1V0_DSP_CORE",
+    "footprint": "TestPoint:TestPoint_Pad_D1.0mm",
+    "nets": {
+      "1": "1V0_DSP_CORE"
+    },
+    "attributes": {},
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        430.53,
+        53.34
+      ]
+    }
+  },
+  "TP205": {
+    "symbol": "TestPoint",
+    "value": "1V0_DSP_CORE_FB",
+    "footprint": "TestPoint:TestPoint_Pad_D1.0mm",
+    "nets": {
+      "1": "1V0_DSP_CORE_FB"
+    },
+    "attributes": {},
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        478.79,
+        116.84
+      ]
+    }
+  },
+  "TP206": {
+    "symbol": "TestPoint",
+    "value": "1V0_DSP_CORE_SS",
+    "footprint": "TestPoint:TestPoint_Pad_D1.0mm",
+    "nets": {
+      "1": "1V0_DSP_CORE_SS"
+    },
+    "attributes": {},
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        300.99,
+        132.08
+      ]
+    }
+  },
+  "U203": {
+    "symbol": "TPS62135RGXR",
+    "value": "TPS62135RGXR",
+    "footprint": "Astra_Sequencing:Texas_RGX0011A",
+    "nets": {
+      "1": "12V_PROTECTED",
+      "2": "3V3_SYS_SW",
+      "3": "POWER_GND",
+      "4": "POWER_GND",
+      "5": "3V3_SYS_FB",
+      "6": "3V3_SYS",
+      "7": null,
+      "8": "DOWNSTREAM_EN",
+      "9": "3V3_SYS_SS",
+      "10": "12V_PROTECTED",
+      "11": "POWER_GND"
+    },
+    "attributes": {},
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        607.06,
+        71.12
+      ],
+      "8": [
+        607.06,
+        73.66
+      ],
+      "10": [
+        607.06,
+        76.2
+      ],
+      "11": [
+        607.06,
+        78.74
+      ],
+      "9": [
+        607.06,
+        81.28
+      ],
+      "3": [
+        607.06,
+        83.82
+      ],
+      "2": [
+        652.78,
+        71.12
+      ],
+      "6": [
+        652.78,
+        73.66
+      ],
+      "5": [
+        652.78,
+        76.2
+      ],
+      "4": [
+        652.78,
+        78.74
+      ],
+      "7": [
+        652.78,
+        81.28
+      ]
+    }
+  },
+  "L203": {
+    "symbol": "L",
+    "value": "1u",
+    "footprint": "Inductor_SMD:L_Coilcraft_XAL4020-XXX",
+    "nets": {
+      "1": "3V3_SYS_SW",
+      "2": "3V3_SYS"
+    },
+    "attributes": {
+      "Acceptance": "L_eff >=0.8uH over tolerance/bias; Isat and Irms >=5A; DCR <=30mOhm",
+      "Polarity": "Nonpolar",
+      "Nominal inductance": "1.0 uH",
+      "Candidate MPN": "XAL4020-102MEC; effective-L qualification required"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        692.15,
+        67.31
+      ],
+      "2": [
+        699.77,
+        67.31
+      ]
+    }
+  },
+  "R221": {
+    "symbol": "R",
+    "value": "37.1k",
+    "footprint": "Resistor_SMD:R_0603_1608Metric",
+    "nets": {
+      "1": "3V3_SYS",
+      "2": "3V3_SYS_FB"
+    },
+    "attributes": {
+      "Tolerance": "0.1%",
+      "Power rating": "0.1 W minimum",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        703.58,
+        90.17
+      ],
+      "2": [
+        703.58,
+        97.79
+      ]
+    }
+  },
+  "R222": {
+    "symbol": "R",
+    "value": "10.0k",
+    "footprint": "Resistor_SMD:R_0603_1608Metric",
+    "nets": {
+      "1": "3V3_SYS_FB",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Tolerance": "0.1%",
+      "Power rating": "0.1 W minimum",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        744.22,
+        90.17
+      ],
+      "2": [
+        744.22,
+        97.79
+      ]
+    }
+  },
+  "C221": {
+    "symbol": "C",
+    "value": "10u",
+    "footprint": "Capacitor_SMD:C_1206_3216Metric",
+    "nets": {
+      "1": "12V_PROTECTED",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Voltage rating": "25 V",
+      "Dielectric": "X7R/X5R",
+      "Tolerance": "10%",
+      "Acceptance": "CIN effective >=3uF; local VIN-GND",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        566.42,
+        72.39
+      ],
+      "2": [
+        566.42,
+        80.01
+      ]
+    }
+  },
+  "C222": {
+    "symbol": "C",
+    "value": "10n",
+    "footprint": "Capacitor_SMD:C_0603_1608Metric",
+    "nets": {
+      "1": "3V3_SYS_SS",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Voltage rating": "25 V",
+      "Dielectric": "C0G",
+      "Tolerance": "5%",
+      "Acceptance": "Independent soft start; no external feed-forward",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        566.42,
+        107.95
+      ],
+      "2": [
+        566.42,
+        115.57
+      ]
+    }
+  },
+  "C223": {
+    "symbol": "C",
+    "value": "22u",
+    "footprint": "Capacitor_SMD:C_1206_3216Metric",
+    "nets": {
+      "1": "3V3_SYS",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Voltage rating": "16 V",
+      "Dielectric": "X7R/X5R",
+      "Tolerance": "10%",
+      "Acceptance": "Total COUT: 22..200uF effective; VOS Kelvin at local positive bank",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        685.8,
+        125.73
+      ],
+      "2": [
+        685.8,
+        133.35
+      ]
+    }
+  },
+  "C224": {
+    "symbol": "C",
+    "value": "22u",
+    "footprint": "Capacitor_SMD:C_1206_3216Metric",
+    "nets": {
+      "1": "3V3_SYS",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Voltage rating": "16 V",
+      "Dielectric": "X7R/X5R",
+      "Tolerance": "10%",
+      "Acceptance": "Total COUT: 22..200uF effective; VOS Kelvin at local positive bank",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        716.28,
+        125.73
+      ],
+      "2": [
+        716.28,
+        133.35
+      ]
+    }
+  },
+  "C226": {
+    "symbol": "C",
+    "value": "22u",
+    "footprint": "Capacitor_SMD:C_1206_3216Metric",
+    "nets": {
+      "1": "3V3_SYS",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Voltage rating": "16 V",
+      "Dielectric": "X7R/X5R",
+      "Tolerance": "10%",
+      "Acceptance": "DNP ramp tuning only; do not exceed total 200uF effective",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": true,
+    "pin_positions": {
+      "1": [
+        777.24,
+        125.73
+      ],
+      "2": [
+        777.24,
+        133.35
+      ]
+    }
+  },
+  "TP207": {
+    "symbol": "TestPoint",
+    "value": "3V3_SYS",
+    "footprint": "TestPoint:TestPoint_Pad_D1.0mm",
+    "nets": {
+      "1": "3V3_SYS"
+    },
+    "attributes": {},
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        695.96,
+        53.34
+      ]
+    }
+  },
+  "TP208": {
+    "symbol": "TestPoint",
+    "value": "3V3_SYS_FB",
+    "footprint": "TestPoint:TestPoint_Pad_D1.0mm",
+    "nets": {
+      "1": "3V3_SYS_FB"
+    },
+    "attributes": {},
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        744.22,
+        116.84
+      ]
+    }
+  },
+  "TP209": {
+    "symbol": "TestPoint",
+    "value": "3V3_SYS_SS",
+    "footprint": "TestPoint:TestPoint_Pad_D1.0mm",
+    "nets": {
+      "1": "3V3_SYS_SS"
+    },
+    "attributes": {},
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        566.42,
+        132.08
+      ]
+    }
+  },
+  "U204": {
+    "symbol": "TPS7A4901DGNR",
+    "value": "TPS7A4901DGNR",
+    "footprint": "Package_SO:Texas_DGN0008D_VSSOP-8-1EP_3x3mm_P0.65mm_EP2x2.94mm_Mask1.57x1.89mm",
+    "nets": {
+      "1": "1V8_DSP_REF_ANA",
+      "2": "1V8_DSP_REF_ANA_FB",
+      "3": null,
+      "4": "POWER_GND",
+      "5": "PGOOD_12V",
+      "6": "1V8_DSP_REF_ANA_NR",
+      "7": null,
+      "8": "3V8_PRE",
+      "9": "POWER_GND"
+    },
+    "attributes": {},
+    "dnp": false,
+    "pin_positions": {
+      "8": [
+        77.47,
+        217.17
+      ],
+      "5": [
+        77.47,
+        219.71
+      ],
+      "6": [
+        77.47,
+        222.25
+      ],
+      "4": [
+        77.47,
+        224.79
+      ],
+      "9": [
+        77.47,
+        227.33
+      ],
+      "1": [
+        123.19,
+        217.17
+      ],
+      "2": [
+        123.19,
+        219.71
+      ],
+      "3": [
+        123.19,
+        222.25
+      ],
+      "7": [
+        123.19,
+        224.79
+      ]
+    }
+  },
+  "R231": {
+    "symbol": "R",
+    "value": "54.2k",
+    "footprint": "Resistor_SMD:R_0603_1608Metric",
+    "nets": {
+      "1": "1V8_DSP_REF_ANA",
+      "2": "1V8_DSP_REF_ANA_FB_TOP_MID"
+    },
+    "attributes": {
+      "Tolerance": "0.1%",
+      "Power rating": "0.1 W minimum",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        166.37,
+        222.25
+      ],
+      "2": [
+        166.37,
+        229.87
+      ]
+    }
+  },
+  "R232": {
+    "symbol": "R",
+    "value": "100",
+    "footprint": "Resistor_SMD:R_0603_1608Metric",
+    "nets": {
+      "1": "1V8_DSP_REF_ANA_FB_TOP_MID",
+      "2": "1V8_DSP_REF_ANA_FB"
+    },
+    "attributes": {
+      "Tolerance": "0.1%",
+      "Power rating": "0.1 W minimum",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        207.01,
+        222.25
+      ],
+      "2": [
+        207.01,
+        229.87
+      ]
+    }
+  },
+  "R233": {
+    "symbol": "R",
+    "value": "100k",
+    "footprint": "Resistor_SMD:R_0603_1608Metric",
+    "nets": {
+      "1": "1V8_DSP_REF_ANA_FB",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Tolerance": "0.1%",
+      "Power rating": "0.1 W minimum",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        166.37,
+        255.27
+      ],
+      "2": [
+        166.37,
+        262.89
+      ]
+    }
+  },
+  "R234": {
+    "symbol": "R",
+    "value": "1.69k",
+    "footprint": "Resistor_SMD:R_0603_1608Metric",
+    "nets": {
+      "1": "1V8_DSP_REF_ANA",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Tolerance": "0.1%",
+      "Power rating": "0.1 W minimum",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        247.65,
+        255.27
+      ],
+      "2": [
+        247.65,
+        262.89
+      ]
+    }
+  },
+  "C231": {
+    "symbol": "C",
+    "value": "10u",
+    "footprint": "Capacitor_SMD:C_1206_3216Metric",
+    "nets": {
+      "1": "3V8_PRE",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Voltage rating": "25 V",
+      "Dielectric": "X7R/X5R",
+      "Tolerance": "10%",
+      "Acceptance": "CIN effective >=2.2uF",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        36.83,
+        217.17
+      ],
+      "2": [
+        36.83,
+        224.79
+      ]
+    }
+  },
+  "C232": {
+    "symbol": "C",
+    "value": "10u",
+    "footprint": "Capacitor_SMD:C_1206_3216Metric",
+    "nets": {
+      "1": "1V8_DSP_REF_ANA",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Voltage rating": "16 V",
+      "Dielectric": "X7R/X5R",
+      "Tolerance": "10%",
+      "Acceptance": "COUT effective >=2.2uF; ESR <200mOhm",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        247.65,
+        222.25
+      ],
+      "2": [
+        247.65,
+        229.87
+      ]
+    }
+  },
+  "C233": {
+    "symbol": "C",
+    "value": "47n",
+    "footprint": "Capacitor_SMD:C_0603_1608Metric",
+    "nets": {
+      "1": "1V8_DSP_REF_ANA_NR",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Voltage rating": "25 V",
+      "Dielectric": "C0G",
+      "Tolerance": "5%",
+      "Acceptance": "NR/SS per Phase 3D",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        36.83,
+        250.19
+      ],
+      "2": [
+        36.83,
+        257.81
+      ]
+    }
+  },
+  "C234": {
+    "symbol": "C",
+    "value": "10n",
+    "footprint": "Capacitor_SMD:C_0603_1608Metric",
+    "nets": {
+      "1": "1V8_DSP_REF_ANA",
+      "2": "1V8_DSP_REF_ANA_FB"
+    },
+    "attributes": {
+      "Voltage rating": "25 V",
+      "Dielectric": "C0G",
+      "Tolerance": "5%",
+      "Acceptance": "CFF across complete upper feedback arm",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        207.01,
+        255.27
+      ],
+      "2": [
+        207.01,
+        262.89
+      ]
+    }
+  },
+  "C236": {
+    "symbol": "C",
+    "value": "10u",
+    "footprint": "Capacitor_SMD:C_1206_3216Metric",
+    "nets": {
+      "1": "1V8_DSP_REF_ANA",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Voltage rating": "16 V",
+      "Dielectric": "X7R/X5R",
+      "Tolerance": "10%",
+      "Acceptance": "DNP ramp adjustment bank",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": true,
+    "pin_positions": {
+      "1": [
+        247.65,
+        288.29
+      ],
+      "2": [
+        247.65,
+        295.91
+      ]
+    }
+  },
+  "TP210": {
+    "symbol": "TestPoint",
+    "value": "1V8_DSP_REF_ANA",
+    "footprint": "TestPoint:TestPoint_Pad_D1.0mm",
+    "nets": {
+      "1": "1V8_DSP_REF_ANA"
+    },
+    "attributes": {},
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        247.65,
+        205.74
+      ]
+    }
+  },
+  "TP211": {
+    "symbol": "TestPoint",
+    "value": "1V8_DSP_REF_ANA_FB",
+    "footprint": "TestPoint:TestPoint_Pad_D1.0mm",
+    "nets": {
+      "1": "1V8_DSP_REF_ANA_FB"
+    },
+    "attributes": {},
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        166.37,
+        279.4
+      ]
+    }
+  },
+  "TP212": {
+    "symbol": "TestPoint",
+    "value": "1V8_DSP_REF_ANA_NR",
+    "footprint": "TestPoint:TestPoint_Pad_D1.0mm",
+    "nets": {
+      "1": "1V8_DSP_REF_ANA_NR"
+    },
+    "attributes": {},
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        36.83,
+        276.86
+      ]
+    }
+  },
+  "U205": {
+    "symbol": "TPS7A4901DGNR",
+    "value": "TPS7A4901DGNR",
+    "footprint": "Package_SO:Texas_DGN0008D_VSSOP-8-1EP_3x3mm_P0.65mm_EP2x2.94mm_Mask1.57x1.89mm",
+    "nets": {
+      "1": "1V35_DSP_DMC",
+      "2": "1V35_DSP_DMC_FB",
+      "3": null,
+      "4": "POWER_GND",
+      "5": "DOWNSTREAM_EN",
+      "6": "1V35_DSP_DMC_NR",
+      "7": null,
+      "8": "3V8_PRE",
+      "9": "POWER_GND"
+    },
+    "attributes": {},
+    "dnp": false,
+    "pin_positions": {
+      "8": [
+        341.63,
+        217.17
+      ],
+      "5": [
+        341.63,
+        219.71
+      ],
+      "6": [
+        341.63,
+        222.25
+      ],
+      "4": [
+        341.63,
+        224.79
+      ],
+      "9": [
+        341.63,
+        227.33
+      ],
+      "1": [
+        387.35,
+        217.17
+      ],
+      "2": [
+        387.35,
+        219.71
+      ],
+      "3": [
+        387.35,
+        222.25
+      ],
+      "7": [
+        387.35,
+        224.79
+      ]
+    }
+  },
+  "R241": {
+    "symbol": "R",
+    "value": "14.9k",
+    "footprint": "Resistor_SMD:R_0603_1608Metric",
+    "nets": {
+      "1": "1V35_DSP_DMC",
+      "2": "1V35_DSP_DMC_FB"
+    },
+    "attributes": {
+      "Tolerance": "0.1%",
+      "Power rating": "0.1 W minimum",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        430.53,
+        222.25
+      ],
+      "2": [
+        430.53,
+        229.87
+      ]
+    }
+  },
+  "R243": {
+    "symbol": "R",
+    "value": "100k",
+    "footprint": "Resistor_SMD:R_0603_1608Metric",
+    "nets": {
+      "1": "1V35_DSP_DMC_FB",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Tolerance": "0.1%",
+      "Power rating": "0.1 W minimum",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        430.53,
+        255.27
+      ],
+      "2": [
+        430.53,
+        262.89
+      ]
+    }
+  },
+  "R244": {
+    "symbol": "R",
+    "value": "1.24k",
+    "footprint": "Resistor_SMD:R_0603_1608Metric",
+    "nets": {
+      "1": "1V35_DSP_DMC",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Tolerance": "0.1%",
+      "Power rating": "0.1 W minimum",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        511.81,
+        255.27
+      ],
+      "2": [
+        511.81,
+        262.89
+      ]
+    }
+  },
+  "C241": {
+    "symbol": "C",
+    "value": "10u",
+    "footprint": "Capacitor_SMD:C_1206_3216Metric",
+    "nets": {
+      "1": "3V8_PRE",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Voltage rating": "25 V",
+      "Dielectric": "X7R/X5R",
+      "Tolerance": "10%",
+      "Acceptance": "CIN effective >=2.2uF",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        300.99,
+        217.17
+      ],
+      "2": [
+        300.99,
+        224.79
+      ]
+    }
+  },
+  "C242": {
+    "symbol": "C",
+    "value": "10u",
+    "footprint": "Capacitor_SMD:C_1206_3216Metric",
+    "nets": {
+      "1": "1V35_DSP_DMC",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Voltage rating": "16 V",
+      "Dielectric": "X7R/X5R",
+      "Tolerance": "10%",
+      "Acceptance": "COUT effective >=2.2uF; ESR <200mOhm",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        511.81,
+        222.25
+      ],
+      "2": [
+        511.81,
+        229.87
+      ]
+    }
+  },
+  "C243": {
+    "symbol": "C",
+    "value": "47n",
+    "footprint": "Capacitor_SMD:C_0603_1608Metric",
+    "nets": {
+      "1": "1V35_DSP_DMC_NR",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Voltage rating": "25 V",
+      "Dielectric": "C0G",
+      "Tolerance": "5%",
+      "Acceptance": "NR/SS per Phase 3D",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        300.99,
+        250.19
+      ],
+      "2": [
+        300.99,
+        257.81
+      ]
+    }
+  },
+  "C244": {
+    "symbol": "C",
+    "value": "10n",
+    "footprint": "Capacitor_SMD:C_0603_1608Metric",
+    "nets": {
+      "1": "1V35_DSP_DMC",
+      "2": "1V35_DSP_DMC_FB"
+    },
+    "attributes": {
+      "Voltage rating": "25 V",
+      "Dielectric": "C0G",
+      "Tolerance": "5%",
+      "Acceptance": "CFF across complete upper feedback arm",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        471.17,
+        255.27
+      ],
+      "2": [
+        471.17,
+        262.89
+      ]
+    }
+  },
+  "C245": {
+    "symbol": "C",
+    "value": "47u",
+    "footprint": "Capacitor_SMD:C_1206_3216Metric",
+    "nets": {
+      "1": "1V35_DSP_DMC",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Voltage rating": "16 V",
+      "Dielectric": "X7R/X5R",
+      "Tolerance": "10%",
+      "Acceptance": "DMC domain bulk >=22uF effective; Phase 3 section 5.1",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        420.37,
+        288.29
+      ],
+      "2": [
+        420.37,
+        295.91
+      ]
+    }
+  },
+  "C246": {
+    "symbol": "C",
+    "value": "10u",
+    "footprint": "Capacitor_SMD:C_1206_3216Metric",
+    "nets": {
+      "1": "1V35_DSP_DMC",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Voltage rating": "16 V",
+      "Dielectric": "X7R/X5R",
+      "Tolerance": "10%",
+      "Acceptance": "DNP ramp adjustment bank",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": true,
+    "pin_positions": {
+      "1": [
+        511.81,
+        288.29
+      ],
+      "2": [
+        511.81,
+        295.91
+      ]
+    }
+  },
+  "TP213": {
+    "symbol": "TestPoint",
+    "value": "1V35_DSP_DMC",
+    "footprint": "TestPoint:TestPoint_Pad_D1.0mm",
+    "nets": {
+      "1": "1V35_DSP_DMC"
+    },
+    "attributes": {},
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        511.81,
+        205.74
+      ]
+    }
+  },
+  "TP214": {
+    "symbol": "TestPoint",
+    "value": "1V35_DSP_DMC_FB",
+    "footprint": "TestPoint:TestPoint_Pad_D1.0mm",
+    "nets": {
+      "1": "1V35_DSP_DMC_FB"
+    },
+    "attributes": {},
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        430.53,
+        279.4
+      ]
+    }
+  },
+  "TP215": {
+    "symbol": "TestPoint",
+    "value": "1V35_DSP_DMC_NR",
+    "footprint": "TestPoint:TestPoint_Pad_D1.0mm",
+    "nets": {
+      "1": "1V35_DSP_DMC_NR"
+    },
+    "attributes": {},
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        300.99,
+        276.86
+      ]
+    }
+  },
+  "U206": {
+    "symbol": "TPS7A4901DGNR",
+    "value": "TPS7A4901DGNR",
+    "footprint": "Package_SO:Texas_DGN0008D_VSSOP-8-1EP_3x3mm_P0.65mm_EP2x2.94mm_Mask1.57x1.89mm",
+    "nets": {
+      "1": "5V_AFE",
+      "2": "5V_AFE_FB",
+      "3": null,
+      "4": "POWER_GND",
+      "5": "ANALOG_PWR_EN",
+      "6": "5V_AFE_NR",
+      "7": null,
+      "8": "12V_PROTECTED",
+      "9": "POWER_GND"
+    },
+    "attributes": {},
+    "dnp": false,
+    "pin_positions": {
+      "8": [
+        607.06,
+        217.17
+      ],
+      "5": [
+        607.06,
+        219.71
+      ],
+      "6": [
+        607.06,
+        222.25
+      ],
+      "4": [
+        607.06,
+        224.79
+      ],
+      "9": [
+        607.06,
+        227.33
+      ],
+      "1": [
+        652.78,
+        217.17
+      ],
+      "2": [
+        652.78,
+        219.71
+      ],
+      "3": [
+        652.78,
+        222.25
+      ],
+      "7": [
+        652.78,
+        224.79
+      ]
+    }
+  },
+  "R251": {
+    "symbol": "R",
+    "value": "324k",
+    "footprint": "Resistor_SMD:R_0603_1608Metric",
+    "nets": {
+      "1": "5V_AFE",
+      "2": "5V_AFE_FB"
+    },
+    "attributes": {
+      "Tolerance": "0.1%",
+      "Power rating": "0.1 W minimum",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        695.96,
+        222.25
+      ],
+      "2": [
+        695.96,
+        229.87
+      ]
+    }
+  },
+  "R253": {
+    "symbol": "R",
+    "value": "100k",
+    "footprint": "Resistor_SMD:R_0603_1608Metric",
+    "nets": {
+      "1": "5V_AFE_FB",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Tolerance": "0.1%",
+      "Power rating": "0.1 W minimum",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        695.96,
+        255.27
+      ],
+      "2": [
+        695.96,
+        262.89
+      ]
+    }
+  },
+  "R254": {
+    "symbol": "R",
+    "value": "4.70k",
+    "footprint": "Resistor_SMD:R_0603_1608Metric",
+    "nets": {
+      "1": "5V_AFE",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Tolerance": "0.1%",
+      "Power rating": "0.1 W minimum",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        777.24,
+        255.27
+      ],
+      "2": [
+        777.24,
+        262.89
+      ]
+    }
+  },
+  "C251": {
+    "symbol": "C",
+    "value": "10u",
+    "footprint": "Capacitor_SMD:C_1206_3216Metric",
+    "nets": {
+      "1": "12V_PROTECTED",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Voltage rating": "25 V",
+      "Dielectric": "X7R/X5R",
+      "Tolerance": "10%",
+      "Acceptance": "CIN effective >=2.2uF",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        566.42,
+        217.17
+      ],
+      "2": [
+        566.42,
+        224.79
+      ]
+    }
+  },
+  "C252": {
+    "symbol": "C",
+    "value": "10u",
+    "footprint": "Capacitor_SMD:C_1206_3216Metric",
+    "nets": {
+      "1": "5V_AFE",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Voltage rating": "16 V",
+      "Dielectric": "X7R/X5R",
+      "Tolerance": "10%",
+      "Acceptance": "COUT effective >=2.2uF; ESR <200mOhm",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        777.24,
+        222.25
+      ],
+      "2": [
+        777.24,
+        229.87
+      ]
+    }
+  },
+  "C253": {
+    "symbol": "C",
+    "value": "10n",
+    "footprint": "Capacitor_SMD:C_0603_1608Metric",
+    "nets": {
+      "1": "5V_AFE_NR",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Voltage rating": "25 V",
+      "Dielectric": "C0G",
+      "Tolerance": "5%",
+      "Acceptance": "NR/SS per Phase 3D",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        566.42,
+        250.19
+      ],
+      "2": [
+        566.42,
+        257.81
+      ]
+    }
+  },
+  "C254": {
+    "symbol": "C",
+    "value": "10n",
+    "footprint": "Capacitor_SMD:C_0603_1608Metric",
+    "nets": {
+      "1": "5V_AFE",
+      "2": "5V_AFE_FB"
+    },
+    "attributes": {
+      "Voltage rating": "25 V",
+      "Dielectric": "C0G",
+      "Tolerance": "5%",
+      "Acceptance": "CFF across complete upper feedback arm",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        736.6,
+        255.27
+      ],
+      "2": [
+        736.6,
+        262.89
+      ]
+    }
+  },
+  "C256": {
+    "symbol": "C",
+    "value": "10u",
+    "footprint": "Capacitor_SMD:C_1206_3216Metric",
+    "nets": {
+      "1": "5V_AFE",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Voltage rating": "16 V",
+      "Dielectric": "X7R/X5R",
+      "Tolerance": "10%",
+      "Acceptance": "DNP ramp adjustment bank",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": true,
+    "pin_positions": {
+      "1": [
+        777.24,
+        288.29
+      ],
+      "2": [
+        777.24,
+        295.91
+      ]
+    }
+  },
+  "TP216": {
+    "symbol": "TestPoint",
+    "value": "5V_AFE",
+    "footprint": "TestPoint:TestPoint_Pad_D1.0mm",
+    "nets": {
+      "1": "5V_AFE"
+    },
+    "attributes": {},
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        777.24,
+        205.74
+      ]
+    }
+  },
+  "TP217": {
+    "symbol": "TestPoint",
+    "value": "5V_AFE_FB",
+    "footprint": "TestPoint:TestPoint_Pad_D1.0mm",
+    "nets": {
+      "1": "5V_AFE_FB"
+    },
+    "attributes": {},
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        695.96,
+        279.4
+      ]
+    }
+  },
+  "TP218": {
+    "symbol": "TestPoint",
+    "value": "5V_AFE_NR",
+    "footprint": "TestPoint:TestPoint_Pad_D1.0mm",
+    "nets": {
+      "1": "5V_AFE_NR"
+    },
+    "attributes": {},
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        566.42,
+        276.86
+      ]
+    }
+  },
+  "U207": {
+    "symbol": "TPS7A2033PDBVR",
+    "value": "TPS7A2033PDBVR",
+    "footprint": "Package_TO_SOT_SMD:SOT-23-5",
+    "nets": {
+      "1": "3V8_PRE",
+      "2": "POWER_GND",
+      "3": "DOWNSTREAM_EN",
+      "4": null,
+      "5": "3V3_ADC_A"
+    },
+    "attributes": {},
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        77.47,
+        377.19
+      ],
+      "3": [
+        77.47,
+        379.73
+      ],
+      "2": [
+        77.47,
+        382.27
+      ],
+      "5": [
+        123.19,
+        377.19
+      ],
+      "4": [
+        123.19,
+        379.73
+      ]
+    }
+  },
+  "C261": {
+    "symbol": "C",
+    "value": "10u",
+    "footprint": "Capacitor_SMD:C_1206_3216Metric",
+    "nets": {
+      "1": "3V8_PRE",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Voltage rating": "25 V",
+      "Dielectric": "X7R/X5R",
+      "Tolerance": "10%",
+      "Acceptance": "Effective >=0.47uF",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        36.83,
+        374.65
+      ],
+      "2": [
+        36.83,
+        382.27
+      ]
+    }
+  },
+  "C262": {
+    "symbol": "C",
+    "value": "10u",
+    "footprint": "Capacitor_SMD:C_1206_3216Metric",
+    "nets": {
+      "1": "3V3_ADC_A",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Voltage rating": "16 V",
+      "Dielectric": "X7R/X5R",
+      "Tolerance": "10%",
+      "Acceptance": "COUT effective 0.47..200uF; ESR <=100mOhm",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        166.37,
+        374.65
+      ],
+      "2": [
+        166.37,
+        382.27
+      ]
+    }
+  },
+  "C263": {
+    "symbol": "C",
+    "value": "100n",
+    "footprint": "Capacitor_SMD:C_0603_1608Metric",
+    "nets": {
+      "1": "3V3_ADC_A",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Voltage rating": "25 V",
+      "Dielectric": "X7R/X5R",
+      "Tolerance": "10%",
+      "Acceptance": "",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        207.01,
+        374.65
+      ],
+      "2": [
+        207.01,
+        382.27
+      ]
+    }
+  },
+  "R261": {
+    "symbol": "R",
+    "value": "3.01k",
+    "footprint": "Resistor_SMD:R_0603_1608Metric",
+    "nets": {
+      "1": "3V3_ADC_A",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Tolerance": "0.1%",
+      "Power rating": "0.1 W minimum",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        247.65,
+        374.65
+      ],
+      "2": [
+        247.65,
+        382.27
+      ]
+    }
+  },
+  "TP219": {
+    "symbol": "TestPoint",
+    "value": "3V3_ADC_A",
+    "footprint": "TestPoint:TestPoint_Pad_D1.0mm",
+    "nets": {
+      "1": "3V3_ADC_A"
+    },
+    "attributes": {},
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        166.37,
+        358.14
+      ]
+    }
+  },
+  "U208": {
+    "symbol": "TPS7A2028PDBVR",
+    "value": "TPS7A2028PDBVR",
+    "footprint": "Package_TO_SOT_SMD:SOT-23-5",
+    "nets": {
+      "1": "3V8_PRE",
+      "2": "POWER_GND",
+      "3": "ANALOG_PWR_EN",
+      "4": null,
+      "5": "2V8_MIC"
+    },
+    "attributes": {},
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        341.63,
+        377.19
+      ],
+      "3": [
+        341.63,
+        379.73
+      ],
+      "2": [
+        341.63,
+        382.27
+      ],
+      "5": [
+        387.35,
+        377.19
+      ],
+      "4": [
+        387.35,
+        379.73
+      ]
+    }
+  },
+  "C271": {
+    "symbol": "C",
+    "value": "10u",
+    "footprint": "Capacitor_SMD:C_1206_3216Metric",
+    "nets": {
+      "1": "3V8_PRE",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Voltage rating": "25 V",
+      "Dielectric": "X7R/X5R",
+      "Tolerance": "10%",
+      "Acceptance": "Effective >=0.47uF",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        300.99,
+        374.65
+      ],
+      "2": [
+        300.99,
+        382.27
+      ]
+    }
+  },
+  "C272": {
+    "symbol": "C",
+    "value": "10u",
+    "footprint": "Capacitor_SMD:C_1206_3216Metric",
+    "nets": {
+      "1": "2V8_MIC",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Voltage rating": "16 V",
+      "Dielectric": "X7R/X5R",
+      "Tolerance": "10%",
+      "Acceptance": "COUT effective 0.47..200uF; ESR <=100mOhm",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        430.53,
+        374.65
+      ],
+      "2": [
+        430.53,
+        382.27
+      ]
+    }
+  },
+  "C273": {
+    "symbol": "C",
+    "value": "100n",
+    "footprint": "Capacitor_SMD:C_0603_1608Metric",
+    "nets": {
+      "1": "2V8_MIC",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Voltage rating": "25 V",
+      "Dielectric": "X7R/X5R",
+      "Tolerance": "10%",
+      "Acceptance": "",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        471.17,
+        374.65
+      ],
+      "2": [
+        471.17,
+        382.27
+      ]
+    }
+  },
+  "R271": {
+    "symbol": "R",
+    "value": "2.55k",
+    "footprint": "Resistor_SMD:R_0603_1608Metric",
+    "nets": {
+      "1": "2V8_MIC",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Tolerance": "0.1%",
+      "Power rating": "0.1 W minimum",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        511.81,
+        374.65
+      ],
+      "2": [
+        511.81,
+        382.27
+      ]
+    }
+  },
+  "TP220": {
+    "symbol": "TestPoint",
+    "value": "2V8_MIC",
+    "footprint": "TestPoint:TestPoint_Pad_D1.0mm",
+    "nets": {
+      "1": "2V8_MIC"
+    },
+    "attributes": {},
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        430.53,
+        358.14
+      ]
+    }
+  },
+  "U209": {
+    "symbol": "LTC2964HUDC_PBF",
+    "value": "LTC2964HUDC#PBF",
+    "footprint": "Package_DFN_QFN:QFN-20-1EP_3x4mm_P0.5mm_EP1.65x2.65mm",
+    "nets": {
+      "1": "3V8_PRE",
+      "2": "3V8_PRE",
+      "3": "POWER_GND",
+      "4": "3V8_PRE",
+      "5": "RAILS_OK",
+      "6": "POWER_GND",
+      "7": "OUT1",
+      "8": null,
+      "9": null,
+      "10": null,
+      "11": "3V8_PRE",
+      "12": "SUP_REF",
+      "13": "SUP_REF",
+      "14": "SUP_REF",
+      "15": "SUP_REF",
+      "16": "SUP_REF",
+      "17": "SENSE_3V3",
+      "18": "SENSE_DMC",
+      "19": "SENSE_CORE",
+      "20": "SENSE_1V8",
+      "21": "POWER_GND"
+    },
+    "attributes": {},
+    "dnp": false,
+    "pin_positions": {
+      "4": [
+        77.47,
+        483.87
+      ],
+      "20": [
+        77.47,
+        486.41
+      ],
+      "19": [
+        77.47,
+        488.95
+      ],
+      "18": [
+        77.47,
+        491.49
+      ],
+      "17": [
+        77.47,
+        494.03
+      ],
+      "1": [
+        77.47,
+        496.57
+      ],
+      "2": [
+        77.47,
+        499.11
+      ],
+      "11": [
+        77.47,
+        501.65
+      ],
+      "3": [
+        77.47,
+        504.19
+      ],
+      "6": [
+        77.47,
+        506.73
+      ],
+      "21": [
+        77.47,
+        509.27
+      ],
+      "7": [
+        123.19,
+        483.87
+      ],
+      "5": [
+        123.19,
+        486.41
+      ],
+      "8": [
+        123.19,
+        488.95
+      ],
+      "9": [
+        123.19,
+        491.49
+      ],
+      "10": [
+        123.19,
+        494.03
+      ],
+      "16": [
+        123.19,
+        496.57
+      ],
+      "15": [
+        123.19,
+        499.11
+      ],
+      "14": [
+        123.19,
+        501.65
+      ],
+      "13": [
+        123.19,
+        504.19
+      ],
+      "12": [
+        123.19,
+        506.73
+      ]
+    }
+  },
+  "C281": {
+    "symbol": "C",
+    "value": "100n",
+    "footprint": "Capacitor_SMD:C_0603_1608Metric",
+    "nets": {
+      "1": "3V8_PRE",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Voltage rating": "25 V",
+      "Dielectric": "X7R/X5R",
+      "Tolerance": "10%",
+      "Acceptance": "",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        36.83,
+        476.25
+      ],
+      "2": [
+        36.83,
+        483.87
+      ]
+    }
+  },
+  "R281": {
+    "symbol": "R",
+    "value": "10.0k",
+    "footprint": "Resistor_SMD:R_0603_1608Metric",
+    "nets": {
+      "1": "3V8_PRE",
+      "2": "OUT1"
+    },
+    "attributes": {
+      "Tolerance": "0.1%",
+      "Power rating": "0.1 W minimum",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        36.83,
+        514.35
+      ],
+      "2": [
+        36.83,
+        521.97
+      ]
+    }
+  },
+  "R282": {
+    "symbol": "R",
+    "value": "10.0k",
+    "footprint": "Resistor_SMD:R_0603_1608Metric",
+    "nets": {
+      "1": "3V3_SYS",
+      "2": "RAILS_OK"
+    },
+    "attributes": {
+      "Tolerance": "0.1%",
+      "Power rating": "0.1 W minimum",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        166.37,
+        514.35
+      ],
+      "2": [
+        166.37,
+        521.97
+      ]
+    }
+  },
+  "R291": {
+    "symbol": "R",
+    "value": "24.9k",
+    "footprint": "Resistor_SMD:R_0603_1608Metric",
+    "nets": {
+      "1": "1V8_DSP_REF_ANA",
+      "2": "SENSE_1V8"
+    },
+    "attributes": {
+      "Tolerance": "0.1%",
+      "Power rating": "0.1 W minimum",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        270.51,
+        476.25
+      ],
+      "2": [
+        270.51,
+        483.87
+      ]
+    }
+  },
+  "R292": {
+    "symbol": "R",
+    "value": "10.0k",
+    "footprint": "Resistor_SMD:R_0603_1608Metric",
+    "nets": {
+      "1": "SENSE_1V8",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Tolerance": "0.1%",
+      "Power rating": "0.1 W minimum",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        270.51,
+        527.05
+      ],
+      "2": [
+        270.51,
+        534.67
+      ]
+    }
+  },
+  "TP221": {
+    "symbol": "TestPoint",
+    "value": "SENSE_1V8",
+    "footprint": "TestPoint:TestPoint_Pad_D1.0mm",
+    "nets": {
+      "1": "SENSE_1V8"
+    },
+    "attributes": {},
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        295.91,
+        530.86
+      ]
+    }
+  },
+  "R294": {
+    "symbol": "R",
+    "value": "9.31k",
+    "footprint": "Resistor_SMD:R_0603_1608Metric",
+    "nets": {
+      "1": "1V0_DSP_CORE",
+      "2": "SENSE_CORE"
+    },
+    "attributes": {
+      "Tolerance": "0.1%",
+      "Power rating": "0.1 W minimum",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        336.55,
+        476.25
+      ],
+      "2": [
+        336.55,
+        483.87
+      ]
+    }
+  },
+  "R295": {
+    "symbol": "R",
+    "value": "10.0k",
+    "footprint": "Resistor_SMD:R_0603_1608Metric",
+    "nets": {
+      "1": "SENSE_CORE",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Tolerance": "0.1%",
+      "Power rating": "0.1 W minimum",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        336.55,
+        527.05
+      ],
+      "2": [
+        336.55,
+        534.67
+      ]
+    }
+  },
+  "TP222": {
+    "symbol": "TestPoint",
+    "value": "SENSE_CORE",
+    "footprint": "TestPoint:TestPoint_Pad_D1.0mm",
+    "nets": {
+      "1": "SENSE_CORE"
+    },
+    "attributes": {},
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        361.95,
+        530.86
+      ]
+    }
+  },
+  "R297": {
+    "symbol": "R",
+    "value": "15.8k",
+    "footprint": "Resistor_SMD:R_0603_1608Metric",
+    "nets": {
+      "1": "1V35_DSP_DMC",
+      "2": "SENSE_DMC_MID"
+    },
+    "attributes": {
+      "Tolerance": "0.1%",
+      "Power rating": "0.1 W minimum",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        402.59,
+        476.25
+      ],
+      "2": [
+        402.59,
+        483.87
+      ]
+    }
+  },
+  "R303": {
+    "symbol": "R",
+    "value": "280",
+    "footprint": "Resistor_SMD:R_0603_1608Metric",
+    "nets": {
+      "1": "SENSE_DMC_MID",
+      "2": "SENSE_DMC"
+    },
+    "attributes": {
+      "Tolerance": "0.1%",
+      "Power rating": "0.1 W minimum",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        402.59,
+        501.65
+      ],
+      "2": [
+        402.59,
+        509.27
+      ]
+    }
+  },
+  "R298": {
+    "symbol": "R",
+    "value": "10.0k",
+    "footprint": "Resistor_SMD:R_0603_1608Metric",
+    "nets": {
+      "1": "SENSE_DMC",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Tolerance": "0.1%",
+      "Power rating": "0.1 W minimum",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        402.59,
+        527.05
+      ],
+      "2": [
+        402.59,
+        534.67
+      ]
+    }
+  },
+  "TP223": {
+    "symbol": "TestPoint",
+    "value": "SENSE_DMC",
+    "footprint": "TestPoint:TestPoint_Pad_D1.0mm",
+    "nets": {
+      "1": "SENSE_DMC"
+    },
+    "attributes": {},
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        427.99,
+        530.86
+      ]
+    }
+  },
+  "R300": {
+    "symbol": "R",
+    "value": "53.6k",
+    "footprint": "Resistor_SMD:R_0603_1608Metric",
+    "nets": {
+      "1": "3V3_SYS",
+      "2": "SENSE_3V3"
+    },
+    "attributes": {
+      "Tolerance": "0.1%",
+      "Power rating": "0.1 W minimum",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        468.63,
+        476.25
+      ],
+      "2": [
+        468.63,
+        483.87
+      ]
+    }
+  },
+  "R301": {
+    "symbol": "R",
+    "value": "10.0k",
+    "footprint": "Resistor_SMD:R_0603_1608Metric",
+    "nets": {
+      "1": "SENSE_3V3",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Tolerance": "0.1%",
+      "Power rating": "0.1 W minimum",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        468.63,
+        527.05
+      ],
+      "2": [
+        468.63,
+        534.67
+      ]
+    }
+  },
+  "TP224": {
+    "symbol": "TestPoint",
+    "value": "SENSE_3V3",
+    "footprint": "TestPoint:TestPoint_Pad_D1.0mm",
+    "nets": {
+      "1": "SENSE_3V3"
+    },
+    "attributes": {},
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        494.03,
+        530.86
+      ]
+    }
+  },
+  "U210": {
+    "symbol": "TPS3431SDRBR",
+    "value": "TPS3431SDRBR",
+    "footprint": "Package_DFN_QFN:Texas_DRB0008A",
+    "nets": {
+      "1": "3V3_SYS",
+      "2": null,
+      "3": "RAILS_OK",
+      "4": "POWER_GND",
+      "5": "3V3_SYS",
+      "6": "DSP_WDI",
+      "7": "SYS_HWRST",
+      "8": "SYS_HWRST",
+      "9": "POWER_GND"
+    },
+    "attributes": {},
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        607.06,
+        480.06
+      ],
+      "3": [
+        607.06,
+        482.6
+      ],
+      "5": [
+        607.06,
+        485.14
+      ],
+      "6": [
+        607.06,
+        487.68
+      ],
+      "4": [
+        607.06,
+        490.22
+      ],
+      "9": [
+        607.06,
+        492.76
+      ],
+      "7": [
+        652.78,
+        480.06
+      ],
+      "8": [
+        652.78,
+        482.6
+      ],
+      "2": [
+        652.78,
+        485.14
+      ]
+    }
+  },
+  "C282": {
+    "symbol": "C",
+    "value": "100n",
+    "footprint": "Capacitor_SMD:C_0603_1608Metric",
+    "nets": {
+      "1": "3V3_SYS",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Voltage rating": "25 V",
+      "Dielectric": "X7R/X5R",
+      "Tolerance": "10%",
+      "Acceptance": "",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        566.42,
+        494.03
+      ],
+      "2": [
+        566.42,
+        501.65
+      ]
+    }
+  },
+  "R283": {
+    "symbol": "R",
+    "value": "10.0k",
+    "footprint": "Resistor_SMD:R_0603_1608Metric",
+    "nets": {
+      "1": "3V3_SYS",
+      "2": "SYS_HWRST"
+    },
+    "attributes": {
+      "Tolerance": "0.1%",
+      "Power rating": "0.1 W minimum",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        711.2,
+        491.49
+      ],
+      "2": [
+        711.2,
+        499.11
+      ]
+    }
+  },
+  "R284": {
+    "symbol": "R",
+    "value": "10.0k",
+    "footprint": "Resistor_SMD:R_0603_1608Metric",
+    "nets": {
+      "1": "DSP_WDI",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Tolerance": "0.1%",
+      "Power rating": "0.1 W minimum",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        566.42,
+        524.51
+      ],
+      "2": [
+        566.42,
+        532.13
+      ]
+    }
+  },
+  "TP225": {
+    "symbol": "TestPoint",
+    "value": "RAILS_OK",
+    "footprint": "TestPoint:TestPoint_Pad_D1.0mm",
+    "nets": {
+      "1": "RAILS_OK"
+    },
+    "attributes": {},
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        711.2,
+        520.7
+      ]
+    }
+  },
+  "TP226": {
+    "symbol": "TestPoint",
+    "value": "SYS_HWRST",
+    "footprint": "TestPoint:TestPoint_Pad_D1.0mm",
+    "nets": {
+      "1": "SYS_HWRST"
+    },
+    "attributes": {},
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        751.84,
+        520.7
+      ]
+    }
+  },
+  "TP227": {
+    "symbol": "TestPoint",
+    "value": "OUT1",
+    "footprint": "TestPoint:TestPoint_Pad_D1.0mm",
+    "nets": {
+      "1": "OUT1"
+    },
+    "attributes": {},
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        711.2,
+        548.64
+      ]
+    }
+  },
+  "TP228": {
+    "symbol": "TestPoint",
+    "value": "DSP_WDI",
+    "footprint": "TestPoint:TestPoint_Pad_D1.0mm",
+    "nets": {
+      "1": "DSP_WDI"
+    },
+    "attributes": {},
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        751.84,
+        548.64
+      ]
+    }
+  },
+  "U211": {
+    "symbol": "SN74LV1T08DBVR",
+    "value": "SN74LV1T08DBVR",
+    "footprint": "Package_TO_SOT_SMD:SOT-23-5",
+    "nets": {
+      "1": "OUT1",
+      "2": "PGOOD_CLEAN",
+      "3": "POWER_GND",
+      "4": "DOWNSTREAM_VALID",
+      "5": "3V8_PRE"
+    },
+    "attributes": {
+      "Function": "Downstream qualification 1/2",
+      "Authority": "Phase 3E + Phase 3F"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "5": [
+        927.1,
+        77.47
+      ],
+      "1": [
+        927.1,
+        80.01
+      ],
+      "2": [
+        927.1,
+        82.55
+      ],
+      "3": [
+        927.1,
+        85.09
+      ],
+      "4": [
+        972.82,
+        77.47
+      ]
+    }
+  },
+  "C300": {
+    "symbol": "C",
+    "value": "100n",
+    "footprint": "Capacitor_SMD:C_0603_1608Metric",
+    "nets": {
+      "1": "3V8_PRE",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Voltage rating": "25 V",
+      "Dielectric": "X7R/X5R",
+      "Tolerance": "10%",
+      "Acceptance": "",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        885.19,
+        76.2
+      ],
+      "2": [
+        885.19,
+        83.82
+      ]
+    }
+  },
+  "U212": {
+    "symbol": "SN74LV1T08DBVR",
+    "value": "SN74LV1T08DBVR",
+    "footprint": "Package_TO_SOT_SMD:SOT-23-5",
+    "nets": {
+      "1": "DOWNSTREAM_VALID",
+      "2": "DOWNSTREAM_RUN_DELAYED",
+      "3": "POWER_GND",
+      "4": "DOWNSTREAM_EN",
+      "5": "3V8_PRE"
+    },
+    "attributes": {
+      "Function": "Downstream qualification 2/2",
+      "Authority": "Phase 3E + Phase 3F"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "5": [
+        1207.77,
+        77.47
+      ],
+      "1": [
+        1207.77,
+        80.01
+      ],
+      "2": [
+        1207.77,
+        82.55
+      ],
+      "3": [
+        1207.77,
+        85.09
+      ],
+      "4": [
+        1253.49,
+        77.47
+      ]
+    }
+  },
+  "C301": {
+    "symbol": "C",
+    "value": "100n",
+    "footprint": "Capacitor_SMD:C_0603_1608Metric",
+    "nets": {
+      "1": "3V8_PRE",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Voltage rating": "25 V",
+      "Dielectric": "X7R/X5R",
+      "Tolerance": "10%",
+      "Acceptance": "",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        1164.59,
+        76.2
+      ],
+      "2": [
+        1164.59,
+        83.82
+      ]
+    }
+  },
+  "U213": {
+    "symbol": "SN74LV1T08DBVR",
+    "value": "SN74LV1T08DBVR",
+    "footprint": "Package_TO_SOT_SMD:SOT-23-5",
+    "nets": {
+      "1": "SHUTDOWN_REQ_3V8",
+      "2": "PGOOD_CLEAN",
+      "3": "POWER_GND",
+      "4": "SHUTDOWN_CLK_3V8",
+      "5": "3V8_PRE"
+    },
+    "attributes": {
+      "Function": "Commanded shutdown clock",
+      "Authority": "Phase 3E + Phase 3F"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "5": [
+        1487.17,
+        77.47
+      ],
+      "1": [
+        1487.17,
+        80.01
+      ],
+      "2": [
+        1487.17,
+        82.55
+      ],
+      "3": [
+        1487.17,
+        85.09
+      ],
+      "4": [
+        1532.89,
+        77.47
+      ]
+    }
+  },
+  "C302": {
+    "symbol": "C",
+    "value": "100n",
+    "footprint": "Capacitor_SMD:C_0603_1608Metric",
+    "nets": {
+      "1": "3V8_PRE",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Voltage rating": "25 V",
+      "Dielectric": "X7R/X5R",
+      "Tolerance": "10%",
+      "Acceptance": "",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        1445.26,
+        76.2
+      ],
+      "2": [
+        1445.26,
+        83.82
+      ]
+    }
+  },
+  "U214": {
+    "symbol": "SN74LV1T08DBVR",
+    "value": "SN74LV1T08DBVR",
+    "footprint": "Package_TO_SOT_SMD:SOT-23-5",
+    "nets": {
+      "1": "PGOOD_CLEAN",
+      "2": "SYS_HWRST_CLEAN",
+      "3": "POWER_GND",
+      "4": "SAFE_PWR_RESET",
+      "5": "3V8_PRE"
+    },
+    "attributes": {
+      "Function": "Hardware safe clear 1/3",
+      "Authority": "Phase 3E + Phase 3F"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "5": [
+        927.1,
+        173.99
+      ],
+      "1": [
+        927.1,
+        176.53
+      ],
+      "2": [
+        927.1,
+        179.07
+      ],
+      "3": [
+        927.1,
+        181.61
+      ],
+      "4": [
+        972.82,
+        173.99
+      ]
+    }
+  },
+  "C303": {
+    "symbol": "C",
+    "value": "100n",
+    "footprint": "Capacitor_SMD:C_0603_1608Metric",
+    "nets": {
+      "1": "3V8_PRE",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Voltage rating": "25 V",
+      "Dielectric": "X7R/X5R",
+      "Tolerance": "10%",
+      "Acceptance": "",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        885.19,
+        172.72
+      ],
+      "2": [
+        885.19,
+        180.34
+      ]
+    }
+  },
+  "U215": {
+    "symbol": "SN74LV1T08DBVR",
+    "value": "SN74LV1T08DBVR",
+    "footprint": "Package_TO_SOT_SMD:SOT-23-5",
+    "nets": {
+      "1": "EFUSE_FLT_CLEAN_N",
+      "2": "AMP_FAULT_CLEAN_N",
+      "3": "POWER_GND",
+      "4": "SAFE_FAULTS",
+      "5": "3V8_PRE"
+    },
+    "attributes": {
+      "Function": "Hardware safe clear 2/3",
+      "Authority": "Phase 3E + Phase 3F"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "5": [
+        1207.77,
+        173.99
+      ],
+      "1": [
+        1207.77,
+        176.53
+      ],
+      "2": [
+        1207.77,
+        179.07
+      ],
+      "3": [
+        1207.77,
+        181.61
+      ],
+      "4": [
+        1253.49,
+        173.99
+      ]
+    }
+  },
+  "C304": {
+    "symbol": "C",
+    "value": "100n",
+    "footprint": "Capacitor_SMD:C_0603_1608Metric",
+    "nets": {
+      "1": "3V8_PRE",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Voltage rating": "25 V",
+      "Dielectric": "X7R/X5R",
+      "Tolerance": "10%",
+      "Acceptance": "",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        1164.59,
+        172.72
+      ],
+      "2": [
+        1164.59,
+        180.34
+      ]
+    }
+  },
+  "U216": {
+    "symbol": "SN74LV1T08DBVR",
+    "value": "SN74LV1T08DBVR",
+    "footprint": "Package_TO_SOT_SMD:SOT-23-5",
+    "nets": {
+      "1": "SAFE_PWR_RESET",
+      "2": "SAFE_FAULTS",
+      "3": "POWER_GND",
+      "4": "SAFE_HW_CLEAR_N",
+      "5": "3V8_PRE"
+    },
+    "attributes": {
+      "Function": "Hardware safe clear 3/3",
+      "Authority": "Phase 3E + Phase 3F"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "5": [
+        1487.17,
+        173.99
+      ],
+      "1": [
+        1487.17,
+        176.53
+      ],
+      "2": [
+        1487.17,
+        179.07
+      ],
+      "3": [
+        1487.17,
+        181.61
+      ],
+      "4": [
+        1532.89,
+        173.99
+      ]
+    }
+  },
+  "C305": {
+    "symbol": "C",
+    "value": "100n",
+    "footprint": "Capacitor_SMD:C_0603_1608Metric",
+    "nets": {
+      "1": "3V8_PRE",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Voltage rating": "25 V",
+      "Dielectric": "X7R/X5R",
+      "Tolerance": "10%",
+      "Acceptance": "",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        1445.26,
+        172.72
+      ],
+      "2": [
+        1445.26,
+        180.34
+      ]
+    }
+  },
+  "U217": {
+    "symbol": "SN74LV1T08DBVR",
+    "value": "SN74LV1T08DBVR",
+    "footprint": "Package_TO_SOT_SMD:SOT-23-5",
+    "nets": {
+      "1": "SAFE_ARM_CMD_3V8",
+      "2": "SYS_HWRST_CLEAN",
+      "3": "POWER_GND",
+      "4": "SAFE_ARM_3V8",
+      "5": "3V8_PRE"
+    },
+    "attributes": {
+      "Function": "Explicit post-check arm edge",
+      "Authority": "Phase 3E + Phase 3F"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "5": [
+        927.1,
+        270.51
+      ],
+      "1": [
+        927.1,
+        273.05
+      ],
+      "2": [
+        927.1,
+        275.59
+      ],
+      "3": [
+        927.1,
+        278.13
+      ],
+      "4": [
+        972.82,
+        270.51
+      ]
+    }
+  },
+  "C306": {
+    "symbol": "C",
+    "value": "100n",
+    "footprint": "Capacitor_SMD:C_0603_1608Metric",
+    "nets": {
+      "1": "3V8_PRE",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Voltage rating": "25 V",
+      "Dielectric": "X7R/X5R",
+      "Tolerance": "10%",
+      "Acceptance": "",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        885.19,
+        269.24
+      ],
+      "2": [
+        885.19,
+        276.86
+      ]
+    }
+  },
+  "U218": {
+    "symbol": "SN74LV1T08DBVR",
+    "value": "SN74LV1T08DBVR",
+    "footprint": "Package_TO_SOT_SMD:SOT-23-5",
+    "nets": {
+      "1": "DOWNSTREAM_EN",
+      "2": "HW_RUN_LATCHED",
+      "3": "POWER_GND",
+      "4": "ANALOG_PERMIT",
+      "5": "3V8_PRE"
+    },
+    "attributes": {
+      "Function": "Analog qualification 1/2",
+      "Authority": "Phase 3E + Phase 3F"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "5": [
+        1207.77,
+        270.51
+      ],
+      "1": [
+        1207.77,
+        273.05
+      ],
+      "2": [
+        1207.77,
+        275.59
+      ],
+      "3": [
+        1207.77,
+        278.13
+      ],
+      "4": [
+        1253.49,
+        270.51
+      ]
+    }
+  },
+  "C307": {
+    "symbol": "C",
+    "value": "100n",
+    "footprint": "Capacitor_SMD:C_0603_1608Metric",
+    "nets": {
+      "1": "3V8_PRE",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Voltage rating": "25 V",
+      "Dielectric": "X7R/X5R",
+      "Tolerance": "10%",
+      "Acceptance": "",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        1164.59,
+        269.24
+      ],
+      "2": [
+        1164.59,
+        276.86
+      ]
+    }
+  },
+  "U219": {
+    "symbol": "SN74LV1T08DBVR",
+    "value": "SN74LV1T08DBVR",
+    "footprint": "Package_TO_SOT_SMD:SOT-23-5",
+    "nets": {
+      "1": "ANALOG_PERMIT",
+      "2": "ANALOG_PWR_CMD_3V8",
+      "3": "POWER_GND",
+      "4": "ANALOG_PWR_EN",
+      "5": "3V8_PRE"
+    },
+    "attributes": {
+      "Function": "Analog qualification 2/2",
+      "Authority": "Phase 3E + Phase 3F"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "5": [
+        1487.17,
+        270.51
+      ],
+      "1": [
+        1487.17,
+        273.05
+      ],
+      "2": [
+        1487.17,
+        275.59
+      ],
+      "3": [
+        1487.17,
+        278.13
+      ],
+      "4": [
+        1532.89,
+        270.51
+      ]
+    }
+  },
+  "C308": {
+    "symbol": "C",
+    "value": "100n",
+    "footprint": "Capacitor_SMD:C_0603_1608Metric",
+    "nets": {
+      "1": "3V8_PRE",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Voltage rating": "25 V",
+      "Dielectric": "X7R/X5R",
+      "Tolerance": "10%",
+      "Acceptance": "",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        1445.26,
+        269.24
+      ],
+      "2": [
+        1445.26,
+        276.86
+      ]
+    }
+  },
+  "U220": {
+    "symbol": "SN74LV1T08DBVR",
+    "value": "SN74LV1T08DBVR",
+    "footprint": "Package_TO_SOT_SMD:SOT-23-5",
+    "nets": {
+      "1": "HW_RUN_LATCHED",
+      "2": "AUDIO_DATA_OE_CMD_3V8",
+      "3": "POWER_GND",
+      "4": "AUDIO_DATA_OE_RELEASE",
+      "5": "3V8_PRE"
+    },
+    "attributes": {
+      "Function": "Data authorization; no bootstrap gating",
+      "Authority": "Phase 3E + Phase 3F"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "5": [
+        927.1,
+        367.03
+      ],
+      "1": [
+        927.1,
+        369.57
+      ],
+      "2": [
+        927.1,
+        372.11
+      ],
+      "3": [
+        927.1,
+        374.65
+      ],
+      "4": [
+        972.82,
+        367.03
+      ]
+    }
+  },
+  "C309": {
+    "symbol": "C",
+    "value": "100n",
+    "footprint": "Capacitor_SMD:C_0603_1608Metric",
+    "nets": {
+      "1": "3V8_PRE",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Voltage rating": "25 V",
+      "Dielectric": "X7R/X5R",
+      "Tolerance": "10%",
+      "Acceptance": "",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        885.19,
+        365.76
+      ],
+      "2": [
+        885.19,
+        373.38
+      ]
+    }
+  },
+  "U221": {
+    "symbol": "SN74LVC1G74DCUR",
+    "value": "SN74LVC1G74DCUR",
+    "footprint": "Package_SO:VSSOP-8_2.3x2mm_P0.5mm",
+    "nets": {
+      "1": "SHUTDOWN_CLK_3V8",
+      "2": "POWER_GND",
+      "3": "SEQ_SHUT",
+      "4": "POWER_GND",
+      "5": "SEQ_RUN_Q",
+      "6": "3V8_PRE",
+      "7": "PGOOD_CLEAN",
+      "8": "3V8_PRE"
+    },
+    "attributes": {
+      "Function": "U_SEQ_RUN: retained service-off state",
+      "Authority": "Phase 3E + Phase 3F"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "8": [
+        1207.77,
+        364.49
+      ],
+      "7": [
+        1207.77,
+        367.03
+      ],
+      "6": [
+        1207.77,
+        369.57
+      ],
+      "2": [
+        1207.77,
+        372.11
+      ],
+      "1": [
+        1207.77,
+        374.65
+      ],
+      "4": [
+        1207.77,
+        377.19
+      ],
+      "5": [
+        1253.49,
+        364.49
+      ],
+      "3": [
+        1253.49,
+        367.03
+      ]
+    }
+  },
+  "C310": {
+    "symbol": "C",
+    "value": "100n",
+    "footprint": "Capacitor_SMD:C_0603_1608Metric",
+    "nets": {
+      "1": "3V8_PRE",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Voltage rating": "25 V",
+      "Dielectric": "X7R/X5R",
+      "Tolerance": "10%",
+      "Acceptance": "",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        1164.59,
+        365.76
+      ],
+      "2": [
+        1164.59,
+        373.38
+      ]
+    }
+  },
+  "U222": {
+    "symbol": "SN74LVC1G74DCUR",
+    "value": "SN74LVC1G74DCUR",
+    "footprint": "Package_SO:VSSOP-8_2.3x2mm_P0.5mm",
+    "nets": {
+      "1": "SAFE_ARM_3V8",
+      "2": "3V8_PRE",
+      "3": null,
+      "4": "POWER_GND",
+      "5": "HW_RUN_LATCHED",
+      "6": "SAFE_CLEAR_N",
+      "7": "3V8_PRE",
+      "8": "3V8_PRE"
+    },
+    "attributes": {
+      "Function": "U_SAFE_LATCH: functional authorization",
+      "Authority": "Phase 3E + Phase 3F"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "8": [
+        1487.17,
+        364.49
+      ],
+      "7": [
+        1487.17,
+        367.03
+      ],
+      "6": [
+        1487.17,
+        369.57
+      ],
+      "2": [
+        1487.17,
+        372.11
+      ],
+      "1": [
+        1487.17,
+        374.65
+      ],
+      "4": [
+        1487.17,
+        377.19
+      ],
+      "5": [
+        1532.89,
+        364.49
+      ],
+      "3": [
+        1532.89,
+        367.03
+      ]
+    }
+  },
+  "C311": {
+    "symbol": "C",
+    "value": "100n",
+    "footprint": "Capacitor_SMD:C_0603_1608Metric",
+    "nets": {
+      "1": "3V8_PRE",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Voltage rating": "25 V",
+      "Dielectric": "X7R/X5R",
+      "Tolerance": "10%",
+      "Acceptance": "",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        1445.26,
+        365.76
+      ],
+      "2": [
+        1445.26,
+        373.38
+      ]
+    }
+  },
+  "U223": {
+    "symbol": "SN74LVC2G17DBVR",
+    "value": "SN74LVC2G17DBVR",
+    "footprint": "Package_TO_SOT_SMD:SOT-23-6",
+    "nets": {
+      "1": "PGOOD_12V",
+      "2": "POWER_GND",
+      "3": "EFUSE_FLT_N",
+      "4": "EFUSE_FLT_CLEAN_N",
+      "5": "3V8_PRE",
+      "6": "PGOOD_CLEAN"
+    },
+    "attributes": {
+      "Function": "Raw PGOOD / eFuse Schmitt conditioning",
+      "Authority": "Phase 3E + Phase 3F"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "5": [
+        927.1,
+        463.55
+      ],
+      "1": [
+        927.1,
+        466.09
+      ],
+      "3": [
+        927.1,
+        468.63
+      ],
+      "2": [
+        927.1,
+        471.17
+      ],
+      "6": [
+        972.82,
+        463.55
+      ],
+      "4": [
+        972.82,
+        466.09
+      ]
+    }
+  },
+  "C312": {
+    "symbol": "C",
+    "value": "100n",
+    "footprint": "Capacitor_SMD:C_0603_1608Metric",
+    "nets": {
+      "1": "3V8_PRE",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Voltage rating": "25 V",
+      "Dielectric": "X7R/X5R",
+      "Tolerance": "10%",
+      "Acceptance": "",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        885.19,
+        462.28
+      ],
+      "2": [
+        885.19,
+        469.9
+      ]
+    }
+  },
+  "U224": {
+    "symbol": "SN74LVC2G07DBVR",
+    "value": "SN74LVC2G07DBVR",
+    "footprint": "Package_TO_SOT_SMD:SOT-23-6",
+    "nets": {
+      "1": "SEQ_RUN_Q",
+      "2": "POWER_GND",
+      "3": "PGOOD_CLEAN",
+      "4": "SYS_HWRST",
+      "5": "3V8_PRE",
+      "6": "SYS_HWRST"
+    },
+    "attributes": {
+      "Function": "Retained shutdown / immediate brownout reset",
+      "Authority": "Phase 3E + Phase 3F"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "5": [
+        1207.77,
+        463.55
+      ],
+      "1": [
+        1207.77,
+        466.09
+      ],
+      "3": [
+        1207.77,
+        468.63
+      ],
+      "2": [
+        1207.77,
+        471.17
+      ],
+      "6": [
+        1253.49,
+        463.55
+      ],
+      "4": [
+        1253.49,
+        466.09
+      ]
+    }
+  },
+  "C313": {
+    "symbol": "C",
+    "value": "100n",
+    "footprint": "Capacitor_SMD:C_0603_1608Metric",
+    "nets": {
+      "1": "3V8_PRE",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Voltage rating": "25 V",
+      "Dielectric": "X7R/X5R",
+      "Tolerance": "10%",
+      "Acceptance": "",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        1164.59,
+        462.28
+      ],
+      "2": [
+        1164.59,
+        469.9
+      ]
+    }
+  },
+  "U225": {
+    "symbol": "TPS3760E012DYYR",
+    "value": "TPS3760E012DYYR",
+    "footprint": "Astra_Sequencing:Texas_DYY0014A",
+    "nets": {
+      "1": "3V8_PRE",
+      "3": "SEQ_SHUT",
+      "6": "DOWNSTREAM_RUN_DELAYED",
+      "8": "POWER_GND",
+      "10": "DOWN_CTS",
+      "13": "POWER_GND"
+    },
+    "attributes": {
+      "Function": "U_DOWN_DELAY: OV / active-low / open drain",
+      "Authority": "Phase 3E + Phase 3F"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        1487.17,
+        458.47
+      ],
+      "3": [
+        1487.17,
+        461.01
+      ],
+      "10": [
+        1487.17,
+        463.55
+      ],
+      "9": [
+        1487.17,
+        466.09
+      ],
+      "8": [
+        1487.17,
+        468.63
+      ],
+      "13": [
+        1487.17,
+        471.17
+      ],
+      "6": [
+        1532.89,
+        458.47
+      ],
+      "2": [
+        1532.89,
+        461.01
+      ],
+      "4": [
+        1532.89,
+        463.55
+      ],
+      "5": [
+        1532.89,
+        466.09
+      ],
+      "7": [
+        1532.89,
+        468.63
+      ],
+      "11": [
+        1532.89,
+        471.17
+      ],
+      "12": [
+        1532.89,
+        473.71
+      ],
+      "14": [
+        1532.89,
+        476.25
+      ]
+    }
+  },
+  "C314": {
+    "symbol": "C",
+    "value": "100n",
+    "footprint": "Capacitor_SMD:C_0603_1608Metric",
+    "nets": {
+      "1": "3V8_PRE",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Voltage rating": "25 V",
+      "Dielectric": "X7R/X5R",
+      "Tolerance": "10%",
+      "Acceptance": "",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        1445.26,
+        462.28
+      ],
+      "2": [
+        1445.26,
+        469.9
+      ]
+    }
+  },
+  "C340": {
+    "symbol": "C",
+    "value": "220n",
+    "footprint": "Capacitor_SMD:C_1210_3225Metric",
+    "nets": {
+      "1": "DOWN_CTS",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "MPN": "C1210C224J3GACTU",
+      "Tolerance": "5%",
+      "Dielectric": "C0G",
+      "Voltage rating": "25 V",
+      "Effective range": "208.373..231.693nF at -40..125C; inside required 198..242nF",
+      "Polarity": "Nonpolar",
+      "Evidence": "KEMET specsheet + C1003_C0G 2025-02-20; 30ppm/C; no bias or aging change"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        1579.88,
+        462.28
+      ],
+      "2": [
+        1579.88,
+        469.9
+      ]
+    }
+  },
+  "R340": {
+    "symbol": "R",
+    "value": "10.0k",
+    "footprint": "Resistor_SMD:R_0603_1608Metric",
+    "nets": {
+      "1": "3V8_PRE",
+      "2": "DOWNSTREAM_RUN_DELAYED"
+    },
+    "attributes": {
+      "Tolerance": "0.1%",
+      "Power rating": "0.1 W minimum",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        1620.52,
+        462.28
+      ],
+      "2": [
+        1620.52,
+        469.9
+      ]
+    }
+  },
+  "U226": {
+    "symbol": "SN74LXC8T245PWR",
+    "value": "SN74LXC8T245PWR",
+    "footprint": "Package_SO:TSSOP-24_4.4x7.8mm_P0.65mm",
+    "nets": {
+      "1": "3V3_SYS",
+      "2": "3V3_SYS",
+      "22": "POWER_GND",
+      "23": "3V8_PRE",
+      "24": "3V8_PRE",
+      "11": "POWER_GND",
+      "12": "POWER_GND",
+      "13": "POWER_GND",
+      "3": "SHUTDOWN_REQ",
+      "21": "SHUTDOWN_REQ_3V8",
+      "4": "SAFE_ARM_CMD",
+      "20": "SAFE_ARM_CMD_3V8",
+      "5": "ANALOG_PWR_CMD",
+      "19": "ANALOG_PWR_CMD_3V8",
+      "6": "CLOCK_STARTUP_CMD",
+      "18": "CLOCK_STARTUP_CMD_3V8",
+      "7": "AUDIO_DATA_OE_CMD",
+      "17": "AUDIO_DATA_OE_CMD_3V8",
+      "8": "RUN_HEALTH_OK_CMD",
+      "16": "RUN_HEALTH_OK_3V8",
+      "9": "SYS_HWRST",
+      "15": "SYS_HWRST_CLEAN",
+      "10": "AMP_FAULT_N",
+      "14": "AMP_FAULT_CLEAN_N"
+    },
+    "attributes": {
+      "Function": "U_CMD_XLAT: eight isolated A-to-B controls",
+      "Authority": "Phase 3E + Phase 3F"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        927.1,
+        547.37
+      ],
+      "2": [
+        927.1,
+        549.91
+      ],
+      "3": [
+        927.1,
+        552.45
+      ],
+      "4": [
+        927.1,
+        554.99
+      ],
+      "5": [
+        927.1,
+        557.53
+      ],
+      "6": [
+        927.1,
+        560.07
+      ],
+      "7": [
+        927.1,
+        562.61
+      ],
+      "8": [
+        927.1,
+        565.15
+      ],
+      "9": [
+        927.1,
+        567.69
+      ],
+      "10": [
+        927.1,
+        570.23
+      ],
+      "22": [
+        927.1,
+        572.77
+      ],
+      "11": [
+        927.1,
+        575.31
+      ],
+      "12": [
+        927.1,
+        577.85
+      ],
+      "13": [
+        927.1,
+        580.39
+      ],
+      "23": [
+        972.82,
+        547.37
+      ],
+      "24": [
+        972.82,
+        549.91
+      ],
+      "21": [
+        972.82,
+        552.45
+      ],
+      "20": [
+        972.82,
+        554.99
+      ],
+      "19": [
+        972.82,
+        557.53
+      ],
+      "18": [
+        972.82,
+        560.07
+      ],
+      "17": [
+        972.82,
+        562.61
+      ],
+      "16": [
+        972.82,
+        565.15
+      ],
+      "15": [
+        972.82,
+        567.69
+      ],
+      "14": [
+        972.82,
+        570.23
+      ]
+    }
+  },
+  "C315": {
+    "symbol": "C",
+    "value": "100n",
+    "footprint": "Capacitor_SMD:C_0603_1608Metric",
+    "nets": {
+      "1": "3V8_PRE",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Voltage rating": "25 V",
+      "Dielectric": "X7R/X5R",
+      "Tolerance": "10%",
+      "Acceptance": "",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        885.19,
+        558.8
+      ],
+      "2": [
+        885.19,
+        566.42
+      ]
+    }
+  },
+  "C341": {
+    "symbol": "C",
+    "value": "100n",
+    "footprint": "Capacitor_SMD:C_0603_1608Metric",
+    "nets": {
+      "1": "3V3_SYS",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Voltage rating": "25 V",
+      "Dielectric": "X7R/X5R",
+      "Tolerance": "10%",
+      "Acceptance": "",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        844.55,
+        558.8
+      ],
+      "2": [
+        844.55,
+        566.42
+      ]
+    }
+  },
+  "U227": {
+    "symbol": "SN74LVC2G08DCUR",
+    "value": "SN74LVC2G08DCUR",
+    "footprint": "Package_SO:VSSOP-8_2.3x2mm_P0.5mm",
+    "nets": {
+      "1": "HW_RUN_LATCHED",
+      "2": "AMP_MUTE_CMD",
+      "3": "AMP_STBY_RELEASE",
+      "4": "POWER_GND",
+      "5": "HW_RUN_LATCHED",
+      "6": "AMP_STBY_CMD",
+      "7": "AMP_MUTE_RELEASE",
+      "8": "3V3_SYS"
+    },
+    "attributes": {
+      "Function": "Amplifier MUTE / STANDBY authorization",
+      "Authority": "Phase 3E + Phase 3F"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "8": [
+        1207.77,
+        557.53
+      ],
+      "1": [
+        1207.77,
+        560.07
+      ],
+      "2": [
+        1207.77,
+        562.61
+      ],
+      "5": [
+        1207.77,
+        565.15
+      ],
+      "6": [
+        1207.77,
+        567.69
+      ],
+      "4": [
+        1207.77,
+        570.23
+      ],
+      "7": [
+        1253.49,
+        557.53
+      ],
+      "3": [
+        1253.49,
+        560.07
+      ]
+    }
+  },
+  "C316": {
+    "symbol": "C",
+    "value": "100n",
+    "footprint": "Capacitor_SMD:C_0603_1608Metric",
+    "nets": {
+      "1": "3V3_SYS",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Voltage rating": "25 V",
+      "Dielectric": "X7R/X5R",
+      "Tolerance": "10%",
+      "Acceptance": "",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        1164.59,
+        558.8
+      ],
+      "2": [
+        1164.59,
+        566.42
+      ]
+    }
+  },
+  "U228": {
+    "symbol": "SN74LVC2G08DCUR",
+    "value": "SN74LVC2G08DCUR",
+    "footprint": "Package_SO:VSSOP-8_2.3x2mm_P0.5mm",
+    "nets": {
+      "1": "SYS_HWRST_CLEAN",
+      "2": "CLOCK_STARTUP_CMD_3V8",
+      "3": "SAFE_CLEAR_N",
+      "4": "POWER_GND",
+      "5": "SAFE_HW_CLEAR_N",
+      "6": "RUN_HEALTH_OK_3V8",
+      "7": "CLOCK_STARTUP_EN",
+      "8": "3V8_PRE"
+    },
+    "attributes": {
+      "Function": "U_BOOT_GATES: clock bootstrap / health clear",
+      "Authority": "Phase 3E + Phase 3F"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "8": [
+        1487.17,
+        557.53
+      ],
+      "1": [
+        1487.17,
+        560.07
+      ],
+      "2": [
+        1487.17,
+        562.61
+      ],
+      "5": [
+        1487.17,
+        565.15
+      ],
+      "6": [
+        1487.17,
+        567.69
+      ],
+      "4": [
+        1487.17,
+        570.23
+      ],
+      "7": [
+        1532.89,
+        557.53
+      ],
+      "3": [
+        1532.89,
+        560.07
+      ]
+    }
+  },
+  "C317": {
+    "symbol": "C",
+    "value": "100n",
+    "footprint": "Capacitor_SMD:C_0603_1608Metric",
+    "nets": {
+      "1": "3V8_PRE",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Voltage rating": "25 V",
+      "Dielectric": "X7R/X5R",
+      "Tolerance": "10%",
+      "Acceptance": "",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        1445.26,
+        558.8
+      ],
+      "2": [
+        1445.26,
+        566.42
+      ]
+    }
+  },
+  "U229": {
+    "symbol": "SN74LVC2G07DBVR",
+    "value": "SN74LVC2G07DBVR",
+    "footprint": "Package_TO_SOT_SMD:SOT-23-6",
+    "nets": {
+      "1": "SYS_HWRST",
+      "2": "POWER_GND",
+      "3": "ADC_RST_RELEASE_CMD",
+      "4": "ADC_PD_RST_N",
+      "5": "3V3_SYS",
+      "6": "ADC_PD_RST_N"
+    },
+    "attributes": {
+      "Function": "ADC reset: system reset AND deliberate release",
+      "Authority": "Phase 3E + Phase 3F"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "5": [
+        927.1,
+        656.59
+      ],
+      "1": [
+        927.1,
+        659.13
+      ],
+      "3": [
+        927.1,
+        661.67
+      ],
+      "2": [
+        927.1,
+        664.21
+      ],
+      "6": [
+        972.82,
+        656.59
+      ],
+      "4": [
+        972.82,
+        659.13
+      ]
+    }
+  },
+  "C318": {
+    "symbol": "C",
+    "value": "100n",
+    "footprint": "Capacitor_SMD:C_0603_1608Metric",
+    "nets": {
+      "1": "3V3_SYS",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Voltage rating": "25 V",
+      "Dielectric": "X7R/X5R",
+      "Tolerance": "10%",
+      "Acceptance": "",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        885.19,
+        655.32
+      ],
+      "2": [
+        885.19,
+        662.94
+      ]
+    }
+  },
+  "R350": {
+    "symbol": "R",
+    "value": "100k",
+    "footprint": "Resistor_SMD:R_0603_1608Metric",
+    "nets": {
+      "1": "SHUTDOWN_REQ",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Tolerance": "0.1%",
+      "Power rating": "0.1 W minimum",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        849.63,
+        750.57
+      ],
+      "2": [
+        849.63,
+        758.19
+      ]
+    }
+  },
+  "R351": {
+    "symbol": "R",
+    "value": "100k",
+    "footprint": "Resistor_SMD:R_0603_1608Metric",
+    "nets": {
+      "1": "SAFE_ARM_CMD",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Tolerance": "0.1%",
+      "Power rating": "0.1 W minimum",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        887.73,
+        750.57
+      ],
+      "2": [
+        887.73,
+        758.19
+      ]
+    }
+  },
+  "R352": {
+    "symbol": "R",
+    "value": "100k",
+    "footprint": "Resistor_SMD:R_0603_1608Metric",
+    "nets": {
+      "1": "ANALOG_PWR_CMD",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Tolerance": "0.1%",
+      "Power rating": "0.1 W minimum",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        925.83,
+        750.57
+      ],
+      "2": [
+        925.83,
+        758.19
+      ]
+    }
+  },
+  "R353": {
+    "symbol": "R",
+    "value": "100k",
+    "footprint": "Resistor_SMD:R_0603_1608Metric",
+    "nets": {
+      "1": "CLOCK_STARTUP_CMD",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Tolerance": "0.1%",
+      "Power rating": "0.1 W minimum",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        963.93,
+        750.57
+      ],
+      "2": [
+        963.93,
+        758.19
+      ]
+    }
+  },
+  "R354": {
+    "symbol": "R",
+    "value": "100k",
+    "footprint": "Resistor_SMD:R_0603_1608Metric",
+    "nets": {
+      "1": "AUDIO_DATA_OE_CMD",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Tolerance": "0.1%",
+      "Power rating": "0.1 W minimum",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        1002.03,
+        750.57
+      ],
+      "2": [
+        1002.03,
+        758.19
+      ]
+    }
+  },
+  "R355": {
+    "symbol": "R",
+    "value": "100k",
+    "footprint": "Resistor_SMD:R_0603_1608Metric",
+    "nets": {
+      "1": "RUN_HEALTH_OK_CMD",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Tolerance": "0.1%",
+      "Power rating": "0.1 W minimum",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        1040.13,
+        750.57
+      ],
+      "2": [
+        1040.13,
+        758.19
+      ]
+    }
+  },
+  "R356": {
+    "symbol": "R",
+    "value": "100k",
+    "footprint": "Resistor_SMD:R_0603_1608Metric",
+    "nets": {
+      "1": "SYS_HWRST",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Tolerance": "0.1%",
+      "Power rating": "0.1 W minimum",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        1078.23,
+        750.57
+      ],
+      "2": [
+        1078.23,
+        758.19
+      ]
+    }
+  },
+  "R357": {
+    "symbol": "R",
+    "value": "100k",
+    "footprint": "Resistor_SMD:R_0603_1608Metric",
+    "nets": {
+      "1": "AMP_FAULT_N",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Tolerance": "0.1%",
+      "Power rating": "0.1 W minimum",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        1116.33,
+        750.57
+      ],
+      "2": [
+        1116.33,
+        758.19
+      ]
+    }
+  },
+  "R358": {
+    "symbol": "R",
+    "value": "100k",
+    "footprint": "Resistor_SMD:R_0603_1608Metric",
+    "nets": {
+      "1": "SHUTDOWN_REQ_3V8",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Tolerance": "0.1%",
+      "Power rating": "0.1 W minimum",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        1154.43,
+        750.57
+      ],
+      "2": [
+        1154.43,
+        758.19
+      ]
+    }
+  },
+  "R359": {
+    "symbol": "R",
+    "value": "100k",
+    "footprint": "Resistor_SMD:R_0603_1608Metric",
+    "nets": {
+      "1": "SAFE_ARM_CMD_3V8",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Tolerance": "0.1%",
+      "Power rating": "0.1 W minimum",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        1192.53,
+        750.57
+      ],
+      "2": [
+        1192.53,
+        758.19
+      ]
+    }
+  },
+  "R360": {
+    "symbol": "R",
+    "value": "100k",
+    "footprint": "Resistor_SMD:R_0603_1608Metric",
+    "nets": {
+      "1": "ANALOG_PWR_CMD_3V8",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Tolerance": "0.1%",
+      "Power rating": "0.1 W minimum",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        1230.63,
+        750.57
+      ],
+      "2": [
+        1230.63,
+        758.19
+      ]
+    }
+  },
+  "R361": {
+    "symbol": "R",
+    "value": "100k",
+    "footprint": "Resistor_SMD:R_0603_1608Metric",
+    "nets": {
+      "1": "CLOCK_STARTUP_CMD_3V8",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Tolerance": "0.1%",
+      "Power rating": "0.1 W minimum",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        1268.73,
+        750.57
+      ],
+      "2": [
+        1268.73,
+        758.19
+      ]
+    }
+  },
+  "R362": {
+    "symbol": "R",
+    "value": "100k",
+    "footprint": "Resistor_SMD:R_0603_1608Metric",
+    "nets": {
+      "1": "AUDIO_DATA_OE_CMD_3V8",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Tolerance": "0.1%",
+      "Power rating": "0.1 W minimum",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        1306.83,
+        750.57
+      ],
+      "2": [
+        1306.83,
+        758.19
+      ]
+    }
+  },
+  "R363": {
+    "symbol": "R",
+    "value": "100k",
+    "footprint": "Resistor_SMD:R_0603_1608Metric",
+    "nets": {
+      "1": "RUN_HEALTH_OK_3V8",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Tolerance": "0.1%",
+      "Power rating": "0.1 W minimum",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        1344.93,
+        750.57
+      ],
+      "2": [
+        1344.93,
+        758.19
+      ]
+    }
+  },
+  "R364": {
+    "symbol": "R",
+    "value": "100k",
+    "footprint": "Resistor_SMD:R_0603_1608Metric",
+    "nets": {
+      "1": "SYS_HWRST_CLEAN",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Tolerance": "0.1%",
+      "Power rating": "0.1 W minimum",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        1383.03,
+        750.57
+      ],
+      "2": [
+        1383.03,
+        758.19
+      ]
+    }
+  },
+  "R365": {
+    "symbol": "R",
+    "value": "100k",
+    "footprint": "Resistor_SMD:R_0603_1608Metric",
+    "nets": {
+      "1": "AMP_FAULT_CLEAN_N",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Tolerance": "0.1%",
+      "Power rating": "0.1 W minimum",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        1421.13,
+        750.57
+      ],
+      "2": [
+        1421.13,
+        758.19
+      ]
+    }
+  },
+  "R366": {
+    "symbol": "R",
+    "value": "100k",
+    "footprint": "Resistor_SMD:R_0603_1608Metric",
+    "nets": {
+      "1": "AMP_MUTE_CMD",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Tolerance": "0.1%",
+      "Power rating": "0.1 W minimum",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        1459.23,
+        750.57
+      ],
+      "2": [
+        1459.23,
+        758.19
+      ]
+    }
+  },
+  "R367": {
+    "symbol": "R",
+    "value": "100k",
+    "footprint": "Resistor_SMD:R_0603_1608Metric",
+    "nets": {
+      "1": "AMP_STBY_CMD",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Tolerance": "0.1%",
+      "Power rating": "0.1 W minimum",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        1497.33,
+        750.57
+      ],
+      "2": [
+        1497.33,
+        758.19
+      ]
+    }
+  },
+  "R368": {
+    "symbol": "R",
+    "value": "100k",
+    "footprint": "Resistor_SMD:R_0603_1608Metric",
+    "nets": {
+      "1": "ADC_RST_RELEASE_CMD",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Tolerance": "0.1%",
+      "Power rating": "0.1 W minimum",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        1535.43,
+        750.57
+      ],
+      "2": [
+        1535.43,
+        758.19
+      ]
+    }
+  },
+  "R369": {
+    "symbol": "R",
+    "value": "100k",
+    "footprint": "Resistor_SMD:R_0603_1608Metric",
+    "nets": {
+      "1": "AMP_MUTE_RELEASE",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Tolerance": "0.1%",
+      "Power rating": "0.1 W minimum",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        1573.53,
+        750.57
+      ],
+      "2": [
+        1573.53,
+        758.19
+      ]
+    }
+  },
+  "R370": {
+    "symbol": "R",
+    "value": "100k",
+    "footprint": "Resistor_SMD:R_0603_1608Metric",
+    "nets": {
+      "1": "AMP_STBY_RELEASE",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Tolerance": "0.1%",
+      "Power rating": "0.1 W minimum",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        1611.63,
+        750.57
+      ],
+      "2": [
+        1611.63,
+        758.19
+      ]
+    }
+  },
+  "R380": {
+    "symbol": "R",
+    "value": "10.0k",
+    "footprint": "Resistor_SMD:R_0603_1608Metric",
+    "nets": {
+      "1": "3V3_SYS",
+      "2": "AMP_FAULT_N"
+    },
+    "attributes": {
+      "Tolerance": "0.1%",
+      "Power rating": "0.1 W minimum",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        549.91,
+        631.19
+      ],
+      "2": [
+        549.91,
+        638.81
+      ]
+    }
+  },
+  "R381": {
+    "symbol": "R",
+    "value": "10.0k",
+    "footprint": "Resistor_SMD:R_0603_1608Metric",
+    "nets": {
+      "1": "3V3_SYS",
+      "2": "ADC_PD_RST_N"
+    },
+    "attributes": {
+      "Tolerance": "0.1%",
+      "Power rating": "0.1 W minimum",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        609.6,
+        631.19
+      ],
+      "2": [
+        609.6,
+        638.81
+      ]
+    }
+  },
+  "R382": {
+    "symbol": "R",
+    "value": "10.0k",
+    "footprint": "Resistor_SMD:R_0603_1608Metric",
+    "nets": {
+      "1": "3V8_PRE",
+      "2": "EFUSE_FLT_N"
+    },
+    "attributes": {
+      "Tolerance": "0.1%",
+      "Power rating": "0.1 W minimum",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        679.45,
+        631.19
+      ],
+      "2": [
+        679.45,
+        638.81
+      ]
+    }
+  },
+  "R310": {
+    "symbol": "R",
+    "value": "100k",
+    "footprint": "Resistor_SMD:R_0603_1608Metric",
+    "nets": {
+      "1": "ANALOG_PWR_EN",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Tolerance": "0.1%",
+      "Power rating": "0.1 W minimum",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        730.25,
+        295.91
+      ],
+      "2": [
+        730.25,
+        303.53
+      ]
+    }
+  },
+  "R311": {
+    "symbol": "R",
+    "value": "100k",
+    "footprint": "Resistor_SMD:R_0603_1608Metric",
+    "nets": {
+      "1": "ANALOG_PWR_EN",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Tolerance": "0.1%",
+      "Power rating": "0.1 W minimum",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        519.43,
+        406.4
+      ],
+      "2": [
+        519.43,
+        414.02
+      ]
+    }
+  },
+  "R312": {
+    "symbol": "R",
+    "value": "100k",
+    "footprint": "Resistor_SMD:R_0603_1608Metric",
+    "nets": {
+      "1": "DOWNSTREAM_EN",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Tolerance": "0.1%",
+      "Power rating": "0.1 W minimum",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        219.71,
+        406.4
+      ],
+      "2": [
+        219.71,
+        414.02
+      ]
+    }
+  },
+  "R313": {
+    "symbol": "R",
+    "value": "100k",
+    "footprint": "Resistor_SMD:R_0603_1608Metric",
+    "nets": {
+      "1": "DOWNSTREAM_EN",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Tolerance": "0.1%",
+      "Power rating": "0.1 W minimum",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        469.9,
+        106.68
+      ],
+      "2": [
+        469.9,
+        114.3
+      ]
+    }
+  },
+  "R314": {
+    "symbol": "R",
+    "value": "100k",
+    "footprint": "Resistor_SMD:R_0603_1608Metric",
+    "nets": {
+      "1": "DOWNSTREAM_EN",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Tolerance": "0.1%",
+      "Power rating": "0.1 W minimum",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        469.9,
+        295.91
+      ],
+      "2": [
+        469.9,
+        303.53
+      ]
+    }
+  },
+  "R315": {
+    "symbol": "R",
+    "value": "100k",
+    "footprint": "Resistor_SMD:R_0603_1608Metric",
+    "nets": {
+      "1": "DOWNSTREAM_EN",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Tolerance": "0.1%",
+      "Power rating": "0.1 W minimum",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        789.94,
+        106.68
+      ],
+      "2": [
+        789.94,
+        114.3
+      ]
+    }
+  },
+  "Q201": {
+    "symbol": "BSS138LT1G",
+    "value": "BSS138LT1G",
+    "footprint": "Package_TO_SOT_SMD:SOT-23",
+    "nets": {
+      "1": "RAILS_OK",
+      "2": "POWER_GND",
+      "3": "MCLK_OE_N"
+    },
+    "attributes": {
+      "Authority": "Phase 3F section 9.2/9.4",
+      "Polarity": "N-channel; source grounded; drain only sinks destination-domain OE"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        77.47,
+        709.93
+      ],
+      "2": [
+        77.47,
+        712.47
+      ],
+      "3": [
+        123.19,
+        709.93
+      ]
+    }
+  },
+  "R390": {
+    "symbol": "R",
+    "value": "10.0k",
+    "footprint": "Resistor_SMD:R_0603_1608Metric",
+    "nets": {
+      "1": "1V8_DSP_REF_ANA",
+      "2": "MCLK_OE_N"
+    },
+    "attributes": {
+      "Tolerance": "0.1%",
+      "Power rating": "0.1 W minimum",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        165.1,
+        706.12
+      ],
+      "2": [
+        165.1,
+        713.74
+      ]
+    }
+  },
+  "R391": {
+    "symbol": "R",
+    "value": "100k",
+    "footprint": "Resistor_SMD:R_0603_1608Metric",
+    "nets": {
+      "1": "RAILS_OK",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Tolerance": "0.1%",
+      "Power rating": "0.1 W minimum",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        35.56,
+        706.12
+      ],
+      "2": [
+        35.56,
+        713.74
+      ]
+    }
+  },
+  "TP229": {
+    "symbol": "TestPoint",
+    "value": "MCLK_OE_N",
+    "footprint": "TestPoint:TestPoint_Pad_D1.0mm",
+    "nets": {
+      "1": "MCLK_OE_N"
+    },
+    "attributes": {},
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        199.39,
+        730.25
+      ]
+    }
+  },
+  "Q202": {
+    "symbol": "BSS138LT1G",
+    "value": "BSS138LT1G",
+    "footprint": "Package_TO_SOT_SMD:SOT-23",
+    "nets": {
+      "1": "CLOCK_STARTUP_EN",
+      "2": "POWER_GND",
+      "3": "AUDIO_CLOCK_OE_N"
+    },
+    "attributes": {
+      "Authority": "Phase 3F section 9.2/9.4",
+      "Polarity": "N-channel; source grounded; drain only sinks destination-domain OE"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        317.5,
+        709.93
+      ],
+      "2": [
+        317.5,
+        712.47
+      ],
+      "3": [
+        363.22,
+        709.93
+      ]
+    }
+  },
+  "R392": {
+    "symbol": "R",
+    "value": "10.0k",
+    "footprint": "Resistor_SMD:R_0603_1608Metric",
+    "nets": {
+      "1": "3V3_SYS",
+      "2": "AUDIO_CLOCK_OE_N"
+    },
+    "attributes": {
+      "Tolerance": "0.1%",
+      "Power rating": "0.1 W minimum",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        405.13,
+        706.12
+      ],
+      "2": [
+        405.13,
+        713.74
+      ]
+    }
+  },
+  "R393": {
+    "symbol": "R",
+    "value": "100k",
+    "footprint": "Resistor_SMD:R_0603_1608Metric",
+    "nets": {
+      "1": "CLOCK_STARTUP_EN",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Tolerance": "0.1%",
+      "Power rating": "0.1 W minimum",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        275.59,
+        706.12
+      ],
+      "2": [
+        275.59,
+        713.74
+      ]
+    }
+  },
+  "TP230": {
+    "symbol": "TestPoint",
+    "value": "AUDIO_CLOCK_OE_N",
+    "footprint": "TestPoint:TestPoint_Pad_D1.0mm",
+    "nets": {
+      "1": "AUDIO_CLOCK_OE_N"
+    },
+    "attributes": {},
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        439.42,
+        730.25
+      ]
+    }
+  },
+  "Q203": {
+    "symbol": "BSS138LT1G",
+    "value": "BSS138LT1G",
+    "footprint": "Package_TO_SOT_SMD:SOT-23",
+    "nets": {
+      "1": "AUDIO_DATA_OE_RELEASE",
+      "2": "POWER_GND",
+      "3": "AUDIO_DATA_OE_N"
+    },
+    "attributes": {
+      "Authority": "Phase 3F section 9.2/9.4",
+      "Polarity": "N-channel; source grounded; drain only sinks destination-domain OE"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        557.53,
+        709.93
+      ],
+      "2": [
+        557.53,
+        712.47
+      ],
+      "3": [
+        603.25,
+        709.93
+      ]
+    }
+  },
+  "R394": {
+    "symbol": "R",
+    "value": "10.0k",
+    "footprint": "Resistor_SMD:R_0603_1608Metric",
+    "nets": {
+      "1": "3V3_SYS",
+      "2": "AUDIO_DATA_OE_N"
+    },
+    "attributes": {
+      "Tolerance": "0.1%",
+      "Power rating": "0.1 W minimum",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        645.16,
+        706.12
+      ],
+      "2": [
+        645.16,
+        713.74
+      ]
+    }
+  },
+  "R395": {
+    "symbol": "R",
+    "value": "100k",
+    "footprint": "Resistor_SMD:R_0603_1608Metric",
+    "nets": {
+      "1": "AUDIO_DATA_OE_RELEASE",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Tolerance": "0.1%",
+      "Power rating": "0.1 W minimum",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        515.62,
+        706.12
+      ],
+      "2": [
+        515.62,
+        713.74
+      ]
+    }
+  },
+  "TP231": {
+    "symbol": "TestPoint",
+    "value": "AUDIO_DATA_OE_N",
+    "footprint": "TestPoint:TestPoint_Pad_D1.0mm",
+    "nets": {
+      "1": "AUDIO_DATA_OE_N"
+    },
+    "attributes": {},
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        679.45,
+        730.25
+      ]
+    }
+  },
+  "U230": {
+    "symbol": "TMUX2821DSGR",
+    "value": "TMUX2821DSGR",
+    "footprint": "Package_DFN_QFN:DFN-8-1EP_2x2mm_P0.5mm_EP0.9x1.6mm",
+    "nets": {
+      "8": "5V_AFE",
+      "4": "POWER_GND",
+      "9": "POWER_GND",
+      "1": "AFE1P_AFTER_47R",
+      "2": "ISO_0_0",
+      "7": "ANALOG_PWR_EN",
+      "5": "AFE1N_AFTER_47R",
+      "6": "ISO_0_1",
+      "3": "ANALOG_PWR_EN"
+    },
+    "attributes": {
+      "Function": "AFE channel 1 -> ADC, two differential legs; 5V_AFE side",
+      "Authority": "Phase 3E section 7.1"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "8": [
+        77.47,
+        883.92
+      ],
+      "7": [
+        77.47,
+        886.46
+      ],
+      "3": [
+        77.47,
+        889.0
+      ],
+      "1": [
+        77.47,
+        891.54
+      ],
+      "5": [
+        77.47,
+        894.08
+      ],
+      "4": [
+        77.47,
+        896.62
+      ],
+      "9": [
+        77.47,
+        899.16
+      ],
+      "2": [
+        123.19,
+        883.92
+      ],
+      "6": [
+        123.19,
+        886.46
+      ]
+    }
+  },
+  "C350": {
+    "symbol": "C",
+    "value": "100n",
+    "footprint": "Capacitor_SMD:C_0603_1608Metric",
+    "nets": {
+      "1": "5V_AFE",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Voltage rating": "25 V",
+      "Dielectric": "X7R/X5R",
+      "Tolerance": "10%",
+      "Acceptance": "",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        35.56,
+        886.46
+      ],
+      "2": [
+        35.56,
+        894.08
+      ]
+    }
+  },
+  "U231": {
+    "symbol": "TMUX2821DSGR",
+    "value": "TMUX2821DSGR",
+    "footprint": "Package_DFN_QFN:DFN-8-1EP_2x2mm_P0.5mm_EP0.9x1.6mm",
+    "nets": {
+      "8": "3V3_ADC_A",
+      "4": "POWER_GND",
+      "9": "POWER_GND",
+      "1": "ISO_0_0",
+      "2": "ADC_AIN1P",
+      "7": "ANALOG_PWR_EN",
+      "5": "ISO_0_1",
+      "6": "ADC_AIN1N",
+      "3": "ANALOG_PWR_EN"
+    },
+    "attributes": {
+      "Function": "AFE channel 1 -> ADC, two differential legs; 3V3_ADC_A side",
+      "Authority": "Phase 3E section 7.1"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "8": [
+        217.17,
+        883.92
+      ],
+      "7": [
+        217.17,
+        886.46
+      ],
+      "3": [
+        217.17,
+        889.0
+      ],
+      "1": [
+        217.17,
+        891.54
+      ],
+      "5": [
+        217.17,
+        894.08
+      ],
+      "4": [
+        217.17,
+        896.62
+      ],
+      "9": [
+        217.17,
+        899.16
+      ],
+      "2": [
+        262.89,
+        883.92
+      ],
+      "6": [
+        262.89,
+        886.46
+      ]
+    }
+  },
+  "C351": {
+    "symbol": "C",
+    "value": "100n",
+    "footprint": "Capacitor_SMD:C_0603_1608Metric",
+    "nets": {
+      "1": "3V3_ADC_A",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Voltage rating": "25 V",
+      "Dielectric": "X7R/X5R",
+      "Tolerance": "10%",
+      "Acceptance": "",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        175.26,
+        886.46
+      ],
+      "2": [
+        175.26,
+        894.08
+      ]
+    }
+  },
+  "U232": {
+    "symbol": "TMUX2821DSGR",
+    "value": "TMUX2821DSGR",
+    "footprint": "Package_DFN_QFN:DFN-8-1EP_2x2mm_P0.5mm_EP0.9x1.6mm",
+    "nets": {
+      "8": "5V_AFE",
+      "4": "POWER_GND",
+      "9": "POWER_GND",
+      "1": "AFE2P_AFTER_47R",
+      "2": "ISO_1_0",
+      "7": "ANALOG_PWR_EN",
+      "5": "AFE2N_AFTER_47R",
+      "6": "ISO_1_1",
+      "3": "ANALOG_PWR_EN"
+    },
+    "attributes": {
+      "Function": "AFE channel 2 -> ADC, two differential legs; 5V_AFE side",
+      "Authority": "Phase 3E section 7.1"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "8": [
+        477.52,
+        883.92
+      ],
+      "7": [
+        477.52,
+        886.46
+      ],
+      "3": [
+        477.52,
+        889.0
+      ],
+      "1": [
+        477.52,
+        891.54
+      ],
+      "5": [
+        477.52,
+        894.08
+      ],
+      "4": [
+        477.52,
+        896.62
+      ],
+      "9": [
+        477.52,
+        899.16
+      ],
+      "2": [
+        523.24,
+        883.92
+      ],
+      "6": [
+        523.24,
+        886.46
+      ]
+    }
+  },
+  "C352": {
+    "symbol": "C",
+    "value": "100n",
+    "footprint": "Capacitor_SMD:C_0603_1608Metric",
+    "nets": {
+      "1": "5V_AFE",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Voltage rating": "25 V",
+      "Dielectric": "X7R/X5R",
+      "Tolerance": "10%",
+      "Acceptance": "",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        435.61,
+        886.46
+      ],
+      "2": [
+        435.61,
+        894.08
+      ]
+    }
+  },
+  "U233": {
+    "symbol": "TMUX2821DSGR",
+    "value": "TMUX2821DSGR",
+    "footprint": "Package_DFN_QFN:DFN-8-1EP_2x2mm_P0.5mm_EP0.9x1.6mm",
+    "nets": {
+      "8": "3V3_ADC_A",
+      "4": "POWER_GND",
+      "9": "POWER_GND",
+      "1": "ISO_1_0",
+      "2": "ADC_AIN2P",
+      "7": "ANALOG_PWR_EN",
+      "5": "ISO_1_1",
+      "6": "ADC_AIN2N",
+      "3": "ANALOG_PWR_EN"
+    },
+    "attributes": {
+      "Function": "AFE channel 2 -> ADC, two differential legs; 3V3_ADC_A side",
+      "Authority": "Phase 3E section 7.1"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "8": [
+        617.22,
+        883.92
+      ],
+      "7": [
+        617.22,
+        886.46
+      ],
+      "3": [
+        617.22,
+        889.0
+      ],
+      "1": [
+        617.22,
+        891.54
+      ],
+      "5": [
+        617.22,
+        894.08
+      ],
+      "4": [
+        617.22,
+        896.62
+      ],
+      "9": [
+        617.22,
+        899.16
+      ],
+      "2": [
+        662.94,
+        883.92
+      ],
+      "6": [
+        662.94,
+        886.46
+      ]
+    }
+  },
+  "C353": {
+    "symbol": "C",
+    "value": "100n",
+    "footprint": "Capacitor_SMD:C_0603_1608Metric",
+    "nets": {
+      "1": "3V3_ADC_A",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Voltage rating": "25 V",
+      "Dielectric": "X7R/X5R",
+      "Tolerance": "10%",
+      "Acceptance": "",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        575.31,
+        886.46
+      ],
+      "2": [
+        575.31,
+        894.08
+      ]
+    }
+  },
+  "U234": {
+    "symbol": "TMUX2821DSGR",
+    "value": "TMUX2821DSGR",
+    "footprint": "Package_DFN_QFN:DFN-8-1EP_2x2mm_P0.5mm_EP0.9x1.6mm",
+    "nets": {
+      "8": "5V_AFE",
+      "4": "POWER_GND",
+      "9": "POWER_GND",
+      "1": "AFE3P_AFTER_47R",
+      "2": "ISO_2_0",
+      "7": "ANALOG_PWR_EN",
+      "5": "AFE3N_AFTER_47R",
+      "6": "ISO_2_1",
+      "3": "ANALOG_PWR_EN"
+    },
+    "attributes": {
+      "Function": "AFE channel 3 -> ADC, two differential legs; 5V_AFE side",
+      "Authority": "Phase 3E section 7.1"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "8": [
+        877.57,
+        883.92
+      ],
+      "7": [
+        877.57,
+        886.46
+      ],
+      "3": [
+        877.57,
+        889.0
+      ],
+      "1": [
+        877.57,
+        891.54
+      ],
+      "5": [
+        877.57,
+        894.08
+      ],
+      "4": [
+        877.57,
+        896.62
+      ],
+      "9": [
+        877.57,
+        899.16
+      ],
+      "2": [
+        923.29,
+        883.92
+      ],
+      "6": [
+        923.29,
+        886.46
+      ]
+    }
+  },
+  "C354": {
+    "symbol": "C",
+    "value": "100n",
+    "footprint": "Capacitor_SMD:C_0603_1608Metric",
+    "nets": {
+      "1": "5V_AFE",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Voltage rating": "25 V",
+      "Dielectric": "X7R/X5R",
+      "Tolerance": "10%",
+      "Acceptance": "",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        834.39,
+        886.46
+      ],
+      "2": [
+        834.39,
+        894.08
+      ]
+    }
+  },
+  "U235": {
+    "symbol": "TMUX2821DSGR",
+    "value": "TMUX2821DSGR",
+    "footprint": "Package_DFN_QFN:DFN-8-1EP_2x2mm_P0.5mm_EP0.9x1.6mm",
+    "nets": {
+      "8": "3V3_ADC_A",
+      "4": "POWER_GND",
+      "9": "POWER_GND",
+      "1": "ISO_2_0",
+      "2": "ADC_AIN3P",
+      "7": "ANALOG_PWR_EN",
+      "5": "ISO_2_1",
+      "6": "ADC_AIN3N",
+      "3": "ANALOG_PWR_EN"
+    },
+    "attributes": {
+      "Function": "AFE channel 3 -> ADC, two differential legs; 3V3_ADC_A side",
+      "Authority": "Phase 3E section 7.1"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "8": [
+        1017.27,
+        883.92
+      ],
+      "7": [
+        1017.27,
+        886.46
+      ],
+      "3": [
+        1017.27,
+        889.0
+      ],
+      "1": [
+        1017.27,
+        891.54
+      ],
+      "5": [
+        1017.27,
+        894.08
+      ],
+      "4": [
+        1017.27,
+        896.62
+      ],
+      "9": [
+        1017.27,
+        899.16
+      ],
+      "2": [
+        1062.99,
+        883.92
+      ],
+      "6": [
+        1062.99,
+        886.46
+      ]
+    }
+  },
+  "C355": {
+    "symbol": "C",
+    "value": "100n",
+    "footprint": "Capacitor_SMD:C_0603_1608Metric",
+    "nets": {
+      "1": "3V3_ADC_A",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Voltage rating": "25 V",
+      "Dielectric": "X7R/X5R",
+      "Tolerance": "10%",
+      "Acceptance": "",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        975.36,
+        886.46
+      ],
+      "2": [
+        975.36,
+        894.08
+      ]
+    }
+  },
+  "U236": {
+    "symbol": "TMUX2821DSGR",
+    "value": "TMUX2821DSGR",
+    "footprint": "Package_DFN_QFN:DFN-8-1EP_2x2mm_P0.5mm_EP0.9x1.6mm",
+    "nets": {
+      "8": "5V_AFE",
+      "4": "POWER_GND",
+      "9": "POWER_GND",
+      "1": "AFE4P_AFTER_47R",
+      "2": "ISO_3_0",
+      "7": "ANALOG_PWR_EN",
+      "5": "AFE4N_AFTER_47R",
+      "6": "ISO_3_1",
+      "3": "ANALOG_PWR_EN"
+    },
+    "attributes": {
+      "Function": "AFE channel 4 -> ADC, two differential legs; 5V_AFE side",
+      "Authority": "Phase 3E section 7.1"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "8": [
+        1277.62,
+        883.92
+      ],
+      "7": [
+        1277.62,
+        886.46
+      ],
+      "3": [
+        1277.62,
+        889.0
+      ],
+      "1": [
+        1277.62,
+        891.54
+      ],
+      "5": [
+        1277.62,
+        894.08
+      ],
+      "4": [
+        1277.62,
+        896.62
+      ],
+      "9": [
+        1277.62,
+        899.16
+      ],
+      "2": [
+        1323.34,
+        883.92
+      ],
+      "6": [
+        1323.34,
+        886.46
+      ]
+    }
+  },
+  "C356": {
+    "symbol": "C",
+    "value": "100n",
+    "footprint": "Capacitor_SMD:C_0603_1608Metric",
+    "nets": {
+      "1": "5V_AFE",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Voltage rating": "25 V",
+      "Dielectric": "X7R/X5R",
+      "Tolerance": "10%",
+      "Acceptance": "",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        1234.44,
+        886.46
+      ],
+      "2": [
+        1234.44,
+        894.08
+      ]
+    }
+  },
+  "U237": {
+    "symbol": "TMUX2821DSGR",
+    "value": "TMUX2821DSGR",
+    "footprint": "Package_DFN_QFN:DFN-8-1EP_2x2mm_P0.5mm_EP0.9x1.6mm",
+    "nets": {
+      "8": "3V3_ADC_A",
+      "4": "POWER_GND",
+      "9": "POWER_GND",
+      "1": "ISO_3_0",
+      "2": "ADC_AIN4P",
+      "7": "ANALOG_PWR_EN",
+      "5": "ISO_3_1",
+      "6": "ADC_AIN4N",
+      "3": "ANALOG_PWR_EN"
+    },
+    "attributes": {
+      "Function": "AFE channel 4 -> ADC, two differential legs; 3V3_ADC_A side",
+      "Authority": "Phase 3E section 7.1"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "8": [
+        1417.32,
+        883.92
+      ],
+      "7": [
+        1417.32,
+        886.46
+      ],
+      "3": [
+        1417.32,
+        889.0
+      ],
+      "1": [
+        1417.32,
+        891.54
+      ],
+      "5": [
+        1417.32,
+        894.08
+      ],
+      "4": [
+        1417.32,
+        896.62
+      ],
+      "9": [
+        1417.32,
+        899.16
+      ],
+      "2": [
+        1463.04,
+        883.92
+      ],
+      "6": [
+        1463.04,
+        886.46
+      ]
+    }
+  },
+  "C357": {
+    "symbol": "C",
+    "value": "100n",
+    "footprint": "Capacitor_SMD:C_0603_1608Metric",
+    "nets": {
+      "1": "3V3_ADC_A",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Voltage rating": "25 V",
+      "Dielectric": "X7R/X5R",
+      "Tolerance": "10%",
+      "Acceptance": "",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        1375.41,
+        886.46
+      ],
+      "2": [
+        1375.41,
+        894.08
+      ]
+    }
+  },
+  "U238": {
+    "symbol": "TMUX2821DSGR",
+    "value": "TMUX2821DSGR",
+    "footprint": "Package_DFN_QFN:DFN-8-1EP_2x2mm_P0.5mm_EP0.9x1.6mm",
+    "nets": {
+      "8": "3V3_ADC_A",
+      "4": "POWER_GND",
+      "9": "POWER_GND",
+      "1": "ADC_VREF",
+      "2": "ISO_4_0",
+      "7": "ANALOG_PWR_EN",
+      "3": "POWER_GND"
+    },
+    "attributes": {
+      "Function": "ADC VREF -> AFE VCM buffer; spare channels OFF; 3V3_ADC_A side",
+      "Authority": "Phase 3E section 7.1"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "8": [
+        77.47,
+        1043.94
+      ],
+      "7": [
+        77.47,
+        1046.48
+      ],
+      "3": [
+        77.47,
+        1049.02
+      ],
+      "1": [
+        77.47,
+        1051.56
+      ],
+      "5": [
+        77.47,
+        1054.1
+      ],
+      "4": [
+        77.47,
+        1056.64
+      ],
+      "9": [
+        77.47,
+        1059.18
+      ],
+      "2": [
+        123.19,
+        1043.94
+      ],
+      "6": [
+        123.19,
+        1046.48
+      ]
+    }
+  },
+  "C358": {
+    "symbol": "C",
+    "value": "100n",
+    "footprint": "Capacitor_SMD:C_0603_1608Metric",
+    "nets": {
+      "1": "3V3_ADC_A",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Voltage rating": "25 V",
+      "Dielectric": "X7R/X5R",
+      "Tolerance": "10%",
+      "Acceptance": "",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        35.56,
+        1046.48
+      ],
+      "2": [
+        35.56,
+        1054.1
+      ]
+    }
+  },
+  "U239": {
+    "symbol": "TMUX2821DSGR",
+    "value": "TMUX2821DSGR",
+    "footprint": "Package_DFN_QFN:DFN-8-1EP_2x2mm_P0.5mm_EP0.9x1.6mm",
+    "nets": {
+      "8": "5V_AFE",
+      "4": "POWER_GND",
+      "9": "POWER_GND",
+      "1": "ISO_4_0",
+      "2": "AFE_VCM_INPUT",
+      "7": "ANALOG_PWR_EN",
+      "3": "POWER_GND"
+    },
+    "attributes": {
+      "Function": "ADC VREF -> AFE VCM buffer; spare channels OFF; 5V_AFE side",
+      "Authority": "Phase 3E section 7.1"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "8": [
+        217.17,
+        1043.94
+      ],
+      "7": [
+        217.17,
+        1046.48
+      ],
+      "3": [
+        217.17,
+        1049.02
+      ],
+      "1": [
+        217.17,
+        1051.56
+      ],
+      "5": [
+        217.17,
+        1054.1
+      ],
+      "4": [
+        217.17,
+        1056.64
+      ],
+      "9": [
+        217.17,
+        1059.18
+      ],
+      "2": [
+        262.89,
+        1043.94
+      ],
+      "6": [
+        262.89,
+        1046.48
+      ]
+    }
+  },
+  "C359": {
+    "symbol": "C",
+    "value": "100n",
+    "footprint": "Capacitor_SMD:C_0603_1608Metric",
+    "nets": {
+      "1": "5V_AFE",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Voltage rating": "25 V",
+      "Dielectric": "X7R/X5R",
+      "Tolerance": "10%",
+      "Acceptance": "",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        175.26,
+        1046.48
+      ],
+      "2": [
+        175.26,
+        1054.1
+      ]
+    }
+  },
+  "U240": {
+    "symbol": "TMUX2821DSGR",
+    "value": "TMUX2821DSGR",
+    "footprint": "Package_DFN_QFN:DFN-8-1EP_2x2mm_P0.5mm_EP0.9x1.6mm",
+    "nets": {
+      "8": "2V8_MIC",
+      "4": "POWER_GND",
+      "9": "POWER_GND",
+      "1": "MIC1_AFTER_100R",
+      "2": "ISO_5_0",
+      "7": "ANALOG_PWR_EN",
+      "5": "MIC2_AFTER_100R",
+      "6": "ISO_5_1",
+      "3": "ANALOG_PWR_EN"
+    },
+    "attributes": {
+      "Function": "Microphone pair 1 -> AFE coupling capacitors; 2V8_MIC side",
+      "Authority": "Phase 3E section 7.1"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "8": [
+        477.52,
+        1043.94
+      ],
+      "7": [
+        477.52,
+        1046.48
+      ],
+      "3": [
+        477.52,
+        1049.02
+      ],
+      "1": [
+        477.52,
+        1051.56
+      ],
+      "5": [
+        477.52,
+        1054.1
+      ],
+      "4": [
+        477.52,
+        1056.64
+      ],
+      "9": [
+        477.52,
+        1059.18
+      ],
+      "2": [
+        523.24,
+        1043.94
+      ],
+      "6": [
+        523.24,
+        1046.48
+      ]
+    }
+  },
+  "C360": {
+    "symbol": "C",
+    "value": "100n",
+    "footprint": "Capacitor_SMD:C_0603_1608Metric",
+    "nets": {
+      "1": "2V8_MIC",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Voltage rating": "25 V",
+      "Dielectric": "X7R/X5R",
+      "Tolerance": "10%",
+      "Acceptance": "",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        435.61,
+        1046.48
+      ],
+      "2": [
+        435.61,
+        1054.1
+      ]
+    }
+  },
+  "U241": {
+    "symbol": "TMUX2821DSGR",
+    "value": "TMUX2821DSGR",
+    "footprint": "Package_DFN_QFN:DFN-8-1EP_2x2mm_P0.5mm_EP0.9x1.6mm",
+    "nets": {
+      "8": "5V_AFE",
+      "4": "POWER_GND",
+      "9": "POWER_GND",
+      "1": "ISO_5_0",
+      "2": "AFE1_BEFORE_4u7",
+      "7": "ANALOG_PWR_EN",
+      "5": "ISO_5_1",
+      "6": "AFE2_BEFORE_4u7",
+      "3": "ANALOG_PWR_EN"
+    },
+    "attributes": {
+      "Function": "Microphone pair 1 -> AFE coupling capacitors; 5V_AFE side",
+      "Authority": "Phase 3E section 7.1"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "8": [
+        617.22,
+        1043.94
+      ],
+      "7": [
+        617.22,
+        1046.48
+      ],
+      "3": [
+        617.22,
+        1049.02
+      ],
+      "1": [
+        617.22,
+        1051.56
+      ],
+      "5": [
+        617.22,
+        1054.1
+      ],
+      "4": [
+        617.22,
+        1056.64
+      ],
+      "9": [
+        617.22,
+        1059.18
+      ],
+      "2": [
+        662.94,
+        1043.94
+      ],
+      "6": [
+        662.94,
+        1046.48
+      ]
+    }
+  },
+  "C361": {
+    "symbol": "C",
+    "value": "100n",
+    "footprint": "Capacitor_SMD:C_0603_1608Metric",
+    "nets": {
+      "1": "5V_AFE",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Voltage rating": "25 V",
+      "Dielectric": "X7R/X5R",
+      "Tolerance": "10%",
+      "Acceptance": "",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        575.31,
+        1046.48
+      ],
+      "2": [
+        575.31,
+        1054.1
+      ]
+    }
+  },
+  "U242": {
+    "symbol": "TMUX2821DSGR",
+    "value": "TMUX2821DSGR",
+    "footprint": "Package_DFN_QFN:DFN-8-1EP_2x2mm_P0.5mm_EP0.9x1.6mm",
+    "nets": {
+      "8": "2V8_MIC",
+      "4": "POWER_GND",
+      "9": "POWER_GND",
+      "1": "MIC3_AFTER_100R",
+      "2": "ISO_6_0",
+      "7": "ANALOG_PWR_EN",
+      "5": "MIC4_AFTER_100R",
+      "6": "ISO_6_1",
+      "3": "ANALOG_PWR_EN"
+    },
+    "attributes": {
+      "Function": "Microphone pair 2 -> AFE coupling capacitors; 2V8_MIC side",
+      "Authority": "Phase 3E section 7.1"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "8": [
+        877.57,
+        1043.94
+      ],
+      "7": [
+        877.57,
+        1046.48
+      ],
+      "3": [
+        877.57,
+        1049.02
+      ],
+      "1": [
+        877.57,
+        1051.56
+      ],
+      "5": [
+        877.57,
+        1054.1
+      ],
+      "4": [
+        877.57,
+        1056.64
+      ],
+      "9": [
+        877.57,
+        1059.18
+      ],
+      "2": [
+        923.29,
+        1043.94
+      ],
+      "6": [
+        923.29,
+        1046.48
+      ]
+    }
+  },
+  "C362": {
+    "symbol": "C",
+    "value": "100n",
+    "footprint": "Capacitor_SMD:C_0603_1608Metric",
+    "nets": {
+      "1": "2V8_MIC",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Voltage rating": "25 V",
+      "Dielectric": "X7R/X5R",
+      "Tolerance": "10%",
+      "Acceptance": "",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        834.39,
+        1046.48
+      ],
+      "2": [
+        834.39,
+        1054.1
+      ]
+    }
+  },
+  "U243": {
+    "symbol": "TMUX2821DSGR",
+    "value": "TMUX2821DSGR",
+    "footprint": "Package_DFN_QFN:DFN-8-1EP_2x2mm_P0.5mm_EP0.9x1.6mm",
+    "nets": {
+      "8": "5V_AFE",
+      "4": "POWER_GND",
+      "9": "POWER_GND",
+      "1": "ISO_6_0",
+      "2": "AFE3_BEFORE_4u7",
+      "7": "ANALOG_PWR_EN",
+      "5": "ISO_6_1",
+      "6": "AFE4_BEFORE_4u7",
+      "3": "ANALOG_PWR_EN"
+    },
+    "attributes": {
+      "Function": "Microphone pair 2 -> AFE coupling capacitors; 5V_AFE side",
+      "Authority": "Phase 3E section 7.1"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "8": [
+        1017.27,
+        1043.94
+      ],
+      "7": [
+        1017.27,
+        1046.48
+      ],
+      "3": [
+        1017.27,
+        1049.02
+      ],
+      "1": [
+        1017.27,
+        1051.56
+      ],
+      "5": [
+        1017.27,
+        1054.1
+      ],
+      "4": [
+        1017.27,
+        1056.64
+      ],
+      "9": [
+        1017.27,
+        1059.18
+      ],
+      "2": [
+        1062.99,
+        1043.94
+      ],
+      "6": [
+        1062.99,
+        1046.48
+      ]
+    }
+  },
+  "C363": {
+    "symbol": "C",
+    "value": "100n",
+    "footprint": "Capacitor_SMD:C_0603_1608Metric",
+    "nets": {
+      "1": "5V_AFE",
+      "2": "POWER_GND"
+    },
+    "attributes": {
+      "Voltage rating": "25 V",
+      "Dielectric": "X7R/X5R",
+      "Tolerance": "10%",
+      "Acceptance": "",
+      "Polarity": "Nonpolar"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        975.36,
+        1046.48
+      ],
+      "2": [
+        975.36,
+        1054.1
+      ]
+    }
+  },
+  "TP232": {
+    "symbol": "TestPoint",
+    "value": "PGOOD_12V",
+    "footprint": "TestPoint:TestPoint_Pad_D1.0mm",
+    "nets": {
+      "1": "PGOOD_12V"
+    },
+    "attributes": {},
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        25.4,
+        820.42
+      ]
+    }
+  },
+  "TP233": {
+    "symbol": "TestPoint",
+    "value": "PGOOD_CLEAN",
+    "footprint": "TestPoint:TestPoint_Pad_D1.0mm",
+    "nets": {
+      "1": "PGOOD_CLEAN"
+    },
+    "attributes": {},
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        90.17,
+        820.42
+      ]
+    }
+  },
+  "TP234": {
+    "symbol": "TestPoint",
+    "value": "EFUSE_FLT_N",
+    "footprint": "TestPoint:TestPoint_Pad_D1.0mm",
+    "nets": {
+      "1": "EFUSE_FLT_N"
+    },
+    "attributes": {},
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        154.94,
+        820.42
+      ]
+    }
+  },
+  "TP235": {
+    "symbol": "TestPoint",
+    "value": "EFUSE_FLT_CLEAN_N",
+    "footprint": "TestPoint:TestPoint_Pad_D1.0mm",
+    "nets": {
+      "1": "EFUSE_FLT_CLEAN_N"
+    },
+    "attributes": {},
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        219.71,
+        820.42
+      ]
+    }
+  },
+  "TP236": {
+    "symbol": "TestPoint",
+    "value": "OUT1",
+    "footprint": "TestPoint:TestPoint_Pad_D1.0mm",
+    "nets": {
+      "1": "OUT1"
+    },
+    "attributes": {},
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        284.48,
+        820.42
+      ]
+    }
+  },
+  "TP237": {
+    "symbol": "TestPoint",
+    "value": "DOWNSTREAM_RUN_DELAYED",
+    "footprint": "TestPoint:TestPoint_Pad_D1.0mm",
+    "nets": {
+      "1": "DOWNSTREAM_RUN_DELAYED"
+    },
+    "attributes": {},
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        350.52,
+        820.42
+      ]
+    }
+  },
+  "TP238": {
+    "symbol": "TestPoint",
+    "value": "DOWNSTREAM_EN",
+    "footprint": "TestPoint:TestPoint_Pad_D1.0mm",
+    "nets": {
+      "1": "DOWNSTREAM_EN"
+    },
+    "attributes": {},
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        415.29,
+        820.42
+      ]
+    }
+  },
+  "TP239": {
+    "symbol": "TestPoint",
+    "value": "SEQ_RUN_Q",
+    "footprint": "TestPoint:TestPoint_Pad_D1.0mm",
+    "nets": {
+      "1": "SEQ_RUN_Q"
+    },
+    "attributes": {},
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        480.06,
+        820.42
+      ]
+    }
+  },
+  "TP240": {
+    "symbol": "TestPoint",
+    "value": "SEQ_SHUT",
+    "footprint": "TestPoint:TestPoint_Pad_D1.0mm",
+    "nets": {
+      "1": "SEQ_SHUT"
+    },
+    "attributes": {},
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        544.83,
+        820.42
+      ]
+    }
+  },
+  "TP241": {
+    "symbol": "TestPoint",
+    "value": "SYS_HWRST",
+    "footprint": "TestPoint:TestPoint_Pad_D1.0mm",
+    "nets": {
+      "1": "SYS_HWRST"
+    },
+    "attributes": {},
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        609.6,
+        820.42
+      ]
+    }
+  },
+  "TP242": {
+    "symbol": "TestPoint",
+    "value": "SYS_HWRST_CLEAN",
+    "footprint": "TestPoint:TestPoint_Pad_D1.0mm",
+    "nets": {
+      "1": "SYS_HWRST_CLEAN"
+    },
+    "attributes": {},
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        674.37,
+        820.42
+      ]
+    }
+  },
+  "TP243": {
+    "symbol": "TestPoint",
+    "value": "AMP_FAULT_N",
+    "footprint": "TestPoint:TestPoint_Pad_D1.0mm",
+    "nets": {
+      "1": "AMP_FAULT_N"
+    },
+    "attributes": {},
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        740.41,
+        820.42
+      ]
+    }
+  },
+  "TP244": {
+    "symbol": "TestPoint",
+    "value": "AMP_FAULT_CLEAN_N",
+    "footprint": "TestPoint:TestPoint_Pad_D1.0mm",
+    "nets": {
+      "1": "AMP_FAULT_CLEAN_N"
+    },
+    "attributes": {},
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        805.18,
+        820.42
+      ]
+    }
+  },
+  "TP245": {
+    "symbol": "TestPoint",
+    "value": "SAFE_HW_CLEAR_N",
+    "footprint": "TestPoint:TestPoint_Pad_D1.0mm",
+    "nets": {
+      "1": "SAFE_HW_CLEAR_N"
+    },
+    "attributes": {},
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        869.95,
+        820.42
+      ]
+    }
+  },
+  "TP246": {
+    "symbol": "TestPoint",
+    "value": "SAFE_CLEAR_N",
+    "footprint": "TestPoint:TestPoint_Pad_D1.0mm",
+    "nets": {
+      "1": "SAFE_CLEAR_N"
+    },
+    "attributes": {},
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        934.72,
+        820.42
+      ]
+    }
+  },
+  "TP247": {
+    "symbol": "TestPoint",
+    "value": "HW_RUN_LATCHED",
+    "footprint": "TestPoint:TestPoint_Pad_D1.0mm",
+    "nets": {
+      "1": "HW_RUN_LATCHED"
+    },
+    "attributes": {},
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        999.49,
+        820.42
+      ]
+    }
+  },
+  "TP248": {
+    "symbol": "TestPoint",
+    "value": "ANALOG_PWR_EN",
+    "footprint": "TestPoint:TestPoint_Pad_D1.0mm",
+    "nets": {
+      "1": "ANALOG_PWR_EN"
+    },
+    "attributes": {},
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        1065.53,
+        820.42
+      ]
+    }
+  },
+  "TP249": {
+    "symbol": "TestPoint",
+    "value": "CLOCK_STARTUP_EN",
+    "footprint": "TestPoint:TestPoint_Pad_D1.0mm",
+    "nets": {
+      "1": "CLOCK_STARTUP_EN"
+    },
+    "attributes": {},
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        1130.3,
+        820.42
+      ]
+    }
+  },
+  "TP250": {
+    "symbol": "TestPoint",
+    "value": "AUDIO_DATA_OE_RELEASE",
+    "footprint": "TestPoint:TestPoint_Pad_D1.0mm",
+    "nets": {
+      "1": "AUDIO_DATA_OE_RELEASE"
+    },
+    "attributes": {},
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        1195.07,
+        820.42
+      ]
+    }
+  },
+  "TP251": {
+    "symbol": "TestPoint",
+    "value": "RUN_HEALTH_OK_3V8",
+    "footprint": "TestPoint:TestPoint_Pad_D1.0mm",
+    "nets": {
+      "1": "RUN_HEALTH_OK_3V8"
+    },
+    "attributes": {},
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        1259.84,
+        820.42
+      ]
+    }
+  },
+  "TP252": {
+    "symbol": "TestPoint",
+    "value": "ADC_PD_RST_N",
+    "footprint": "TestPoint:TestPoint_Pad_D1.0mm",
+    "nets": {
+      "1": "ADC_PD_RST_N"
+    },
+    "attributes": {},
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        1324.61,
+        820.42
+      ]
+    }
+  },
+  "TP253": {
+    "symbol": "TestPoint",
+    "value": "SHUTDOWN_REQ_3V8",
+    "footprint": "TestPoint:TestPoint_Pad_D1.0mm",
+    "nets": {
+      "1": "SHUTDOWN_REQ_3V8"
+    },
+    "attributes": {},
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        1389.38,
+        820.42
+      ]
+    }
+  },
+  "TP254": {
+    "symbol": "TestPoint",
+    "value": "SAFE_ARM_3V8",
+    "footprint": "TestPoint:TestPoint_Pad_D1.0mm",
+    "nets": {
+      "1": "SAFE_ARM_3V8"
+    },
+    "attributes": {},
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        1455.42,
+        820.42
+      ]
+    }
+  },
+  "TP255": {
+    "symbol": "TestPoint",
+    "value": "3V8_PRE",
+    "footprint": "TestPoint:TestPoint_Pad_D1.0mm",
+    "nets": {
+      "1": "3V8_PRE"
+    },
+    "attributes": {},
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        1520.19,
+        820.42
+      ]
+    }
+  },
+  "TP256": {
+    "symbol": "TestPoint",
+    "value": "POWER_GND",
+    "footprint": "TestPoint:TestPoint_Pad_D1.0mm",
+    "nets": {
+      "1": "POWER_GND"
+    },
+    "attributes": {},
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        1584.96,
+        820.42
+      ]
+    }
+  },
+  "#FLG201": {
+    "symbol": "PWR_FLAG",
+    "value": "PWR_FLAG",
+    "footprint": "",
+    "nets": {
+      "1": "3V8_PRE"
+    },
+    "attributes": {
+      "Reason": "Shown regulated buck source behind series inductor"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        449.58,
+        609.6
+      ]
+    }
+  },
+  "#FLG202": {
+    "symbol": "PWR_FLAG",
+    "value": "PWR_FLAG",
+    "footprint": "",
+    "nets": {
+      "1": "1V0_DSP_CORE"
+    },
+    "attributes": {
+      "Reason": "Shown regulated buck source behind series inductor"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        505.46,
+        609.6
+      ]
+    }
+  },
+  "#FLG203": {
+    "symbol": "PWR_FLAG",
+    "value": "PWR_FLAG",
+    "footprint": "",
+    "nets": {
+      "1": "3V3_SYS"
+    },
+    "attributes": {
+      "Reason": "Shown regulated buck source behind series inductor"
+    },
+    "dnp": false,
+    "pin_positions": {
+      "1": [
+        561.34,
+        609.6
+      ]
+    }
+  }
+}

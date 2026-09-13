@@ -3,13 +3,13 @@
 	(generator "eeschema")
 	(generator_version "10.0")
 	(uuid "a89958ad-9daf-4465-87fb-0da6e733aead")
-	(paper "A3")
+	(paper "A1")
 	(title_block
 		(title "circuitBuilderAi-Astra - Schematic Hierarchy")
 		(date "2026-09-09")
-		(rev "4B-BLOCKED")
+		(rev "4B")
 		(company "circuitBuilderAi-Astra")
-		(comment 1 "Sheet 2 partially entered; Phase 4B BLOCKED. Later circuitry remains unimplemented.")
+		(comment 1 "Sheet 2 Phase 3D/3E/3F controls. Later-sheet circuitry remains unimplemented.")
 	)
 	(lib_symbols)
 	(text "PLACEHOLDER - not implemented in Phase 4A"
@@ -67,9 +67,9 @@
 		)
 		(uuid "62d792ae-8451-40b9-8ad6-4eecae68fa1e")
 	)
-	(text "4B BLOCKED - rails entered; safe-state / shutdown incomplete"
+	(text "Sheet 2: Phase 3D/3E/3F implementation; validation record controls gate"
 		(exclude_from_sim no)
-		(at 225 56 0)
+		(at 450 48 0)
 		(effects
 			(font
 				(size 1.5 1.5)
@@ -100,7 +100,7 @@
 		)
 		(uuid "85fe6fb8-1943-44b2-bba5-10fe824e05d4")
 	)
-	(text "Sheet 1: Phase 4A PASS. Sheet 2: Phase 4B BLOCKED, partial entry. Sheets 3-7: placeholders."
+	(text "Sheet 1: Phase 4A. Sheet 2: regulation / retained sequencing / bootstrap controls. Sheets 3-7: future endpoints."
 		(exclude_from_sim no)
 		(at 25 25 0)
 		(effects
@@ -123,98 +123,282 @@
 		(uuid "c6895c84-dd12-43c8-9d61-058182801039")
 	)
 	(no_connect
-		(at 395 73.89)
-		(uuid "124e0e4a-3614-5609-b259-dd40e2be39b9")
+		(at 800 274.32)
+		(uuid "05e93457-b844-523d-bf09-b63ec68dbbe4")
 	)
 	(no_connect
-		(at 225 92.94)
-		(uuid "38cba4bf-cd50-52d8-9f71-5960cc705847")
+		(at 800 177.8)
+		(uuid "0612acde-1641-5093-bf28-f3477995f573")
 	)
 	(no_connect
-		(at 395 70.08)
-		(uuid "4bd9ca72-01ec-5e69-8f17-9f67e7d04bc0")
+		(at 450 120.65)
+		(uuid "0a79e7e8-e876-5200-8471-0bb5195ad762")
 	)
 	(no_connect
-		(at 395 100.56)
-		(uuid "73049347-ed4d-5ccf-862b-a6b4582f2821")
+		(at 800 233.68)
+		(uuid "0b67e600-8755-5030-9608-8453a123538b")
 	)
 	(no_connect
-		(at 395 77.7)
-		(uuid "82ec9dbc-90f4-5eee-87f8-d35f4d0c29e5")
+		(at 450 135.89)
+		(uuid "1095a93c-1672-53a4-a110-a54596fca062")
 	)
 	(no_connect
-		(at 395 89.13)
-		(uuid "9ecc7ae4-e6c4-51c4-be14-916761ccd55b")
+		(at 800 208.28)
+		(uuid "16855b2f-d129-5f49-b801-bfc6f11deb93")
 	)
 	(no_connect
-		(at 395 96.75)
-		(uuid "afe08232-f1e4-50ab-b464-9566c21f6401")
+		(at 800 172.72)
+		(uuid "18722cf2-b9cb-5940-8cfe-68ba6898cc7e")
 	)
 	(no_connect
-		(at 395 85.32)
-		(uuid "cf587745-b1e8-55ea-845f-b501b82cc9fb")
+		(at 800 106.68)
+		(uuid "1c65c23f-2cd5-592c-97e4-7c7af55e24f4")
 	)
 	(no_connect
-		(at 395 81.51)
-		(uuid "e39b70fe-6d52-55ce-85c0-96b8284b93f1")
+		(at 450 110.49)
+		(uuid "1ebb54af-ef28-512f-9de4-31ad317fc2e5")
 	)
 	(no_connect
-		(at 395 92.94)
-		(uuid "fc60a8dc-9e09-58d2-9ec1-88cdcf056f66")
+		(at 800 187.96)
+		(uuid "2050c220-1529-58e8-99f6-9d06ca280c43")
 	)
 	(no_connect
-		(at 225 89.13)
-		(uuid "fedd110c-03fb-5944-a026-e713e5300318")
+		(at 800 289.56)
+		(uuid "2b03614c-30dd-5ccd-bc12-90262a6785f8")
+	)
+	(no_connect
+		(at 800 167.64)
+		(uuid "2dc9e19d-1633-5f31-b970-e4887e300ac8")
+	)
+	(no_connect
+		(at 800 228.6)
+		(uuid "3422d153-fc13-5c8d-93e1-1e0551ac8b0c")
+	)
+	(no_connect
+		(at 800 152.4)
+		(uuid "3703e885-3f16-52cc-8826-417328b3a8ee")
+	)
+	(no_connect
+		(at 800 223.52)
+		(uuid "3a5bce8c-7fde-5d31-b000-09b4a4ef9ac2")
+	)
+	(no_connect
+		(at 800 147.32)
+		(uuid "3ae4491b-de01-5345-8984-3e4db2407961")
+	)
+	(no_connect
+		(at 800 238.76)
+		(uuid "3b051378-d533-5fa4-9da2-3e1b1df9c10b")
+	)
+	(no_connect
+		(at 800 248.92)
+		(uuid "40be03b2-df7f-5f72-9eb7-c42980ee00a5")
+	)
+	(no_connect
+		(at 800 71.12)
+		(uuid "416f956c-3f3e-5097-b49e-03e1930acd7b")
+	)
+	(no_connect
+		(at 800 96.52)
+		(uuid "4305b8ee-cfa3-5bf0-a7ca-68c16c70744e")
+	)
+	(no_connect
+		(at 800 137.16)
+		(uuid "443b3465-01dc-521a-b3bb-c9c7f05d6603")
+	)
+	(no_connect
+		(at 800 264.16)
+		(uuid "47635fcf-c78f-56f7-9f9d-176bec536738")
+	)
+	(no_connect
+		(at 800 203.2)
+		(uuid "4b3afdd4-839b-560b-b85c-63033d353b0c")
+	)
+	(no_connect
+		(at 800 91.44)
+		(uuid "4bfe9090-43dc-5d4c-bcec-d129ed7240cb")
+	)
+	(no_connect
+		(at 800 193.04)
+		(uuid "4d9cf2e8-fd4c-5546-ad49-e575096234df")
+	)
+	(no_connect
+		(at 800 284.48)
+		(uuid "55f5d092-8dad-5122-8582-beccd9796737")
+	)
+	(no_connect
+		(at 800 132.08)
+		(uuid "65c90fc2-2d11-5305-afb0-55c9e3646018")
+	)
+	(no_connect
+		(at 800 213.36)
+		(uuid "6785450b-f17c-5701-90e3-db165567e9ab")
+	)
+	(no_connect
+		(at 800 299.72)
+		(uuid "70f6b4a2-3fe6-59b3-8adf-cbed1c2426e5")
+	)
+	(no_connect
+		(at 450 146.05)
+		(uuid "7fe9f07a-75d9-59dc-9e03-080dc86e0115")
+	)
+	(no_connect
+		(at 800 294.64)
+		(uuid "809180b6-906d-5a6f-b780-93899774764a")
+	)
+	(no_connect
+		(at 450 140.97)
+		(uuid "833eec76-f443-50cb-a4bc-96971525113d")
+	)
+	(no_connect
+		(at 800 127)
+		(uuid "86012c3f-b24b-5df7-b52d-207953cfada0")
+	)
+	(no_connect
+		(at 800 279.4)
+		(uuid "864e9cf0-d155-5350-80ca-8c7ab0dc6e67")
+	)
+	(no_connect
+		(at 800 162.56)
+		(uuid "8acf5df6-8e2d-5e0d-be95-d3a08e7f4292")
+	)
+	(no_connect
+		(at 800 76.2)
+		(uuid "92e97874-04ba-5c12-a906-26ce5d3894c3")
+	)
+	(no_connect
+		(at 800 254)
+		(uuid "9acd2e75-4bfe-50be-9758-77d4cb966a2f")
+	)
+	(no_connect
+		(at 450 115.57)
+		(uuid "9e752240-520b-5f0b-8479-9c2ba0ed0aa3")
+	)
+	(no_connect
+		(at 800 121.92)
+		(uuid "a7a96440-0502-531c-96a8-f782cba4ab05")
+	)
+	(no_connect
+		(at 450 151.13)
+		(uuid "aea86622-4d21-5ade-95f9-7bbe5d393820")
+	)
+	(no_connect
+		(at 800 116.84)
+		(uuid "b57a3333-25a1-5cae-9d32-0cf801acb261")
+	)
+	(no_connect
+		(at 800 157.48)
+		(uuid "b83c1e04-7cac-52b5-a957-3014599d2aae")
+	)
+	(no_connect
+		(at 800 111.76)
+		(uuid "c1c379a8-57d7-5cc6-a1db-1f8ef33551ad")
+	)
+	(no_connect
+		(at 800 101.6)
+		(uuid "c4545233-50f1-5b14-bd21-130bf985311b")
+	)
+	(no_connect
+		(at 450 105.41)
+		(uuid "c890ca0e-6768-5657-b2e4-1d990f6f3e57")
+	)
+	(no_connect
+		(at 450 100.33)
+		(uuid "cbfe5728-0603-50d0-b7e8-713c1da73cca")
+	)
+	(no_connect
+		(at 800 259.08)
+		(uuid "ce00751d-82a1-5928-9804-aea6090ebc67")
+	)
+	(no_connect
+		(at 800 198.12)
+		(uuid "ce265d01-4f79-564e-871c-dc54d0de965b")
+	)
+	(no_connect
+		(at 800 243.84)
+		(uuid "d0c27720-5262-540e-bcaf-ba267e6fe697")
+	)
+	(no_connect
+		(at 450 125.73)
+		(uuid "d12bee2f-880f-5c56-8505-e1051f54261f")
+	)
+	(no_connect
+		(at 800 182.88)
+		(uuid "d835ad4b-aef4-5c58-a7e7-be17084eee1a")
+	)
+	(no_connect
+		(at 800 142.24)
+		(uuid "d9af4c1d-6a0f-5777-9450-19cc35d74025")
+	)
+	(no_connect
+		(at 450 130.81)
+		(uuid "dc5c3169-fc90-53fc-9931-cca2401d1df4")
+	)
+	(no_connect
+		(at 800 218.44)
+		(uuid "dcd36f5a-e742-525d-ac2b-cc2040abc1c2")
+	)
+	(no_connect
+		(at 800 269.24)
+		(uuid "dd8e89da-fe61-54aa-885d-030fffe6deaa")
+	)
+	(no_connect
+		(at 800 86.36)
+		(uuid "dfe10ba3-5f01-557c-821f-7c393aa5349a")
+	)
+	(no_connect
+		(at 800 81.28)
+		(uuid "f7ef7869-10b5-5e71-a144-184f076698d3")
 	)
 	(wire
 		(pts
-			(xy 195 85.32) (xy 225 85.32)
+			(xy 195 85.32) (xy 450 85.32)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "0275e77a-6687-5ec1-8346-791728abff2e")
+		(uuid "170c9815-3bcc-55b4-9121-0c4b800e7908")
 	)
 	(wire
 		(pts
-			(xy 195 73.89) (xy 225 73.89)
+			(xy 195 77.7) (xy 450 77.7)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "2092d9a8-fd41-52e2-a16c-2e375a22753b")
+		(uuid "8574e1c1-0c26-59a7-8864-51924346f8cb")
 	)
 	(wire
 		(pts
-			(xy 195 81.51) (xy 225 81.51)
+			(xy 195 73.89) (xy 450 73.89)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "625cb0ad-b874-5bde-a7b6-b58d32bd2a75")
+		(uuid "8aca0a44-2c25-5399-90df-70840f2c7fc9")
 	)
 	(wire
 		(pts
-			(xy 195 77.7) (xy 225 77.7)
+			(xy 195 70.08) (xy 450 70.08)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "bff25142-9f55-5bfb-81f1-0753d41bc0c0")
+		(uuid "f6f26afb-88a6-5fe3-8218-ec1741255c22")
 	)
 	(wire
 		(pts
-			(xy 195 70.08) (xy 225 70.08)
+			(xy 195 81.51) (xy 450 81.51)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "e91fbcfa-c1b0-5d7f-a73e-1502748ef830")
+		(uuid "f951611a-5b74-57c4-a07e-0d05192a8916")
 	)
 	(sheet
 		(at 25 112)
@@ -492,8 +676,8 @@
 		)
 	)
 	(sheet
-		(at 225 65)
-		(size 170 38.1)
+		(at 450 65)
+		(size 350 290)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
@@ -507,7 +691,7 @@
 		)
 		(uuid "c46ad3ab-53c4-4782-9638-c5343c581d6a")
 		(property "Sheetname" "2 - Power Regulation / Sequencing"
-			(at 225 63.5 0)
+			(at 450 63 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -518,7 +702,7 @@
 			)
 		)
 		(property "Sheetfile" "power_regulation.kicad_sch"
-			(at 225 104.6 0)
+			(at 450 357 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -529,8 +713,8 @@
 			)
 		)
 		(pin "12V_PROTECTED" input
-			(at 225 70.08 180)
-			(uuid "fc46a49b-f9c2-56aa-a64b-53870f309d70")
+			(at 450 70.08 180)
+			(uuid "5e0ba75b-0cc8-580b-81cd-52e1b4890a41")
 			(effects
 				(font
 					(size 1.016 1.016)
@@ -538,8 +722,8 @@
 			)
 		)
 		(pin "POWER_GND" passive
-			(at 225 73.89 180)
-			(uuid "ea4776e1-4c2a-5bcb-a825-73a6736736f5")
+			(at 450 73.89 180)
+			(uuid "2728fe5f-31de-561d-a2cc-756033c86309")
 			(effects
 				(font
 					(size 1.016 1.016)
@@ -547,8 +731,8 @@
 			)
 		)
 		(pin "3V8_PRE" output
-			(at 225 77.7 180)
-			(uuid "71147688-71bc-5d29-a9bd-2e8f36d81aeb")
+			(at 450 77.7 180)
+			(uuid "8d57fab0-7a10-5cd3-a497-1e3733966daf")
 			(effects
 				(font
 					(size 1.016 1.016)
@@ -556,8 +740,8 @@
 			)
 		)
 		(pin "PGOOD_12V" input
-			(at 225 81.51 180)
-			(uuid "e225775e-dfc6-5b2e-95a2-1bc8087b66b3")
+			(at 450 81.51 180)
+			(uuid "fa8cf0bc-2cf4-57dc-84fd-ef254e2cd828")
 			(effects
 				(font
 					(size 1.016 1.016)
@@ -565,26 +749,8 @@
 			)
 		)
 		(pin "EFUSE_FLT_N" input
-			(at 225 85.32 180)
-			(uuid "ac7c8334-bbec-57ad-a51a-3c687a64f0e9")
-			(effects
-				(font
-					(size 1.016 1.016)
-				)
-			)
-		)
-		(pin "DSP_WDI" input
-			(at 225 89.13 180)
-			(uuid "3eb56604-f8da-59dd-8d09-b67ad65b880a")
-			(effects
-				(font
-					(size 1.016 1.016)
-				)
-			)
-		)
-		(pin "AFE_EN_CMD" input
-			(at 225 92.94 180)
-			(uuid "96dc2595-55d7-5b0c-ba0b-6eea7b9ee0bf")
+			(at 450 85.32 180)
+			(uuid "81715866-2509-55fa-8f17-78e3d9ef047b")
 			(effects
 				(font
 					(size 1.016 1.016)
@@ -592,8 +758,8 @@
 			)
 		)
 		(pin "1V8_DSP_REF_ANA" output
-			(at 395 70.08 0)
-			(uuid "41b48f56-ed34-51af-a7f0-454eeb65dddd")
+			(at 800 71.12 0)
+			(uuid "79e103df-a367-5930-9295-12565e6112f6")
 			(effects
 				(font
 					(size 1.016 1.016)
@@ -601,8 +767,8 @@
 			)
 		)
 		(pin "1V0_DSP_CORE" output
-			(at 395 73.89 0)
-			(uuid "03e4f066-b703-5d96-8067-b446c7350638")
+			(at 800 76.2 0)
+			(uuid "48e85435-c23d-5440-b693-c7eea3be55b8")
 			(effects
 				(font
 					(size 1.016 1.016)
@@ -610,8 +776,8 @@
 			)
 		)
 		(pin "1V35_DSP_DMC" output
-			(at 395 77.7 0)
-			(uuid "54cf4f83-f179-5d5c-8a70-905d62956774")
+			(at 800 81.28 0)
+			(uuid "e2c1059c-f6dd-5254-86f2-4fbf23e4e6e0")
 			(effects
 				(font
 					(size 1.016 1.016)
@@ -619,8 +785,8 @@
 			)
 		)
 		(pin "3V3_SYS" output
-			(at 395 81.51 0)
-			(uuid "c7583aaf-2c03-588d-a868-7efaa4bdccea")
+			(at 800 86.36 0)
+			(uuid "01ee702d-ccb2-5ee2-a28e-a10b07f1617f")
 			(effects
 				(font
 					(size 1.016 1.016)
@@ -628,8 +794,8 @@
 			)
 		)
 		(pin "3V3_ADC_A" output
-			(at 395 85.32 0)
-			(uuid "4ddbc53d-248f-551c-8805-f1b138fb150b")
+			(at 800 91.44 0)
+			(uuid "6db9e059-4573-5e86-b0cc-f67cab088a38")
 			(effects
 				(font
 					(size 1.016 1.016)
@@ -637,8 +803,8 @@
 			)
 		)
 		(pin "2V8_MIC" output
-			(at 395 89.13 0)
-			(uuid "e222ab08-74eb-5a73-abc0-88c2acf03ed7")
+			(at 800 96.52 0)
+			(uuid "62ed3159-4dda-5e16-8b42-7d53394c050c")
 			(effects
 				(font
 					(size 1.016 1.016)
@@ -646,8 +812,8 @@
 			)
 		)
 		(pin "5V_AFE" output
-			(at 395 92.94 0)
-			(uuid "d0f5d90b-e8a5-5ee4-9dde-bbd4a30b06e9")
+			(at 800 101.6 0)
+			(uuid "8f85aedd-164e-5f75-99fb-e4959d005d30")
 			(effects
 				(font
 					(size 1.016 1.016)
@@ -655,8 +821,8 @@
 			)
 		)
 		(pin "RAILS_OK" output
-			(at 395 96.75 0)
-			(uuid "d856633b-95dc-5a8e-a3d3-822990f8c180")
+			(at 800 106.68 0)
+			(uuid "031db1ec-3e60-5798-8a1f-6dadfbfc9fa7")
 			(effects
 				(font
 					(size 1.016 1.016)
@@ -664,8 +830,440 @@
 			)
 		)
 		(pin "SYS_HWRST" bidirectional
-			(at 395 100.56 0)
-			(uuid "6f9441d8-ba14-5c92-a163-31be76e8a858")
+			(at 800 111.76 0)
+			(uuid "f34f2022-d8f8-587a-be29-832410a1c946")
+			(effects
+				(font
+					(size 1.016 1.016)
+				)
+			)
+		)
+		(pin "DSP_WDI" input
+			(at 450 100.33 180)
+			(uuid "51f80cd4-8e77-5d7c-b4bf-2da1809f2e31")
+			(effects
+				(font
+					(size 1.016 1.016)
+				)
+			)
+		)
+		(pin "SHUTDOWN_REQ" input
+			(at 450 105.41 180)
+			(uuid "30699b08-dfa2-5a5a-bc4b-6c8349c16567")
+			(effects
+				(font
+					(size 1.016 1.016)
+				)
+			)
+		)
+		(pin "SAFE_ARM_CMD" input
+			(at 450 110.49 180)
+			(uuid "a9599f5e-9eba-53d0-ade2-ad48952b2c62")
+			(effects
+				(font
+					(size 1.016 1.016)
+				)
+			)
+		)
+		(pin "ANALOG_PWR_CMD" input
+			(at 450 115.57 180)
+			(uuid "fb583844-d01d-5908-8f2d-7bc488279893")
+			(effects
+				(font
+					(size 1.016 1.016)
+				)
+			)
+		)
+		(pin "CLOCK_STARTUP_CMD" input
+			(at 450 120.65 180)
+			(uuid "b9873a60-f2af-5713-be6b-95d9651f42ef")
+			(effects
+				(font
+					(size 1.016 1.016)
+				)
+			)
+		)
+		(pin "AUDIO_DATA_OE_CMD" input
+			(at 450 125.73 180)
+			(uuid "1bb746ea-14fc-5c2a-b293-29099a6bd69b")
+			(effects
+				(font
+					(size 1.016 1.016)
+				)
+			)
+		)
+		(pin "RUN_HEALTH_OK_CMD" input
+			(at 450 130.81 180)
+			(uuid "e6faead7-c3dd-5d43-bf52-d10e8319de4f")
+			(effects
+				(font
+					(size 1.016 1.016)
+				)
+			)
+		)
+		(pin "AMP_FAULT_N" input
+			(at 450 135.89 180)
+			(uuid "dd6a7d78-ea7f-5207-a704-eb49ec8f1c19")
+			(effects
+				(font
+					(size 1.016 1.016)
+				)
+			)
+		)
+		(pin "ADC_RST_RELEASE_CMD" input
+			(at 450 140.97 180)
+			(uuid "135c2e30-6d87-5817-824d-7e9681fd9fed")
+			(effects
+				(font
+					(size 1.016 1.016)
+				)
+			)
+		)
+		(pin "AMP_MUTE_CMD" input
+			(at 450 146.05 180)
+			(uuid "b8b40cc9-a26c-5045-9ace-bae800129343")
+			(effects
+				(font
+					(size 1.016 1.016)
+				)
+			)
+		)
+		(pin "AMP_STBY_CMD" input
+			(at 450 151.13 180)
+			(uuid "1645de91-ce21-5b1f-a79c-80bd2b7947ad")
+			(effects
+				(font
+					(size 1.016 1.016)
+				)
+			)
+		)
+		(pin "ADC_PD_RST_N" output
+			(at 800 116.84 0)
+			(uuid "1745802b-b47f-54da-a1db-59ce29ed20d7")
+			(effects
+				(font
+					(size 1.016 1.016)
+				)
+			)
+		)
+		(pin "AMP_MUTE_RELEASE" output
+			(at 800 121.92 0)
+			(uuid "90d7efae-2514-5a1d-b945-e8d0939e1014")
+			(effects
+				(font
+					(size 1.016 1.016)
+				)
+			)
+		)
+		(pin "AMP_STBY_RELEASE" output
+			(at 800 127 0)
+			(uuid "e2e2c8a7-31cd-55f3-828f-9867ec9625cf")
+			(effects
+				(font
+					(size 1.016 1.016)
+				)
+			)
+		)
+		(pin "MCLK_OE_N" output
+			(at 800 132.08 0)
+			(uuid "8ea2154d-b405-53fe-89ac-87243c010e30")
+			(effects
+				(font
+					(size 1.016 1.016)
+				)
+			)
+		)
+		(pin "AUDIO_CLOCK_OE_N" output
+			(at 800 137.16 0)
+			(uuid "e54c02c9-3345-54a4-b3b5-50a506f8ff12")
+			(effects
+				(font
+					(size 1.016 1.016)
+				)
+			)
+		)
+		(pin "AUDIO_DATA_OE_N" output
+			(at 800 142.24 0)
+			(uuid "913b9c86-2224-5ee0-95a3-fdd38bd70e85")
+			(effects
+				(font
+					(size 1.016 1.016)
+				)
+			)
+		)
+		(pin "CLOCK_STARTUP_EN" output
+			(at 800 147.32 0)
+			(uuid "a9f6b15d-968d-5526-b78c-43abd3d21b7e")
+			(effects
+				(font
+					(size 1.016 1.016)
+				)
+			)
+		)
+		(pin "HW_RUN_LATCHED" output
+			(at 800 152.4 0)
+			(uuid "8b551b07-20ef-5c61-a596-6f2a2d9f68a5")
+			(effects
+				(font
+					(size 1.016 1.016)
+				)
+			)
+		)
+		(pin "ANALOG_PWR_EN" output
+			(at 800 157.48 0)
+			(uuid "93cb9ae7-77cc-5073-ae7f-1823dd4d9a24")
+			(effects
+				(font
+					(size 1.016 1.016)
+				)
+			)
+		)
+		(pin "RUN_HEALTH_OK_3V8" output
+			(at 800 162.56 0)
+			(uuid "d6642332-89d8-5d64-9eea-befe34a4138a")
+			(effects
+				(font
+					(size 1.016 1.016)
+				)
+			)
+		)
+		(pin "SAFE_CLEAR_N" output
+			(at 800 167.64 0)
+			(uuid "63eac2f7-1d55-540f-bb9a-63271219c3eb")
+			(effects
+				(font
+					(size 1.016 1.016)
+				)
+			)
+		)
+		(pin "AFE1P_AFTER_47R" passive
+			(at 800 172.72 0)
+			(uuid "d4435ce2-cf46-5216-a34d-f56198432c9d")
+			(effects
+				(font
+					(size 1.016 1.016)
+				)
+			)
+		)
+		(pin "ADC_AIN1P" passive
+			(at 800 177.8 0)
+			(uuid "0d5369b6-d23f-53e0-8869-b7f65d1310ec")
+			(effects
+				(font
+					(size 1.016 1.016)
+				)
+			)
+		)
+		(pin "AFE1N_AFTER_47R" passive
+			(at 800 182.88 0)
+			(uuid "eb207dfe-ae63-5743-b4a6-633d69d8d041")
+			(effects
+				(font
+					(size 1.016 1.016)
+				)
+			)
+		)
+		(pin "ADC_AIN1N" passive
+			(at 800 187.96 0)
+			(uuid "1531e97e-e084-55eb-a0be-c48c6944bdd5")
+			(effects
+				(font
+					(size 1.016 1.016)
+				)
+			)
+		)
+		(pin "AFE2P_AFTER_47R" passive
+			(at 800 193.04 0)
+			(uuid "451c95eb-0f8f-5700-ad3f-1be12b16ce63")
+			(effects
+				(font
+					(size 1.016 1.016)
+				)
+			)
+		)
+		(pin "ADC_AIN2P" passive
+			(at 800 198.12 0)
+			(uuid "76b1c98f-9353-599e-bf7d-7039a43d6204")
+			(effects
+				(font
+					(size 1.016 1.016)
+				)
+			)
+		)
+		(pin "AFE2N_AFTER_47R" passive
+			(at 800 203.2 0)
+			(uuid "44f99453-469d-5ee6-b69b-6b5e75860d0d")
+			(effects
+				(font
+					(size 1.016 1.016)
+				)
+			)
+		)
+		(pin "ADC_AIN2N" passive
+			(at 800 208.28 0)
+			(uuid "4ef81bf0-4470-52c1-b249-e784a9eb277f")
+			(effects
+				(font
+					(size 1.016 1.016)
+				)
+			)
+		)
+		(pin "AFE3P_AFTER_47R" passive
+			(at 800 213.36 0)
+			(uuid "29581754-cb0f-55fd-b56b-6185148080b5")
+			(effects
+				(font
+					(size 1.016 1.016)
+				)
+			)
+		)
+		(pin "ADC_AIN3P" passive
+			(at 800 218.44 0)
+			(uuid "ac62bbaa-1c7e-55cf-b108-961349961a8d")
+			(effects
+				(font
+					(size 1.016 1.016)
+				)
+			)
+		)
+		(pin "AFE3N_AFTER_47R" passive
+			(at 800 223.52 0)
+			(uuid "2cd60e71-7456-592a-a0ed-206294971394")
+			(effects
+				(font
+					(size 1.016 1.016)
+				)
+			)
+		)
+		(pin "ADC_AIN3N" passive
+			(at 800 228.6 0)
+			(uuid "99d8a840-2883-5d30-82d6-0cf9fdc025ae")
+			(effects
+				(font
+					(size 1.016 1.016)
+				)
+			)
+		)
+		(pin "AFE4P_AFTER_47R" passive
+			(at 800 233.68 0)
+			(uuid "a41390ae-7936-5962-af7b-dbcdd4959217")
+			(effects
+				(font
+					(size 1.016 1.016)
+				)
+			)
+		)
+		(pin "ADC_AIN4P" passive
+			(at 800 238.76 0)
+			(uuid "1230c154-e2af-5d56-b24f-66e66203c893")
+			(effects
+				(font
+					(size 1.016 1.016)
+				)
+			)
+		)
+		(pin "AFE4N_AFTER_47R" passive
+			(at 800 243.84 0)
+			(uuid "b00f2b60-642c-5574-ad0e-b8835af12ab0")
+			(effects
+				(font
+					(size 1.016 1.016)
+				)
+			)
+		)
+		(pin "ADC_AIN4N" passive
+			(at 800 248.92 0)
+			(uuid "161f2bcf-c1f0-51de-9586-781c71c83ab2")
+			(effects
+				(font
+					(size 1.016 1.016)
+				)
+			)
+		)
+		(pin "ADC_VREF" passive
+			(at 800 254 0)
+			(uuid "873feae7-d452-5f67-9fa3-f1358064a9c7")
+			(effects
+				(font
+					(size 1.016 1.016)
+				)
+			)
+		)
+		(pin "AFE_VCM_INPUT" passive
+			(at 800 259.08 0)
+			(uuid "60830577-82c8-587f-ab81-2c6757d9acf9")
+			(effects
+				(font
+					(size 1.016 1.016)
+				)
+			)
+		)
+		(pin "MIC1_AFTER_100R" passive
+			(at 800 264.16 0)
+			(uuid "0272eee2-5039-5d20-bf49-0fa7d88cdebb")
+			(effects
+				(font
+					(size 1.016 1.016)
+				)
+			)
+		)
+		(pin "AFE1_BEFORE_4u7" passive
+			(at 800 269.24 0)
+			(uuid "4ccf4112-1071-5f68-a734-47220014fc54")
+			(effects
+				(font
+					(size 1.016 1.016)
+				)
+			)
+		)
+		(pin "MIC2_AFTER_100R" passive
+			(at 800 274.32 0)
+			(uuid "209d4640-fee5-5591-a13d-cf64a5cc785c")
+			(effects
+				(font
+					(size 1.016 1.016)
+				)
+			)
+		)
+		(pin "AFE2_BEFORE_4u7" passive
+			(at 800 279.4 0)
+			(uuid "723f1c0a-d0b4-5cd9-b106-6886f23db9b6")
+			(effects
+				(font
+					(size 1.016 1.016)
+				)
+			)
+		)
+		(pin "MIC3_AFTER_100R" passive
+			(at 800 284.48 0)
+			(uuid "8b89f3b6-e811-5ae7-aae6-0ce4f6675388")
+			(effects
+				(font
+					(size 1.016 1.016)
+				)
+			)
+		)
+		(pin "AFE3_BEFORE_4u7" passive
+			(at 800 289.56 0)
+			(uuid "be46bc96-4781-5bd6-834a-0347f6e81dd7")
+			(effects
+				(font
+					(size 1.016 1.016)
+				)
+			)
+		)
+		(pin "MIC4_AFTER_100R" passive
+			(at 800 294.64 0)
+			(uuid "117cdac4-dec2-53dc-b1ce-9efbc1bb91aa")
+			(effects
+				(font
+					(size 1.016 1.016)
+				)
+			)
+		)
+		(pin "AFE4_BEFORE_4u7" passive
+			(at 800 299.72 0)
+			(uuid "d07f8761-992d-5fe8-b2f2-d89fdbe8048a")
 			(effects
 				(font
 					(size 1.016 1.016)

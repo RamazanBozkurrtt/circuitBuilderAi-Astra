@@ -1,0 +1,301 @@
+{
+  "phase_gate": "PHASE 4B: BLOCKED",
+  "blocking_finding": "MCLK release requires the safe latch armed; permitted arming requires prior ADC PLL verification.",
+  "model_type": "Necessary-condition contract reachability; not SPICE or physical timing validation",
+  "reachable_states_armed_PLL_checked": [
+    [
+      false,
+      false
+    ]
+  ],
+  "transitions": [
+    {
+      "state": [
+        false,
+        false
+      ],
+      "AUDIO_OE_CMD": false,
+      "MCLK_enabled": false,
+      "action": "wait_for_PLL",
+      "next_state": [
+        false,
+        false
+      ]
+    },
+    {
+      "state": [
+        false,
+        false
+      ],
+      "AUDIO_OE_CMD": true,
+      "MCLK_enabled": false,
+      "action": "wait_for_PLL",
+      "next_state": [
+        false,
+        false
+      ]
+    }
+  ],
+  "startup_and_post_fault_rearm_reachable": false,
+  "source_sha256": {
+    "docs/phases/phase_3_schematic_readiness.md": "beaaf8278670643189f1176cd2b11be951de024f0d747e6df2c4056f8180cde8",
+    "docs/phases/phase_3d_final_power_contract_audit.md": "da1eab86b3c55a39da300db19f3bc02b68d0c7ef52f9bcfa6ecba6e39c0ad28f",
+    "docs/phases/phase_3e_shutdown_safe_state_correction.md": "61edae92db6fbaa7fd08fc4712d2cd8beb7b4c5d439e9b3f245b2cddb86b798d",
+    "datasheets/adc/adau1978_datasheet_rev_b.pdf": "5b80650206aba0345f6acb32d50cd5c3515575e3647846c55d3c497ce260f838"
+  },
+  "manufacturer_evidence": "ADAU1978 Rev.B pp.12-14,29: stable PLL input clocks required; MCLK mode selected by contract; PLL_LOCK reset=0.",
+  "prior_entry_parts_values_footprints_connected_pins_rechecked": 124,
+  "hardware_files_unchanged": true,
+  "prior_history_and_artifacts_preserved": true,
+  "new_schematic_implementation": "NONE; stop before committing the conflicting OE-release circuit",
+  "erc": {
+    "errors": 3,
+    "warnings": 5,
+    "blocking_items": 0,
+    "items": [
+      {
+        "sheet": "/",
+        "description": "Symbol pin or wire end off connection grid",
+        "items": [
+          {
+            "description": "Yatay Yol, uzunluk 0.3000 mm",
+            "pos": {
+              "x": 1.95,
+              "y": 0.7008
+            },
+            "uuid": "e91fbcfa-c1b0-5d7f-a73e-1502748ef830"
+          }
+        ],
+        "severity": "warning",
+        "type": "endpoint_off_grid",
+        "classification": "JUSTIFIED / INTENTIONAL",
+        "reason": "Existing Sheet 1 hierarchy port geometry is retained. Native netlist confirms continuity to Sheet 2."
+      },
+      {
+        "sheet": "/",
+        "description": "Symbol pin or wire end off connection grid",
+        "items": [
+          {
+            "description": "Yatay Yol, uzunluk 0.3000 mm",
+            "pos": {
+              "x": 1.95,
+              "y": 0.7389
+            },
+            "uuid": "2092d9a8-fd41-52e2-a16c-2e375a22753b"
+          }
+        ],
+        "severity": "warning",
+        "type": "endpoint_off_grid",
+        "classification": "JUSTIFIED / INTENTIONAL",
+        "reason": "Existing Sheet 1 hierarchy port geometry is retained. Native netlist confirms continuity to Sheet 2."
+      },
+      {
+        "sheet": "/",
+        "description": "Symbol pin or wire end off connection grid",
+        "items": [
+          {
+            "description": "Yatay Yol, uzunluk 0.3000 mm",
+            "pos": {
+              "x": 1.95,
+              "y": 0.777
+            },
+            "uuid": "bff25142-9f55-5bfb-81f1-0753d41bc0c0"
+          }
+        ],
+        "severity": "warning",
+        "type": "endpoint_off_grid",
+        "classification": "JUSTIFIED / INTENTIONAL",
+        "reason": "Existing Sheet 1 hierarchy port geometry is retained. Native netlist confirms continuity to Sheet 2."
+      },
+      {
+        "sheet": "/",
+        "description": "Symbol pin or wire end off connection grid",
+        "items": [
+          {
+            "description": "Yatay Yol, uzunluk 0.3000 mm",
+            "pos": {
+              "x": 1.95,
+              "y": 0.8151
+            },
+            "uuid": "625cb0ad-b874-5bde-a7b6-b58d32bd2a75"
+          }
+        ],
+        "severity": "warning",
+        "type": "endpoint_off_grid",
+        "classification": "JUSTIFIED / INTENTIONAL",
+        "reason": "Existing Sheet 1 hierarchy port geometry is retained. Native netlist confirms continuity to Sheet 2."
+      },
+      {
+        "sheet": "/",
+        "description": "Symbol pin or wire end off connection grid",
+        "items": [
+          {
+            "description": "Yatay Yol, uzunluk 0.3000 mm",
+            "pos": {
+              "x": 1.95,
+              "y": 0.8532
+            },
+            "uuid": "0275e77a-6687-5ec1-8346-791728abff2e"
+          }
+        ],
+        "severity": "warning",
+        "type": "endpoint_off_grid",
+        "classification": "JUSTIFIED / INTENTIONAL",
+        "reason": "Existing Sheet 1 hierarchy port geometry is retained. Native netlist confirms continuity to Sheet 2."
+      },
+      {
+        "sheet": "/2 - Power Regulation / Sequencing/",
+        "description": "Open collector ve Power output tipi pimler ba\u011fl\u0131",
+        "items": [
+          {
+            "description": "Symbol U201 Pin 4 [FB2, Open collector, Line]",
+            "pos": {
+              "x": 1.2319,
+              "y": 0.7874
+            },
+            "uuid": "12917b9c-3b0a-51d7-aae8-16a1ce59fed0"
+          },
+          {
+            "description": "Symbol #FLG02 Pin 1 [Power output, Line]",
+            "pos": {
+              "x": 0.2032,
+              "y": 1.7272
+            },
+            "uuid": "aa024cdd-1c01-52d8-96de-dc2892a293c2"
+          }
+        ],
+        "severity": "error",
+        "type": "pin_to_pin",
+        "classification": "JUSTIFIED / INTENTIONAL",
+        "reason": "Phase 3D section 8 requires FB2 grounded with VSEL low. Existing ground power flag causes the output-type conflict. No rule suppression or electrical change is appropriate."
+      },
+      {
+        "sheet": "/2 - Power Regulation / Sequencing/",
+        "description": "Open collector ve Power output tipi pimler ba\u011fl\u0131",
+        "items": [
+          {
+            "description": "Symbol U202 Pin 4 [FB2, Open collector, Line]",
+            "pos": {
+              "x": 3.8735,
+              "y": 0.7874
+            },
+            "uuid": "fb59f0c2-16c7-52cf-b3af-cda21ead0884"
+          },
+          {
+            "description": "Symbol #FLG02 Pin 1 [Power output, Line]",
+            "pos": {
+              "x": 0.2032,
+              "y": 1.7272
+            },
+            "uuid": "aa024cdd-1c01-52d8-96de-dc2892a293c2"
+          }
+        ],
+        "severity": "error",
+        "type": "pin_to_pin",
+        "classification": "JUSTIFIED / INTENTIONAL",
+        "reason": "Phase 3D section 8 requires FB2 grounded with VSEL low. Existing ground power flag causes the output-type conflict. No rule suppression or electrical change is appropriate."
+      },
+      {
+        "sheet": "/2 - Power Regulation / Sequencing/",
+        "description": "Open collector ve Power output tipi pimler ba\u011fl\u0131",
+        "items": [
+          {
+            "description": "Symbol U203 Pin 4 [FB2, Open collector, Line]",
+            "pos": {
+              "x": 6.5278,
+              "y": 0.7874
+            },
+            "uuid": "573ff438-8a86-552c-bc01-ef405c6ea27c"
+          },
+          {
+            "description": "Symbol #FLG02 Pin 1 [Power output, Line]",
+            "pos": {
+              "x": 0.2032,
+              "y": 1.7272
+            },
+            "uuid": "aa024cdd-1c01-52d8-96de-dc2892a293c2"
+          }
+        ],
+        "severity": "error",
+        "type": "pin_to_pin",
+        "classification": "JUSTIFIED / INTENTIONAL",
+        "reason": "Phase 3D section 8 requires FB2 grounded with VSEL low. Existing ground power flag causes the output-type conflict. No rule suppression or electrical change is appropriate."
+      }
+    ],
+    "ignored_checks": [
+      {
+        "description": "Global label only appears once in the schematic",
+        "key": "single_global_label"
+      },
+      {
+        "description": "Four connection points are joined together",
+        "key": "four_way_junction"
+      },
+      {
+        "description": "SPICE model issue",
+        "key": "simulation_model_issue"
+      },
+      {
+        "description": "Assigned footprint doesn't match footprint filters",
+        "key": "footprint_filter"
+      }
+    ]
+  },
+  "native_tool_calls": [
+    {
+      "command": [
+        "C:\\Users\\Ramazan Bozkurt\\AppData\\Local\\Programs\\KiCad\\10.0\\bin\\kicad-cli.exe",
+        "sch",
+        "upgrade",
+        "--force",
+        "C:\\Users\\RAMAZA~1\\AppData\\Local\\Temp\\astra-3e-blocker-1wqwco44\\kicad\\power_regulation.kicad_sch"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "C:\\Users\\Ramazan Bozkurt\\AppData\\Local\\Programs\\KiCad\\10.0\\bin\\kicad-cli.exe",
+        "sch",
+        "upgrade",
+        "--force",
+        "C:\\Users\\RAMAZA~1\\AppData\\Local\\Temp\\astra-3e-blocker-1wqwco44\\kicad\\circuitBuilderAi-Astra.kicad_sch"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "C:\\Users\\Ramazan Bozkurt\\AppData\\Local\\Programs\\KiCad\\10.0\\bin\\kicad-cli.exe",
+        "sch",
+        "erc",
+        "--format",
+        "json",
+        "--output",
+        "C:\\Users\\Ramazan Bozkurt\\Documents\\circuitBuilderAi-Astra\\validation\\phase_4b\\phase3e_resume\\existing_sheet2_erc.json",
+        "C:\\Users\\Ramazan Bozkurt\\Documents\\circuitBuilderAi-Astra\\hardware\\kicad\\circuitBuilderAi-Astra.kicad_sch"
+      ],
+      "exit_code": 0,
+      "stdout": "8 ihlal bulundu\r\nElektriksel Kural Kontrol\ufffd Raporu C:/Users/Ramazan Bozkurt/Documents/circuitBuilderAi-Astra/validation/phase_4b/phase3e_resume/existing_sheet2_erc.json'ye kaydedildi\r\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "C:\\Users\\Ramazan Bozkurt\\AppData\\Local\\Programs\\KiCad\\10.0\\bin\\kicad-cli.exe",
+        "sch",
+        "export",
+        "netlist",
+        "--format",
+        "kicadxml",
+        "--output",
+        "C:\\Users\\Ramazan Bozkurt\\Documents\\circuitBuilderAi-Astra\\validation\\phase_4b\\phase3e_resume\\existing_project.net.xml",
+        "C:\\Users\\Ramazan Bozkurt\\Documents\\circuitBuilderAi-Astra\\hardware\\kicad\\circuitBuilderAi-Astra.kicad_sch"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  ]
+}

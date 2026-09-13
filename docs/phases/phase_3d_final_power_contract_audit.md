@@ -5,6 +5,10 @@ Scope: documentary worst-case correction and final audit of the frozen Sheet 2 p
 
 Evidence notation uses the IDs in the [component evidence index](../evidence/component_evidence_index.md). Only the already-selected power, supervisor, watchdog, enable-logic, and load-device manufacturer documents were used. Static limits below are calculated contract limits; ripple, transients, temperature rise, and ramp behavior remain physical-validation items.
 
+**Phase 3E amendment (2026-09-13):** Phase 4B exposed a sequencing contradiction in the shared direct `OUT1` fanout. The [Phase 3E shutdown/safe-state correction](phase_3e_shutdown_safe_state_correction.md) supersedes sections 9.1-9.2 and implementation items 6-7 below wherever they describe direct downstream/microphone enables or an unspecified AFE override. It does not change any Phase 3D rail source, regulator, divider, preload, threshold, load allocation, static range, or margin calculation.
+
+**Phase 3G amendment (2026-09-14):** the [remaining-sheet preflight](phase_3g_remaining_schematic_implementation_preflight.md) replaces the former AFE devices and Phase 3E microphone-isolation population. The corrected consumers remain within the existing `2V8_MIC`, `3V3_ADC_A`, and `5V_AFE` allocations, so no Phase 3D rail, divider, preload, static range or margin changes.
+
 ## 1. Original pre/core contradiction
 
 The frozen contract contained two different kinds of voltage range:
@@ -158,29 +162,29 @@ The Phase 4B BOM may choose manufacturer part numbers only by satisfying these f
 2. `3V8_PRE` TPS62135 EN is tied directly to its `12V_PROTECTED` VIN and starts whenever that source is present. This is the sole unqualified Sheet 2 rail and breaks the pull-up dependency.
 3. TPS3760 is already powered from `12V_PROTECTED`; its open-drain output can pull low before `3V8_PRE` exists. Once pre is present and `12V_PROTECTED` exceeds the rising threshold, its 10 kOhm pull-up creates `PGOOD_12V`.
 4. `PGOOD_12V` drives the 1.8 V TPS7A49 EN. EN is never above its IN rail because both the pull-up and LDO input are `3V8_PRE`.
-5. LTC2964 is powered by `3V8_PRE`. Valid V1 releases open-drain `OUT1`, pulled to the same rail. `OUT1` enables core, DMC, ADC, and microphone regulators. Their EN pins are within their absolute and recommended ranges.
-6. The `3V3_SYS` branch uses SN74LV1T08DBVR powered from `3V8_PRE` to implement `OUT1 AND PGOOD_12V`, with 0.1 uF bypass and a 1.0 MOhm TPS62135-EN pulldown. Both inputs are <=the gate's 5.5 V input rating; gate VCC is 3.746849-3.841293 V, inside 1.6-5.5 V; its worst published VIH maximum is 2.11 V. The output cannot exceed its own VCC, while TPS62135 VIN is 10.4-13.2 V.
+5. LTC2964 is powered by `3V8_PRE`. Valid V1 releases open-drain `OUT1`, pulled to the same rail. Phase 3E uses `OUT1` only as one input to pre-powered enable qualification; it is not connected directly to any regulator EN.
+6. Phase 3E Schmitt-conditions PGOOD and forms `DOWNSTREAM_EN = OUT1 AND PGOOD_CLEAN AND DOWNSTREAM_RUN_DELAYED` with exact SN74LV1T08 gates powered from `3V8_PRE`. That node enables core, DMC, `3V3_SYS`, and ADC analog power. A retained `SN74LVC1G74` shutdown latch and `TPS3760E012` timer keep the node high for 20.415-40.946 ms after commanded DSP reset. Their logic levels remain within every regulator EN limit established by this audit.
 7. LTC2964 common `RST` holds `RAILS_OK` low until all four DSP rails are valid for 160-240 ms. `RAILS_OK`, pulled only to `3V3_SYS`, drives TPS3431 EN; no pin exceeds TPS3431 VDD+0.3 V.
 8. TPS3431 ENOUT adds 170-230 ms. `SYS_HWRST` therefore releases 330-470 ms after all rail thresholds are valid. The 1.8 V clock source/fanout maximum 3 ms startup is covered.
-9. `5V_AFE` stays off through the 100 kOhm EN pulldown and hardware-safe override. Firmware may assert buffered `AFE_EN_CMD` only after DSP reset release, ADC reset release, the mandatory >=10 ms ADC wait, and successful PLL/configuration checks. A missing or slow ADC analog rail prevents successful ADC readiness and leaves AFE off; no unsupported TPS7A20 startup-time extrapolation is used.
+9. `2V8_MIC` and `5V_AFE` stay off through local 100-kohm EN pulldowns and `ANALOG_PWR_EN = DOWNSTREAM_EN AND HW_RUN_LATCHED AND ANALOG_PWR_CMD_3V8`. Phase 3E's dual-supply translator isolates this command from an unpowered DSP domain. Firmware may arm and assert the node only after DSP/ADC reset release, the mandatory >=10 ms ADC wait, and successful PLL/configuration checks. A missing or slow ADC analog rail prevents successful ADC readiness and leaves both analog rails off; no unsupported TPS7A20 startup-time extrapolation is used.
 
-There is no enable cycle: pre permits `PGOOD_12V` pull-up; `PGOOD_12V` permits 1.8 V; 1.8 V permits `OUT1`; `OUT1` permits the remaining rails; the four monitored rails permit reset release. No monitored rail is required to be valid before its own source can start.
+There is no enable cycle: pre permits `PGOOD_12V` pull-up; `PGOOD_12V` permits 1.8 V; 1.8 V permits `OUT1`; `OUT1` plus pre-powered retained qualification permits the remaining monitored rails; those rails permit reset release. The safe latch then requires an explicit post-boot arm before analog/audio release. No monitored rail is required to be valid before its own source can start, and no retained state is powered by a rail it controls.
 
 ### 9.2 Brownout and power-down
 
-- Falling `PGOOD_12V` immediately asserts the hardware-safe path and drives the `3V3_SYS` AND-gate low while the eFuse remains on. AFE enable is overridden low, amplifier MUTE/STANDBY and reset/OE defaults assert, and automatic PLAY recovery remains prohibited.
-- The 1.8 V LDO disables from `PGOOD_12V`. As V1 falls, LTC2964 asserts common reset and `OUT1` low, disabling core, DMC, ADC, and microphone regulators. This is a feed-forward shutdown path, not a circular dependency.
+- Falling `PGOOD_12V` immediately clears the Phase 3E hardware-safe latch and drives `DOWNSTREAM_EN` and `ANALOG_PWR_EN` low while the eFuse remains on. Microphone/AFE enables, amplifier MUTE/STANDBY, reset, and OE defaults assert, and automatic PLAY recovery remains prohibited.
+- The 1.8 V LDO also disables from `PGOOD_12V`. `OUT1` subsequently falls as V1 decays. This is a feed-forward shutdown path, not a circular dependency.
 - TPS62135 active discharge is effective while its source remains above about 2 V. TPS7A20 P variants actively discharge; the Phase 3D preloads provide deterministic passive discharge for every LDO rail, including TPS7A49, which has no active-discharge output.
-- Commanded shutdown retains: mute/Hi-Z, STANDBY >=15 ms, AFE and microphones off, ADC reset, buffer OEs off, DSP reset, wait >=20 ms, then 3.3 V/DMC/core off, and 1.8 V last. Amplifier VDD is removed before protected PVDD/VBAT.
+- Commanded shutdown is now implemented by Phase 3E: mute/Hi-Z, STANDBY >=15 ms, microphone/AFE command low, >=1 ms command guard, ADC reset and buffer OEs off, retained DSP reset, a guaranteed 20.415-40.946 ms hardware hold, then 3.3 V/DMC/core/ADC analog off, and 1.8 V last. Amplifier VDD is removed before protected PVDD/VBAT.
 - Abrupt removal, output-capacitance spread, load-dependent ramps, and DSP rail-difference waveforms still require oscilloscope verification. Safe-state assertion does not depend on firmware.
 
-The brownout and shutdown relationships are deterministic at the contract level and expose no enable-pin overstress.
+With the Phase 3E amendment, the brownout and shutdown relationships are deterministic at the contract level and expose no enable-pin overstress.
 
 ## 10. Additional corrections found by the all-rail audit
 
 1. The 1.8 V TPS7A49 top divider changes from 53.6 k to **54.2 k + 100 Ohm in series**, with the 100 k bottom and all resistors 0.1%, because the former fully calculated minimum left only 11.460 mV of release margin.
 2. The DMC TPS7A49 divider changes from 14.7 k/100 k to **14.9 k/100 k**, both 0.1%, because the former fully calculated minimum left only 11.028 mV, below the prior 12.621 mV release allowance.
-3. The 5 V divider remains 324 k/100 k, but its guaranteed static range is corrected to **4.858943-5.157889 V** after divider and FB-current terms. It remains inside the OPA165x 4.5-5.5 V rail requirement.
+3. The 5 V divider remains 324 k/100 k, but its guaranteed static range is corrected to **4.858943-5.157889 V** after divider and FB-current terms. It remains inside the Phase 3G OPAx192 4.5-36 V rail requirement.
 4. TPS7A49 and TPS7A20 accuracy specifications require at least 1 mA load. The five exact preloads in section 5.3 are added; normal consumer current is not used as an undocumented minimum-load assumption.
 5. TPS7A2033P and TPS7A2028P output bounds are now explicitly tied to their VIN headroom, load, temperature, capacitance, and ESR conditions.
 6. Directly connected TPS62135 output capacitance is explicitly capped at 200 uF effective, and every capacitor requirement is an effective-after-bias requirement.
@@ -196,8 +200,8 @@ Phase 4B may resume only under separate authorization. When authorized, Astra sh
 3. Use TPS7A2033PDBVR with 3.01 kOhm 0.1% preload and TPS7A2028PDBVR with 2.55 kOhm 0.1% preload, both from `3V8_PRE`, with the section 8 capacitance contract.
 4. Implement LTC2964HUDC#PBF, its four Phase 3B dividers, pin straps, pull-ups, and `RAILS_OK` exactly as Phase 3B. Do not substitute native regulator PGOOD for safety supervision.
 5. Implement TPS3431SDRBR and `SYS_HWRST` exactly as Phase 3B. Preserve low `PGOOD_12V`, eFuse FLT, low LTC2964 RST, and low TPS3431 WDO as hardware-dominant safe-state inputs.
-6. Implement SN74LV1T08DBVR and the `3V3_SYS` enable qualification exactly as Phase 3C. Keep every other downstream regulator on `OUT1`, the 1.8 V regulator on `PGOOD_12V`, and pre enabled directly.
-7. Implement the AFE buffered command, 100 kOhm EN pulldown, and hardware-fault open-drain override. No firmware state may bypass the safe-state inputs.
+6. Superseded by Phase 3E: implement its retained `DOWNSTREAM_EN` architecture for core, DMC, `3V3_SYS`, and ADC analog. Do not connect any regulator EN directly to `OUT1`. Keep the 1.8 V regulator on `PGOOD_12V` and pre enabled directly.
+7. Superseded by Phase 3E and corrected by Phase 3G: drive both microphone and AFE regulator EN pins from the exact `ANALOG_PWR_EN` logic, implement the safe latch and shutdown timer, and fit ten `TMUX2821DSGR` plus four `TMUX1574PWR` paired-domain analog-isolation packages. No firmware state may bypass the safe-state inputs.
 8. Keep all load allocations in section 3 as total maxima including dividers/preloads. Recalculate the populated BOM without exceeding them.
 9. Provide all rail, sense, enable, PGOOD, reset, and fault test points. Run ERC, startup/shutdown transient checks, full rail/load calculations, and the physical validations below. Do not alter a rail, divider, supervisor threshold, input source, enable relation, or regulator part to make implementation convenient.
 
@@ -216,6 +220,6 @@ These are required implementation/board validations, not unresolved component or
 - verify AFE/ADC settling, regulator noise/PSRR, and no back-powering under every power state;
 - verify symbol pins and packages against the cited official documents and retain ERC/validation artifacts.
 
-No known frozen-contract contradiction remains in the Sheet 2 power tree. The regulator choices, input sources, divider values, preload values, supervision thresholds, enable dependencies, and passive electrical limits are deterministic for implementation.
+With the Phase 3E amendment, no known frozen-contract contradiction remains in the Sheet 2 power tree. The regulator choices, input sources, divider values, preload values, supervision thresholds, corrected enable dependencies, and passive electrical limits are deterministic for implementation.
 
 PHASE 3D: PASS

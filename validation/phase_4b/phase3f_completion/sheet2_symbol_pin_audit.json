@@ -1,0 +1,678 @@
+{
+  "TPS62135RGXR": {
+    "pins": {
+      "1": [
+        "VIN",
+        "power_in"
+      ],
+      "2": [
+        "SW",
+        "power_out"
+      ],
+      "3": [
+        "GND",
+        "power_in"
+      ],
+      "4": [
+        "FB2",
+        "open_collector"
+      ],
+      "5": [
+        "FB",
+        "input"
+      ],
+      "6": [
+        "VOS",
+        "input"
+      ],
+      "7": [
+        "PG",
+        "open_collector"
+      ],
+      "8": [
+        "EN",
+        "input"
+      ],
+      "9": [
+        "SS/TR",
+        "passive"
+      ],
+      "10": [
+        "MODE",
+        "input"
+      ],
+      "11": [
+        "VSEL",
+        "input"
+      ]
+    },
+    "footprint": "Astra_Sequencing:Texas_RGX0011A",
+    "evidence": "https://www.ti.com/lit/ds/symlink/tps62135.pdf"
+  },
+  "TPS7A4901DGNR": {
+    "pins": {
+      "1": [
+        "OUT",
+        "power_out"
+      ],
+      "2": [
+        "FB",
+        "input"
+      ],
+      "3": [
+        "NC",
+        "no_connect"
+      ],
+      "4": [
+        "GND",
+        "power_in"
+      ],
+      "5": [
+        "EN",
+        "input"
+      ],
+      "6": [
+        "NR/SS",
+        "passive"
+      ],
+      "7": [
+        "DNC",
+        "no_connect"
+      ],
+      "8": [
+        "IN",
+        "power_in"
+      ],
+      "9": [
+        "EP",
+        "passive"
+      ]
+    },
+    "footprint": "Package_SO:Texas_DGN0008D_VSSOP-8-1EP_3x3mm_P0.65mm_EP2x2.94mm_Mask1.57x1.89mm",
+    "evidence": "https://www.ti.com/lit/ds/symlink/tps7a49.pdf"
+  },
+  "TPS7A2033PDBVR": {
+    "pins": {
+      "1": [
+        "IN",
+        "power_in"
+      ],
+      "2": [
+        "GND",
+        "power_in"
+      ],
+      "3": [
+        "EN",
+        "input"
+      ],
+      "4": [
+        "NC",
+        "no_connect"
+      ],
+      "5": [
+        "OUT",
+        "power_out"
+      ]
+    },
+    "footprint": "Package_TO_SOT_SMD:SOT-23-5",
+    "evidence": "https://www.ti.com/lit/ds/symlink/tps7a20.pdf"
+  },
+  "TPS7A2028PDBVR": {
+    "pins": {
+      "1": [
+        "IN",
+        "power_in"
+      ],
+      "2": [
+        "GND",
+        "power_in"
+      ],
+      "3": [
+        "EN",
+        "input"
+      ],
+      "4": [
+        "NC",
+        "no_connect"
+      ],
+      "5": [
+        "OUT",
+        "power_out"
+      ]
+    },
+    "footprint": "Package_TO_SOT_SMD:SOT-23-5",
+    "evidence": "https://www.ti.com/lit/ds/symlink/tps7a20.pdf"
+  },
+  "LTC2964HUDC_PBF": {
+    "pins": {
+      "1": [
+        "RDIS",
+        "input"
+      ],
+      "2": [
+        "MR",
+        "input"
+      ],
+      "3": [
+        "DVCC",
+        "power_in"
+      ],
+      "4": [
+        "VCC",
+        "power_in"
+      ],
+      "5": [
+        "RST",
+        "open_collector"
+      ],
+      "6": [
+        "GND",
+        "power_in"
+      ],
+      "7": [
+        "OUT1",
+        "open_collector"
+      ],
+      "8": [
+        "OUT2",
+        "open_collector"
+      ],
+      "9": [
+        "OUT3",
+        "open_collector"
+      ],
+      "10": [
+        "OUT4",
+        "open_collector"
+      ],
+      "11": [
+        "RT",
+        "passive"
+      ],
+      "12": [
+        "PG4",
+        "input"
+      ],
+      "13": [
+        "PG3",
+        "input"
+      ],
+      "14": [
+        "PG2",
+        "input"
+      ],
+      "15": [
+        "PG1",
+        "input"
+      ],
+      "16": [
+        "REF",
+        "output"
+      ],
+      "17": [
+        "V4",
+        "input"
+      ],
+      "18": [
+        "V3",
+        "input"
+      ],
+      "19": [
+        "V2",
+        "input"
+      ],
+      "20": [
+        "V1",
+        "input"
+      ],
+      "21": [
+        "EP",
+        "passive"
+      ]
+    },
+    "footprint": "Package_DFN_QFN:QFN-20-1EP_3x4mm_P0.5mm_EP1.65x2.65mm",
+    "evidence": "https://www.analog.com/media/en/technical-documentation/data-sheets/ltc2962-2963-2964.pdf"
+  },
+  "TPS3431SDRBR": {
+    "pins": {
+      "1": [
+        "VDD",
+        "power_in"
+      ],
+      "2": [
+        "CWD",
+        "no_connect"
+      ],
+      "3": [
+        "EN",
+        "input"
+      ],
+      "4": [
+        "GND",
+        "power_in"
+      ],
+      "5": [
+        "SET1",
+        "input"
+      ],
+      "6": [
+        "WDI",
+        "input"
+      ],
+      "7": [
+        "WDO",
+        "open_collector"
+      ],
+      "8": [
+        "ENOUT",
+        "open_collector"
+      ],
+      "9": [
+        "EP",
+        "passive"
+      ]
+    },
+    "footprint": "Package_DFN_QFN:Texas_DRB0008A",
+    "evidence": "https://www.ti.com/lit/ds/symlink/tps3431.pdf"
+  },
+  "SN74LV1T08DBVR": {
+    "pins": {
+      "1": [
+        "A",
+        "input"
+      ],
+      "2": [
+        "B",
+        "input"
+      ],
+      "3": [
+        "GND",
+        "power_in"
+      ],
+      "4": [
+        "Y",
+        "output"
+      ],
+      "5": [
+        "VCC",
+        "power_in"
+      ]
+    },
+    "footprint": "Package_TO_SOT_SMD:SOT-23-5",
+    "evidence": "https://www.ti.com/lit/ds/symlink/sn74lv1t08.pdf"
+  },
+  "L": {
+    "pins": {
+      "1": [
+        "",
+        "passive"
+      ],
+      "2": [
+        "",
+        "passive"
+      ]
+    },
+    "footprint": "",
+    "evidence": ""
+  },
+  "SN74LVC1G74DCUR": {
+    "pins": {
+      "1": [
+        "CLK",
+        "input"
+      ],
+      "2": [
+        "D",
+        "input"
+      ],
+      "3": [
+        "~{Q}",
+        "output"
+      ],
+      "4": [
+        "GND",
+        "power_in"
+      ],
+      "5": [
+        "Q",
+        "output"
+      ],
+      "6": [
+        "~{CLR}",
+        "input"
+      ],
+      "7": [
+        "~{PRE}",
+        "input"
+      ],
+      "8": [
+        "VCC",
+        "power_in"
+      ]
+    },
+    "footprint": "Package_SO:VSSOP-8_2.3x2mm_P0.5mm",
+    "evidence": "https://www.ti.com/lit/ds/symlink/sn74lvc1g74.pdf"
+  },
+  "SN74LVC2G07DBVR": {
+    "pins": {
+      "1": [
+        "1A",
+        "input"
+      ],
+      "2": [
+        "GND",
+        "power_in"
+      ],
+      "3": [
+        "2A",
+        "input"
+      ],
+      "4": [
+        "2Y",
+        "open_collector"
+      ],
+      "5": [
+        "VCC",
+        "power_in"
+      ],
+      "6": [
+        "1Y",
+        "open_collector"
+      ]
+    },
+    "footprint": "Package_TO_SOT_SMD:SOT-23-6",
+    "evidence": "https://www.ti.com/lit/ds/symlink/sn74lvc2g07.pdf"
+  },
+  "SN74LVC2G17DBVR": {
+    "pins": {
+      "1": [
+        "1A",
+        "input"
+      ],
+      "2": [
+        "GND",
+        "power_in"
+      ],
+      "3": [
+        "2A",
+        "input"
+      ],
+      "4": [
+        "2Y",
+        "output"
+      ],
+      "5": [
+        "VCC",
+        "power_in"
+      ],
+      "6": [
+        "1Y",
+        "output"
+      ]
+    },
+    "footprint": "Package_TO_SOT_SMD:SOT-23-6",
+    "evidence": "https://www.ti.com/lit/ds/symlink/sn74lvc2g17.pdf"
+  },
+  "SN74LVC2G08DCUR": {
+    "pins": {
+      "1": [
+        "1A",
+        "input"
+      ],
+      "2": [
+        "1B",
+        "input"
+      ],
+      "3": [
+        "2Y",
+        "output"
+      ],
+      "4": [
+        "GND",
+        "power_in"
+      ],
+      "5": [
+        "2A",
+        "input"
+      ],
+      "6": [
+        "2B",
+        "input"
+      ],
+      "7": [
+        "1Y",
+        "output"
+      ],
+      "8": [
+        "VCC",
+        "power_in"
+      ]
+    },
+    "footprint": "Package_SO:VSSOP-8_2.3x2mm_P0.5mm",
+    "evidence": "https://www.ti.com/lit/ds/symlink/sn74lvc2g08.pdf"
+  },
+  "SN74LXC8T245PWR": {
+    "pins": {
+      "1": [
+        "VCCA",
+        "power_in"
+      ],
+      "2": [
+        "DIR",
+        "input"
+      ],
+      "22": [
+        "~{OE}",
+        "input"
+      ],
+      "23": [
+        "VCCB",
+        "power_in"
+      ],
+      "24": [
+        "VCCB",
+        "power_in"
+      ],
+      "11": [
+        "GND",
+        "power_in"
+      ],
+      "12": [
+        "GND",
+        "power_in"
+      ],
+      "13": [
+        "GND",
+        "power_in"
+      ],
+      "3": [
+        "A1",
+        "bidirectional"
+      ],
+      "21": [
+        "B1",
+        "bidirectional"
+      ],
+      "4": [
+        "A2",
+        "bidirectional"
+      ],
+      "20": [
+        "B2",
+        "bidirectional"
+      ],
+      "5": [
+        "A3",
+        "bidirectional"
+      ],
+      "19": [
+        "B3",
+        "bidirectional"
+      ],
+      "6": [
+        "A4",
+        "bidirectional"
+      ],
+      "18": [
+        "B4",
+        "bidirectional"
+      ],
+      "7": [
+        "A5",
+        "bidirectional"
+      ],
+      "17": [
+        "B5",
+        "bidirectional"
+      ],
+      "8": [
+        "A6",
+        "bidirectional"
+      ],
+      "16": [
+        "B6",
+        "bidirectional"
+      ],
+      "9": [
+        "A7",
+        "bidirectional"
+      ],
+      "15": [
+        "B7",
+        "bidirectional"
+      ],
+      "10": [
+        "A8",
+        "bidirectional"
+      ],
+      "14": [
+        "B8",
+        "bidirectional"
+      ]
+    },
+    "footprint": "Package_SO:TSSOP-24_4.4x7.8mm_P0.65mm",
+    "evidence": "https://www.ti.com/lit/ds/symlink/sn74lxc8t245.pdf"
+  },
+  "TPS3760E012DYYR": {
+    "pins": {
+      "2": [
+        "NC",
+        "no_connect"
+      ],
+      "4": [
+        "NC",
+        "no_connect"
+      ],
+      "5": [
+        "NC",
+        "no_connect"
+      ],
+      "7": [
+        "NC",
+        "no_connect"
+      ],
+      "11": [
+        "NC",
+        "no_connect"
+      ],
+      "12": [
+        "NC",
+        "no_connect"
+      ],
+      "14": [
+        "NC",
+        "no_connect"
+      ],
+      "1": [
+        "VDD",
+        "power_in"
+      ],
+      "3": [
+        "SENSE",
+        "input"
+      ],
+      "6": [
+        "~{RESET}",
+        "open_collector"
+      ],
+      "8": [
+        "GND",
+        "power_in"
+      ],
+      "9": [
+        "CTR/MR",
+        "passive"
+      ],
+      "10": [
+        "CTS",
+        "passive"
+      ],
+      "13": [
+        "GND",
+        "power_in"
+      ]
+    },
+    "footprint": "Astra_Sequencing:Texas_DYY0014A",
+    "evidence": "https://www.ti.com/lit/ds/symlink/tps3760.pdf"
+  },
+  "TMUX2821DSGR": {
+    "pins": {
+      "1": [
+        "S1",
+        "passive"
+      ],
+      "2": [
+        "D1",
+        "passive"
+      ],
+      "3": [
+        "SEL2",
+        "input"
+      ],
+      "4": [
+        "GND",
+        "power_in"
+      ],
+      "5": [
+        "S2",
+        "passive"
+      ],
+      "6": [
+        "D2",
+        "passive"
+      ],
+      "7": [
+        "SEL1",
+        "input"
+      ],
+      "8": [
+        "VDD",
+        "power_in"
+      ],
+      "9": [
+        "EP",
+        "passive"
+      ]
+    },
+    "footprint": "Package_DFN_QFN:DFN-8-1EP_2x2mm_P0.5mm_EP0.9x1.6mm",
+    "evidence": "https://www.ti.com/lit/ds/symlink/tmux2821.pdf"
+  },
+  "BSS138LT1G": {
+    "pins": {
+      "1": [
+        "G",
+        "input"
+      ],
+      "2": [
+        "S",
+        "passive"
+      ],
+      "3": [
+        "D",
+        "open_collector"
+      ]
+    },
+    "footprint": "Package_TO_SOT_SMD:SOT-23",
+    "evidence": "https://www.onsemi.com/pdf/datasheet/bss138lt1-d.pdf"
+  }
+}
