@@ -7,7 +7,7 @@ Evidence notation uses the IDs in the [component evidence index](../evidence/com
 
 **Phase 3E amendment (2026-09-13):** Phase 4B exposed a sequencing contradiction in the shared direct `OUT1` fanout. The [Phase 3E shutdown/safe-state correction](phase_3e_shutdown_safe_state_correction.md) supersedes sections 9.1-9.2 and implementation items 6-7 below wherever they describe direct downstream/microphone enables or an unspecified AFE override. It does not change any Phase 3D rail source, regulator, divider, preload, threshold, load allocation, static range, or margin calculation.
 
-**Phase 3G amendment (2026-09-14):** the [remaining-sheet preflight](phase_3g_remaining_schematic_implementation_preflight.md) replaces the former AFE devices and Phase 3E microphone-isolation population. The corrected consumers remain within the existing `2V8_MIC`, `3V3_ADC_A`, and `5V_AFE` allocations, so no Phase 3D rail, divider, preload, static range or margin changes.
+**Phase 3G amendment (2026-09-14):** the [remaining-sheet preflight](phase_3g_remaining_schematic_preflight.md) replaces the former AFE devices and Phase 3E microphone-isolation population. The corrected consumers remain within the existing `2V8_MIC`, `3V3_ADC_A`, and `5V_AFE` allocations, so no Phase 3D rail, divider, preload, static range or margin changes.
 
 ## 1. Original pre/core contradiction
 

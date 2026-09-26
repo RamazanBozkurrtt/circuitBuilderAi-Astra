@@ -16,7 +16,7 @@ Evidence notation such as `DSP p.53` refers to the source IDs and local manufact
 
 **Phase 3F amendment (2026-09-13):** the Phase 3E combined post-arm audio/MCLK OE requirement prevented the ADAU1978 PLL from locking before the arm edge. The [clock startup correction](phase_3f_clock_startup_correction.md) supersedes the affected clock-OE, ADC-reset, arming, startup, shutdown, and clock-fault text below. It adds a pre-arm `CLOCK_STARTUP_EN`, separates clock and data buffer banks, and preserves all rail and Phase 3E functional safe-state decisions.
 
-**Phase 3G amendment (2026-09-14):** Phase 4C proved that the four differential microphones require eight, not four, independently isolated legs and that the former OPA165x 0.8 V headroom claim was not guaranteed at the actual 5 V operating point. The [remaining-sheet preflight](phase_3g_remaining_schematic_implementation_preflight.md) supersedes the microphone-isolation device/count, VREF-buffer, signal-amplifier, gain/headroom/noise, Sheet 3 ownership, and Sheets 3-7 implementation-inventory text below. Unrelated Phase 3 through Phase 3F decisions remain unchanged.
+**Phase 3G amendment (2026-09-14):** Phase 4C proved that the four differential microphones require eight, not four, independently isolated legs and that the former OPA165x 0.8 V headroom claim was not guaranteed at the actual 5 V operating point. The [remaining-sheet preflight](phase_3g_remaining_schematic_preflight.md) supersedes the microphone-isolation device/count, VREF-buffer, signal-amplifier, gain/headroom/noise, Sheet 3 ownership, and Sheets 3-7 implementation-inventory text below. Unrelated Phase 3 through Phase 3F decisions remain unchanged.
 
 ## 1. Executive summary
 
@@ -326,7 +326,7 @@ This is **PROVISIONAL** and does not approve an ANC cancellation target or acous
 
 ### 9.2 Per-channel topology and values
 
-The exact corrected implementation is frozen by [Phase 3G section 3](phase_3g_remaining_schematic_implementation_preflight.md): two `OPA4192IPWR` signal amplifiers, one `OPA2192IDR` AFE VCM buffer, and one `OPA320AIDBVR` ADC-local VREF buffer. For each of the eight legs use 4.7 uF nominal coupling (at least 2.2 uF effective), 100 kohm 0.1% bias to VCM, `Rg=2.80 kohm` and `Rf=1.27 kohm` 0.1% thin-film, and 47 ohms at the output. Retain one balanced 1 nF C0G differential capacitor at each ADC pair. Sheet 7 owns the connector-edge protection and matched 100-ohm RF resistors.
+The exact corrected implementation is frozen by [Phase 3G section 3](phase_3g_remaining_schematic_preflight.md): two `OPA4192IPWR` signal amplifiers, one `OPA2192IDR` AFE VCM buffer, and one `OPA320AIDBVR` ADC-local VREF buffer. For each of the eight legs use 4.7 uF nominal coupling (at least 2.2 uF effective), 100 kohm 0.1% bias to VCM, `Rg=2.80 kohm` and `Rf=1.27 kohm` 0.1% thin-film, and 47.0 ohms 0.1% at the output. Retain one balanced 1 nF C0G differential capacitor at each ADC pair. Sheet 7 owns the connector-edge protection and matched 100.0-ohm 0.1% RF resistors.
 
 ### 9.3 Gain and headroom
 

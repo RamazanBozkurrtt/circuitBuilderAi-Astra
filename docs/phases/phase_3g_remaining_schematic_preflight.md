@@ -1,4 +1,4 @@
-# PHASE 3G — Remaining schematic implementation preflight
+# PHASE 3G — Remaining schematic preflight
 
 Date: 2026-09-14
 
@@ -153,7 +153,7 @@ The coupling poles remain 0.339 Hz nominal and 0.723 Hz at 2.2 uF effective with
 | Gain/headroom/common mode | Exact OPAx192 population, 1.453571 nominal gain and OPA320/OPA2192 VCM chain in §3. | PASS |
 | LF corner | 4.7 uF nominal, >=2.2 uF effective, 100 kohm; 0.339/0.723 Hz. | PASS |
 | Load/stability | `Rg+Rf>=4.066 kohm` and matched 47.0-ohm output isolation; Sheet 4 owns the balanced 1 nF C0G differential ADC capacitors. Macromodel/noise/CMRR tests retained. | PASS for schematic |
-| Noise-critical resistors | 100 kohm bias, 2.80 kohm Rg, 1.27 kohm Rf, all 0.1% thin-film; 47 ohm output and Sheet 7 100 ohm RF resistors matched within each pair. | PASS |
+| Noise-critical resistors | 100 kohm bias, 2.80 kohm Rg, 1.27 kohm Rf, 47.0-ohm output and Sheet 7 100.0-ohm RF resistors, all 0.1% thin-film and pair-matched. | PASS |
 | Power-off behavior | Paired-domain powered-off switches; no direct VREF or charged output path across an absent rail. | PASS |
 | ADC interface | Eight outputs map one-to-one and polarity-correct to ADAU1978 AIN1-4. | PASS |
 | Sheet 3 hierarchy count | **18 scalar pins:** eight mic inputs, eight AFE outputs, `AFE_VCM_ISO`, and `5V_AFE`. Ground is a global power net; no microphone connector is instantiated here. | PASS |
@@ -246,36 +246,71 @@ Sheet 5 has **37 scalar hierarchy pins**: four rail nets; ten command/watchdog o
 
 Exact connector series and enclosure mechanics remain procurement/mechanical selections within these fixed counts and ratings. They do not change schematic architecture.
 
-## 5. Cross-sheet hierarchy inventory
+## 5. Implementation readiness and device-resource budget
+
+| Sheet | Classification | Basis / documented provision |
+| --- | --- | --- |
+| Sheet 3 — Microphones / AFE | **READY WITH DOCUMENTED PROVISION** | Exact eight-leg topology, isolation, gain, VCM, passives and hierarchy are frozen. Sheet 2/root must first receive the specified eight-leg correction; macromodel and bench closure remain physical validation. |
+| Sheet 4 — ADAU1978 ADC | **READY WITH DOCUMENTED PROVISION** | Exact pins, rails, decoupling, address, clocks, reset and TDM mode are frozen. Typical-only ADC full scale and loaded timing remain physical validation. |
+| Sheet 5 — ADSP-21569 | **READY WITH DOCUMENTED PROVISION** | All power balls and required interfaces have explicit resources with no collision. PI/transient and BGA-escape review remain physical validation/layout work. |
+| Sheet 6 — TAS6424E-Q1 | **READY WITH DOCUMENTED PROVISION** | Exact device pins, supplies, bypass/bootstrap/filter values, control defaults and safe sequence are frozen. Magnetics qualification, thermal and EMI closure remain physical validation. |
+| Sheet 7 — Connectors / interfaces | **READY WITH DOCUMENTED PROVISION** | Required contact counts, returns, shields, voltage/current ratings and signal ownership are frozen. Exact connector series is a bounded mechanical/procurement selection before PCB release, not an electrical-architecture choice. |
+
+No remaining sheet is `BLOCKED` by an unresolved component function, signal count, voltage domain, pin collision or electrical contradiction.
+
+| Major device/resource | Required / allocated | Available / disposition | Result |
+| --- | --- | --- | --- |
+| Four IM73A135V01 modules | Eight analog legs, four supplies, four signal returns; shields separate | Two differential outputs plus supply/ground per microphone; four five-contact connectors | PASS |
+| Microphone isolation | 16 series elements across eight legs | Four `TMUX1574PWR`: 16 of 16 channels used | PASS |
+| AFE/ADC plus VREF isolation | 18 series elements | Ten `TMUX2821DSGR`: 18 of 20 channels used; both unused channels are explicitly disabled | PASS |
+| Signal/VCM amplifiers | Eight signal channels plus one VCM channel | Two `OPA4192IPWR`: 8/8 signal channels; one `OPA2192IDR`: one VCM channel plus one defined unused follower; one `OPA320AIDBVR`: 1/1 ADC-local VREF channel | PASS |
+| ADAU1978 | Four differential inputs, one TDM4 data output, MCLK/BCLK/LRCLK, I2C and reset | Four AIN pairs, SDATAOUT1, dedicated clocks/control/reset; SDATAOUT2 and documented NC pins unused | PASS |
+| ADSP-21569 SPORT/DAI | One synchronous TDM4 receive and one synchronous TDM4 transmit sharing BCLK/FSYNC | SPORT0A RX and SPORT0B TX on DAI0 pins 01-04; DAI0 pins 05-20 unallocated | PASS |
+| ADSP-21569 serial peripherals | SPI2 boot (4 pins), TWI0 (2), UART0 (4) | PA00/01/04/05, PA10/11 and PA06-09 respectively; no overlap | PASS |
+| ADSP-21569 GPIO/control | Ten command/watchdog outputs and three status inputs | PA12-15 and PB00-08: 13 unique GPIO; PA02/03, PB09-15 and PC00-07 remain spare | PASS |
+| ADSP-21569 boot/debug/clock/reset | Three BMODE straps, five JTAG, SYS_CLKIN0 and dedicated SYS_HWRST | Dedicated balls assigned exactly; none is reused as GPIO/SPORT | PASS |
+| TAS6424E-Q1 | Four BTL channels, one TDM input, three clocks, I2C, four control/status lines | Four independent BTL stages; SDIN1 used, SDIN2 grounded; all dedicated interface pins available | PASS |
+
+## 6. Cross-sheet hierarchy inventory
 
 The following inventory is the root-sheet contract. Counts are scalar nets; rails and grounds are listed where crossing ownership matters.
 
-| Source | Destination | Signal bundle | Direction | Count |
-| --- | --- | --- | --- | ---: |
-| Sheet 7 | Sheet 2 | `MIC1..4_[P/N]_RAW` after edge protection/100 ohms | 7 -> 2 | 8 |
-| Sheet 2 | Sheet 3 | `MIC1..4_[P/N]_ISO` | 2 -> 3 | 8 |
-| Sheet 3 | Sheet 2 | `AFE1..4_[P/N]_RAW` | 3 -> 2 | 8 |
-| Sheet 2 | Sheet 4 | `ADC1..4_[P/N]_ISO` | 2 -> 4 | 8 |
-| Sheet 4 | Sheet 2 | `ADC_VREF_RAW` | 4 -> 2 | 1 |
-| Sheet 2 | Sheet 3 | `AFE_VCM_ISO` | 2 -> 3 | 1 |
-| Sheet 2 | Sheets 3/4/5/6/7 | Frozen rails and enables: 5V AFE; 3V3 ADC; DSP rails; 3V3 SYS; 12V protected; 2V8 MIC | 2 -> loads | 8 named rails plus returns |
-| Sheet 5 | Sheet 4 | ADC MCLK, BCLK, FSYNC | 5 -> 4 | 3 |
-| Sheet 4 | Sheet 5 | ADC TDM data | 4 -> 5 | 1 |
-| Sheet 5 | Sheet 6 | amplifier MCLK, SCLK, FSYNC, TDM data | 5 -> 6 | 4 |
-| Sheet 5 | Sheets 4/6 | shared SDA, SCL | bidirectional | 2 |
-| Sheet 5 | Sheet 2 | six retained-domain commands, MUTE command, STANDBY command, ADC reset-release command, WDI | 5 -> 2 | 10 |
-| Sheet 2 | Sheet 5 | `RAILS_OK`, `SYS_HWRST` (dedicated reset, not GPIO) | 2 -> 5 | 2 |
-| Sheet 6 | Sheets 2/5 | `AMP_FAULT_N` fanout | 6 -> 2 and 5 | 1 source, 2 sinks |
-| Sheet 6 | Sheet 5 | `AMP_WARN_N` | 6 -> 5 | 1 |
-| Sheet 6 | Sheet 7 | four filtered BTL `SPKn+/-` pairs | 6 -> 7 | 8 |
-| Sheet 5 | Sheet 7 | UART TX/RX/RTS/CTS | mixed | 4 |
-| Sheet 5 | Sheet 7 | JTAG TMS/TCK/TDO/TRST/TDI | mixed | 5 |
-| Sheet 2 | Sheet 7 | common `SYS_HWRST` branch to JTAG reset contact | 2 -> 7 | 1 |
-| Sheet 5 | Sheet 7 | optional service SDA/SCL | bidirectional | 2 |
+| Source sheet | Destination sheet | Signal | Direction | Count | Voltage/domain | Status |
+| --- | --- | --- | --- | ---: | --- | --- |
+| Sheet 7 | Sheet 2 | `MIC1..4_[P/N]_RAW` after edge protection/100 ohms | 7 -> 2 | 8 | 2.8 V microphone analog; approximately 1.35 V common mode | CONFIRMED |
+| Sheet 2 | Sheet 3 | `MIC1..4_[P/N]_ISO` | 2 -> 3 | 8 | Paired `2V8_MIC`/`5V_AFE` isolated analog | CONFIRMED |
+| Sheet 3 | Sheet 2 | `AFE1..4_[P/N]_RAW` | 3 -> 2 | 8 | `5V_AFE` analog about copied ADC VREF | CONFIRMED |
+| Sheet 2 | Sheet 4 | `ADC1..4_[P/N]_ISO` | 2 -> 4 | 8 | Paired `5V_AFE`/`3V3_ADC_A` isolated analog | CONFIRMED |
+| Sheet 4 | Sheet 2 | `ADC_VREF_RAW` | 4 -> 2 | 1 | `3V3_ADC_A`, OPA320-buffered 1.47-1.54 V | CONFIRMED |
+| Sheet 2 | Sheet 3 | `AFE_VCM_ISO` | 2 -> 3 | 1 | Paired `3V3_ADC_A`/`5V_AFE` isolated analog | CONFIRMED |
+| Sheet 2 | Sheets 3/4/5/6/7 | `5V_AFE`, `3V3_ADC_A`, `1V0_DSP_CORE`, `1V35_DSP_DMC`, `1V8_DSP_REF_ANA`, `3V3_SYS`, `12V_PROTECTED`, `2V8_MIC` plus global ground | 2 -> loads | 8 rails + return | Named power domains | CONFIRMED |
+| Sheet 5 | Sheet 4 | ADC MCLK, BCLK, FSYNC | 5 -> 4 | 3 | 3.3 V endpoint logic after frozen translation/buffering | CONFIRMED |
+| Sheet 4 | Sheet 5 | ADC TDM data | 4 -> 5 | 1 | `3V3_SYS` digital, buffered | CONFIRMED |
+| Sheet 5 | Sheet 6 | amplifier MCLK, SCLK, FSYNC, TDM data | 5 -> 6 | 4 | `3V3_SYS` digital, buffered | CONFIRMED |
+| Sheet 5 | Sheets 4/6 | shared SDA, SCL | bidirectional open-drain | 2 | `3V3_SYS`; one 2.2-kohm pullup pair | CONFIRMED |
+| Sheet 5 | Sheet 2 | Six retained-domain commands, MUTE command, STANDBY command, ADC reset-release command, WDI | 5 -> 2 | 10 | 3.3 V DSP logic; retained commands translated on Sheet 2 | CONFIRMED |
+| Sheet 2 | Sheet 5 | `RAILS_OK`, `SYS_HWRST` (dedicated reset, not GPIO) | 2 -> 5 | 2 | `3V3_SYS`, active-high valid / active-low reset | CONFIRMED |
+| Sheet 6 | Sheets 2/5 | `AMP_FAULT_N` fanout | 6 -> 2 and 5 | 1 source, 2 sinks | 3.3 V open-drain with one pullup | CONFIRMED |
+| Sheet 6 | Sheet 5 | `AMP_WARN_N` | 6 -> 5 | 1 | 3.3 V open-drain with one pullup | CONFIRMED |
+| Sheet 6 | Sheet 7 | Four filtered BTL `SPKn+/-` pairs | 6 -> 7 | 8 | Floating high-current BTL outputs; no ground leg | CONFIRMED |
+| Sheet 5 | Sheet 7 | UART TX/RX/RTS/CTS | mixed | 4 | 3.3 V target-referenced logic | CONFIRMED |
+| Sheet 5 | Sheet 7 | JTAG TMS/TCK/TDO/TRST/TDI | mixed | 5 | 3.3 V target-referenced logic | CONFIRMED |
+| Sheet 2 | Sheet 7 | Common `SYS_HWRST` branch to JTAG reset contact | 2 -> 7 | 1 | 3.3 V target-referenced active-low reset | CONFIRMED |
+| Sheet 5 | Sheet 7 | Optional service SDA/SCL | bidirectional open-drain | 2 | 3.3 V, DNP header, no off-board pullups/hot-plug | DOCUMENTED OPTIONAL |
 
 No net in this table is a vector placeholder whose width may be chosen during schematic entry. The exact scalar labels and polarity are part of the contract.
 
-## 6. Remaining non-architectural validation
+| Cross-sheet check | Result |
+| --- | --- |
+| Missing differential half | PASS — every channel has one `P` and one `N` leg through both boundaries and into the matching ADC pair. |
+| Duplicate/ambiguous net | PASS — scalar names are unique; `SYS_HWRST`, `AMP_FAULT_N`, I2C and rails have only the intentional fanouts listed above. |
+| Voltage-domain compatibility | PASS — digital endpoints share 3.3 V or use the frozen translators; analog crossings use paired powered-off switches. |
+| Missing return/reference | PASS — global ground covers on-board logic/analog returns; microphone connectors add `MIC_GND` and shield; BTL speakers deliberately have no ground leg. |
+| Powered-off-domain drive | PASS — paired analog switches and the previously frozen digital `Ioff`/OE architecture prevent a live source from driving an absent domain. |
+| Clock/control dependency loop | PASS — root clock/MCLK precede reset; pre-arm BCLK/FSYNC is independent of the safe latch; data/analog/PLAY remain latch-gated. |
+| Hierarchical count mismatch | PASS — Sheet 3=18, Sheet 4=18, Sheet 5=37 and Sheet 6=20 scalar pins, reconciled to the rows above and their intentional fanouts. |
+
+## 7. Remaining non-architectural validation
 
 The following are explicitly **physical-validation items**, not choices left to Astra:
 
@@ -285,19 +320,20 @@ The following are explicitly **physical-validation items**, not choices left to 
 - ADC data hold timing using exact IBIS/trace extraction and the already frozen >=3 ns measured acceptance criterion.
 - DSP rail transient/PI and BGA escape review; decoupling may be augmented within the frozen regulator limits.
 - Exact amplifier inductor part, saturation/DCR/temperature, EMI filter optimization, heatsink/interface, load diagnostics and conducted/radiated emissions.
-- Exact production connector series, creepage/mechanics, mating-cycle and cable strain relief.
 
-None of these items changes a signal count, polarity, component function, voltage domain, boot resource, protocol, connector pin inventory or safe-state architecture.
+None of these items changes a signal count, polarity, component function, voltage domain, boot resource, protocol, connector pin inventory or safe-state architecture. Exact connector series, approved footprints and enclosure mechanics are bounded procurement/mechanical details under the fixed Sheet 7 contact/rating contract; they are not classified as an electrical `UNKNOWN`.
 
-## 7. Controlled implementation order
+## 8. Remaining blockers and controlled implementation order
+
+There is no unresolved schematic-architecture blocker in Sheets 3-7. One implementation prerequisite remains because this task was documentation-only: Phase 4C stays stopped until the already implemented Sheet 2/root boundary is amended and revalidated against this corrected contract.
 
 1. Do not resume Phase 4C yet. First revise the Sheet 2 microphone isolation block and root hierarchy to the four exact TMUX1574 packages and eight-leg mapping in §3.2; retain the ten TMUX2821 devices for the other two boundaries.
 2. Re-run the Phase 4B structural/ERC checks for only the affected Sheet 2/root interface and record the amendment. Do not redesign passed power/sequencing circuits.
 3. Resume Phase 4C using the exact Sheet 3 parts/values and hierarchy in §3.5/§4.1.
 4. Implement Sheets 4-7 only from their frozen inventories above. A mismatch against any scalar-net count or resource allocation is a stop condition, not an invitation to choose a substitute during entry.
 
-## 8. Gate
+## 9. Gate
 
-Both Phase 4C blockers are resolved. Every remaining sheet has a fixed component/interface/safe-state contract, the four-channel DSP resource map has no collision, connector counts include required returns/shields, and the remaining unknowns are physical validation or mechanical procurement items rather than schematic-architecture blockers.
+Both Phase 4C contract blockers are resolved. Every remaining sheet has a fixed component/interface/safe-state contract, the four-channel DSP resource map has no collision, connector counts include required returns/shields, and every item still classified as unknown is a physical-validation item rather than a schematic-architecture blocker. Mechanical/procurement choices are bounded by explicit electrical contracts.
 
 PHASE 3G: PASS

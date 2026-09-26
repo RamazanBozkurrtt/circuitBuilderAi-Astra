@@ -355,3 +355,27 @@ Baseline hashes confirm **Sheet 1, its symbol library, project settings, and eve
 Remaining nonblocking future validation: actual rail ramps and >=100 us DSP rise/fall; regulator MLCC effective capacitance/ESR and inductor bias/saturation qualification; loaded ripple/stability/thermal performance; analog switch noise/CMRR/settling/leakage and powered-off permutations; loaded OE edge/timing quality; complete workload-dependent BOM currents; endpoint clock generation, ADC DVDD/reset/PLL sequence and fault response; firmware graceful waits and amplifier active Hi-Z-before-PLAY checks; oscilloscope confirmation of the post-reset hold. These are explicitly unperformed and do not block the completed Sheet 2 schematic merely because hardware or later sheets do not yet exist.
 
 PHASE 4B: PASS
+
+
+## Phase 3G eight-leg microphone isolation amendment — 2026-09-26
+
+**PHASE 4B AMENDMENT: PASS.** The Phase 3G preflight supersedes the earlier four-path microphone implementation. This amendment changes only the Sheet 2 microphone isolation group, its cached/library symbol, and affected Sheet 2/root analog hierarchy names. It does not implement Sheet 3 or change Sheets 4–7.
+
+### Implemented interface
+
+- Replaced U240–U243 with four exact `TMUX1574PWR` TSSOP-16 devices. U240/U242 use `2V8_MIC`; U241/U243 use `5V_AFE`. U240/U241 carry microphone channels 1/2, and U242/U243 carry channels 3/4.
+- Each package routes `S1A/D1`, `S2A/D2`, `S3A/D3`, and `S4A/D4` in that order to channel 1 P, channel 1 N, channel 2 P, and channel 2 N for its group. Every `MICn_P_RAW` and `MICn_N_RAW` passes through a 2.8 V switch, its unique `MICn_[P/N]_MID` net, and a 5 V switch to `MICn_[P/N]_ISO`. No switch element is shared or paralleled; polarity and channel identity are retained.
+- `EN` pin 15 and `SEL` pin 1 are directly grounded on all four devices. All unused `SxB` pins 3/6/10/13 are grounded; VDD pin 16 has its own 100 nF bypass to GND pin 8. TI TMUX1574 SCDS391C Rev.C, pp.3–6 and 24–26, provides the PW pin map, `EN=0, SEL=0` A-path truth table, 1.5–5.5 V supply and 0–`2 × VDD` powered / 0–3.6 V unpowered signal limits, powered-off isolation, and bypass guidance. The KiCad TSSOP-16 footprint has pads 1–16.
+- U230–U239 remain the ten `TMUX2821DSGR` AFE/ADC/VREF isolation devices. Their analog endpoint hierarchy names were updated to the Phase 3G contract: `AFEn_[P/N]_RAW`, `ADCn_[P/N]_ISO`, `ADC_VREF_RAW`, and `AFE_VCM_ISO`; their switch connections and controls were not altered. The root and Sheet 2 now expose all eight `MICn_[P/N]_RAW` and eight `MICn_[P/N]_ISO` scalar ports. The root future endpoints remain explicitly unconnected until their authorized sheets are implemented.
+
+### Verification and ERC disposition
+
+KiCad 10.0.6 reloaded and saved the amended Sheet 2 and root in a complete temporary project copy; only those two saved schematics were copied back. Native XML netlist export and focused project ERC were run on the final hierarchy. The [pin-level audit](phase_4b/phase3g_amendment/amendment_results.json) confirms all eight independent two-switch paths, all four package supplies/control/spare pins and bypass capacitors, exact component counts, hierarchy ports, and **762 unchanged non-microphone pin nets**. The audit also checks that the previous four-path microphone port names are absent. Its source is the [exported netlist](phase_4b/phase3g_amendment/sheet2_project.net.xml); the [raw ERC](phase_4b/phase3g_amendment/sheet2_erc.json) is preserved. Re-run the audit with `python validation/phase_4b/verify_phase3g_amendment.py` after exporting a fresh netlist/ERC.
+
+ERC remains **3 errors / 5 warnings**, with the exact same item UUIDs as the prior Phase 4B final ERC and **zero newly introduced findings**. The three existing U201–U203 FB2-to-ground power-flag pin-type findings retain their documented intentional grounding disposition. The five root Sheet 1 wire endpoint off-grid warnings retain their documented original geometry and verified connectivity disposition. No waiver or project-level severity suppression was added.
+
+The two supply domains retain the existing shared `ANALOG_PWR_EN` rail qualification. With both rails valid, grounded EN/SEL connects only each selected A path; removal of either adjacent rail leaves its series device in TI's powered-off high-impedance state. The Phase 3G calculated 0.788–1.912 V microphone leg range lies within the powered and unpowered switch signal limits, and grounded controls cannot overdrive an absent domain. This is a schematic/netlist and manufacturer-limit result: finite off leakage remains, and populated-board rail-collapse, connector/cable capacitance, noise and leakage measurements are still open physical validation. No direct switched signal-to-supply or new control-driven back-power path was introduced.
+
+Files changed by this amendment: `hardware/kicad/power_regulation.kicad_sch`, `hardware/kicad/circuitBuilderAi-Astra.kicad_sch`, `hardware/kicad/Astra_Sequencing.kicad_sym`, and this appended record. Reproducibility files: `validation/phase_4b/amend_phase3g_mic.py`, `validation/phase_4b/verify_phase3g_amendment.py`, and `validation/phase_4b/phase3g_amendment/`. Existing validation history above remains intact. Power, sequencing, supervisor, watchdog, and clock nets are unchanged by the exported pin-net comparison. No PCB or Phase 4C work occurred.
+
+PHASE 4B AMENDMENT: PASS

@@ -163,6 +163,10 @@
 		(uuid "2050c220-1529-58e8-99f6-9d06ca280c43")
 	)
 	(no_connect
+		(at 800 314.96)
+		(uuid "27bbff7f-3238-582e-b309-f2c1e74e84d8")
+	)
+	(no_connect
 		(at 800 289.56)
 		(uuid "2b03614c-30dd-5ccd-bc12-90262a6785f8")
 	)
@@ -223,6 +227,10 @@
 		(uuid "4d9cf2e8-fd4c-5546-ad49-e575096234df")
 	)
 	(no_connect
+		(at 800 309.88)
+		(uuid "5474f15f-a345-5a4a-9a5a-69bab7e146ba")
+	)
+	(no_connect
 		(at 800 284.48)
 		(uuid "55f5d092-8dad-5122-8582-beccd9796737")
 	)
@@ -233,6 +241,10 @@
 	(no_connect
 		(at 800 213.36)
 		(uuid "6785450b-f17c-5701-90e3-db165567e9ab")
+	)
+	(no_connect
+		(at 800 320.04)
+		(uuid "67bd3f8c-dd78-5069-8896-38561dcba947")
 	)
 	(no_connect
 		(at 800 299.72)
@@ -267,6 +279,10 @@
 		(uuid "92e97874-04ba-5c12-a906-26ce5d3894c3")
 	)
 	(no_connect
+		(at 800 304.8)
+		(uuid "93d39eac-7d0e-51ce-98b9-623820e3a9b7")
+	)
+	(no_connect
 		(at 800 254)
 		(uuid "9acd2e75-4bfe-50be-9758-77d4cb966a2f")
 	)
@@ -295,6 +311,10 @@
 		(uuid "c1c379a8-57d7-5cc6-a1db-1f8ef33551ad")
 	)
 	(no_connect
+		(at 800 330.2)
+		(uuid "c4208d4b-2355-532d-bfe7-ef88ba251cac")
+	)
+	(no_connect
 		(at 800 101.6)
 		(uuid "c4545233-50f1-5b14-bd21-130bf985311b")
 	)
@@ -305,6 +325,10 @@
 	(no_connect
 		(at 450 100.33)
 		(uuid "cbfe5728-0603-50d0-b7e8-713c1da73cca")
+	)
+	(no_connect
+		(at 800 335.28)
+		(uuid "cd3fc569-9c4d-5049-8191-b7f2f46c3f74")
 	)
 	(no_connect
 		(at 800 259.08)
@@ -347,8 +371,16 @@
 		(uuid "dfe10ba3-5f01-557c-821f-7c393aa5349a")
 	)
 	(no_connect
+		(at 800 340.36)
+		(uuid "f5a5789a-1f27-5b84-8709-a4efca2efbfb")
+	)
+	(no_connect
 		(at 800 81.28)
 		(uuid "f7ef7869-10b5-5e71-a144-184f076698d3")
+	)
+	(no_connect
+		(at 800 325.12)
+		(uuid "fc44e876-bb00-5eae-ac42-c6c581a79e75")
 	)
 	(wire
 		(pts
@@ -1036,7 +1068,7 @@
 				)
 			)
 		)
-		(pin "AFE1P_AFTER_47R" passive
+		(pin "AFE1_P_RAW" passive
 			(at 800 172.72 0)
 			(uuid "d4435ce2-cf46-5216-a34d-f56198432c9d")
 			(effects
@@ -1045,7 +1077,7 @@
 				)
 			)
 		)
-		(pin "ADC_AIN1P" passive
+		(pin "ADC1_P_ISO" passive
 			(at 800 177.8 0)
 			(uuid "0d5369b6-d23f-53e0-8869-b7f65d1310ec")
 			(effects
@@ -1054,7 +1086,7 @@
 				)
 			)
 		)
-		(pin "AFE1N_AFTER_47R" passive
+		(pin "AFE1_N_RAW" passive
 			(at 800 182.88 0)
 			(uuid "eb207dfe-ae63-5743-b4a6-633d69d8d041")
 			(effects
@@ -1063,7 +1095,7 @@
 				)
 			)
 		)
-		(pin "ADC_AIN1N" passive
+		(pin "ADC1_N_ISO" passive
 			(at 800 187.96 0)
 			(uuid "1531e97e-e084-55eb-a0be-c48c6944bdd5")
 			(effects
@@ -1072,7 +1104,7 @@
 				)
 			)
 		)
-		(pin "AFE2P_AFTER_47R" passive
+		(pin "AFE2_P_RAW" passive
 			(at 800 193.04 0)
 			(uuid "451c95eb-0f8f-5700-ad3f-1be12b16ce63")
 			(effects
@@ -1081,7 +1113,7 @@
 				)
 			)
 		)
-		(pin "ADC_AIN2P" passive
+		(pin "ADC2_P_ISO" passive
 			(at 800 198.12 0)
 			(uuid "76b1c98f-9353-599e-bf7d-7039a43d6204")
 			(effects
@@ -1090,7 +1122,7 @@
 				)
 			)
 		)
-		(pin "AFE2N_AFTER_47R" passive
+		(pin "AFE2_N_RAW" passive
 			(at 800 203.2 0)
 			(uuid "44f99453-469d-5ee6-b69b-6b5e75860d0d")
 			(effects
@@ -1099,7 +1131,7 @@
 				)
 			)
 		)
-		(pin "ADC_AIN2N" passive
+		(pin "ADC2_N_ISO" passive
 			(at 800 208.28 0)
 			(uuid "4ef81bf0-4470-52c1-b249-e784a9eb277f")
 			(effects
@@ -1108,7 +1140,7 @@
 				)
 			)
 		)
-		(pin "AFE3P_AFTER_47R" passive
+		(pin "AFE3_P_RAW" passive
 			(at 800 213.36 0)
 			(uuid "29581754-cb0f-55fd-b56b-6185148080b5")
 			(effects
@@ -1117,7 +1149,7 @@
 				)
 			)
 		)
-		(pin "ADC_AIN3P" passive
+		(pin "ADC3_P_ISO" passive
 			(at 800 218.44 0)
 			(uuid "ac62bbaa-1c7e-55cf-b108-961349961a8d")
 			(effects
@@ -1126,7 +1158,7 @@
 				)
 			)
 		)
-		(pin "AFE3N_AFTER_47R" passive
+		(pin "AFE3_N_RAW" passive
 			(at 800 223.52 0)
 			(uuid "2cd60e71-7456-592a-a0ed-206294971394")
 			(effects
@@ -1135,7 +1167,7 @@
 				)
 			)
 		)
-		(pin "ADC_AIN3N" passive
+		(pin "ADC3_N_ISO" passive
 			(at 800 228.6 0)
 			(uuid "99d8a840-2883-5d30-82d6-0cf9fdc025ae")
 			(effects
@@ -1144,7 +1176,7 @@
 				)
 			)
 		)
-		(pin "AFE4P_AFTER_47R" passive
+		(pin "AFE4_P_RAW" passive
 			(at 800 233.68 0)
 			(uuid "a41390ae-7936-5962-af7b-dbcdd4959217")
 			(effects
@@ -1153,7 +1185,7 @@
 				)
 			)
 		)
-		(pin "ADC_AIN4P" passive
+		(pin "ADC4_P_ISO" passive
 			(at 800 238.76 0)
 			(uuid "1230c154-e2af-5d56-b24f-66e66203c893")
 			(effects
@@ -1162,7 +1194,7 @@
 				)
 			)
 		)
-		(pin "AFE4N_AFTER_47R" passive
+		(pin "AFE4_N_RAW" passive
 			(at 800 243.84 0)
 			(uuid "b00f2b60-642c-5574-ad0e-b8835af12ab0")
 			(effects
@@ -1171,7 +1203,7 @@
 				)
 			)
 		)
-		(pin "ADC_AIN4N" passive
+		(pin "ADC4_N_ISO" passive
 			(at 800 248.92 0)
 			(uuid "161f2bcf-c1f0-51de-9586-781c71c83ab2")
 			(effects
@@ -1180,7 +1212,7 @@
 				)
 			)
 		)
-		(pin "ADC_VREF" passive
+		(pin "ADC_VREF_RAW" passive
 			(at 800 254 0)
 			(uuid "873feae7-d452-5f67-9fa3-f1358064a9c7")
 			(effects
@@ -1189,7 +1221,7 @@
 				)
 			)
 		)
-		(pin "AFE_VCM_INPUT" passive
+		(pin "AFE_VCM_ISO" passive
 			(at 800 259.08 0)
 			(uuid "60830577-82c8-587f-ab81-2c6757d9acf9")
 			(effects
@@ -1198,7 +1230,7 @@
 				)
 			)
 		)
-		(pin "MIC1_AFTER_100R" passive
+		(pin "MIC1_P_RAW" passive
 			(at 800 264.16 0)
 			(uuid "0272eee2-5039-5d20-bf49-0fa7d88cdebb")
 			(effects
@@ -1207,7 +1239,7 @@
 				)
 			)
 		)
-		(pin "AFE1_BEFORE_4u7" passive
+		(pin "MIC1_P_ISO" passive
 			(at 800 269.24 0)
 			(uuid "4ccf4112-1071-5f68-a734-47220014fc54")
 			(effects
@@ -1216,7 +1248,7 @@
 				)
 			)
 		)
-		(pin "MIC2_AFTER_100R" passive
+		(pin "MIC2_P_RAW" passive
 			(at 800 274.32 0)
 			(uuid "209d4640-fee5-5591-a13d-cf64a5cc785c")
 			(effects
@@ -1225,7 +1257,7 @@
 				)
 			)
 		)
-		(pin "AFE2_BEFORE_4u7" passive
+		(pin "MIC2_P_ISO" passive
 			(at 800 279.4 0)
 			(uuid "723f1c0a-d0b4-5cd9-b106-6886f23db9b6")
 			(effects
@@ -1234,7 +1266,7 @@
 				)
 			)
 		)
-		(pin "MIC3_AFTER_100R" passive
+		(pin "MIC3_P_RAW" passive
 			(at 800 284.48 0)
 			(uuid "8b89f3b6-e811-5ae7-aae6-0ce4f6675388")
 			(effects
@@ -1243,7 +1275,7 @@
 				)
 			)
 		)
-		(pin "AFE3_BEFORE_4u7" passive
+		(pin "MIC3_P_ISO" passive
 			(at 800 289.56 0)
 			(uuid "be46bc96-4781-5bd6-834a-0347f6e81dd7")
 			(effects
@@ -1252,7 +1284,7 @@
 				)
 			)
 		)
-		(pin "MIC4_AFTER_100R" passive
+		(pin "MIC4_P_RAW" passive
 			(at 800 294.64 0)
 			(uuid "117cdac4-dec2-53dc-b1ce-9efbc1bb91aa")
 			(effects
@@ -1261,9 +1293,81 @@
 				)
 			)
 		)
-		(pin "AFE4_BEFORE_4u7" passive
+		(pin "MIC4_P_ISO" passive
 			(at 800 299.72 0)
 			(uuid "d07f8761-992d-5fe8-b2f2-d89fdbe8048a")
+			(effects
+				(font
+					(size 1.016 1.016)
+				)
+			)
+		)
+		(pin "MIC1_N_RAW" passive
+			(at 800 304.8 0)
+			(uuid "e72a6ccd-c585-5e1e-bfe2-88458676ea99")
+			(effects
+				(font
+					(size 1.016 1.016)
+				)
+			)
+		)
+		(pin "MIC2_N_RAW" passive
+			(at 800 309.88 0)
+			(uuid "0e2d0e46-862d-5409-8925-b7027ab6adfa")
+			(effects
+				(font
+					(size 1.016 1.016)
+				)
+			)
+		)
+		(pin "MIC3_N_RAW" passive
+			(at 800 314.96 0)
+			(uuid "de14560b-75bf-5233-b250-ae92b80eb245")
+			(effects
+				(font
+					(size 1.016 1.016)
+				)
+			)
+		)
+		(pin "MIC4_N_RAW" passive
+			(at 800 320.04 0)
+			(uuid "2f65322a-cb62-540b-be74-fb555c058012")
+			(effects
+				(font
+					(size 1.016 1.016)
+				)
+			)
+		)
+		(pin "MIC1_N_ISO" passive
+			(at 800 325.12 0)
+			(uuid "afc4d17a-eb13-58e5-ab79-bdab6c71e4d6")
+			(effects
+				(font
+					(size 1.016 1.016)
+				)
+			)
+		)
+		(pin "MIC2_N_ISO" passive
+			(at 800 330.2 0)
+			(uuid "79ec0fee-6fc8-51d8-81b7-7fe8bb4233e2")
+			(effects
+				(font
+					(size 1.016 1.016)
+				)
+			)
+		)
+		(pin "MIC3_N_ISO" passive
+			(at 800 335.28 0)
+			(uuid "47399c12-be05-51f7-ba54-2b40a6d788fa")
+			(effects
+				(font
+					(size 1.016 1.016)
+				)
+			)
+		)
+		(pin "MIC4_N_ISO" passive
+			(at 800 340.36 0)
+			(uuid "088d3716-ac67-5dc2-8806-1e8551e6be2f")
 			(effects
 				(font
 					(size 1.016 1.016)
