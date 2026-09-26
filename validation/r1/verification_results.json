@@ -1,0 +1,15 @@
+{
+  "result": "PASS",
+  "checks": {
+    "state": "PASS: R1 checkpoint, previous R0.5 PASS, seven open decisions, no Product V1 KiCad claim",
+    "product_source": "PASS: authoritative Product V1 DOCX matches R0 hash",
+    "findings": "PASS: 13 schema-valid evidenced findings, exact state sync, all due after R2",
+    "interface": "PASS: both boards, required signal classes, optional MCLK and unfrozen electrical/mechanical values",
+    "reports": "PASS: 49 classified acceptance rows, seven decisions and validation report present",
+    "r1_gate": "PASS: R1 machine gate permits only separately authorized R2; human gate remains separate",
+    "future_due_gate": "PASS: R3 gate sees its due boot/interface/ANC blockers",
+    "future_kicad": "PASS: unimplemented KiCad hooks remain NOT_AVAILABLE; no false ERC/DRC PASS",
+    "r2_blocker_injection": "PASS: a finding newly due at R2 blocks R1-to-R2 progression",
+    "kicad_scope": "PASS: no Product V1 KiCad artifacts exist"
+  }
+}

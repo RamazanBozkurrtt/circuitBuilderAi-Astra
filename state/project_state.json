@@ -1,0 +1,135 @@
+{
+  "schema_version": "1.0",
+  "product": "ANC B2B Product V1",
+  "architecture": {
+    "status": "product_baseline",
+    "microphone_inputs": 4,
+    "secondary_speaker_outputs": 2,
+    "boards": [
+      {
+        "id": "board_a",
+        "name": "Controller + Audio AFE"
+      },
+      {
+        "id": "board_b",
+        "name": "Power + Stereo Class-D"
+      }
+    ],
+    "interface_contract": "state/board_to_board_interface.json"
+  },
+  "current_phase": "R1",
+  "previous_gate": {
+    "phase": "R0.5",
+    "result": "PASS",
+    "report": "docs/rebaseline/phase_r0_5_workflow_infrastructure.md"
+  },
+  "board_a_status": "r1_requirements_controlled_component_verification_pending",
+  "board_b_status": "r1_requirements_controlled_component_verification_pending",
+  "interface_status": "signal_classes_controlled_electrical_contract_open",
+  "open_blockers": [
+    {
+      "id": "PV1-R1-001",
+      "blocks_from_phase": "R4"
+    },
+    {
+      "id": "PV1-R1-002",
+      "blocks_from_phase": "R3"
+    },
+    {
+      "id": "PV1-R1-003",
+      "blocks_from_phase": "R13"
+    },
+    {
+      "id": "PV1-R1-004",
+      "blocks_from_phase": "R4"
+    },
+    {
+      "id": "PV1-R1-005",
+      "blocks_from_phase": "R13"
+    },
+    {
+      "id": "PV1-R1-006",
+      "blocks_from_phase": "R7"
+    },
+    {
+      "id": "PV1-R1-007",
+      "blocks_from_phase": "R13"
+    },
+    {
+      "id": "PV1-R1-008",
+      "blocks_from_phase": "R14"
+    },
+    {
+      "id": "PV1-R1-009",
+      "blocks_from_phase": "R3"
+    },
+    {
+      "id": "PV1-R1-010",
+      "blocks_from_phase": "R3"
+    },
+    {
+      "id": "PV1-R1-011",
+      "blocks_from_phase": "R4"
+    },
+    {
+      "id": "PV1-R1-012",
+      "blocks_from_phase": "R4"
+    },
+    {
+      "id": "PV1-R1-013",
+      "blocks_from_phase": "R3"
+    }
+  ],
+  "open_decisions": [
+    {
+      "id": "D1",
+      "title": "IM73A135 to TLV320ADC5140 analog input network",
+      "status": "open",
+      "disposition": "R2 evidence and bench; R4 readiness"
+    },
+    {
+      "id": "D2",
+      "title": "RT1062 boot and programming model",
+      "status": "open",
+      "disposition": "Product-owner approval before R3"
+    },
+    {
+      "id": "D3",
+      "title": "Final secondary speaker choice",
+      "status": "open",
+      "disposition": "Real-crib A/B test before R13"
+    },
+    {
+      "id": "D4",
+      "title": "12 V amplifier headroom",
+      "status": "open",
+      "disposition": "Provisional R4 envelope; final EVT evidence before R13"
+    },
+    {
+      "id": "D5",
+      "title": "Board dimensions and connector selection",
+      "status": "open",
+      "disposition": "Mechanical input before R7"
+    },
+    {
+      "id": "D6",
+      "title": "Microphone roles and placement",
+      "status": "open",
+      "disposition": "Acoustic geometry and test before R13"
+    },
+    {
+      "id": "D7",
+      "title": "Acoustic safety and SPL acceptance criteria",
+      "status": "open",
+      "disposition": "External expert/lab evidence before R14"
+    }
+  ],
+  "authoritative_product_spec": "docs/product/ANC_B2B_Custom_PCB_2_Kart_Mimari_Tasarim_Dokumani_v1.0.docx",
+  "current_contracts": [
+    "state/board_to_board_interface.json",
+    "docs/product_v1/phase_r1_product_requirements.md"
+  ],
+  "current_kicad_projects": [],
+  "latest_validation": "validation/r1_product_requirements_validation.md",
+  "last_verified_commit": null
+}

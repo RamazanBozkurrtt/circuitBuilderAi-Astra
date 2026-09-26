@@ -1,0 +1,26 @@
+{
+  "id": "REPLACE_WITH_STABLE_ID",
+  "title": "REPLACE_WITH_FINDING_TITLE",
+  "severity": "blocking",
+  "category": "other",
+  "board": "interface",
+  "phase": "R1",
+  "component_interface": "REPLACE_WITH_COMPONENT_OR_INTERFACE",
+  "description": "REPLACE_WITH_OBSERVED_CONDITION_AND_CONSEQUENCE",
+  "evidence": [
+    {
+      "source": "REPLACE_WITH_AUTHORITATIVE_SOURCE_PATH_OR_URL",
+      "location": "REPLACE_WITH_SECTION_OR_PAGE",
+      "note": "REPLACE_WITH_DIRECT_SUPPORT_FOR_FINDING"
+    }
+  ],
+  "calculation_reference": [],
+  "status": "open",
+  "blocking": true,
+  "discovered_at": "2000-01-01T00:00:00Z",
+  "blocks_from_phase": "R3",
+  "decision_id": "D1",
+  "closure_criterion": "REPLACE_WITH_OBJECTIVE_CLOSURE_EVIDENCE",
+  "resolved_by": null,
+  "resolution": null
+}

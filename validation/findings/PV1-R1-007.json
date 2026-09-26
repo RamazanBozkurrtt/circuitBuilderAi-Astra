@@ -1,0 +1,26 @@
+{
+  "id": "PV1-R1-007",
+  "title": "Microphone role and placement need acoustic geometry",
+  "severity": "blocking",
+  "category": "validation",
+  "board": "board_a",
+  "phase": "R1",
+  "component_interface": "Four external microphone channels and role map",
+  "description": "The PCB must retain four electrically equivalent channels, but reference/error/monitoring roles and placement depend on acoustic geometry and algorithm testing.",
+  "evidence": [
+    {
+      "source": "docs/product/ANC_B2B_Custom_PCB_2_Kart_Mimari_Tasarim_Dokumani_v1.0.docx",
+      "location": "§2.1; §12 item 6",
+      "note": "Role and placement are explicitly deferred to acoustic geometry and tests."
+    }
+  ],
+  "calculation_reference": [],
+  "status": "open",
+  "blocking": true,
+  "discovered_at": "2026-09-26T10:41:41Z",
+  "blocks_from_phase": "R13",
+  "decision_id": "D6",
+  "closure_criterion": "Document actual crib microphone geometry, channel mapping and algorithm/acoustic evidence for reference/error/monitoring assignments; preserve four equivalent electrical inputs and approve final harness/placement map before R13 PASS.",
+  "resolved_by": null,
+  "resolution": null
+}

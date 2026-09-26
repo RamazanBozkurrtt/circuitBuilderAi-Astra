@@ -1,0 +1,26 @@
+{
+  "id": "PV1-R1-002",
+  "title": "Production boot model needs product-owner choice",
+  "severity": "blocking",
+  "category": "firmware",
+  "board": "board_a",
+  "phase": "R1",
+  "component_interface": "RT1062 boot, QSPI flash and programming",
+  "description": "The product document prefers a native production flow but leaves native RT1062 boot/update versus Teensy compatibility open. Flash, recovery, fixture, maintenance and external dependency choices differ.",
+  "evidence": [
+    {
+      "source": "docs/product/ANC_B2B_Custom_PCB_2_Kart_Mimari_Tasarim_Dokumani_v1.0.docx",
+      "location": "§1.1 boot/update; §7; §12 item 2",
+      "note": "Boot/update model is explicitly open; Teensy compatibility is not automatic."
+    }
+  ],
+  "calculation_reference": [],
+  "status": "open",
+  "blocking": true,
+  "discovered_at": "2026-09-26T10:41:41Z",
+  "blocks_from_phase": "R3",
+  "decision_id": "D2",
+  "closure_criterion": "Product owner records native or Teensy-compatible direction, expected factory and field update route, service/recovery policy and dependency/licensing disposition; R2 verifies the chosen path against official sources before R3 PASS.",
+  "resolved_by": null,
+  "resolution": null
+}

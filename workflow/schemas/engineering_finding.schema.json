@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://circuitbuilderai-astra.local/workflow/schemas/engineering_finding.schema.json",
+  "title": "Product V1 engineering finding",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id", "title", "severity", "category", "board", "phase",
+    "component_interface", "description", "evidence",
+    "calculation_reference", "status", "blocking",
+    "discovered_at", "blocks_from_phase", "decision_id",
+    "closure_criterion", "resolved_by", "resolution"
+  ],
+  "properties": {
+    "id": {"type": "string", "minLength": 1},
+    "title": {"type": "string", "minLength": 1},
+    "severity": {"enum": ["info", "warning", "error", "blocking"]},
+    "category": {
+      "enum": [
+        "requirements", "analog", "digital_audio", "power", "clock",
+        "safety", "firmware", "mechanical", "manufacturing",
+        "validation", "process", "other"
+      ]
+    },
+    "board": {"enum": ["board_a", "board_b", "interface", "system"]},
+    "phase": {"enum": ["R0", "R0.5", "R1", "R2", "R3", "R4", "R5", "R6", "R7", "R8", "R9", "R10", "R11", "R12", "R13", "R14"]},
+    "component_interface": {"type": "string", "minLength": 1},
+    "description": {"type": "string", "minLength": 1},
+    "evidence": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["source", "location", "note"],
+        "properties": {
+          "source": {"type": "string", "minLength": 1},
+          "location": {"type": "string"},
+          "note": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "calculation_reference": {"type": "array", "items": {"type": "string"}},
+    "status": {"enum": ["open", "accepted", "resolved", "deferred"]},
+    "blocking": {"type": "boolean"},
+    "discovered_at": {"type": "string", "format": "date-time"},
+    "blocks_from_phase": {
+      "enum": [null, "R0", "R0.5", "R1", "R2", "R3", "R4", "R5", "R6", "R7", "R8", "R9", "R10", "R11", "R12", "R13", "R14"]
+    },
+    "decision_id": {"type": ["string", "null"]},
+    "closure_criterion": {"type": "string", "minLength": 1},
+    "resolved_by": {"type": ["string", "null"]},
+    "resolution": {"type": ["string", "null"]}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"blocking": {"const": true}}, "required": ["blocking"]},
+      "then": {"properties": {"blocks_from_phase": {"type": "string"}}}
+    },
+    {
+      "if": {"properties": {"status": {"const": "resolved"}}, "required": ["status"]},
+      "then": {
+        "properties": {
+          "resolved_by": {"type": "string", "minLength": 1},
+          "resolution": {"type": "string", "minLength": 1}
+        }
+      }
+    }
+  ]
+}

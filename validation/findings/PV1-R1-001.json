@@ -1,0 +1,26 @@
+{
+  "id": "PV1-R1-001",
+  "title": "Microphone-to-ADC analog network remains undefined",
+  "severity": "blocking",
+  "category": "analog",
+  "board": "board_a",
+  "phase": "R1",
+  "component_interface": "IM73A135 / TLV320ADC5140 analog interface",
+  "description": "The product source targets a differential microphone and ADC path but explicitly leaves coupling, common mode, gain, bias, headroom, filtering, noise and low-frequency behavior unresolved. The AFE cannot pass schematic readiness without a supported input contract.",
+  "evidence": [
+    {
+      "source": "docs/product/ANC_B2B_Custom_PCB_2_Kart_Mimari_Tasarim_Dokumani_v1.0.docx",
+      "location": "§3.1 AFE note; §12 item 1",
+      "note": "Exact analog network is open and needs reference-circuit and bench validation."
+    }
+  ],
+  "calculation_reference": [],
+  "status": "open",
+  "blocking": true,
+  "discovered_at": "2026-09-26T10:41:41Z",
+  "blocks_from_phase": "R4",
+  "decision_id": "D1",
+  "closure_criterion": "Approve an analog interface contract covering topology, coupling, common mode, bias, gain, headroom, anti-alias response, noise and low-frequency ANC response, backed by R2 device evidence and targeted bench/reference-circuit validation before R4 PASS.",
+  "resolved_by": null,
+  "resolution": null
+}

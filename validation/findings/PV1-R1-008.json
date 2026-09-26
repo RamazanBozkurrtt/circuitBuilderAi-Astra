@@ -1,0 +1,26 @@
+{
+  "id": "PV1-R1-008",
+  "title": "Acoustic safety and SPL acceptance are not defined",
+  "severity": "blocking",
+  "category": "safety",
+  "board": "system",
+  "phase": "R1",
+  "component_interface": "Product acoustic output safety",
+  "description": "The product requires independent acoustic/safety input and written limits/test methods before sale; no numeric SPL criterion is supplied. A numeric limit must not be invented.",
+  "evidence": [
+    {
+      "source": "docs/product/ANC_B2B_Custom_PCB_2_Kart_Mimari_Tasarim_Dokumani_v1.0.docx",
+      "location": "§6 safety table; §12 item 7",
+      "note": "Independent acoustic expert/lab must provide written sales-release criteria."
+    }
+  ],
+  "calculation_reference": [],
+  "status": "open",
+  "blocking": true,
+  "discovered_at": "2026-09-26T10:41:41Z",
+  "blocks_from_phase": "R14",
+  "decision_id": "D7",
+  "closure_criterion": "Obtain signed or controlled expert/lab-defined acoustic safety limits, measurement setup, peak/duration and fault/instability acceptance method; demonstrate compliance and trace it into release evidence before R14 PASS.",
+  "resolved_by": null,
+  "resolution": null
+}

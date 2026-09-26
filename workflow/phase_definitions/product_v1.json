@@ -1,0 +1,168 @@
+{
+  "schema_version": "1.0",
+  "product": "ANC B2B Product V1",
+  "phases": [
+    {
+      "id": "R0",
+      "objective": "Rebaseline the product around the authoritative two-board architecture.",
+      "required_inputs": ["docs/product/ANC_B2B_Custom_PCB_2_Kart_Mimari_Tasarim_Dokumani_v1.0.docx"],
+      "required_outputs": ["docs/rebaseline/phase_r0_b2b_two_board_rebaseline.md"],
+      "machine_gates": ["documentation_contract", "blocking_findings", "product_architecture"],
+      "human_gate": "Review product source fidelity and legacy disposition.",
+      "allowed_next_phase": ["R0.5", "R1"]
+    },
+    {
+      "id": "R0.5",
+      "objective": "Establish lightweight findings, state, gates, rules and phase definitions.",
+      "required_inputs": ["docs/rebaseline/phase_r0_b2b_two_board_rebaseline.md"],
+      "required_outputs": [
+        "docs/rebaseline/phase_r0_5_workflow_infrastructure.md",
+        "validation/r0_5_workflow_infrastructure_validation.md",
+        "state/project_state.json",
+        "state/board_to_board_interface.json",
+        "workflow/schemas/engineering_finding.schema.json"
+      ],
+      "machine_gates": ["documentation_contract", "blocking_findings", "product_architecture"],
+      "human_gate": "Review that process scaffolding preserves open engineering decisions.",
+      "allowed_next_phase": ["R1"]
+    },
+    {
+      "id": "R1",
+      "objective": "Resolve or explicitly carry Product V1 requirements and open product decisions.",
+      "required_inputs": ["docs/product/ANC_B2B_Custom_PCB_2_Kart_Mimari_Tasarim_Dokumani_v1.0.docx", "state/project_state.json"],
+      "required_outputs": ["docs/product_v1/phase_r1_product_requirements.md"],
+      "machine_gates": ["documentation_contract", "blocking_findings", "product_architecture"],
+      "human_gate": "Approve requirement statuses, owners and unresolved schematic-entry blockers.",
+      "allowed_next_phase": ["R2"]
+    },
+    {
+      "id": "R2",
+      "objective": "Verify target components and source evidence for both boards.",
+      "required_inputs": ["docs/product_v1/phase_r1_product_requirements.md"],
+      "required_outputs": ["docs/product_v1/r2_component_verification.md"],
+      "machine_gates": ["documentation_contract", "blocking_findings", "product_architecture"],
+      "human_gate": "Review exact variants, operating modes, limits, errata and suitability.",
+      "allowed_next_phase": ["R3"]
+    },
+    {
+      "id": "R3",
+      "objective": "Freeze supported system architecture and controlled board interface.",
+      "required_inputs": ["docs/product_v1/r2_component_verification.md", "state/board_to_board_interface.json"],
+      "required_outputs": ["docs/product_v1/r3_architecture_interface.md"],
+      "machine_gates": ["documentation_contract", "blocking_findings", "product_architecture"],
+      "human_gate": "Approve cross-board power, audio, control, fault, clock and mechanics contracts.",
+      "allowed_next_phase": ["R4"]
+    },
+    {
+      "id": "R4",
+      "objective": "Demonstrate schematic-entry readiness for Board A and Board B.",
+      "required_inputs": ["docs/product_v1/r3_architecture_interface.md"],
+      "required_outputs": ["docs/product_v1/r4_schematic_readiness.md"],
+      "machine_gates": ["documentation_contract", "blocking_findings", "product_architecture"],
+      "human_gate": "Accept worst-case budgets, pin plans, open risks and schematic-entry disposition.",
+      "allowed_next_phase": ["R5"]
+    },
+    {
+      "id": "R5",
+      "objective": "Implement separate controlled KiCad schematics for both boards.",
+      "required_inputs": ["docs/product_v1/r4_schematic_readiness.md"],
+      "required_outputs": [
+        "hardware/product_v1/board_a_controller_afe/board_a.kicad_sch",
+        "hardware/product_v1/board_b_power_amp/board_b.kicad_sch"
+      ],
+      "machine_gates": ["documentation_contract", "blocking_findings", "product_architecture", "hierarchical_interface_audit", "pin_audit"],
+      "human_gate": "Review both schematics and trace symbols/nets to approved contracts.",
+      "allowed_next_phase": ["R6"]
+    },
+    {
+      "id": "R6",
+      "objective": "Verify both schematics and the cross-board interface.",
+      "required_inputs": [
+        "hardware/product_v1/board_a_controller_afe/board_a.kicad_sch",
+        "hardware/product_v1/board_b_power_amp/board_b.kicad_sch"
+      ],
+      "required_outputs": ["validation/product_v1/r6_schematic_verification.md"],
+      "machine_gates": ["documentation_contract", "blocking_findings", "product_architecture", "erc", "hierarchical_interface_audit", "pin_audit", "bom_validation"],
+      "human_gate": "Review ERC findings, electrical correctness and accepted waivers.",
+      "allowed_next_phase": ["R7"]
+    },
+    {
+      "id": "R7",
+      "objective": "Define Board A/B PCB constraints, stackups and common mechanical interface.",
+      "required_inputs": ["validation/product_v1/r6_schematic_verification.md"],
+      "required_outputs": ["docs/product_v1/r7_pcb_constraints.md"],
+      "machine_gates": ["documentation_contract", "blocking_findings", "product_architecture"],
+      "human_gate": "Approve fabricator/mechanical/thermal/EMC constraints for both boards.",
+      "allowed_next_phase": ["R8"]
+    },
+    {
+      "id": "R8",
+      "objective": "Plan critical placement and return paths before placement.",
+      "required_inputs": ["docs/product_v1/r7_pcb_constraints.md"],
+      "required_outputs": ["docs/product_v1/r8_placement_plan.md"],
+      "machine_gates": ["documentation_contract", "blocking_findings", "product_architecture"],
+      "human_gate": "Review analog isolation, switching loops, connector geometry and thermal plan.",
+      "allowed_next_phase": ["R9"]
+    },
+    {
+      "id": "R9",
+      "objective": "Place components on both boards against approved constraints.",
+      "required_inputs": ["docs/product_v1/r8_placement_plan.md"],
+      "required_outputs": [
+        "hardware/product_v1/board_a_controller_afe/board_a.kicad_pcb",
+        "hardware/product_v1/board_b_power_amp/board_b.kicad_pcb"
+      ],
+      "machine_gates": ["documentation_contract", "blocking_findings", "product_architecture", "drc"],
+      "human_gate": "Review placement, access, returns, assembly and thermal paths.",
+      "allowed_next_phase": ["R10"]
+    },
+    {
+      "id": "R10",
+      "objective": "Route only critical power, analog, clocks, audio and switching paths.",
+      "required_inputs": [
+        "hardware/product_v1/board_a_controller_afe/board_a.kicad_pcb",
+        "hardware/product_v1/board_b_power_amp/board_b.kicad_pcb"
+      ],
+      "required_outputs": ["validation/product_v1/r10_critical_routing.md"],
+      "machine_gates": ["documentation_contract", "blocking_findings", "product_architecture", "drc"],
+      "human_gate": "Review critical routing and return-path evidence before general routing.",
+      "allowed_next_phase": ["R11"]
+    },
+    {
+      "id": "R11",
+      "objective": "Complete routing and copper implementation on both boards.",
+      "required_inputs": ["validation/product_v1/r10_critical_routing.md"],
+      "required_outputs": ["validation/product_v1/r11_full_routing.md"],
+      "machine_gates": ["documentation_contract", "blocking_findings", "product_architecture", "drc"],
+      "human_gate": "Review all routes, fills, high-current, analog and connector paths.",
+      "allowed_next_phase": ["R12"]
+    },
+    {
+      "id": "R12",
+      "objective": "Verify PCB implementation and record physical-validation limits.",
+      "required_inputs": ["validation/product_v1/r11_full_routing.md"],
+      "required_outputs": ["validation/product_v1/r12_pcb_verification.md"],
+      "machine_gates": ["documentation_contract", "blocking_findings", "product_architecture", "drc", "hierarchical_interface_audit"],
+      "human_gate": "Review DRC, SI/PI/thermal/EMC evidence, waivers and remaining bench work.",
+      "allowed_next_phase": ["R13"]
+    },
+    {
+      "id": "R13",
+      "objective": "Review manufacturability and assembly for the paired-board product.",
+      "required_inputs": ["validation/product_v1/r12_pcb_verification.md"],
+      "required_outputs": ["docs/product_v1/r13_dfm_dfa.md"],
+      "machine_gates": ["documentation_contract", "blocking_findings", "product_architecture", "bom_validation"],
+      "human_gate": "Approve factory feedback, test access, sourcing and assembly risks.",
+      "allowed_next_phase": ["R14"]
+    },
+    {
+      "id": "R14",
+      "objective": "Assemble controlled manufacturing and test release package.",
+      "required_inputs": ["docs/product_v1/r13_dfm_dfa.md"],
+      "required_outputs": ["docs/product_v1/r14_manufacturing_package.md"],
+      "machine_gates": ["documentation_contract", "blocking_findings", "product_architecture", "erc", "drc", "bom_validation"],
+      "human_gate": "Approve complete fabrication, assembly, programming, EOL and traceability release.",
+      "allowed_next_phase": []
+    }
+  ]
+}

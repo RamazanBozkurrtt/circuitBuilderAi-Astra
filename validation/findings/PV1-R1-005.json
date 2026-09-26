@@ -1,0 +1,26 @@
+{
+  "id": "PV1-R1-005",
+  "title": "Final 12 V amplifier headroom requires physical proof",
+  "severity": "blocking",
+  "category": "validation",
+  "board": "board_b",
+  "phase": "R1",
+  "component_interface": "12 V amplifier headroom with selected speakers",
+  "description": "The product explicitly forbids final supply freeze until required electrical/acoustic performance is measured in the real crib. A 24 V change is conditional on that evidence.",
+  "evidence": [
+    {
+      "source": "docs/product/ANC_B2B_Custom_PCB_2_Kart_Mimari_Tasarim_Dokumani_v1.0.docx",
+      "location": "§4.2 12 V decision gate; §10 EVT-1; §12 item 4",
+      "note": "12 V versus possible 24 V is a measured decision."
+    }
+  ],
+  "calculation_reference": [],
+  "status": "open",
+  "blocking": true,
+  "discovered_at": "2026-09-26T10:41:41Z",
+  "blocks_from_phase": "R13",
+  "decision_id": "D4",
+  "closure_criterion": "With the chosen speaker and actual crib, record target attenuation and required Vrms/Irms across the test band, impedance, THD, excursion, simultaneous stereo loading and ANC reserve at worst-case supply; approve 12 V or formally reopen architecture before R13 PASS.",
+  "resolved_by": null,
+  "resolution": null
+}

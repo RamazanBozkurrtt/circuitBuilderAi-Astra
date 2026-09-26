@@ -1,0 +1,198 @@
+{
+  "schema_version": "1.0",
+  "product": "ANC B2B Product V1",
+  "contract_status": "r1_signal_classes_controlled_electrical_open",
+  "source": {
+    "path": "docs/product/ANC_B2B_Custom_PCB_2_Kart_Mimari_Tasarim_Dokumani_v1.0.docx",
+    "section": "5.1 proposed interface signals; 4.1 Board B status and mute"
+  },
+  "boards": [
+    "board_a",
+    "board_b"
+  ],
+  "connector_part": null,
+  "pin_assignment": null,
+  "signals": [
+    {
+      "signal": "5V",
+      "source_board": "board_b",
+      "destination_board": "board_a",
+      "direction": "b_to_a",
+      "voltage_domain": null,
+      "signal_type": "power",
+      "required_count": null,
+      "status": "proposed",
+      "evidence": "Product architecture §5.1: 5 V B to A; voltage tolerances and contact count remain open.",
+      "requirement_id": "IF-01",
+      "inclusion": "product_required",
+      "aliases": []
+    },
+    {
+      "signal": "GND_RETURN",
+      "source_board": null,
+      "destination_board": null,
+      "direction": "shared_return",
+      "voltage_domain": null,
+      "signal_type": "return",
+      "required_count": null,
+      "status": "proposed",
+      "evidence": "Product architecture §§5.1, 6: multiple low-impedance return contacts; exact count and allocation open.",
+      "requirement_id": "IF-02",
+      "inclusion": "product_required",
+      "aliases": []
+    },
+    {
+      "signal": "BCLK",
+      "source_board": "board_a",
+      "destination_board": "board_b",
+      "direction": "a_to_b",
+      "voltage_domain": null,
+      "signal_type": "digital_audio_clock",
+      "required_count": null,
+      "status": "proposed",
+      "evidence": "Product architecture §5.1 audio row; clock ownership and electrical mode unverified.",
+      "requirement_id": "IF-03",
+      "inclusion": "intended_unverified",
+      "aliases": []
+    },
+    {
+      "signal": "LRCLK",
+      "source_board": "board_a",
+      "destination_board": "board_b",
+      "direction": "a_to_b",
+      "voltage_domain": null,
+      "signal_type": "digital_audio_clock",
+      "required_count": null,
+      "status": "proposed",
+      "evidence": "Product architecture §5.1 audio row; exact frame mode unverified.",
+      "requirement_id": "IF-04",
+      "inclusion": "intended_unverified",
+      "aliases": [
+        "FSYNC"
+      ]
+    },
+    {
+      "signal": "AUDIO_DATA",
+      "source_board": "board_a",
+      "destination_board": "board_b",
+      "direction": "a_to_b",
+      "voltage_domain": null,
+      "signal_type": "digital_audio_data",
+      "required_count": null,
+      "status": "proposed",
+      "evidence": "Product architecture §5.1 labels this class SDOUT; endpoint naming and format remain open.",
+      "requirement_id": "IF-05",
+      "inclusion": "intended_unverified",
+      "aliases": [
+        "SDOUT (product document label)"
+      ]
+    },
+    {
+      "signal": "MCLK",
+      "source_board": "board_a",
+      "destination_board": "board_b",
+      "direction": "a_to_b",
+      "voltage_domain": null,
+      "signal_type": "digital_audio_clock",
+      "required_count": null,
+      "status": "optional_unverified",
+      "evidence": "Product architecture §5.1 explicitly marks MCLK optional; verify device mode before inclusion.",
+      "requirement_id": "IF-06",
+      "inclusion": "optional_pending_R2",
+      "aliases": []
+    },
+    {
+      "signal": "I2C_SDA",
+      "source_board": null,
+      "destination_board": null,
+      "direction": "bidirectional",
+      "voltage_domain": null,
+      "signal_type": "control",
+      "required_count": null,
+      "status": "proposed",
+      "evidence": "Product architecture §5.1 control row; levels, pullups and power-off behavior open.",
+      "requirement_id": "IF-07",
+      "inclusion": "intended_unverified",
+      "aliases": []
+    },
+    {
+      "signal": "I2C_SCL",
+      "source_board": null,
+      "destination_board": null,
+      "direction": "bidirectional",
+      "voltage_domain": null,
+      "signal_type": "control",
+      "required_count": null,
+      "status": "proposed",
+      "evidence": "Product architecture §5.1 control row; levels, pullups and power-off behavior open.",
+      "requirement_id": "IF-07",
+      "inclusion": "intended_unverified",
+      "aliases": []
+    },
+    {
+      "signal": "AMP_MUTE",
+      "source_board": "board_a",
+      "destination_board": "board_b",
+      "direction": "a_to_b",
+      "voltage_domain": null,
+      "signal_type": "safety_control",
+      "required_count": null,
+      "status": "proposed",
+      "evidence": "Product architecture §§3.1, 4.1, 5.1; exact polarity and hardware-safe default open.",
+      "requirement_id": "IF-08",
+      "inclusion": "product_required",
+      "aliases": []
+    },
+    {
+      "signal": "AMP_FAULT",
+      "source_board": "board_b",
+      "destination_board": "board_a",
+      "direction": "b_to_a",
+      "voltage_domain": null,
+      "signal_type": "status",
+      "required_count": null,
+      "status": "proposed",
+      "evidence": "Product architecture §§4.1, 5.1: amplifier fault feedback to Board A; electrical form open.",
+      "requirement_id": "IF-09",
+      "inclusion": "intended_unverified",
+      "aliases": []
+    },
+    {
+      "signal": "PGOOD",
+      "source_board": "board_b",
+      "destination_board": "board_a",
+      "direction": "b_to_a",
+      "voltage_domain": null,
+      "signal_type": "status",
+      "required_count": null,
+      "status": "proposed",
+      "evidence": "Product architecture §§4.1, 5.1: power-good feedback to Board A; source and polarity open.",
+      "requirement_id": "IF-10",
+      "inclusion": "intended_unverified",
+      "aliases": []
+    },
+    {
+      "signal": "REVISION_OR_SERVICE",
+      "source_board": null,
+      "destination_board": null,
+      "direction": "undetermined",
+      "voltage_domain": null,
+      "signal_type": "service",
+      "required_count": null,
+      "status": "optional_unverified",
+      "evidence": "Product architecture §5.1 lists revision detect/spare GPIO as optional/DNP; minimum justified service only.",
+      "requirement_id": "IF-11",
+      "inclusion": "optional_justification_required",
+      "aliases": []
+    }
+  ],
+  "phase_basis": "R1 product requirements; no schematic-level interface freeze",
+  "open_contract_items": [
+    "5 V source tolerance, load/peak current and return-contact allocation",
+    "Digital-audio protocol, mastership, sample/frame format, levels and timing",
+    "MCLK inclusion only if R2 verifies a need",
+    "I2C voltage, pullups, address ownership and unpowered behavior",
+    "MUTE/FAULT/PGOOD electrical polarity, pull/default state and response timing",
+    "Connector part, mechanical stack, pin assignment and optional service contacts"
+  ]
+}
