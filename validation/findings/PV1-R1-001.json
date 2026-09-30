@@ -12,9 +12,36 @@
       "source": "docs/product/ANC_B2B_Custom_PCB_2_Kart_Mimari_Tasarim_Dokumani_v1.0.docx",
       "location": "§3.1 AFE note; §12 item 1",
       "note": "Exact analog network is open and needs reference-circuit and bench validation."
+    },
+    {
+      "source": "datasheets/microphone/im73a135_datasheet_v1_20.pdf",
+      "location": "pp.8-10 Tables 6-7",
+      "note": "Microphone requires >=25 kohm per output; ADC maximum selectable input is 20 kohm per pin, so direct connection remains unapproved."
+    },
+    {
+      "source": "docs/product_v1/phase_r3_system_architecture.md",
+      "location": "section 6 finding disposition",
+      "note": "R3 reviewed this finding; its existing blocker phase and required external/R4 evidence remain open."
+    },
+    {
+      "source": "docs/product_v1/phase_r4_schematic_readiness.md",
+      "location": "section 2 AFE and noise",
+      "note": "R4 preflight reviewed this finding. R4 electrical closure remains blocked; no R5 schematic approval."
+    },
+    {
+      "source": "docs/product_v1/phase_r4_schematic_readiness.md",
+      "location": "section 9, R4 closure pass 2026-09-28",
+      "note": "Public official evidence and conditional calculations reviewed; closure criterion is not yet satisfied. Current NXP RM Rev 4 / HW Guide Rev 7 access restriction applies to the RT1062 portions. Finding remains blocking, with original history preserved."
+    },
+    {
+      "source": "docs/product_v1/phase_r4_schematic_readiness.md",
+      "location": "section 10, authorized-manual and owner-input closure audit, 2026-09-30",
+      "note": "New NXP manuals do not determine IM73A135-to-ADC analog topology. Four identical, worst-case verified mic buffer/bias/filter/ESD/noise/headroom circuits still absent."
     }
   ],
-  "calculation_reference": [],
+  "calculation_reference": [
+    "docs/product_v1/phase_r2_component_verification.md"
+  ],
   "status": "open",
   "blocking": true,
   "discovered_at": "2026-09-26T10:41:41Z",

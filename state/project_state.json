@@ -2,7 +2,7 @@
   "schema_version": "1.0",
   "product": "ANC B2B Product V1",
   "architecture": {
-    "status": "product_baseline",
+    "status": "r3_architecture_retained_r4_schematic_readiness_blocked",
     "microphone_inputs": 4,
     "secondary_speaker_outputs": 2,
     "boards": [
@@ -17,15 +17,17 @@
     ],
     "interface_contract": "state/board_to_board_interface.json"
   },
-  "current_phase": "R1",
+  "current_phase": "R4",
   "previous_gate": {
-    "phase": "R0.5",
+    "phase": "R3",
     "result": "PASS",
-    "report": "docs/rebaseline/phase_r0_5_workflow_infrastructure.md"
+    "report": "validation/r3_system_architecture_validation.md",
+    "human_gate": "APPROVED",
+    "approval_source": "Project-owner R4 authorization, 2026-09-28"
   },
-  "board_a_status": "r1_requirements_controlled_component_verification_pending",
-  "board_b_status": "r1_requirements_controlled_component_verification_pending",
-  "interface_status": "signal_classes_controlled_electrical_contract_open",
+  "board_a_status": "r4_blocked_afe_power_boot_and_full_pin_contract",
+  "board_b_status": "r4_blocked_input_buck_amp_passives_and_safety_gate",
+  "interface_status": "r4_blocked_loaded_dc_timing_power_off_and_contact_current",
   "open_blockers": [
     {
       "id": "PV1-R1-001",
@@ -33,7 +35,7 @@
     },
     {
       "id": "PV1-R1-002",
-      "blocks_from_phase": "R3"
+      "blocks_from_phase": "R4"
     },
     {
       "id": "PV1-R1-003",
@@ -61,11 +63,11 @@
     },
     {
       "id": "PV1-R1-009",
-      "blocks_from_phase": "R3"
+      "blocks_from_phase": "R4"
     },
     {
       "id": "PV1-R1-010",
-      "blocks_from_phase": "R3"
+      "blocks_from_phase": "R12"
     },
     {
       "id": "PV1-R1-011",
@@ -77,7 +79,7 @@
     },
     {
       "id": "PV1-R1-013",
-      "blocks_from_phase": "R3"
+      "blocks_from_phase": "R4"
     }
   ],
   "open_decisions": [
@@ -90,8 +92,8 @@
     {
       "id": "D2",
       "title": "RT1062 boot and programming model",
-      "status": "open",
-      "disposition": "Product-owner approval before R3"
+      "status": "provisional_native_nxp_direction",
+      "disposition": "R3 approval includes provisional native NXP boot direction; exact ROM straps, flash, factory/field recovery and security remain R4 blocker."
     },
     {
       "id": "D3",
@@ -103,7 +105,7 @@
       "id": "D4",
       "title": "12 V amplifier headroom",
       "status": "open",
-      "disposition": "Provisional R4 envelope; final EVT evidence before R13"
+      "disposition": "R3 protected nominal 12 V class baseline; R4 provisional electrical bound; EVT final headroom"
     },
     {
       "id": "D5",
@@ -127,9 +129,47 @@
   "authoritative_product_spec": "docs/product/ANC_B2B_Custom_PCB_2_Kart_Mimari_Tasarim_Dokumani_v1.0.docx",
   "current_contracts": [
     "state/board_to_board_interface.json",
-    "docs/product_v1/phase_r1_product_requirements.md"
+    "docs/product_v1/phase_r1_product_requirements.md",
+    "docs/product_v1/phase_r2_component_verification.md",
+    "docs/product_v1/component_evidence_index.md",
+    "state/product_v1_component_contract.json",
+    "docs/product_v1/phase_r3_system_architecture.md",
+    "state/product_v1_architecture_contract.json",
+    "docs/product_v1/phase_r4_schematic_readiness.md",
+    "state/board_a_schematic_contract.json",
+    "state/board_b_schematic_contract.json",
+    "state/rt1062_pin_resource_map.json"
   ],
   "current_kicad_projects": [],
-  "latest_validation": "validation/r1_product_requirements_validation.md",
-  "last_verified_commit": null
+  "latest_validation": "validation/r4_schematic_readiness_validation.md",
+  "last_verified_commit": null,
+  "current_gate": {
+    "phase": "R4",
+    "machine_result": "BLOCKED",
+    "report": "validation/r4_schematic_readiness_validation.md",
+    "human_gate": "NOT_EVALUATED",
+    "r5_authorized": false
+  },
+  "r4_closure_pass": {
+    "date": "2026-09-30",
+    "machine_result": "BLOCKED",
+    "seven_findings_remaining": [
+      "PV1-R1-001",
+      "PV1-R1-002",
+      "PV1-R1-004",
+      "PV1-R1-009",
+      "PV1-R1-011",
+      "PV1-R1-012",
+      "PV1-R1-013"
+    ],
+    "restricted_evidence": "RESOLVED: authorized NXP IMXRT1060RM Rev 4 and MIMXRT105060HDUG Rev 7 are in docs/evidence/nxp; remaining blocks are unproven circuits, not missing manuals",
+    "r5_authorized": false,
+    "validation": "validation/r4_schematic_readiness_validation.md",
+    "owner_inputs": {
+      "input_power": "12 V nominal provisional; PoC 10 A not carried; adapter/range derived from selected circuit and budget",
+      "hardware_mute": "<=10 ms provisional engineering target; production response criterion TBD",
+      "acoustic_spl": "no numeric limit; R14 independent safety/acoustic validation"
+    },
+    "clock_evidence": "24 MHz reference; PLL4 786.432 MHz /4; SAI1/2 24.576 MHz roots; 12.288/6.144 MHz BCLK; cross-SAI frame phase not hardware-synchronous"
+  }
 }

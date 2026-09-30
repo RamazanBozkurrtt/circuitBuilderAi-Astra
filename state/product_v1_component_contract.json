@@ -1,0 +1,74 @@
+{
+  "schema_version": "1.0",
+  "phase_basis": "R2 manufacturer verification; architecture candidates, not schematic values",
+  "product": "ANC B2B Product V1",
+  "boards": ["board_a", "board_b"],
+  "evidence_index": "docs/product_v1/component_evidence_index.md",
+  "components": {
+    "IM73A135V01": {
+      "board_role": "four external analog microphones feeding Board A",
+      "architecture_status": "PROVISIONALLY APPROVED",
+      "pins": {"1": "OUT+", "2": "VDD", "3": "OUT-", "4": "GND", "5": "GND"},
+      "supply_normal_v": [2.3, 3.0],
+      "output_dc_typ_v": 1.35,
+      "minimum_load_per_output_ohm": 25000,
+      "maximum_output_load_capacitance_pf": 100,
+      "evidence": "E-MIC pp.8-11 Tables 5-8"
+    },
+    "TLV320ADC5140": {
+      "board_role": "Board A four-channel ADC",
+      "architecture_status": "PROVISIONALLY APPROVED",
+      "analog_channels": 4,
+      "input_impedance_per_pin_typ_kohm": [2.5, 10, 20],
+      "avdd_options_v": [[1.65, 1.95], [3.0, 3.6]],
+      "iovdd_options_v": [[1.65, 1.95], [3.0, 3.6]],
+      "four_analog_96khz_dre_agc_disabled": true,
+      "slave_tdm_96khz_128fs_bclk_hz": 12288000,
+      "slave_mclk_required": false,
+      "evidence": "E-ADC pp.1,26-28,44,48,108-110; E-ADC-RATE p.6 Fig.3-3"
+    },
+    "IMXRT1062": {
+      "board_role": "Board A controller",
+      "architecture_status": "PROVISIONALLY APPROVED",
+      "sai_instances": 3,
+      "core_max_mhz_consumer": 600,
+      "on_chip_ram_bytes": 1048576,
+      "sai_master_bclk_min_period_ns": 40,
+      "flexspi_xip_external_nor": true,
+      "evidence": "E-MCU pp.2-3,6-7,13-17,61,86-88; E-MCU-MFG"
+    },
+    "TAS5825M": {
+      "board_role": "Board B stereo BTL digital-input amplifier",
+      "architecture_status": "PROVISIONALLY APPROVED",
+      "speaker_channels_btl": 2,
+      "pvdd_v": [4.5, 26.4],
+      "dvdd_v": [1.62, 3.63],
+      "minimum_btl_load_ohm": 3.2,
+      "i2s_96khz_64fs_bclk_hz": 6144000,
+      "mclk_required": false,
+      "pdn_active_low": true,
+      "fault_gpio_configuration_required": true,
+      "evidence": "E-AMP pp.1,4-8,28-30,34,42-43"
+    }
+  },
+  "candidate_links": [
+    {"name": "ADC_TO_MCU", "rate_hz": 96000, "word_bits": 32, "slots": 4, "bclk_hz": 12288000, "format": "TDM", "clock_master": "IMXRT1062", "status": "architecture_compatible_pin_timing_open"},
+    {"name": "MCU_TO_AMP", "rate_hz": 96000, "word_bits": 32, "slots": 2, "bclk_hz": 6144000, "format": "I2S", "clock_master": "IMXRT1062", "status": "architecture_compatible_pin_timing_open"}
+  ],
+  "hard_constraints": [
+    "No nominal 3.3 V on IM73A135 VDD; 3.0 V absolute maximum.",
+    "Direct microphone-to-ADC load is unapproved: ADC maximum input impedance 20 kohm per pin versus microphone minimum load 25 kohm per output.",
+    "Four analog ADC channels at 96 kHz require DRE/AGC disabled per E-ADC-RATE Figure 3-3.",
+    "Board B amplifier needs no forwarded MCLK in the candidate 3-wire mode.",
+    "Independent hardware path must force amplifier safe state; MCU watchdog reset alone does not prove it."
+  ],
+  "open_for_r3_r4": [
+    "exact RT1062 MPN/silicon/pin mux/audio clock roots and boot model",
+    "mic AFE including harness capacitance, loading, gain, noise and low-frequency phase",
+    "clock edge/setup/hold, DMA/cache and complete ANC latency",
+    "external flash size/MPN and boot image budget",
+    "external watchdog, amp fault/power-good/safe-state polarity and timing",
+    "protected input, 5 V buck and all rail budgets",
+    "12 V amplifier headroom, output filter and thermal proof"
+  ]
+}

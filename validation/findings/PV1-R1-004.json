@@ -12,9 +12,41 @@
       "source": "docs/product/ANC_B2B_Custom_PCB_2_Kart_Mimari_Tasarim_Dokumani_v1.0.docx",
       "location": "§4.2 12 V decision gate; §12 item 4",
       "note": "Final 12 V decision requires measured Vrms/Irms, THD and ANC headroom."
+    },
+    {
+      "source": "datasheets/product_v1/tas5825m_slasad6h.pdf",
+      "location": "pp.6-8,14,91",
+      "note": "Supply/load envelope and headroom calculation framework established; actual 12-V/4-ohm product power remains unbounded pending speaker/acoustic data."
+    },
+    {
+      "source": "docs/product_v1/phase_r3_system_architecture.md",
+      "location": "section 6 finding disposition",
+      "note": "R3 reviewed this finding; its existing blocker phase and required external/R4 evidence remain open."
+    },
+    {
+      "source": "docs/product_v1/phase_r4_schematic_readiness.md",
+      "location": "section 5 power envelope",
+      "note": "R4 preflight reviewed this finding. R4 electrical closure remains blocked; no R5 schematic approval."
+    },
+    {
+      "source": "docs/product_v1/phase_r4_schematic_readiness.md",
+      "location": "section 9, R4 closure pass 2026-09-28",
+      "note": "Public official evidence and conditional calculations reviewed; closure criterion is not yet satisfied. Current NXP RM Rev 4 / HW Guide Rev 7 access restriction applies to the RT1062 portions. Finding remains blocking, with original history preserved."
+    },
+    {
+      "source": "docs/product_v1/phase_r4_schematic_readiness.md",
+      "location": "section 10, authorized-manual and owner-input closure audit, 2026-09-30",
+      "note": "Owner: 12 V nominal only provisional, PoC 10 A not a requirement; derive adapter and envelope. R4 report section 10 screens 8-18 V and symbolic current, but no selected protected supply or guaranteed Board A/amp budget yet."
+    },
+    {
+      "source": "Project-owner R4 closure instruction, 2026-09-30",
+      "location": "input power item 1",
+      "note": "12 V nominal only provisional; PoC 10 A not carried; derive protected operating range/current from selected circuitry and worst-case loads; final adapter TBD."
     }
   ],
-  "calculation_reference": [],
+  "calculation_reference": [
+    "docs/product_v1/phase_r2_component_verification.md"
+  ],
   "status": "open",
   "blocking": true,
   "discovered_at": "2026-09-26T10:41:41Z",

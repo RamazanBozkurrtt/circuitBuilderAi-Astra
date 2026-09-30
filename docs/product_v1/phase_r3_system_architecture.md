@@ -1,0 +1,106 @@
+# Product V1 Phase R3 system architecture and interface freeze
+
+**Date:** 2026-09-28. **Authority:** the complete [two-board product architecture](../product/ANC_B2B_Custom_PCB_2_Kart_Mimari_Tasarim_Dokumani_v1.0.docx), [R1 requirements](phase_r1_product_requirements.md), [R2 manufacturer verification](phase_r2_component_verification.md), and its [evidence index](component_evidence_index.md). The project owner approved the R2 human gate before R3. This is a **system architecture contract**, not circuit, pin, connector, PCB or final acoustic approval. `CONFIRMED` means manufacturer/product evidence establishes the stated fact; `PROVISIONAL` means the selected architecture awaits R4 implementation proof; `OPEN` and `BLOCKED` identify missing evidence or a gate constraint. All four named ICs retain their R2 **PROVISIONALLY APPROVED** architecture status. Legacy devices and circuits are excluded.
+
+## 1. Functional architecture and board ownership
+
+```text
+four external IM73A135V01 analog differential microphones
+  -> Board A: four equivalent protected/filterable microphone entries
+  -> Board A: four-channel analog AFE (network OPEN, no direct ADC connection assumed)
+  -> Board A: TLV320ADC5140 ADC, four analog channels
+  -> Board A: 96 kHz / four-slot TDM -> RT1062 SAI1 RX / DMA
+  -> Board A: RT1062 ANC/FxLMS prototype, control and safety state machine
+  -> Board A: SAI2 TX / DMA, stereo 96 kHz I2S
+  -> controlled Board A-to-B interface
+  -> Board B: TAS5825M, two BTL channels -> two secondary speakers
+```
+
+| Block | Owner | R3 classification and boundary |
+| --- | --- | --- |
+| Four electrically equivalent microphone channels | A | **CONFIRMED** product count/equality; IM73A135V01 **PROVISIONAL**. No reference/error/monitor role or placement assigned. |
+| Differential entries, ESD/EMI/filter provisions and low-noise AFE | A | Provisions **CONFIRMED**; topology **OPEN**. R2 finds a direct mic-to-ADC loading conflict (mic ≥25 kΩ/leg; ADC ≤20 kΩ typical/leg). R4 must solve it without unequal channels. |
+| TLV320ADC5140 and four-channel digitization | A | **PROVISIONAL** 96-kHz fixed-gain, AGC/DRE-off configuration supported by E-ADC-RATE Fig. 3-3. HPF, gain, phase and network **OPEN**. |
+| RT1062 processing and DMA | A | **PROVISIONAL** resource architecture: separate SAI RX/TX with eDMA, no claimed final FxLMS capacity. Algorithm size and measured latency **OPEN**. |
+| Stereo TAS5825M / BTL outputs | B | **PROVISIONAL** 96-kHz I2S architecture capable of a nominal 4-Ω load under the verified device limits. Final speaker impedance/choice and 12-V acoustic power **OPEN**. Speaker negatives never become signal or ground returns. |
+| Protected input, 5-V buck, PVDD and local amp logic | B | Ownership **CONFIRMED**. Exact input range, protection/buck devices, current and thermal values **OPEN for R4/EVT**. |
+| Bootable NOR, clock reference, USB and debug/programming | A | Ownership **CONFIRMED**; native NXP production route **PROVISIONAL**. Detailed pins/fuses/fixtures **OPEN for R4**. |
+| Independent watchdog and cross-board safe request | A | Functional responsibility **CONFIRMED**. Independent monitor gates the enable line; Board B supplies fail-safe pull and local power/fault gating. Device and response timing **OPEN for R4**. |
+
+Board A owns microphone entry and analog protection, ADC control, RT1062, external NOR, 24-MHz reference, both serial-audio masters, system I²C master, USB service, SWD/JTAG/pogo access, watchdog heartbeat/independent monitor and generation of its low-noise rails from Board B's 5 V. Board B owns external low-voltage DC entry, reverse polarity/OVP/OCP/eFuse functions, high-current protection, protected PVDD, 12-to-5-V buck, local 3.3-V amp logic, TAS5825M, output network/decoupling/thermal path, both BTL speaker connections, local hardware inhibit, and protected-power PGOOD/fault reporting. No functional ownership remains ambiguous; physical implementation details remain R4/R7 work.
+
+## 2. Selected digital-audio and clock architecture
+
+| Link | Transmitter / receiver | R3 baseline | Explicit clocks and voltage | Selection limit |
+| --- | --- | --- | --- | --- |
+| ADC to MCU | TLV320ADC5140 SDOUT slave transmitter → RT1062 **SAI1 RX clock master** | Four analog channels, 96,000 samples/s, 32-bit words in four 32-bit TDM slots; fixed gain, AGC/DRE off | `96,000 × 4 × 32 = 12,288,000 Hz` BCLK; 96,000-Hz FSYNC. ADC slave uses BCLK/FSYNC internal PLL, no ADC MCLK pin required. Both IOVDD/RT1062 SAI bank nominal 3.3 V. | E-ADC p.26 Table 6, E-ADC-RATE p.6 Fig.3-3 and E-MCU p.61 Table 50 establish endpoint rates. Exact SAI1 pin mux, edge polarity, divider, setup/hold, DMA and filter/HPF delay must be proven in R4. |
+| MCU to amp | RT1062 **SAI2 TX clock master** → TAS5825M slave SDIN | Two channels, 96,000 samples/s, 32-bit words in two 32-bit I²S slots; amp process flow constrained to an R4 latency-measured profile | `96,000 × 2 × 32 = 6,144,000 Hz` BCLK; 96,000-Hz LRCLK. TAS5825M derives clocks from SCLK; **no Board B MCLK**. Both SAI bank/amp DVDD nominal 3.3 V. | E-AMP p.29 Table 9-1 and E-MCU p.61 Table 50 support rates. Exact SAI2 pin mux, output-clock common-root setup, connector loaded timing and amp DSP delay remain R4 proofs. |
+
+This selects distinct TDM input and stereo I²S output framing; no frame-conversion wire crosses the boards. SAI1 and SAI2 use one RT1062 24-MHz XTALI reference and an audio PLL/common frequency family (PLL4 candidate), then separate integer-related BCLK/frame dividers. The 24-MHz reference is the NXP datasheet's typical XTALI clock for SDK/USB timing (E-MCU p.26 Table 11; [NXP official datasheet](https://www.nxp.com/docs/en/nxp/data-sheets/IMXRT1060CEC.pdf)); oscillator/crystal component values, actual PLL settings and root selection await the accessible reference manual/hardware guide in R4. NXP identifies PLL4 as its audio PLL in [manufacturer clock guidance](https://community.nxp.com/t5/i-MX-RT-Crossover-MCUs-Knowledge/RT-s-System-Clocks/ta-p/1151118). There is **one reference clock owner, Board A**. The ADC and amplifier are clock slaves. No independent audio oscillator or forwarded MCLK is in the baseline. MCLK is **excluded from the required board-to-board inventory** (`required_count: 0`).
+
+Both links operate at the same **frequency**, but precise SAI frame phase/synchronization is **PROVISIONAL**. R4 must show that asynchronous start of two SAI blocks cannot cause sample-slip or unstable buffering, and must measure total microphone-to-speaker delay. Clock edges may toggle only after their receiver rails are valid; amp clock loss sends its output Hi-Z but automatically recovers (E-AMP pp.28–29), so **hardware enable must remain independent of clock presence**. The 48-kHz alternate remains a fallback requiring a formal architecture revision and ANC latency review.
+
+## 3. Controlled Board A ↔ Board B electrical inventory
+
+The [interface JSON](../../state/board_to_board_interface.json) is the normative, versioned R3 signal contract. **Ten active logical signal/return classes** require at least **14 provisional contacts**: two 5-V, four GND returns, three serial-audio, two I²C and three safety/status. The contact minima are architecture allocations, **not** proven current capacity; R4 calculates peak/continuous current, resistance/drop, temperature rise and connector derating and increases counts if needed. No connector series, shell or pin order is frozen. MCLK and spare/revision signals have zero required contacts. A keyed, retained, serviceable paired-board stack is required; the product's 10–15-mm stack is a planning class pending mechanics.
+
+| Net | Source → sink; count | Nominal electrical/safe state | R4 circuit condition |
+| --- | --- | --- | --- |
+| 5V | B→A; ≥2 parallel contacts | Regulated nominal 5 V after B protection/buck; off/disconnected means no A supply. | Verify tolerance, inrush, current sharing, dropout and no USB/debug backfeed to B. |
+| GND_RETURN | common A↔B; ≥4 contacts | Continuous low-impedance reference and power return. | At least one paired return near each power group and digital-audio group; allocate by measured current and connector geometry. |
+| BCLK, LRCLK, AUDIO_DATA | A→B; one each | 3.3-V nominal CMOS, 6.144 MHz / 96 kHz / 32-bit stereo I²S. Inactive/undefined during boot is safe because B hardware inhibit is low. | Verify VOH/VIL, edge/termination, connector skew, powered-off injection; buffer only if those tests require it. Place nearby return contacts. |
+| I2C_SDA, I2C_SCL | A master ↔ B slave data; A→B clock; one each | Nominal 3.3-V open-drain bus, idle high only while both domains valid; no transaction during B power-off. | Board A owns system pull-up/control; powered-off isolation on B side is **required** unless R4 proves a direct connection has no injection/backfeed. Address resistor, capacitance and speed to be fixed; B clock stretching is not assumed. |
+| AMP_MUTE (`AMP_ENABLE` function) | A→B; one | **High = permission to release PDN for configuration/operation; low/open = hardware safe PDN low**. Board B pulls low by default and locally gates with B power-good. | A independent watchdog must remove permission on heartbeat failure; B cannot depend on MCU software to assert safe. Prove off-domain behavior and PDN threshold/response. This line is not synonymous with the amp's I²C soft-mute bit. |
+| AMP_FAULT | B→A; one | Configured TAS5825M GPIO FAULTZ, active low; before GPIO configuration it is **invalid**. | Board A treats unavailable status during boot as no permission to Play. Choose open-drain pull-up on powered A side with off-domain protection; B local fault reaction cannot rely on A seeing this GPIO. |
+| PGOOD | B→A; one | **High only while B protected PVDD path, B logic and 5-V delivery are valid**; low/open = unsafe. B local power-good also gates PDN. | Board B owns supervisor output; A input has fail-low default and powered-off isolation. Exact UV/OV thresholds and timing are R4 values. |
+
+No level translation is needed **if** the two isolated logic sides meet a common 3.3-V logic specification at all loads and corners (E-MCU pp.25–26; E-AMP pp.6–7). That is an R4 measured/calculated condition, not an approval for bare direct interconnect. All signals must tolerate either board being unpowered without backfeeding or false enable. I²C isolation is required by contract; other buffering is conditional on R4 Ioff/drive/timing proof. `AMP_FAULT` is not a fixed-function hardware pin until the amp GPIO is configured, and PGOOD is external to the amp (E-AMP pp.4–5). No service or spare conductor is included by habit.
+
+**Return/placement intent for R7/R8:** both boards have one coherent ground reference with low-impedance multiple contacts. Do not arbitrarily split AGND/DGND; partition by placement and current paths. Board B Class-D output/PVDD switching loops and speaker returns close on B, never through A or microphone shields. The 5-V feed has adjacent return contacts, and each fast audio group has nearby ground continuity. Board A AFE, mic entry and low-noise analog rails sit away from B's high-current converter and amplifier loops. Shield termination and exact trace/plane geometry await mechanical/EMI work.
+
+## 4. Boot, NOR, power and safety responsibilities
+
+**Boot direction (PROVISIONAL Product V1 selection): native NXP RT1062 Boot ROM → external boot-capable FlexSPI NOR XIP image.** R1's preference and R2's NXP ROM/manufacturing evidence support this without a stated Teensy compatibility requirement. PJRC compatibility would add its preprogrammed MKL02 and version-specific flash/tool dependency; no such requirement has been approved. Board A reserves ROM USB/UART recovery/boot-mode access and SWD/JTAG pogo; factory programming uses a controlled NXP ROM/flashloader image/fixture, and a wired USB service route is reserved for authenticated/controlled field maintenance. No OTA. Exact fuses/security policy, field-update rollback and factory fixture details remain R4/R14 decisions; no irreversible fuse is authorized here. This provisional architecture direction closes the R3 comparison only and needs owner sign-off before detailed boot-circuit release.
+
+External NOR is mandatory. Use RT1062 boot-capable FlexSPI (the EVK boot pad group is the R4 starting route), quad IO0–IO3, CS#, SCK, VCC/GND, and XIP-compatible ROM configuration. A **1.8-V, 64-Mbit/8-MiB ISSI IS25WP064AJBLE-class** flash is the provisional manufacturer EVK baseline (E-EVK/E-FLASH), matched to a 1.8-V NVCC_SD bank; it is **not** a verified final MPN or minimum silicon capacity. R4 must check exact boot pad mux, flash command/SFDP/reset, package and supply/current, oscillator/PLL startup, NXP FlexSPI errata, image size and headroom. Reserve versioned, checksummed and redundant calibration/configuration sectors separate from executable image; factory pair identity belongs in controlled metadata. Final partition sizes and update rollback need firmware image budgeting, not a guessed flash size.
+
+**Power ownership:** external nominal 12-V-class low-voltage DC enters B protection, then feeds TAS5825M PVDD and B's 5-V buck. B produces local nominal 3.3-V DVDD/control and hardware PGOOD. Product V1 keeps **12 V provisional**: protect/regulate against the eventual approved input range, and do not lock a regulator/protection topology to an unverified speaker-power conclusion. A receives 5 V and generates its own 3.3-V digital/IO, quiet 3.3-V ADC analog, ~2.75-V microphone/AFE, and 1.8-V flash/SD-bank domains. RT1062 SNVS/HIGH_IN/DCDC_IN/POR/DCDC_PSWITCH ordering and all powered NVCC banks follow E-MCU pp.25–31; ADC SHDNZ remains low through its rail settle and microphone channels receive their specified settle time. No nominal 3.3 V goes to IM73A135 VDD. B's TAS PVDD is 4.5–26.4 V and DVDD 1.62–3.63 V (E-AMP p.6); the 5-V rail does not directly power its logic. R4 must calculate worst-case startup/inrush, Board A digital/analog loads, simultaneous stereo power, protected-input and converter current, rail ripple/noise and thermal margins. The connector's 5-V path must carry `I_A,peak = Σ(rail output power / rail efficiency) / V_5V,min + service/debug and startup allowance`; return contacts must carry the matching worst-case current. The input/protection path must include simultaneous stereo PVDD input power plus 5-V-buck input power and faults. R3 has no reliable maximum for these terms, so **the 2-power/4-return contact floor is not current approval**.
+
+**Independent safe-state contract:** Board B holds TAS PDN low by a local hardware default when enable wire is open, A or B is off, B PGOOD is false, or local hard fault requires shutdown. Board A's independent hardware watchdog/supervisor gates the enable permission, independently of normal ANC firmware execution. RT1062 internal WDOG/EWM is supplementary. During controlled configuration, the watchdog may permit PDN high while TAS remains in its reset **Deep Sleep**/commanded Hi-Z state: E-AMP p.48 §9.6.1.3 gives DEVICE_CTRL2 reset `00x10` (CTRL_STATE `00`, Deep Sleep); pp.42–43 specify PDN, clocks, Hi-Z/configuration, then Play ordering. A firmware crash after PDN release must time out the independent monitor and pull PDN low; an unconfigured FAULTZ is not the primary safety layer. Release to Play requires B PGOOD, A valid rails/clocks, watchdog heartbeat, ADC/audio initialized, link checks, amp configured in Hi-Z, self-test and READY. Hardware default **wins** over software Play. Normal shutdown commands Hi-Z/soft ramp, then PDN low before PVDD/DVDD removal. Emergency fault asserts PDN low without waiting for I²C. Exact timeouts, local fault latch/rearm, analog gating, and acoustic safe-response target are R4 evidence work.
+
+## 5. Startup, shutdown and dependency audit
+
+```text
+external DC -> B protection -> B PVDD/5V/DVDD valid -> B local PGOOD
+                                  |
+                                  +-> A 5V -> A rails -> 24MHz XTALI -> RT1062 ROM/FlexSPI boot
+                                                                      -> watchdog heartbeat
+                                                                      -> ADC rail/SHDNZ/init
+                                                                      -> SAI1/SAI2 clocks and DMA
+                                                                      -> B I2C/amp configuration in Deep Sleep/Hi-Z
+                                                                      -> audio/link/self-test -> READY
+B local PGOOD AND A watchdog-gated AMP_ENABLE -> TAS PDN permission
+READY AND configured Hi-Z AND healthy watchdog -> I2C Play -> ANC_ACTIVE
+```
+
+The dependency edges all move from supply and reference clock toward boot, audio configuration and output enable. **ACYCLIC = true.** B power-good does not wait for A, A boot does not wait for B I²C, and the watchdog can be serviced before amplifier configuration. PDN is temporarily released under watchdog supervision for I²C configuration while the TAS reset state is Deep Sleep; Play is a later explicit step. No clock or control is generated by B for A to boot.
+
+| Event | Owner and deterministic reaction |
+| --- | --- |
+| Normal shutdown | A exits ANC, commands amp Hi-Z/soft mute, lowers enable/PDN, then B may remove rails after device timing. |
+| MCU reset, stalled firmware, A power loss or B2B unplug | A independent monitor ceases permission or wire opens; B default pull drives PDN low. B PGOOD does not require A. |
+| B PGOOD loss / brownout | B locally forces PDN low before relying on A notification; A stops audio and records fault if powered. |
+| Amplifier FAULTZ or critical protection fault | B local amp hardware protection and PDN policy make output safe; A records fault and withholds Play/recovery. FAULTZ alone is not trusted before GPIO configuration. |
+| I²C or audio-clock loss | A withholds/withdraws Play permission under a defined timeout; independent monitor covers firmware failure. Amp clock fault auto Hi-Z/recovery is not a latching safety policy. |
+| Recovery | Re-enter BOOT_SAFE/SELF_TEST, require stable B PGOOD, fresh watchdog health, reinitialized ADC/amp and explicit READY; latch/rearm timing is R4. |
+
+Dependency audit: power B→A; 24-MHz reference/SAI clocks A→ADC and A→B; ADC data→A; B amp I²C control A→B with slave acknowledgment B→A; amp audio A→B; enable A→B gated independently and locally; fault/PGOOD B→A; native boot A flash/ROM; watchdog A→B enable gate. Every active interface has defined direction and ground return. Powered-off-domain injection and loaded timing are explicit R4 proof obligations. No software-only safety edge or circular startup edge is accepted.
+
+## 6. External decision boundaries and R4 handoff
+
+- **ANC envelope:** 96 kHz, four capture channels and two output channels are the provisional processing schedule. The product's 80–800-Hz sweep is only a prototype investigation band, **not** an attenuation or latency acceptance mask. Controls/acoustic lead and owner must supply a measurable band, attenuation, latency and test method before performance qualification; R4 may design to this bounded prototype schedule while preserving margin. No final FxLMS capacity is claimed.
+- **Speakers and 12 V:** retain both candidates and a Board B output path that can be evaluated with nominal 4-Ω loads; no speaker impedance or model is frozen. EVT in the actual crib must measure impedance versus frequency, Vrms/Irms at the minimum protected PVDD, attenuation across the approved band, THD, excursion, thermal behavior, simultaneous stereo loading, supply sag, protection trips and ANC reserve. D3/D4 stay open. If 12 V fails, reopen the B protection/buck/PVDD envelope and R3 interface assumptions; do not silently move to 24 V.
+- **Mechanics:** dimensions, connector family, exact pin order and mounting remain open for R7. R4 has a 14-contact minimum planning floor, electrical classes, keying/retention and separation objective; current/EMI calculations can raise contact count. No physical shell is implied.
+- **R4 electrical work:** read current RT1060 reference manual and hardware guide, choose exact silicon/flash/package, prove SAI pin mux/PLL/dividers/edges and connector loaded timing, finish mic AFE and four-channel equality, rail/current/protection budget, I²C/off-domain isolation, B PGOOD/local gate/watchdog timing and independent fault behavior. Schematic entry remains gated separately.
+
+**Finding disposition:** All 13 R1 records were reviewed. R3 records provisional native boot and transfers its final production decision to R4; the cross-board electrical and serial-audio records carry the R3 baseline and R4 loaded/implementation proof; the quantitative ANC acceptance record moves to physical-performance qualification because no owner-approved mask exists. Their history remains in structured findings. Analog network, provisional power bound, hardware safe response and all speaker, mechanical and acoustic tests remain open. No blocker due by R3 is silently treated as resolved; the phase changes and reasons are explicit in the finding evidence/resolutions. The [R3 validation](../../validation/r3_system_architecture_validation.md) reports the machine gate and its limits.

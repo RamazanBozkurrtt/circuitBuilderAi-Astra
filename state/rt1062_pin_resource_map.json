@@ -1,0 +1,471 @@
+{
+  "schema_version": "1.0",
+  "phase": "R4",
+  "status": "PARTIAL_BLOCKED",
+  "device": {
+    "package": "MIMXRT1062DVJ6B",
+    "ball_source": "NXP IMXRT1060CEC Rev 4 (2024-04), Table 69 pp.103-111",
+    "mux_source": "NXP MCUXpresso SDK fsl_iomuxc.h commit 5aca9adfa3dd9be25fb31144dc52a5a845fd95aa",
+    "boot_source": "NXP IMXRT1060CEC Rev 4, Table 71 p.85",
+    "reference_manual_source": "NXP IMXRT1060RM Rev 4 (01/2026), authorized docs/evidence/nxp/IMXRT1060RM.pdf",
+    "hardware_guide_source": "NXP MIMXRT105060HDUG Rev 7 (2025-09-25), authorized docs/evidence/nxp/MIMXRT105060HDUG.pdf"
+  },
+  "voltage_bank_plan": {
+    "NVCC_GPIO": "3.3 V nominal",
+    "NVCC_EMC": "3.3 V nominal",
+    "NVCC_SD1": "1.8 V nominal for provisional ISSI flash"
+  },
+  "allocations": [
+    {
+      "function": "ADC_FSYNC",
+      "pad": "GPIO_AD_B1_10",
+      "ball": "L13",
+      "io_bank": "NVCC_GPIO",
+      "mux": "SAI1_RX_SYNC",
+      "resource": "SAI1_RX",
+      "status": "PROVISIONAL_MUX_VERIFIED",
+      "boot_strap": false
+    },
+    {
+      "function": "ADC_BCLK",
+      "pad": "GPIO_AD_B1_11",
+      "ball": "J13",
+      "io_bank": "NVCC_GPIO",
+      "mux": "SAI1_RX_BCLK",
+      "resource": "SAI1_RX",
+      "status": "PROVISIONAL_MUX_VERIFIED",
+      "boot_strap": false
+    },
+    {
+      "function": "ADC_DATA",
+      "pad": "GPIO_AD_B1_12",
+      "ball": "H12",
+      "io_bank": "NVCC_GPIO",
+      "mux": "SAI1_RX_DATA00",
+      "resource": "SAI1_RX",
+      "status": "PROVISIONAL_MUX_VERIFIED",
+      "boot_strap": false
+    },
+    {
+      "function": "AMP_DATA",
+      "pad": "GPIO_EMC_04",
+      "ball": "F2",
+      "io_bank": "NVCC_EMC",
+      "mux": "SAI2_TX_DATA",
+      "resource": "SAI2_TX",
+      "status": "PROVISIONAL_MUX_VERIFIED",
+      "boot_strap": false
+    },
+    {
+      "function": "AMP_LRCLK",
+      "pad": "GPIO_EMC_05",
+      "ball": "G5",
+      "io_bank": "NVCC_EMC",
+      "mux": "SAI2_TX_SYNC",
+      "resource": "SAI2_TX",
+      "status": "PROVISIONAL_MUX_VERIFIED",
+      "boot_strap": false
+    },
+    {
+      "function": "AMP_BCLK",
+      "pad": "GPIO_EMC_06",
+      "ball": "H5",
+      "io_bank": "NVCC_EMC",
+      "mux": "SAI2_TX_BCLK",
+      "resource": "SAI2_TX",
+      "status": "PROVISIONAL_MUX_VERIFIED",
+      "boot_strap": false
+    },
+    {
+      "function": "ADC_I2C_SCL",
+      "pad": "GPIO_AD_B1_00",
+      "ball": "J11",
+      "io_bank": "NVCC_GPIO",
+      "mux": "LPI2C1_SCL",
+      "resource": "LPI2C1",
+      "status": "PROVISIONAL_MUX_VERIFIED",
+      "boot_strap": false
+    },
+    {
+      "function": "ADC_I2C_SDA",
+      "pad": "GPIO_AD_B1_01",
+      "ball": "K11",
+      "io_bank": "NVCC_GPIO",
+      "mux": "LPI2C1_SDA",
+      "resource": "LPI2C1",
+      "status": "PROVISIONAL_MUX_VERIFIED",
+      "boot_strap": false
+    },
+    {
+      "function": "AMP_I2C_SDA",
+      "pad": "GPIO_AD_B1_06",
+      "ball": "J12",
+      "io_bank": "NVCC_GPIO",
+      "mux": "LPI2C3_SDA",
+      "resource": "LPI2C3",
+      "status": "PROVISIONAL_MUX_VERIFIED",
+      "boot_strap": false
+    },
+    {
+      "function": "AMP_I2C_SCL",
+      "pad": "GPIO_AD_B1_07",
+      "ball": "K10",
+      "io_bank": "NVCC_GPIO",
+      "mux": "LPI2C3_SCL",
+      "resource": "LPI2C3",
+      "status": "PROVISIONAL_MUX_VERIFIED",
+      "boot_strap": false
+    },
+    {
+      "function": "FLASH_CS_N",
+      "pad": "GPIO_SD_B1_06",
+      "ball": "L3",
+      "io_bank": "NVCC_SD1",
+      "mux": "FLEXSPIA_SS0_B",
+      "resource": "FlexSPIA",
+      "status": "PROVISIONAL_MUX_VERIFIED",
+      "boot_strap": false
+    },
+    {
+      "function": "FLASH_SCLK",
+      "pad": "GPIO_SD_B1_07",
+      "ball": "L4",
+      "io_bank": "NVCC_SD1",
+      "mux": "FLEXSPIA_SCLK",
+      "resource": "FlexSPIA",
+      "status": "PROVISIONAL_MUX_VERIFIED",
+      "boot_strap": false
+    },
+    {
+      "function": "FLASH_IO0",
+      "pad": "GPIO_SD_B1_08",
+      "ball": "P3",
+      "io_bank": "NVCC_SD1",
+      "mux": "FLEXSPIA_DATA00",
+      "resource": "FlexSPIA",
+      "status": "PROVISIONAL_MUX_VERIFIED",
+      "boot_strap": false
+    },
+    {
+      "function": "FLASH_IO1",
+      "pad": "GPIO_SD_B1_09",
+      "ball": "N4",
+      "io_bank": "NVCC_SD1",
+      "mux": "FLEXSPIA_DATA01",
+      "resource": "FlexSPIA",
+      "status": "PROVISIONAL_MUX_VERIFIED",
+      "boot_strap": false
+    },
+    {
+      "function": "FLASH_IO2",
+      "pad": "GPIO_SD_B1_10",
+      "ball": "P4",
+      "io_bank": "NVCC_SD1",
+      "mux": "FLEXSPIA_DATA02",
+      "resource": "FlexSPIA",
+      "status": "PROVISIONAL_MUX_VERIFIED",
+      "boot_strap": false
+    },
+    {
+      "function": "FLASH_IO3",
+      "pad": "GPIO_SD_B1_11",
+      "ball": "P5",
+      "io_bank": "NVCC_SD1",
+      "mux": "FLEXSPIA_DATA03",
+      "resource": "FlexSPIA",
+      "status": "PROVISIONAL_MUX_VERIFIED",
+      "boot_strap": false
+    },
+    {
+      "function": "SERVICE_UART_TX",
+      "pad": "GPIO_AD_B0_12",
+      "ball": "K14",
+      "io_bank": "NVCC_GPIO",
+      "mux": "LPUART1_TX",
+      "resource": "LPUART1",
+      "status": "PROVISIONAL_MUX_VERIFIED",
+      "boot_strap": false
+    },
+    {
+      "function": "SERVICE_UART_RX",
+      "pad": "GPIO_AD_B0_13",
+      "ball": "L14",
+      "io_bank": "NVCC_GPIO",
+      "mux": "LPUART1_RX",
+      "resource": "LPUART1",
+      "status": "PROVISIONAL_MUX_VERIFIED",
+      "boot_strap": false
+    },
+    {
+      "function": "WATCHDOG_HEARTBEAT",
+      "pad": "GPIO_AD_B1_02",
+      "ball": "L11",
+      "io_bank": "NVCC_GPIO",
+      "mux": "GPIO",
+      "resource": "GPIO",
+      "status": "PROVISIONAL_MUX_VERIFIED",
+      "boot_strap": false
+    },
+    {
+      "function": "AMP_ENABLE_REQUEST",
+      "pad": "GPIO_AD_B1_03",
+      "ball": "M12",
+      "io_bank": "NVCC_GPIO",
+      "mux": "GPIO",
+      "resource": "GPIO",
+      "status": "PROVISIONAL_MUX_VERIFIED",
+      "boot_strap": false
+    },
+    {
+      "function": "PGOOD_SENSE",
+      "pad": "GPIO_B1_01",
+      "ball": "B11",
+      "io_bank": "NVCC_GPIO",
+      "mux": "GPIO",
+      "resource": "GPIO",
+      "status": "PROVISIONAL_MUX_VERIFIED",
+      "boot_strap": false
+    },
+    {
+      "function": "AMP_FAULT_SENSE",
+      "pad": "GPIO_B1_02",
+      "ball": "C11",
+      "io_bank": "NVCC_GPIO",
+      "mux": "GPIO",
+      "resource": "GPIO",
+      "status": "PROVISIONAL_MUX_VERIFIED",
+      "boot_strap": false
+    },
+    {
+      "function": "ADC_SHDNZ",
+      "pad": "GPIO_B1_03",
+      "ball": "D11",
+      "io_bank": "NVCC_GPIO",
+      "mux": "GPIO",
+      "resource": "GPIO",
+      "status": "PROVISIONAL_MUX_VERIFIED",
+      "boot_strap": false
+    }
+  ],
+  "reserved": [
+    {
+      "function": "BOOT_MODE0",
+      "pad": "GPIO_AD_B0_04",
+      "ball": "F11",
+      "reason": "ROM boot mode"
+    },
+    {
+      "function": "BOOT_MODE1",
+      "pad": "GPIO_AD_B0_05",
+      "ball": "G14",
+      "reason": "ROM boot mode"
+    },
+    {
+      "function": "SWD_DIO",
+      "pad": "GPIO_AD_B0_06",
+      "ball": "E14",
+      "reason": "debug / JTAG TMS"
+    },
+    {
+      "function": "SWD_CLK",
+      "pad": "GPIO_AD_B0_07",
+      "ball": "F12",
+      "reason": "debug / JTAG TCK"
+    },
+    {
+      "function": "JTAG_MOD",
+      "pad": "GPIO_AD_B0_08",
+      "ball": "F13",
+      "reason": "debug selection"
+    },
+    {
+      "function": "JTAG_TDI",
+      "pad": "GPIO_AD_B0_09",
+      "ball": "F14",
+      "reason": "debug"
+    },
+    {
+      "function": "JTAG_TDO",
+      "pad": "GPIO_AD_B0_10",
+      "ball": "G13",
+      "reason": "debug"
+    },
+    {
+      "function": "JTAG_TRST_B",
+      "pad": "GPIO_AD_B0_11",
+      "ball": "G10",
+      "reason": "debug"
+    },
+    {
+      "function": "BT_CFG0",
+      "pad": "GPIO_B0_04",
+      "ball": "C8",
+      "reason": "ROM boot configuration when BT_FUSE_SEL=0; reserve until fuse/strap policy frozen"
+    },
+    {
+      "function": "BT_CFG1",
+      "pad": "GPIO_B0_05",
+      "ball": "B8",
+      "reason": "ROM boot configuration when BT_FUSE_SEL=0; reserve until fuse/strap policy frozen"
+    },
+    {
+      "function": "BT_CFG2",
+      "pad": "GPIO_B0_06",
+      "ball": "A8",
+      "reason": "ROM boot configuration when BT_FUSE_SEL=0; reserve until fuse/strap policy frozen"
+    },
+    {
+      "function": "BT_CFG3",
+      "pad": "GPIO_B0_07",
+      "ball": "A9",
+      "reason": "ROM boot configuration when BT_FUSE_SEL=0; reserve until fuse/strap policy frozen"
+    },
+    {
+      "function": "BT_CFG4",
+      "pad": "GPIO_B0_08",
+      "ball": "B9",
+      "reason": "ROM boot configuration when BT_FUSE_SEL=0; reserve until fuse/strap policy frozen"
+    },
+    {
+      "function": "BT_CFG5",
+      "pad": "GPIO_B0_09",
+      "ball": "C9",
+      "reason": "ROM boot configuration when BT_FUSE_SEL=0; reserve until fuse/strap policy frozen"
+    },
+    {
+      "function": "BT_CFG6",
+      "pad": "GPIO_B0_10",
+      "ball": "D9",
+      "reason": "ROM boot configuration when BT_FUSE_SEL=0; reserve until fuse/strap policy frozen"
+    },
+    {
+      "function": "BT_CFG7",
+      "pad": "GPIO_B0_11",
+      "ball": "A10",
+      "reason": "ROM boot configuration when BT_FUSE_SEL=0; reserve until fuse/strap policy frozen"
+    },
+    {
+      "function": "BT_CFG8",
+      "pad": "GPIO_B0_12",
+      "ball": "C10",
+      "reason": "ROM boot configuration when BT_FUSE_SEL=0; reserve until fuse/strap policy frozen"
+    },
+    {
+      "function": "BT_CFG9",
+      "pad": "GPIO_B0_13",
+      "ball": "D10",
+      "reason": "ROM boot configuration when BT_FUSE_SEL=0; reserve until fuse/strap policy frozen"
+    },
+    {
+      "function": "BT_CFG10",
+      "pad": "GPIO_B0_14",
+      "ball": "E10",
+      "reason": "ROM boot configuration when BT_FUSE_SEL=0; reserve until fuse/strap policy frozen"
+    },
+    {
+      "function": "BT_CFG11",
+      "pad": "GPIO_B0_15",
+      "ball": "E11",
+      "reason": "ROM boot configuration when BT_FUSE_SEL=0; reserve until fuse/strap policy frozen"
+    }
+  ],
+  "fixed_resources": [
+    {
+      "function": "USB_OTG1",
+      "balls": {
+        "DP": "L8",
+        "DN": "M8",
+        "VBUS": "N6",
+        "CHD_B": "N12"
+      },
+      "source": "NXP IMXRT1060CEC Rev 4 Table 86 p.111; HW Guide Rev 7 pp.9,18",
+      "status": "BLOCKED_CIRCUIT"
+    },
+    {
+      "function": "24_MHz_reference",
+      "balls": {
+        "XTALI": "P11",
+        "XTALO": "N11",
+        "NVCC_PLL": "P10"
+      },
+      "source": "NXP IMXRT1060CEC Rev 4 Tables 85-86 pp.104,111; HW Guide Rev 7 p.7",
+      "status": "BLOCKED_CRYSTAL_MPN_LOAD"
+    },
+    {
+      "function": "POR_B_ONOFF_DCDC_PSWITCH",
+      "balls": {
+        "POR_B": "M7",
+        "ONOFF": "M6",
+        "DCDC_PSWITCH": "K3"
+      },
+      "source": "NXP IMXRT1060CEC Rev 4 Tables 85-86 pp.104,110-111; HW Guide Rev 7 pp.4-5,10-11",
+      "status": "BLOCKED_SUPERVISOR_THRESHOLD"
+    },
+    {
+      "function": "SWD_debug",
+      "balls": {
+        "TMS_SWDIO": "E14",
+        "TCK_SWCLK": "F12",
+        "JTAG_MOD": "F13",
+        "TRST_B": "G10"
+      },
+      "source": "NXP IMXRT1060CEC Rev 4 Table 86 p.105; HW Guide Rev 7 pp.7-8",
+      "status": "BLOCKED_FIXTURE_TERMINATION"
+    },
+    {
+      "function": "all_supply_balls",
+      "source": "NXP IMXRT1060CEC Rev 4 Table 85 p.104; HW Guide Rev 7 Table 2 p.3",
+      "status": "BLOCKED_POWER_CIRCUIT"
+    }
+  ],
+  "collision_check": {
+    "duplicate_pads": false,
+    "duplicate_balls": false,
+    "reserved_overlap": false,
+    "result": "PASS_FOR_LISTED_PROVISIONAL_PADS_ONLY"
+  },
+  "missing_r5_facts": [
+    "exact 24-MHz crystal MPN and load",
+    "reset/supervisor threshold and RC circuit",
+    "USB protection/VBUS and fixture circuit",
+    "exact flash MPN/package and FCB image",
+    "BT_FUSE_SEL manufacturing/security policy",
+    "complete powered-off pin behavior",
+    "SAI inter-peripheral frame phase (no hardware sync) and bounded latency"
+  ],
+  "missing_authoritative_evidence": [],
+  "audio_clock_verified": {
+    "reference_hz": 24000000,
+    "pll4_vco_hz": 786432000,
+    "pll4_div_select": 32,
+    "pll4_num": 96,
+    "pll4_denom": 125,
+    "pll4_post_div": 4,
+    "pll4_post_hz": 196608000,
+    "sai1_root_hz": 24576000,
+    "sai2_root_hz": 24576000,
+    "sai1_pred": 2,
+    "sai1_podf": 4,
+    "sai2_pred": 2,
+    "sai2_podf": 4,
+    "sai1_rcr2_msel": "MCLK1",
+    "sai1_rcr2_div": 0,
+    "sai1_bclk_hz": 12288000,
+    "sai2_tcr2_msel": "MCLK1",
+    "sai2_tcr2_div": 1,
+    "sai2_bclk_hz": 6144000,
+    "cross_sai_phase_lock": false,
+    "source": "NXP IMXRT1060RM Rev 4 pp.1028,1052,1056-1058,1104-1106,1977-1978,2000,2016"
+  },
+  "boot_rom_verified": {
+    "mode_00": "Boot From Fuses; if BT_FUSE_SEL=0 enters Serial Downloader",
+    "mode_01": "Serial Downloader",
+    "mode_10": "Internal Boot",
+    "primary_flexspi": "FlexSPI_A_SS0_B GPIO_SD_B1_06; CLK GPIO_SD_B1_07; DATA[0:3] GPIO_SD_B1_08..11",
+    "fcb_bytes": 512,
+    "fcb_offset": 0,
+    "initial_read_hz": 30000000,
+    "flexspi_b_direct_boot": false,
+    "source": "NXP IMXRT1060RM Rev 4 pp.193-200,210-214; HW Guide Rev 7 pp.9,14-15"
+  }
+}

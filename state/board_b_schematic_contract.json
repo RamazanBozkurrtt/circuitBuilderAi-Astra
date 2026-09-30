@@ -1,0 +1,117 @@
+{
+  "phase": "R4",
+  "readiness": "BLOCKED",
+  "schematic_implementation_authorized": false,
+  "audio": {
+    "adc_to_mcu": {
+      "rate_hz": 96000,
+      "slots": 4,
+      "slot_bits": 32,
+      "bclk_hz": 12288000,
+      "fsync_hz": 96000
+    },
+    "mcu_to_amp": {
+      "rate_hz": 96000,
+      "slots": 2,
+      "slot_bits": 32,
+      "bclk_hz": 6144000,
+      "lrclk_hz": 96000
+    }
+  },
+  "interface": "state/board_to_board_interface.json",
+  "board": "board_b",
+  "components": {
+    "amplifier": {
+      "mpn": "TAS5825MRHBR",
+      "package": "RHB32 5 x 5 mm VQFN, exposed pad to system ground",
+      "pin_map": "TI SLASEH7H pp.4-5"
+    },
+    "input_protection": {
+      "mpn": null,
+      "status": "BLOCKED"
+    },
+    "five_volt_buck": {
+      "mpn": null,
+      "status": "BLOCKED"
+    },
+    "logic_regulator": {
+      "mpn": null,
+      "status": "BLOCKED"
+    },
+    "watchdog_and_supervisors": {
+      "mpns": [],
+      "status": "BLOCKED"
+    }
+  },
+  "power_tree": {
+    "input": "12 V nominal PROVISIONAL only; final adapter voltage/model TBD",
+    "protected_pvdd": "TAS5825M PVDD 4.5 to 26.4 V at IC",
+    "board_a_supply_v": 5.0,
+    "amp_logic_v": 3.3,
+    "input_envelope_v": null,
+    "board_a_current_max_a": null,
+    "buck_current_rating_a": null,
+    "connector_drop_max_v": null,
+    "status": "BLOCKED_WORST_CASE_AND_PARTS",
+    "candidate_engineering_input_envelope_v": [
+      8,
+      18
+    ],
+    "candidate_envelope_status": "SCREENING_ONLY_NOT_GUARANTEED_BY_SELECTED_CIRCUIT",
+    "illustrative_adapter_current_a_at_12v": 7.9,
+    "illustrative_adapter_current_a_at_18v": 10.9,
+    "illustrative_current_conditions": "Rload 3.2 ohm, ideal two-channel sine ceiling, assumed 70% amp efficiency, 10 W Board A, 85% buck efficiency, 25% allowance; all assumptions to verify. PoC 10 A not used.",
+    "required_protection": [
+      "reverse_polarity",
+      "over_voltage",
+      "over_current",
+      "short_circuit"
+    ]
+  },
+  "safety": {
+    "default": "PDN low; AMP_MUTE open or low cannot release amplifier",
+    "independent_watchdog_required": true,
+    "watchdog_mpn": null,
+    "pgood_thresholds": null,
+    "status": "BLOCKED_GATE_AND_THRESHOLD_PROOF"
+  },
+  "sheets": [
+    {
+      "name": "B1 DC input protection",
+      "status": "BLOCKED",
+      "reason": "adapter envelope, TVS/eFuse/reverse/OVP/OCP MPN and values open"
+    },
+    {
+      "name": "B2 5 V buck and PGOOD",
+      "status": "BLOCKED",
+      "reason": "current, guaranteed regulation, threshold and loss open"
+    },
+    {
+      "name": "B3 TAS5825M power and audio",
+      "status": "BLOCKED",
+      "reason": "PVDD/logic passives, output filter and register/profile open"
+    },
+    {
+      "name": "B4 Safety control",
+      "status": "BLOCKED",
+      "reason": "independent watchdog, gate truth table and reset policy open"
+    },
+    {
+      "name": "B5 Speaker and board interface",
+      "status": "BLOCKED",
+      "reason": "loaded timing, return/contact current, EMI passives open"
+    }
+  ],
+  "r4_closure_evidence": {
+    "audio_isolation_candidate": "3 x SN74LVC1G125, one each BCLK/LRCLK/SDIN; power-off Ioff and conditional DC/timing shown in R4 report section 9",
+    "i2c_isolation_candidate": "TCA9800 at <=100 kHz; no external B-side pull-ups; not frozen",
+    "buck_candidate": "TPS54334 reference 0.788-0.812 V across stated VIN and TJ; feedback/inductor/load design not frozen",
+    "closure_status": "BLOCKED"
+  },
+  "provisional_safety_target": {
+    "fault_to_hardware_mute_ms": 10,
+    "status": "PROVISIONAL_ENGINEERING_TARGET",
+    "production_limit": "TBD_INDEPENDENT_SAFETY_VALIDATION",
+    "proof_status": "BLOCKED"
+  }
+}

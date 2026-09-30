@@ -12,6 +12,16 @@
       "source": "docs/product/ANC_B2B_Custom_PCB_2_Kart_Mimari_Tasarim_Dokumani_v1.0.docx",
       "location": "§2.1; §12 item 6",
       "note": "Role and placement are explicitly deferred to acoustic geometry and tests."
+    },
+    {
+      "source": "docs/product_v1/phase_r3_system_architecture.md",
+      "location": "section 6 finding disposition",
+      "note": "R3 reviewed this finding; its existing blocker phase and required external/R4 evidence remain open."
+    },
+    {
+      "source": "docs/product_v1/phase_r4_schematic_readiness.md",
+      "location": "section 7 microphone roles",
+      "note": "R4 preflight reviewed this finding. External physical/acoustic/mechanical closure remains phase-scoped; R4 did not close it."
     }
   ],
   "calculation_reference": [],

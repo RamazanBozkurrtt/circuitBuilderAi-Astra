@@ -39,33 +39,33 @@
       "id": "R2",
       "objective": "Verify target components and source evidence for both boards.",
       "required_inputs": ["docs/product_v1/phase_r1_product_requirements.md"],
-      "required_outputs": ["docs/product_v1/r2_component_verification.md"],
-      "machine_gates": ["documentation_contract", "blocking_findings", "product_architecture"],
+      "required_outputs": ["docs/product_v1/phase_r2_component_verification.md", "docs/product_v1/component_evidence_index.md", "state/product_v1_component_contract.json"],
+      "machine_gates": ["documentation_contract", "blocking_findings", "product_architecture", "r2_component_verification"],
       "human_gate": "Review exact variants, operating modes, limits, errata and suitability.",
       "allowed_next_phase": ["R3"]
     },
     {
       "id": "R3",
       "objective": "Freeze supported system architecture and controlled board interface.",
-      "required_inputs": ["docs/product_v1/r2_component_verification.md", "state/board_to_board_interface.json"],
-      "required_outputs": ["docs/product_v1/r3_architecture_interface.md"],
-      "machine_gates": ["documentation_contract", "blocking_findings", "product_architecture"],
+      "required_inputs": ["docs/product_v1/phase_r2_component_verification.md", "state/board_to_board_interface.json"],
+      "required_outputs": ["docs/product_v1/phase_r3_system_architecture.md", "state/product_v1_architecture_contract.json", "validation/r3_system_architecture_validation.md"],
+      "machine_gates": ["documentation_contract", "blocking_findings", "product_architecture", "r3_system_architecture"],
       "human_gate": "Approve cross-board power, audio, control, fault, clock and mechanics contracts.",
       "allowed_next_phase": ["R4"]
     },
     {
       "id": "R4",
       "objective": "Demonstrate schematic-entry readiness for Board A and Board B.",
-      "required_inputs": ["docs/product_v1/r3_architecture_interface.md"],
-      "required_outputs": ["docs/product_v1/r4_schematic_readiness.md"],
-      "machine_gates": ["documentation_contract", "blocking_findings", "product_architecture"],
+      "required_inputs": ["docs/product_v1/phase_r3_system_architecture.md", "state/product_v1_architecture_contract.json", "state/board_to_board_interface.json"],
+      "required_outputs": ["docs/product_v1/phase_r4_schematic_readiness.md", "validation/r4_schematic_readiness_validation.md", "state/board_a_schematic_contract.json", "state/board_b_schematic_contract.json", "state/rt1062_pin_resource_map.json"],
+      "machine_gates": ["documentation_contract", "blocking_findings", "product_architecture", "r4_schematic_readiness"],
       "human_gate": "Accept worst-case budgets, pin plans, open risks and schematic-entry disposition.",
       "allowed_next_phase": ["R5"]
     },
     {
       "id": "R5",
       "objective": "Implement separate controlled KiCad schematics for both boards.",
-      "required_inputs": ["docs/product_v1/r4_schematic_readiness.md"],
+      "required_inputs": ["docs/product_v1/phase_r4_schematic_readiness.md", "state/board_a_schematic_contract.json", "state/board_b_schematic_contract.json", "state/rt1062_pin_resource_map.json"],
       "required_outputs": [
         "hardware/product_v1/board_a_controller_afe/board_a.kicad_sch",
         "hardware/product_v1/board_b_power_amp/board_b.kicad_sch"

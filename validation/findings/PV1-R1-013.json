@@ -12,15 +12,48 @@
       "source": "docs/product/ANC_B2B_Custom_PCB_2_Kart_Mimari_Tasarim_Dokumani_v1.0.docx",
       "location": "§§2.1–2.2, 3.1, 4.1, 5.1",
       "note": "The named audio links are product intent; complete clock/protocol compatibility is not established."
+    },
+    {
+      "source": "docs/product_v1/phase_r2_component_verification.md",
+      "location": "section 5",
+      "note": "Two 96-kHz candidate digital links are architecture compatible; exact clock phase/pin/timing and latency remain R3 open."
+    },
+    {
+      "source": "docs/product_v1/phase_r3_system_architecture.md",
+      "location": "sections 2, 3 and 5",
+      "note": "R3 disposition: R3 selects ADC TDM four 32-bit slots at 96 kHz (12.288-MHz BCLK) and amp stereo I2S two 32-bit slots (6.144-MHz BCLK), RT1062 master on both, common 24-MHz reference/audio-PLL family and no cross-board MCLK. R4 loaded edge, mux/divider, DMA and full latency proof remains. Earlier R1 criterion remains in repository history. Prior R1 status=open, blocker=R3, closure criterion: Before R3 PASS, use R2 authoritative endpoint evidence to approve one end-to-end ADC→RT1062→amplifier clock/audio contract, including master roles, rate/slot/frame formats, logic levels, loaded timing, startup and latency budget; decide MCLK inclusion by evidence and identify resource/DMA feasibility."
+    },
+    {
+      "source": "docs/product_v1/phase_r4_schematic_readiness.md",
+      "location": "sections 4 and 6 audio clocks/timing",
+      "note": "R4 preflight reviewed this finding. R4 electrical closure remains blocked; no R5 schematic approval."
+    },
+    {
+      "source": "docs/product_v1/phase_r4_schematic_readiness.md",
+      "location": "section 9, R4 closure pass 2026-09-28",
+      "note": "Public official evidence and conditional calculations reviewed; closure criterion is not yet satisfied. Current NXP RM Rev 4 / HW Guide Rev 7 access restriction applies to the RT1062 portions. Finding remains blocking, with original history preserved."
+    },
+    {
+      "source": "docs/product_v1/phase_r4_schematic_readiness.md",
+      "location": "section 10, authorized-manual and owner-input closure audit, 2026-09-30",
+      "note": "NXP RM Rev 4 pp.1028,1052,1056-1058,1977-2020 supports 24 MHz->PLL4 786.432 MHz/4->SAI roots 24.576 MHz->12.288/6.144 MHz BCLK; different SAI units lack hardware synchronous mode. ADC receive half-cycle has only 7.69 ns conditional setup before skew at 25 C/20 pF; full loaded/temp/DMA/latency proof remains open."
+    },
+    {
+      "source": "docs/product_v1/phase_r4_schematic_readiness.md",
+      "location": "section 10.3, 24-bit timing mitigation",
+      "note": "TI ADC supports four 24-bit TDM words; NXP PLL4 884.736 MHz candidate gives 9.216-MHz ADC BCLK and conditional 16.25-ns setup room at 25 C/20 pF/5-ns assumed skew. This is not frozen or full-temperature proof; R3 32-bit baseline remains."
     }
   ],
-  "calculation_reference": [],
-  "status": "open",
+  "calculation_reference": [
+    "docs/product_v1/phase_r2_component_verification.md",
+    "docs/product_v1/phase_r3_system_architecture.md"
+  ],
+  "status": "accepted",
   "blocking": true,
   "discovered_at": "2026-09-26T10:41:41Z",
-  "blocks_from_phase": "R3",
+  "blocks_from_phase": "R4",
   "decision_id": null,
-  "closure_criterion": "Before R3 PASS, use R2 authoritative endpoint evidence to approve one end-to-end ADC→RT1062→amplifier clock/audio contract, including master roles, rate/slot/frame formats, logic levels, loaded timing, startup and latency budget; decide MCLK inclusion by evidence and identify resource/DMA feasibility.",
-  "resolved_by": null,
-  "resolution": null
+  "closure_criterion": "Verify exact SAI mux/clock dividers/frame phase, loaded setup/hold across connector, 3.3-V corner levels, DMA continuity and complete input-to-speaker latency before R4 schematic readiness.",
+  "resolved_by": "R3 architecture disposition; later closure required",
+  "resolution": "R3 selects ADC TDM four 32-bit slots at 96 kHz (12.288-MHz BCLK) and amp stereo I2S two 32-bit slots (6.144-MHz BCLK), RT1062 master on both, common 24-MHz reference/audio-PLL family and no cross-board MCLK. R4 loaded edge, mux/divider, DMA and full latency proof remains."
 }

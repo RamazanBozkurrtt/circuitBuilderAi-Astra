@@ -12,15 +12,43 @@
       "source": "docs/product/ANC_B2B_Custom_PCB_2_Kart_Mimari_Tasarim_Dokumani_v1.0.docx",
       "location": "§1.1 boot/update; §7; §12 item 2",
       "note": "Boot/update model is explicitly open; Teensy compatibility is not automatic."
+    },
+    {
+      "source": "docs/product_v1/phase_r2_component_verification.md",
+      "location": "section 3 production boot alternatives",
+      "note": "NXP ROM/flashloader and PJRC MKL02 paths technically characterized; product-owner direction remains open."
+    },
+    {
+      "source": "docs/product_v1/phase_r3_system_architecture.md",
+      "location": "sections 4 and 6",
+      "note": "R3 disposition: Provisional native NXP boot direction selected for R3. Owner sign-off, exact flash/boot/recovery/security path and production fixture are required before R4 boot-circuit readiness. Earlier R1 criterion remains in repository history. Prior R1 status=open, blocker=R3, closure criterion: Product owner records native or Teensy-compatible direction, expected factory and field update route, service/recovery policy and dependency/licensing disposition; R2 verifies the chosen path against official sources before R3 PASS."
+    },
+    {
+      "source": "docs/product_v1/phase_r4_schematic_readiness.md",
+      "location": "section 4 boot/pin",
+      "note": "R4 preflight reviewed this finding. R4 electrical closure remains blocked; no R5 schematic approval."
+    },
+    {
+      "source": "docs/product_v1/phase_r4_schematic_readiness.md",
+      "location": "section 9, R4 closure pass 2026-09-28",
+      "note": "Public official evidence and conditional calculations reviewed; closure criterion is not yet satisfied. Current NXP RM Rev 4 / HW Guide Rev 7 access restriction applies to the RT1062 portions. Finding remains blocking, with original history preserved."
+    },
+    {
+      "source": "docs/product_v1/phase_r4_schematic_readiness.md",
+      "location": "section 10, authorized-manual and owner-input closure audit, 2026-09-30",
+      "note": "Authorized NXP RM Rev 4 pp.193-214 and HW Guide Rev 7 pp.7-11,14-19 now establish ROM boot modes, FlexSPI A default pads, FCB and boot/reset guidance. Missing-authoritative-evidence flag retired. Exact flash/FCB/fuse-security policy, straps, fixture and reset circuit still prevent closure."
     }
   ],
-  "calculation_reference": [],
-  "status": "open",
+  "calculation_reference": [
+    "docs/product_v1/phase_r2_component_verification.md",
+    "docs/product_v1/phase_r3_system_architecture.md"
+  ],
+  "status": "accepted",
   "blocking": true,
   "discovered_at": "2026-09-26T10:41:41Z",
-  "blocks_from_phase": "R3",
+  "blocks_from_phase": "R4",
   "decision_id": "D2",
-  "closure_criterion": "Product owner records native or Teensy-compatible direction, expected factory and field update route, service/recovery policy and dependency/licensing disposition; R2 verifies the chosen path against official sources before R3 PASS.",
-  "resolved_by": null,
-  "resolution": null
+  "closure_criterion": "Record owner approval of native NXP boot and verify exact flash, boot straps, factory/field recovery and security policy before R4 PASS.",
+  "resolved_by": "R3 architecture disposition; later closure required",
+  "resolution": "Provisional native NXP boot direction selected for R3. Owner sign-off, exact flash/boot/recovery/security path and production fixture are required before R4 boot-circuit readiness."
 }

@@ -12,9 +12,41 @@
       "source": "docs/product/ANC_B2B_Custom_PCB_2_Kart_Mimari_Tasarim_Dokumani_v1.0.docx",
       "location": "§§3.1, 4.1, 6, 7.1; §9 watchdog/mute EOL row",
       "note": "Safe-state behavior is required; exact electrical/timing contract remains open."
+    },
+    {
+      "source": "datasheets/product_v1/tas5825m_slasad6h.pdf",
+      "location": "pp.4,28,42-43",
+      "note": "PDN is active-low; amp can auto-recover after clock fault, so independent safe-state behavior and timing remain open."
+    },
+    {
+      "source": "docs/product_v1/phase_r3_system_architecture.md",
+      "location": "section 6 finding disposition",
+      "note": "R3 reviewed this finding; its existing blocker phase and required external/R4 evidence remain open."
+    },
+    {
+      "source": "docs/product_v1/phase_r4_schematic_readiness.md",
+      "location": "section 6 safety",
+      "note": "R4 preflight reviewed this finding. R4 electrical closure remains blocked; no R5 schematic approval."
+    },
+    {
+      "source": "docs/product_v1/phase_r4_schematic_readiness.md",
+      "location": "section 9, R4 closure pass 2026-09-28",
+      "note": "Public official evidence and conditional calculations reviewed; closure criterion is not yet satisfied. Current NXP RM Rev 4 / HW Guide Rev 7 access restriction applies to the RT1062 portions. Finding remains blocking, with original history preserved."
+    },
+    {
+      "source": "docs/product_v1/phase_r4_schematic_readiness.md",
+      "location": "section 10, authorized-manual and owner-input closure audit, 2026-09-30",
+      "note": "Owner: <=10 ms is provisional circuit-engineering mute target; production criterion TBD. TAS5825M SLASEH7H p.7 turn-off figure excludes volume ramp and cannot alone prove worst-case fault-to-silence. Exact watchdog/gate/supervisor and response calculation remain open."
+    },
+    {
+      "source": "Project-owner R4 closure instruction and Analog Devices ADM6316-6322 Rev I",
+      "location": "hardware mute item 2; ADM6316-6322 p.3 Table 2",
+      "note": "<=10 ms is provisional circuit engineering target only. Fastest screened watchdog W option is 4.3-9.3 ms over specified range; combined mute path is unproven. Production response-time criterion remains TBD."
     }
   ],
-  "calculation_reference": [],
+  "calculation_reference": [
+    "docs/product_v1/phase_r2_component_verification.md"
+  ],
   "status": "open",
   "blocking": true,
   "discovered_at": "2026-09-26T10:41:41Z",

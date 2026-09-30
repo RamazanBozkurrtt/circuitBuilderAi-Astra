@@ -12,9 +12,36 @@
       "source": "docs/product/ANC_B2B_Custom_PCB_2_Kart_Mimari_Tasarim_Dokumani_v1.0.docx",
       "location": "§§3.1, 4.1, 5.1, 6",
       "note": "Power/protection functions are required, but exact rail and protection limits are not supplied."
+    },
+    {
+      "source": "docs/product_v1/phase_r2_component_verification.md",
+      "location": "section 6",
+      "note": "Device-driven rail classes and sequencing constraints documented; converter, protection and full current margins remain R4 open."
+    },
+    {
+      "source": "docs/product_v1/phase_r3_system_architecture.md",
+      "location": "section 6 finding disposition",
+      "note": "R3 reviewed this finding; its existing blocker phase and required external/R4 evidence remain open."
+    },
+    {
+      "source": "docs/product_v1/phase_r4_schematic_readiness.md",
+      "location": "sections 4-6 power/protection",
+      "note": "R4 preflight reviewed this finding. R4 electrical closure remains blocked; no R5 schematic approval."
+    },
+    {
+      "source": "docs/product_v1/phase_r4_schematic_readiness.md",
+      "location": "section 9, R4 closure pass 2026-09-28",
+      "note": "Public official evidence and conditional calculations reviewed; closure criterion is not yet satisfied. Current NXP RM Rev 4 / HW Guide Rev 7 access restriction applies to the RT1062 portions. Finding remains blocking, with original history preserved."
+    },
+    {
+      "source": "docs/product_v1/phase_r4_schematic_readiness.md",
+      "location": "section 10, authorized-manual and owner-input closure audit, 2026-09-30",
+      "note": "NXP HW Guide Rev 7 pp.2-6 now supplies current DCDC, sequence and decoupling guidance; owner removes PoC 10-A assumption. Selected regulators/protection and guaranteed rail/load/threshold budgets remain open."
     }
   ],
-  "calculation_reference": [],
+  "calculation_reference": [
+    "docs/product_v1/phase_r2_component_verification.md"
+  ],
   "status": "open",
   "blocking": true,
   "discovered_at": "2026-09-26T10:41:41Z",

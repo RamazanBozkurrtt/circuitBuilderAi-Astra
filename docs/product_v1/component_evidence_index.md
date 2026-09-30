@@ -1,0 +1,58 @@
+# Product V1 component evidence index — R2
+
+Verified 2026-09-28. PDF page references in the R2 report use the printed page number, which matches the PDF page for the TI and Infineon datasheets. NXP web PDF references use the printed page where stated. The legacy ADAU1978, ADSP-21569 and TAS6424E-Q1 files are excluded.
+
+| ID | Manufacturer, controlled document | Revision/date | Repository copy or official URL | Use |
+| --- | --- | --- | --- | --- |
+| E-MIC | Infineon, IM73A135V01 datasheet | V1.20, 2021-07-07 | [local PDF](../../datasheets/microphone/im73a135_datasheet_v1_20.pdf), [official PDF](https://www.infineon.com/assets/row/public/documents/24/49/infineon-im73a135-datasheet-en.pdf) | Acoustic/electrical limits, package and PCB port. |
+| E-ADC | TI, TLV320ADC5140, SBAS892A | Rev A, 2019-10 | [local PDF](../../datasheets/product_v1/tlv320adc5140_sbas892a.pdf), [official PDF](https://www.ti.com/lit/ds/symlink/tlv320adc5140.pdf) | Analog inputs, ASI, timing, power, reset, package. |
+| E-ADC-RATE | TI, TLV320ADCx140/PCMx140-Q1 sampling rates and processing blocks, SBAA381B | Rev B, 2024-05 | [local PDF](../../datasheets/product_v1/tlv320adcx140_sample_rate_sbaa381b.pdf), [official PDF](https://www.ti.com/lit/an/sbaa381b/sbaa381b.pdf) | Four analog channels at 96 kHz, DRE/AGC restrictions. |
+| E-MCU | NXP, i.MX RT1060 consumer datasheet, IMXRT1060CEC | Rev 4, 2024-04 | [local PDF](../../datasheets/product_v1/nxp_imxrt1060cec_rev4.pdf), [official PDF](https://cache.nxp.com/docs/en/nxp/data-sheets/IMXRT1060CEC.pdf) | RT1062 ordering, supplies, SAI electrical timing, pin/power restrictions. The NXP cache endpoint supplied the repository copy during R4. |
+| E-MCU-I | NXP, i.MX RT1060 industrial datasheet, IMXRT1060IEC | Rev 4, 2024-04 | [official PDF](https://www.nxp.com/docs/en/nxp/data-sheets/IMXRT1060IEC.pdf) | Industrial variant candidate and package/pin comparison for R3. |
+| E-MCU-ERR-A | NXP, i.MX RT1060_A chip errata, IMXRT1060CE_A | Rev 1.3, 2021-12 | [official PDF](https://www.nxp.com/docs/en/errata/IMXRT1060CE_A.pdf) | Silicon A constraints. |
+| E-MCU-ERR-B | NXP, i.MX RT1060_B chip errata, IMXRT1060CE_B | Rev 1.1, 2021-12 | [official PDF](https://www.nxp.com/docs/en/errata/IMXRT1060CE_B.pdf) | Silicon B constraints. |
+| E-MCU-MFG | NXP, i.MX RT1060 Manufacturing User Guide | Online MCUXpresso SDK, accessed 2026-09-28 | [guide](https://docs.mcuxpresso.nxp.com/mcuxsdk/latest/html/middleware/mcu_bootloader/docs/iMXRT1060_Manufacturing_User_Guide/index.html) | ROM downloader, flashloader, boot image and FlexSPI NOR factory flow. |
+| E-MCU-SAI | NXP, Using Multi-Channel Feature of SAI, AN12090 | Rev 0, 2017-11 | [official PDF](https://www.nxp.com/docs/en/application-note/AN12090.pdf) | SAI multichannel implementation method; exact Product V1 mux remains open. |
+| E-MCU-SDK | NXP, SAI eDMA multi-channel transfer example | Online SDK, accessed 2026-09-28 | [example](https://mcuxpresso.nxp.com/mcuxsdk/latest/html/examples/driver_examples/sai/edma_multi_channel_transfer/readme.html) | Evidence of SAI/eDMA path on RT1060 EVKB; not a measured ANC workload. |
+| E-MCU-HW | NXP, MIMXRT1050/MIMXRT1060 Hardware Design Guide, MIMXRT105060HDUG | Rev 7.0, 2025-09 | [NXP document listing](https://www.nxp.com/products/i.MX-RT1060) | Required R4 checklist for power, clock, reset, BGA, FlexSPI layout; full PDF access pending. |
+| E-AMP | TI, TAS5825M, SLASEH7H | Rev H, 2023-01 | [local PDF](../../datasheets/product_v1/tas5825m_slaseh7h.pdf), [official PDF](https://www.ti.com/lit/ds/symlink/tas5825m.pdf) | Supplies, I2S/TDM, BTL, protection, startup and thermal. |
+| E-PJRC | PJRC, Bootloader Chip for DIY Teensy 4.0 & 4.1 Projects | Web page, accessed 2026-09-28 | [primary vendor page](https://www.pjrc.com/store/ic_mkl02_t4.html) | Third-party Teensy-compatible hardware dependency and flash combinations; not NXP evidence. |
+| E-EVK | NXP, MIMXRT1060-EVK schematic, A2 | NXP-hosted design file | [official hosted schematic](https://community.nxp.com/pwmxy87654/attachments/pwmxy87654/imxrt/1874/1/i-MX%20RT1060%20EVK%20Schematic.pdf) | IS25WP064AJBLE 64-Mbit example candidate, not Product V1 approval. |
+| E-FLASH | ISSI, IS25WP064A/032A serial flash datasheet | Rev 00D, 2016-03 | [manufacturer PDF](https://www.issi.com/WW/pdf/IS25WP064A_032A.pdf) | EVK flash family has 1.65–1.95-V VCC; R3 must match MCU SD-bank voltage. |
+| E-FLASH-3V | ISSI, IS25LP064A serial flash datasheet | Manufacturer PDF | [manufacturer PDF](https://www.issi.com/WW/pdf/25LP064A.pdf) | 3-V family example only; RT1062 ROM boot support not established for exact MPN. |
+| E-MCU-R4 | NXP, i.MX RT1060 consumer datasheet, IMXRT1060CEC | Rev 4, 2024-04 | [local PDF](../../datasheets/product_v1/nxp_imxrt1060cec_rev4.pdf), [NXP source](https://cache.nxp.com/docs/en/nxp/data-sheets/IMXRT1060CEC.pdf) | R4 ball map, boot-strap pads, rail bounds and SAI electrical limits. |
+| E-MCU-HW-OLD | NXP, MIMXRT1050/MIMXRT1060 Hardware Design Guide | Rev 3, 2019 | [local PDF](../../datasheets/product_v1/nxp_mimxrt105060hdug_rev3_2019.pdf), [NXP community source](https://community.nxp.com/pwmxy87654/attachments/pwmxy87654/imxrt/3999/1/MIMXRT105060HDUG.pdf) | Historical manufacturer decoupling and DCDC guidance; superseded by listed Rev 7 and insufficient alone for R4 freeze. |
+| E-MCU-MUX | NXP MCUXpresso device header, `fsl_iomuxc.h` | [commit 5aca9ad](https://github.com/nxp-mcuxpresso/mcux-devices-rt/blob/5aca9adfa3dd9be25fb31144dc52a5a845fd95aa/RT1060/MIMXRT1062/drivers/fsl_iomuxc.h) | [manufacturer source](https://github.com/nxp-mcuxpresso/mcux-devices-rt/blob/5aca9adfa3dd9be25fb31144dc52a5a845fd95aa/RT1060/MIMXRT1062/drivers/fsl_iomuxc.h) | Candidate SAI, I2C, UART and FlexSPI muxes. Pin defaults/ROM use still require current RM. |
+| E-MCU-LIFE | NXP RT1060 orderable-product listing and package information | Accessed 2026-09-28 | [official product page](https://www.nxp.com/products/i.MX-RT1060?tab=Package_Quality_Tab), [SOT1968-1 package](https://www.nxp.com/packages/SOT1968-1) | DVJ6A NRND versus DVJ6B Active, 12-mm 196-ball choice. |
+| E-OPA | TI, OPA320/OPA2320 datasheet SBOS513F | Rev F | [local PDF](../../datasheets/afe/opa320_datasheet.pdf), [official PDF](https://www.ti.com/lit/ds/symlink/opa320.pdf) | Unity-buffer feasibility candidate only; exact AFE circuit not approved. |
+
+Manufacturer product pages used for lifecycle: [Infineon IM73A135](https://www.infineon.com/part/IM73A135), [TI TLV320ADC5140](https://www.ti.com/product/TLV320ADC5140), [NXP RT1060](https://www.nxp.com/products/i.MX-RT1060), [TI TAS5825M](https://www.ti.com/product/TAS5825M). Manufacturer sites did not expose standalone TI/Infineon silicon errata in the documents reviewed; that absence is not proof that no advisory exists. Recheck at exact MPN release.
+ 
+## R4 closure-pass manufacturer evidence (2026-09-28)
+
+These newly retained PDFs support conditional calculations and candidate screening only. Their presence does not close a schematic finding.
+
+| ID | Manufacturer document | Revision/date | Repository copy and official source | Applied limit |
+| --- | --- | --- | --- | --- |
+| E-LVC-ISO | TI SN74LVC1G125, SCES223U | Rev U, 2026-08 | [local PDF](../../datasheets/product_v1/sn74lvc1g125_datasheet.pdf), [TI PDF](https://www.ti.com/lit/ds/symlink/sn74lvc1g125.pdf) | pp.4-7 input levels, output VOH/VOL at stated load, Ioff, 125-C propagation for conditional Board B audio isolation. |
+| E-I2C-ISO | TI TCA9800, SCPS264B | Rev B, 2020-02 | [local PDF](../../datasheets/product_v1/tca9800_datasheet.pdf), [TI PDF](https://www.ti.com/lit/ds/symlink/tca9800.pdf) | pp.4-7 100-kHz limit, B-side current source, powered-off candidate; not a frozen interface. |
+| E-BUCK-B | TI TPS54334, SLUSC26A | Rev A, 2016-02 | [local PDF](../../datasheets/product_v1/tps54334_datasheet.pdf), [TI PDF](https://www.ti.com/lit/ds/symlink/tps54334.pdf) | pp.4-6 4.2-28-V operation and 0.788-0.812-V reference across stated full temperature/VIN. |
+| E-BUCK-EXCLUDED | TI TPS54302, SLVSDG6C | Rev C, 2026-03 | [local PDF](../../datasheets/product_v1/tps54302_datasheet.pdf), [TI PDF](https://www.ti.com/lit/ds/symlink/tps54302.pdf) | The cited feedback reference accuracy is specified at VIN=12 V; it was not reused as a guarantee over an unbounded input range. |
+| E-QSPI-AN | NXP AN12108, How to Enable Boot from QSPI Flash | Rev 4, 2019 | [local PDF](../../datasheets/product_v1/nxp_an12108_flexspi_boot.pdf), [NXP PDF](https://www.nxp.com/docs/en/application-note/AN12108.pdf) | RT1050/EVK example only; cannot establish Product V1 RT1062 boot straps or FCB. |
+| E-LDO-A | TI TPS7A20, SBVS338H | Rev H, 2024-07 | [local PDF](../../datasheets/power/tps7a20_datasheet_rev_h.pdf), [TI PDF](https://www.ti.com/lit/ds/symlink/tps7a20.pdf) | p.6 DQN fixed 2.8-V tolerance only at VIN >=3.1 V, IOUT 1-300 mA, specified CIN/COUT and junction temperature. |
+| E-BUCK-A | TI TPS62135, SLVSBH3B | Rev B, 2017-04 | [local PDF](../../datasheets/power/tps62135_datasheet_rev_b.pdf), [TI PDF](https://www.ti.com/lit/ds/symlink/tps62135.pdf) | pp.4-7 candidate 5-V to 3.3-V buck constraints; no Product V1 rail approval. |
+| E-EFUSE-B | TI TPS2663, SLVSE94G | Rev G | [local PDF](../../datasheets/power/tps2663_datasheet_rev_g.pdf), [TI PDF](https://www.ti.com/lit/ds/symlink/tps2663.pdf) | Board B eFuse/reverse FET candidate; trip/thermal circuit not frozen. |
+| E-WATCHDOG | TI TPS3431, SNVSB66A | Rev A, 2021-10 | [local PDF](../../datasheets/power/tps3431_datasheet_rev_a.pdf), [TI PDF](https://www.ti.com/lit/ds/symlink/tps3431.pdf) | pp.3-7 independent watchdog candidate; timeout and gate unresolved. |
+| E-SUPERVISOR | TI TPS3760, SBVS420A | Rev A, 2023-09 | [local PDF](../../datasheets/power/tps3760_datasheet_rev_a.pdf), [TI PDF](https://www.ti.com/lit/ds/symlink/tps3760.pdf) | pp.3-9 supervisor candidate; no threshold/hysteresis circuit approved. |
+
+Current NXP [RT1060 documentation listing](https://www.nxp.com/products/i.MX-RT1060) marks `IMXRT1060RM` Rev 4 (2026-01-15) and `MIMXRT105060HDUG` Rev 7 (2025-09-25) **Account Required**. The exact current System Boot/Fuse Map/FlexSPI/CCM/SAI/eDMA/IOMUXC and hardware-guide power/reset/clock/decoupling sections needed for R4 were not available; older public revisions are not substitutes.
+
+## Authorized NXP documents added for R4 owner closure (2026-09-30)
+
+The preceding access note is historical. The project owner has now supplied authorized repository copies. The findings below supersede the earlier `MISSING_AUTHORITATIVE_EVIDENCE` designation for these two documents.
+
+| ID | Manufacturer document | Revision/date | Repository copy | Applied sections |
+| --- | --- | --- | --- | --- |
+| E-MCU-RM4 | NXP, i.MX RT1060 Processor Reference Manual, `IMXRT1060RM` | Rev. 4, 01/2026 | [authorized PDF](../evidence/nxp/IMXRT1060RM.pdf) | System Boot pp.193–214; Fuse Map pp.1287–1288; Audio PLL/CCM pp.1028, 1052, 1056–1058; SAI pp.1977–2020. Physical PDF page numbers; confirm printed chapter pagination when transferring values. |
+| E-MCU-HW7 | NXP, MIMXRT1050/MIMXRT1060 Hardware Design Guide, `MIMXRT105060HDUG` | Rev. 7.0, 2025-09-25 | [authorized PDF](../evidence/nxp/MIMXRT105060HDUG.pdf) | Power and decoupling pp.2–6; reference clock/debug/ROM downloader/boot pp.7–11; FlexSPI boot/layout pp.14–19. |
+| E-WATCHDOG-FAST-SCREEN | Analog Devices, ADM6316/17/18/20/21 watchdog and supervisor family | Rev. I, 2018-03 | [manufacturer PDF](https://www.analog.com/media/en/technical-documentation/data-sheets/ADM6316_6317_6318_6319_6320_6321_6322.pdf) | p.3 Table 2: fastest W option has 4.3–9.3-ms timeout over specified range; candidate screening only, not a selected safety circuit. |

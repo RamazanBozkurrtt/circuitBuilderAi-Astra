@@ -1,0 +1,35 @@
+{
+  "schema_version": "1.0",
+  "phase": "R3",
+  "status": "system_architecture_frozen_with_r4_electrical_and_external_test_dependencies",
+  "source": "docs/product_v1/phase_r3_system_architecture.md",
+  "boards": {
+    "board_a": {
+      "name": "Controller + Audio AFE",
+      "owns": ["four equivalent analog microphone entries", "microphone protection/filter and AFE", "TLV320ADC5140", "i.MX RT1062", "bootable FlexSPI NOR", "24 MHz reference and SAI clocks", "ADC and amplifier system control", "independent watchdog heartbeat/gate", "USB service and SWD/JTAG/pogo programming", "local digital/analog/microphone/flash rails from 5 V"]
+    },
+    "board_b": {
+      "name": "Power + Stereo Class-D",
+      "owns": ["external protected low-voltage DC input", "reverse-polarity/OVP/OCP/eFuse functions", "protected amplifier PVDD", "12 V-class to 5 V buck and Board A delivery", "local 3.3 V amplifier logic", "TAS5825M and two BTL speaker outputs", "local default-off PDN gate and fault response", "power-good generation"]
+    }
+  },
+  "components": {
+    "microphone": "IM73A135V01 provisional; four electrically equivalent channels",
+    "adc": "TLV320ADC5140 provisional",
+    "controller": "i.MX RT1062 provisional",
+    "amplifier": "TAS5825M provisional"
+  },
+  "audio": {
+    "adc_to_mcu": {"format": "TDM", "rate_hz": 96000, "channels": 4, "word_bits": 32, "slot_bits": 32, "slots": 4, "bclk_hz": 12288000, "fsync_hz": 96000, "master": "RT1062_SAI1_RX", "slave": "TLV320ADC5140", "logic_nominal_v": 3.3, "adc_agc_dre": "off", "mclk_required": false, "status": "provisional_r4_pin_timing_proof"},
+    "mcu_to_amp": {"format": "I2S", "rate_hz": 96000, "channels": 2, "word_bits": 32, "slot_bits": 32, "slots": 2, "bclk_hz": 6144000, "lrclk_hz": 96000, "master": "RT1062_SAI2_TX", "slave": "TAS5825M", "logic_nominal_v": 3.3, "board_b_mclk_required": false, "status": "provisional_r4_pin_timing_latency_proof"}
+  },
+  "clock": {"owner": "board_a", "reference": "24 MHz XTALI crystal/oscillator class", "audio_pll": "RT1062 PLL4 candidate, one frequency family for both SAI modules", "adc_clock": "SAI1 BCLK/FSYNC slave PLL", "amp_clock": "SAI2 BCLK/LRCLK, no MCLK", "r4_open": "exact crystal, PLL/dividers, SAI pin mux, phase and startup timing"},
+  "board_interface": "state/board_to_board_interface.json",
+  "interface_active_logical_classes": 10,
+  "interface_provisional_minimum_contacts": 14,
+  "boot": {"direction": "native NXP RT1062 Boot ROM plus external FlexSPI NOR XIP", "status": "provisional_owner_signoff_required_before_r4_boot_circuit_release", "flash_candidate": "ISSI IS25WP064AJBLE-class 1.8 V 64 Mbit / 8 MiB EVK baseline", "factory": "ROM USB/UART flashloader with SWD/JTAG pogo recovery", "field": "wired USB service capability, exact update/security/rollback policy open", "no_teensy_bootloader_dependency": true},
+  "power": {"board_b_input": "protected nominal 12 V class, final headroom open", "board_b_outputs": ["protected PVDD", "nominal 5 V to Board A", "local nominal 3.3 V amp DVDD"], "board_a_from_5v": ["nominal 3.3 V MCU digital/IO", "quiet 3.3 V ADC AVDD", "nominal ~2.75 V microphone AFE", "1.8 V flash/NVCC_SD", "RT1062 internal core DCDC network"], "pgood_owner": "board_b", "r4_open": "input envelope, load/current and tolerance, sequencing, converter/protection parts"},
+  "safety": {"board_b_default": "TAS PDN low on power-off/open cable/invalid PGOOD", "board_a_independent_monitor": "heartbeat-gated AMP_MUTE/ENABLE permission; internal RT1062 WDOG alone insufficient", "amp_reset_state": "Deep Sleep until configured; I2C Play only after READY", "fault_rule": "B local hard fault/PGOOD loss forces PDN low without waiting for A software", "recovery": "return through BOOT_SAFE/SELF_TEST; timing and latch policy R4"},
+  "dependency_graph": {"acyclic": true, "edges": [["external_dc", "board_b_protection"], ["board_b_protection", "board_b_power_good"], ["board_b_protection", "board_b_5v"], ["board_b_5v", "board_a_rails"], ["board_a_rails", "rt1062_boot"], ["rt1062_boot", "watchdog_heartbeat"], ["rt1062_boot", "adc_audio_init"], ["adc_audio_init", "amp_configuration"], ["amp_configuration", "ready"], ["board_b_power_good", "amp_pdn_permission"], ["watchdog_heartbeat", "amp_pdn_permission"], ["amp_pdn_permission", "amp_configuration"], ["ready", "amp_play"]]},
+  "open_architecture_dependencies": ["R4 microphone AFE loading/noise/phase", "R4 SAI PLL/pin/loaded timing and end-to-end latency", "R4 exact flash/boot/security and production sign-off", "R4 rail/current/protection and off-domain isolation", "R4 independent safe-state response and fault recovery", "R7 connector/mechanical constraints", "EVT speaker/headroom/acoustic acceptance"]
+}

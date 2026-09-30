@@ -1,0 +1,148 @@
+{
+  "phase": "R4",
+  "readiness": "BLOCKED",
+  "schematic_implementation_authorized": false,
+  "audio": {
+    "adc_to_mcu": {
+      "rate_hz": 96000,
+      "slots": 4,
+      "slot_bits": 32,
+      "bclk_hz": 12288000,
+      "fsync_hz": 96000
+    },
+    "mcu_to_amp": {
+      "rate_hz": 96000,
+      "slots": 2,
+      "slot_bits": 32,
+      "bclk_hz": 6144000,
+      "lrclk_hz": 96000
+    }
+  },
+  "interface": "state/board_to_board_interface.json",
+  "board": "board_a",
+  "components": {
+    "microphones": {
+      "mpn": "IM73A135V01XTSA1",
+      "quantity": 4,
+      "package": "PG-LLGA-5-2",
+      "pin_map": "Infineon IM73A135V01 datasheet v1.20 Table 8 p.11"
+    },
+    "adc": {
+      "mpn": "TLV320ADC5140IRTWT",
+      "package": "RTW24 WQFN, exposed pad to AVSS",
+      "pin_map": "TI SBAS892A pp.4-5"
+    },
+    "mcu": {
+      "mpn": "MIMXRT1062DVJ6B",
+      "package": "12 x 12 mm 196-ball MAPBGA",
+      "pin_map": "NXP IMXRT1060CEC Rev 4 Table 69 pp.103-111"
+    },
+    "flash": {
+      "mpn": null,
+      "candidate": "IS25WP064AJBLE",
+      "voltage_v": 1.8,
+      "capacity_mbit": 64,
+      "status": "BLOCKED_ROM_BOOT_AND_PACKAGE_PROOF"
+    }
+  },
+  "microphone_afe": {
+    "channels": 4,
+    "electrically_equivalent": true,
+    "microphone_supply_v": 2.75,
+    "adc_avdd_v": 3.3,
+    "adc_iovdd_v": 3.3,
+    "candidate": "four dual OPA2320 unity buffers (one per differential leg), then AC-coupled differential ADC inputs",
+    "status": "BLOCKED_TOPOLOGY_AND_VALUES_NOT_VERIFIED",
+    "missing": [
+      "exact OPA2320 OPN/package, guaranteed load/noise at full conditions",
+      "coupling and RC values/tolerance/phase",
+      "ESD capacitance and cable load",
+      "ADC PGA and HPF/filter register profile",
+      "clipping and noise across bounded SPL and temperature"
+    ]
+  },
+  "power_tree": {
+    "input": "5 V from Board B",
+    "rails": [
+      {
+        "name": "MCU_3V3",
+        "nominal_v": 3.3,
+        "regulator_mpn": null,
+        "status": "BLOCKED"
+      },
+      {
+        "name": "ADC_AVDD_3V3",
+        "nominal_v": 3.3,
+        "regulator_mpn": null,
+        "status": "BLOCKED"
+      },
+      {
+        "name": "MIC_AFE_2V75",
+        "nominal_v": 2.75,
+        "regulator_mpn": null,
+        "status": "BLOCKED"
+      },
+      {
+        "name": "FLASH_SD1_1V8",
+        "nominal_v": 1.8,
+        "regulator_mpn": null,
+        "status": "BLOCKED"
+      },
+      {
+        "name": "RT1062_CORE_INTERNAL_DCDC",
+        "nominal_v": null,
+        "regulator_mpn": "internal RT1062 with external inductor/capacitors",
+        "status": "BLOCKED_CURRENT_GUIDE_AND_NETWORK"
+      }
+    ],
+    "load_budget_a": null,
+    "sequence_verified": false,
+    "rt1062_hardware_guide": "NXP MIMXRT105060HDUG Rev 7 pp.2-6: SNVS before/tied HIGH; DCDC_PSWITCH RC 5-15 ms, >=1 ms post DCDC stable; 4.7-10 uH Isat >1 A ESR <0.2 ohm; 33 uF DCDC output; Table 2 decoupling. Component selection/derating pending."
+  },
+  "sheets": [
+    {
+      "name": "A1 Microphone ports and protection",
+      "status": "BLOCKED",
+      "reason": "AFE cable/ESD/filter values open"
+    },
+    {
+      "name": "A2 AFE and ADC",
+      "status": "BLOCKED",
+      "reason": "coupling/gain/ADC decoupling/registers open"
+    },
+    {
+      "name": "A3 RT1062 core",
+      "status": "BLOCKED",
+      "reason": "complete pin/supply/decoupling map open"
+    },
+    {
+      "name": "A4 Flash boot and clocks",
+      "status": "BLOCKED",
+      "reason": "ROM straps, exact flash, crystal/PLL open"
+    },
+    {
+      "name": "A5 Board A power",
+      "status": "BLOCKED",
+      "reason": "regulator guarantees, loads and sequence open"
+    },
+    {
+      "name": "A6 USB debug and service",
+      "status": "BLOCKED",
+      "reason": "USB/reference/debug/fixture circuit open"
+    },
+    {
+      "name": "A7 Safety and Board B interface",
+      "status": "BLOCKED",
+      "reason": "watchdog, off-domain and thresholds open"
+    }
+  ],
+  "r4_closure_evidence": {
+    "mic_ldo_candidate": "TPS7A2028PDQNR; conditional 2.758-2.842 V only at VIN >= 3.1 V, IOUT 1-300 mA, specified capacitors and -40..125 C; TI TPS7A20 SBVS338H",
+    "audio_bclk_hz": 12288000,
+    "boot_evidence": "NXP IMXRT1060RM Rev 4 pp.193-214,1028,1052,1056-1058,1977-2020 and MIMXRT105060HDUG Rev 7 pp.2-11,14-19 now available; exact flash/FCB/fuses/reset circuit still open",
+    "closure_status": "BLOCKED",
+    "nxp_manual_access": "RESOLVED_2026-09-30",
+    "sai_frequency_plan": "24 MHz -> PLL4 786.432 MHz /4 -> SAI1/2 24.576 MHz -> BCLK 12.288/6.144 MHz; cross-SAI frame phase not hardware synchronous",
+    "adc_timing": "At 25 C, 20 pF: ADC SDOUT tmax 18 ns; MCU setup 15 ns; 12.288 MHz half-period 40.69 ns; 7.69 ns before skew, 2.69 ns at proposed 5 ns skew. Not full-temperature proof."
+  }
+}

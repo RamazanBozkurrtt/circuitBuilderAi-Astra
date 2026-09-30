@@ -12,15 +12,27 @@
       "source": "docs/product/ANC_B2B_Custom_PCB_2_Kart_Mimari_Tasarim_Dokumani_v1.0.docx",
       "location": "§2.2 ANC target; figure 1; §12 item 4",
       "note": "No complete quantitative ANC acceptance mask is given."
+    },
+    {
+      "source": "docs/product_v1/phase_r3_system_architecture.md",
+      "location": "sections 2 and 6",
+      "note": "R3 disposition: The R3 bounded prototype envelope is four-in/two-out at 96 kHz with an exploratory 80?800-Hz sweep. No manufacturer source or owner message supplies a quantified attenuation/latency acceptance mask; final product performance remains a physical/acoustic validation gate, so R3 claims no performance pass. Earlier R1 criterion remains in repository history. Prior R1 status=open, blocker=R3, closure criterion: Product owner and controls/acoustic lead approve a measurable operating band, attenuation/latency target or a clearly bounded prototype envelope, plus conditions and measurement method before R3 architecture freeze; physical performance remains unproven until EVT."
+    },
+    {
+      "source": "docs/product_v1/phase_r4_schematic_readiness.md",
+      "location": "section 6 clock/latency boundary",
+      "note": "R4 preflight reviewed this finding. External physical/acoustic/mechanical closure remains phase-scoped; R4 did not close it."
     }
   ],
-  "calculation_reference": [],
-  "status": "open",
+  "calculation_reference": [
+    "docs/product_v1/phase_r3_system_architecture.md"
+  ],
+  "status": "deferred",
   "blocking": true,
   "discovered_at": "2026-09-26T10:41:41Z",
-  "blocks_from_phase": "R3",
+  "blocks_from_phase": "R12",
   "decision_id": null,
-  "closure_criterion": "Product owner and controls/acoustic lead approve a measurable operating band, attenuation/latency target or a clearly bounded prototype envelope, plus conditions and measurement method before R3 architecture freeze; physical performance remains unproven until EVT.",
-  "resolved_by": null,
-  "resolution": null
+  "closure_criterion": "Owner and controls/acoustic lead approve measured ANC operating band, attenuation/latency limits and method before R12 physical performance qualification; R4 must retain a latency budget and ability to measure it.",
+  "resolved_by": "R3 architecture disposition; later closure required",
+  "resolution": "The R3 bounded prototype envelope is four-in/two-out at 96 kHz with an exploratory 80?800-Hz sweep. No manufacturer source or owner message supplies a quantified attenuation/latency acceptance mask; final product performance remains a physical/acoustic validation gate, so R3 claims no performance pass."
 }
