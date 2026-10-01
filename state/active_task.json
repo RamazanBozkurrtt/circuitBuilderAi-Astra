@@ -1,0 +1,35 @@
+{
+  "phase": "R4-A2",
+  "objective": "Close the remaining genuine Board A schematic-entry blockers",
+  "scope": "board_a",
+  "blockers": [
+    "AFE electrical bounds",
+    "boot hardware",
+    "hardware-relevant recovery policy",
+    "Board A load and thermal proof",
+    "startup and POR proof"
+  ],
+  "must_read": [
+    "state/project_state.json",
+    "state/board_a_schematic_contract.json",
+    "state/rt1062_pin_resource_map.json",
+    "validation/r4a_gate_result.json"
+  ],
+  "read_on_demand": [
+    "validation/r4a_board_a_closure.md",
+    "docs/product_v1/component_evidence_index.md",
+    "state/product_v1_component_contract.json"
+  ],
+  "do_not_read_by_default": [
+    "R0-R3 reports",
+    "legacy hardware",
+    "Board B material",
+    "unrelated findings",
+    "old validation history"
+  ],
+  "constraints": {
+    "modify_kicad": false,
+    "begin_r5": false,
+    "change_r3_architecture": false
+  }
+}

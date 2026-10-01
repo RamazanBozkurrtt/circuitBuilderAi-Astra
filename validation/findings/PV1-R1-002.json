@@ -37,18 +37,39 @@
       "source": "docs/product_v1/phase_r4_schematic_readiness.md",
       "location": "section 10, authorized-manual and owner-input closure audit, 2026-09-30",
       "note": "Authorized NXP RM Rev 4 pp.193-214 and HW Guide Rev 7 pp.7-11,14-19 now establish ROM boot modes, FlexSPI A default pads, FCB and boot/reset guidance. Missing-authoritative-evidence flag retired. Exact flash/FCB/fuse-security policy, straps, fixture and reset circuit still prevent closure."
+    },
+    {
+      "source": "validation/r4a_board_a_closure.md",
+      "location": "section 2, R4-A boot circuit decision",
+      "note": "Selected IS25WP064AJBLE 1.8-V 64-Mbit FlexSPI A flash from NXP EVKB reference and explicit 4.7-kohm BOOT_MODE, 10-kohm BT_CFG, 1-kohm fixture override values. MCU_3V3 POR supervisor TPS389030DSER has a bounded threshold; other-rail gate, exact flash command/FCB image, production fuse/security/update policy and bench recovery remain open."
+    },
+    {
+      "source": "validation/r4a_board_a_closure.md",
+      "location": "section 4, R4-A gate semantics audit, 2026-09-30",
+      "note": "Original R4 boot closure mixed hardware and execution tests. R4 still requires exact flash command/FCB configuration, strap and recovery circuit proof, and hardware-affecting factory/field/security policy. A built and tested boot image plus physical recovery execution stay open with required_by_phase R14 in the project-state R4-A requirement ledger."
+    },
+    {
+      "source": "state/rt1062_pin_resource_map.json",
+      "location": "r4a_board_a_selection.boot_straps, R4-A2 2026-10-01",
+      "note": "V1 hardware policy frozen: unfused native internal boot, no OTP security fuses or OTA path, and powered ROM LPUART1 fixture for factory and field service. NXP CEC Rev 4 Table 22 guaranteed GPIO thresholds and opposing-pull/input leakage limits support the 4.7-kohm/1-kohm static strap corner calculation. Complete FCB, reset, clock and recovery electrical implementation remain open; tested image/recovery remains R14."
+    },
+    {
+      "source": "validation/r4a_board_a_closure.md",
+      "location": "R4-A manufacturer reassessment, 2026-10-01",
+      "note": "NXP RM Rev 4 Tables 9-15/9-18 define the FCB fields and AN12108 treats boot header/image generation as a firmware flow. The selected one-pad 03h profile is deterministic; binary LUT/image validation belongs to R14. Hardware timing, crystal, reset and powered service fixture remain R4-A. NXP HW Guide Rev 7 Tables 8-10 guide UART pullups, boot straps and POR."
     }
   ],
   "calculation_reference": [
     "docs/product_v1/phase_r2_component_verification.md",
-    "docs/product_v1/phase_r3_system_architecture.md"
+    "docs/product_v1/phase_r3_system_architecture.md",
+    "validation/r4a_closure_calculations.py"
   ],
   "status": "accepted",
   "blocking": true,
   "discovered_at": "2026-09-26T10:41:41Z",
   "blocks_from_phase": "R4",
   "decision_id": "D2",
-  "closure_criterion": "Record owner approval of native NXP boot and verify exact flash, boot straps, factory/field recovery and security policy before R4 PASS.",
+  "closure_criterion": "R4-A: prove flash 03h at ROM 30 MHz and voltage compatibility, boot straps, crystal, reset and powered ROM-UART fixture circuit with exact values. Freeze FCB field semantics and recovery/security policy affecting hardware. Generate/check exact FCB bytes and test boot/recovery at R14.",
   "resolved_by": "R3 architecture disposition; later closure required",
   "resolution": "Provisional native NXP boot direction selected for R3. Owner sign-off, exact flash/boot/recovery/security path and production fixture are required before R4 boot-circuit readiness."
 }

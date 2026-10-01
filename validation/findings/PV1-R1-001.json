@@ -37,17 +37,38 @@
       "source": "docs/product_v1/phase_r4_schematic_readiness.md",
       "location": "section 10, authorized-manual and owner-input closure audit, 2026-09-30",
       "note": "New NXP manuals do not determine IM73A135-to-ADC analog topology. Four identical, worst-case verified mic buffer/bias/filter/ESD/noise/headroom circuits still absent."
+    },
+    {
+      "source": "validation/r4a_board_a_closure.md",
+      "location": "section 1, R4-A circuit decision and calculations",
+      "note": "Selected four OPA2320AIDGKR dual unity buffers, per-port TPD2E2U06DRLR, symmetric 100-ohm input and 47-ohm/1-nF output filtering, and 10-uF 5% film AC coupling. 20-kohm ADC input setting is typical only: the calculated 0.84-Hz upper high-pass corner at 5% low capacitance is conditional, so worst-case phase/noise and cable/ESD loading plus targeted bench proof remain open."
+    },
+    {
+      "source": "validation/r4a_board_a_closure.md",
+      "location": "section 4, R4-A gate semantics audit, 2026-09-30",
+      "note": "Original closure wording required targeted bench proof before R4. Schematic-entry electrical bounds remain required by R4; the selected-harness four-channel 96-kHz physical bench sweep stays open with required_by_phase R14 in the project-state R4-A requirement ledger. No electrical criterion was retired."
+    },
+    {
+      "source": "https://www.ti.com/lit/ds/symlink/tlv320adc5140.pdf",
+      "location": "SBAS892A section 7.5 p.7 and 7.5 pp.8-10; R4-A2 manufacturer check 2026-10-01",
+      "note": "20-kohm ADC input impedance is listed only as typical; 96-kHz decimation response is specified but electrical SNR/current table is at 48 kHz. No minimum ADC impedance or full-temperature 96-kHz noise guarantee was found, so the existing coupling corner cannot be certified. Finding remains open; later bench obligation remains R14."
+    },
+    {
+      "source": "validation/r4a_board_a_closure.md",
+      "location": "R4-A manufacturer reassessment, 2026-10-01",
+      "note": "TI SBAS892A gives selectable ADC impedances as typical and specifies 48-kHz SNR; TI SBAA395B is a four-analog-microphone performance example and SBAU335 Figure 25 shows EVM AC-coupling provisions. No source guarantees this product?s 96-kHz noise/phase. Preserve physical sweep for R14; the Infineon 100-pF/25-kohm mic load and ADC voltage/backfeed electrical proof remain R4-A."
     }
   ],
   "calculation_reference": [
-    "docs/product_v1/phase_r2_component_verification.md"
+    "docs/product_v1/phase_r2_component_verification.md",
+    "validation/r4a_closure_calculations.py"
   ],
   "status": "open",
   "blocking": true,
   "discovered_at": "2026-09-26T10:41:41Z",
   "blocks_from_phase": "R4",
   "decision_id": "D1",
-  "closure_criterion": "Approve an analog interface contract covering topology, coupling, common mode, bias, gain, headroom, anti-alias response, noise and low-frequency ANC response, backed by R2 device evidence and targeted bench/reference-circuit validation before R4 PASS.",
+  "closure_criterion": "R4-A: freeze schematic-ready four-channel topology, exact parts/values and prove microphone 25-kohm/100-pF operating load, ADC recommended/absolute input voltage, buffer drive and power-state safety with worst-case calculations. Typical ADC impedance supports nominal response only. Provide adjustable coupling/filter values; measured 96-kHz noise, response, clipping and phase remain open at R14.",
   "resolved_by": null,
   "resolution": null
 }

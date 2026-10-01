@@ -389,7 +389,7 @@
         "NVCC_PLL": "P10"
       },
       "source": "NXP IMXRT1060CEC Rev 4 Tables 85-86 pp.104,111; HW Guide Rev 7 p.7",
-      "status": "BLOCKED_CRYSTAL_MPN_LOAD"
+      "status": "SELECTED_CRYSTAL_CANDIDATE_LOAD_AND_OSCILLATOR_PROOF_OPEN"
     },
     {
       "function": "POR_B_ONOFF_DCDC_PSWITCH",
@@ -399,7 +399,7 @@
         "DCDC_PSWITCH": "K3"
       },
       "source": "NXP IMXRT1060CEC Rev 4 Tables 85-86 pp.104,110-111; HW Guide Rev 7 pp.4-5,10-11",
-      "status": "BLOCKED_SUPERVISOR_THRESHOLD"
+      "status": "SELECTED_3V3_SUPERVISOR_OTHER_RAIL_AND_POR_SEQUENCE_PROOF_OPEN"
     },
     {
       "function": "SWD_debug",
@@ -415,7 +415,7 @@
     {
       "function": "all_supply_balls",
       "source": "NXP IMXRT1060CEC Rev 4 Table 85 p.104; HW Guide Rev 7 Table 2 p.3",
-      "status": "BLOCKED_POWER_CIRCUIT"
+      "status": "SELECTED_DCDC_VALUES_EFFECTIVE_CAP_RAMP_AND_RAIL_MAP_OPEN"
     }
   ],
   "collision_check": {
@@ -425,10 +425,10 @@
     "result": "PASS_FOR_LISTED_PROVISIONAL_PADS_ONLY"
   },
   "missing_r5_facts": [
-    "exact 24-MHz crystal MPN and load",
+    "24-MHz crystal candidate load capacitance, start margin and USB frequency proof",
     "reset/supervisor threshold and RC circuit",
     "USB protection/VBUS and fixture circuit",
-    "exact flash MPN/package and FCB image",
+    "selected flash ISSI command/package verification and FCB binary/boot test",
     "BT_FUSE_SEL manufacturing/security policy",
     "complete powered-off pin behavior",
     "SAI inter-peripheral frame phase (no hardware sync) and bounded latency"
@@ -467,5 +467,103 @@
     "initial_read_hz": 30000000,
     "flexspi_b_direct_boot": false,
     "source": "NXP IMXRT1060RM Rev 4 pp.193-200,210-214; HW Guide Rev 7 pp.9,14-15"
+  },
+  "r4a_board_a_selection": {
+    "flash": {
+      "mpn": "IS25WP064AJBLE",
+      "capacity_mbit": 64,
+      "vcc_v": 1.8,
+      "connection": "FlexSPI_A_SS0_B GPIO_SD_B1_06, SCLK GPIO_SD_B1_07, IO0..3 GPIO_SD_B1_08..11 on NVCC_SD1=1.8 V",
+      "source": "NXP MIMXRT1060-EVKB user manual Table 17 p.20 and NXP IMXRT1060RM Rev 4 pp.194,212-213",
+      "status": "PART_AND_BOOT_COMMAND_PROFILE_SELECTED_HARDWARE_TIMING_OPEN_FCB_BINARY_R14",
+      "rom_read_profile": "Unfused internal boot: 0x03 normal read, 24-bit address, one data pad, 30-MHz ROM initial clock; no QE bit or quad command needed for first boot. ISSI Rev A11 section 9.3 gives NORD at 50 MHz <=12 mA core current, excluding output switching. ISSI Rev A11 section 9.6 guarantees 03h fC <=50 MHz over its operating range, so the ROM 30-MHz frequency is within that bound (0.60x fmax); setup/hold/output path margin on this board remains to be calculated.",
+      "fcb_configuration_profile": {
+        "source": "NXP IMXRT1060RM Rev 4 Table 9-15 pp.222-224 and Table 9-18 p.226; ISSI IS25WP064A Rev A11 Table 8.1 and section 9.3",
+        "flash_offset": 0,
+        "length_bytes": 512,
+        "tag_hex": "0x42464346",
+        "version_hex": "0x56010000",
+        "read_sample_clock_source": 0,
+        "cs_hold_cycles": 3,
+        "cs_setup_cycles": 3,
+        "device_mode_configuration_enabled": false,
+        "config_commands_enabled": false,
+        "device_type_serial_nor": 1,
+        "serial_flash_pad_type": 1,
+        "serial_clock_frequency_code_30mhz": 1,
+        "sflash_a1_size_bytes": 8388608,
+        "other_flash_ports_size_bytes": 0,
+        "page_size_bytes": 256,
+        "sector_size_bytes": 4096,
+        "ip_command_clock_frequency_code_30mhz": 1,
+        "lut_read_index_0": "03h command / 24-bit address / one-pad read",
+        "lut_read_status_index_1": "05h command / one-pad status read",
+        "lut_write_enable_index_3": "06h command, one pad",
+        "lut_sector_erase_index_5": "20h command / 24-bit address, one pad",
+        "lut_page_program_index_9": "02h command / 24-bit address / one-pad write",
+        "status_busy_offset": 0,
+        "status_busy_polarity": 0,
+        "generated_binary_test_required_by_phase": "R14",
+        "status": "FIELD_SEMANTICS_SELECTED_BINARY_LUT_AND_BOOT_TEST_R14_HARDWARE_TIMING_R4A",
+        "binary_image_boundary": "The exact 512-byte FCB and LUT opcode encoding is produced and verified with the boot firmware at R14; R4-A still requires flash 03h read and ROM 30-MHz electrical/timing compatibility."
+      },
+      "program_erase_core_current_max_ma_at_125c": 30
+    },
+    "boot_straps": {
+      "normal_unfused_mode_bits_1_0": "10 internal boot",
+      "mode1_gpio_ad_b0_05": "4.7-kohm 1% pullup to NVCC_GPIO 3.3 V",
+      "mode0_gpio_ad_b0_04": "4.7-kohm 1% pulldown to GND",
+      "recovery_mode_bits_1_0": "01 serial downloader forced by fixture before POR_B release",
+      "recovery_fixture": "Powered service fixture forces MODE1 low and MODE0 high through separate 1-kohm 1% resistors before POR_B release; use ROM LPUART1 only. Fixture outputs high-Z whenever NVCC_GPIO is absent; ROM USB is not required for recovery.",
+      "bt_cfg_0_to_11_development": "10-kohm individual pulldown to GND, all zero for FlexSPI NOR 3-byte 0x03 initial read; reserve all 12 pads",
+      "production_fuses": "V1 freezes factory-default BOOT_CFG, BT_FUSE_SEL=0 and open HAB security state; no OTP fuse programming in factory or field. MODE[1:0]=10 and BT_CFG[11:0]=0 remain the physical boot source. Reconsidering fuses requires a new hardware/security review.",
+      "factory_and_field_route": "Factory image programming and in-field service recovery use the same enclosed powered fixture on MODE0/1, POR_B, LPUART1 TX/RX, MCU_3V3 sense and GND. No application/OTA update path is claimed for V1; return-to-service fixture access is the field route. SWD is a development/service debug path, not needed by ROM downloader.",
+      "v1_policy": {
+        "boot_fuse_select": 0,
+        "otp_programming": false,
+        "hab_closed": false,
+        "factory_route": "rom_lpuart1_powered_fixture",
+        "field_route": "rom_lpuart1_powered_service_fixture",
+        "ota_update": false,
+        "usb_recovery_required": false
+      },
+      "static_threshold_proof": "NXP CEC Rev 4 Table 22 pp.37-38: VIH>=0.7 NVCC, VIL<=0.3 NVCC; opposing 100-k internal pull <=48 uA and input leakage <=1 uA. 4.7-k/1-k 1% network worst ratios calculated in validation/r4a_closure_calculations.py; normal and forced levels pass static thresholds.",
+      "source": "NXP IMXRT1060RM Rev 4 pp.197-200,210-213; NXP HW Guide Rev 7 pp.9-11"
+    },
+    "clock_and_debug": {
+      "crystal_candidate_mpn": "ECS-240-8-33B2-CKM-TR3",
+      "crystal_mhz": 24,
+      "crystal_cl_pf": 8,
+      "crystal_esr_max_ohm": 40,
+      "xtali_bias_to_ground_ohm": 2200000,
+      "crystal_load_cap_per_side_candidate_pf": 12,
+      "load_cap_assumed_stray_per_side_pf": 2,
+      "load_cap_status": "CANDIDATE_REQUIRES_PCB_PARASITIC_AND_USB_CLOCK_TEST",
+      "jtag_mod_and_trst_b_pulldown_ohm": 4700,
+      "service_uart_tx_rx_pullup_ohm": 10000,
+      "swd": "SWDIO E14 and SWCLK F12 to powered fixture with POR_B, GND and 3V3 reference; fixture must not drive an unpowered NVCC_GPIO bank",
+      "source": "NXP HW Guide Rev 7 pp.7-9; ECS ECS-240-8-33B2-CKM-TR3 manufacturer product page"
+    },
+    "power": {
+      "snvs_tied_to_high_in": true,
+      "dcdc_pswitch_r_ohm": 30000,
+      "dcdc_pswitch_c_uf": 0.22,
+      "dcdc_inductor_mpn": "XFL4020-472MEC",
+      "dcdc_output_effective_cap_min_uf": 33,
+      "source": "NXP HW Guide Rev 7 pp.2-6; Coilcraft XFL4020-472 manufacturer product page",
+      "status": "VALUES_SELECTED_CAP_DERATING_RAMP_AND_RESET_PROOF_OPEN"
+    },
+    "reset": {
+      "supervisor_mpn": "TPS389030DSER",
+      "sense": "MCU_3V3",
+      "por_b_pullup_ohm": 10000,
+      "ct_cap_nf": 10,
+      "ct_cap_tolerance_pct": 10,
+      "fall_threshold_min_v": 2.8611,
+      "rise_threshold_max_v": 2.9361,
+      "mr": "reserve for all-other-rails-valid logic; circuit still open",
+      "source": "TI TPS3890 SLVSD65A pp.3-5; NXP HW Guide Rev 7 pp.10-11",
+      "status": "MCU_3V3_THRESHOLD_SELECTED_OTHER_RAIL_GATE_AND_POWERUP_WAVEFORM_OPEN"
+    }
   }
 }

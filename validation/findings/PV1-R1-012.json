@@ -37,17 +37,43 @@
       "source": "docs/product_v1/phase_r4_schematic_readiness.md",
       "location": "section 10, authorized-manual and owner-input closure audit, 2026-09-30",
       "note": "NXP HW Guide Rev 7 pp.2-6 now supplies current DCDC, sequence and decoupling guidance; owner removes PoC 10-A assumption. Selected regulators/protection and guaranteed rail/load/threshold budgets remain open."
+    },
+    {
+      "source": "validation/r4a_board_a_closure.md",
+      "location": "section 3, Board A portion only",
+      "note": "Selected Board A 3.3-V buck, ADC/AFE 3.3-V LDO, mic 2.8-V LDO, flash 1.8-V LDO, NXP internal-DCDC values and a TPS389030DSER MCU_3V3 POR threshold. Voltage corners are conditionally calculated. Guaranteed 96-kHz ADC current, capacitor effective values, thermal/load/transient, other-rail gate and POR timing are unresolved; Board B and full interface protection remain outside R4-A."
+    },
+    {
+      "source": "validation/r4a_board_a_closure.md",
+      "location": "section 4, R4-A gate semantics audit, 2026-09-30",
+      "note": "R4-A requires Board A guaranteed load, component derating, thermal and startup/POR calculations plus exact circuit values. Populated-board thermal and waveform tests stay open with required_by_phase R14 in the project-state R4-A requirement ledger. Board B/interface electrical closure remains required for global R4 but outside focused R4-A."
+    },
+    {
+      "source": "https://www.issi.com/WW/pdf/25WP064A.pdf",
+      "location": "IS25WP064A Rev A11 section 9.3 p.94; R4-A2 2026-10-01",
+      "note": "Flash core program/erase/status-write current maximum is 30 mA at 125 C and normal-read maximum is 12 mA at 50 MHz, but the read-current footnote excludes output switching. This closes only the flash core segment, not the 1.8-V rail or Board A load budget. TI TLV320ADC5140 SBAS892A p.10 lists only typical 48-kHz supply currents; TPS62135 SLVSBH3B gives soft-start source current but not a guaranteed overall output ramp, so load, thermal and startup proofs remain open."
+    },
+    {
+      "source": "validation/r4a_board_a_closure.md",
+      "location": "R4-A manufacturer reassessment, 2026-10-01",
+      "note": "TI SBAA379 Table 1 provides 25.68-mA typical AVDD at four-channel 96-kHz PLL-on DRE-off linear phase, and excludes I/O. NXP AN12245 Table 8 reports EVK XIP measurements. Neither is a guaranteed maximum; use explicit design reserve and prove regulators, derating, rail validity and POR. Measured consumption/thermal/ramp stay R14; Board B remains outside this focused gate."
+    },
+    {
+      "source": "validation/r4a_board_a_closure.md",
+      "location": "section 3.1-3.2, Board A load and thermal subtask, 2026-10-01",
+      "note": "Four local rail budgets and a 5-V receiving budget now itemize every connected consumer, NXP/Infineon/TI/ISSI current-limit applicability, design-only ADC/I/O/transient/ground-current ceilings, regulator voltage range, reference-board loss and thermal margins, protection and exact proposed values. 75-mA ADC LDO, 350-mA MCU buck and 750-mA 5-V input ceilings are design allocations, not guaranteed device consumption maxima. Closure remains open for guaranteed or formally accepted current/loss ceilings, exact derated capacitor and hot-inductor selections, product-board thermal path and fault-energy enforcement. Startup/POR and Board B/interface are separate open requirements; R14 physical tests remain mandatory."
     }
   ],
   "calculation_reference": [
-    "docs/product_v1/phase_r2_component_verification.md"
+    "docs/product_v1/phase_r2_component_verification.md",
+    "validation/r4a_closure_calculations.py"
   ],
   "status": "open",
   "blocking": true,
   "discovered_at": "2026-09-26T10:41:41Z",
   "blocks_from_phase": "R4",
   "decision_id": null,
-  "closure_criterion": "Before R4 PASS, document Board B input/protected rail and 5 V envelopes, Board A rail sources/loads, peak/transient current, return-contact budget, protection thresholds, startup/shutdown and fault states; support all bounds with R2 device evidence and worst-case calculation. Do not copy legacy rails or supervisor networks.",
+  "closure_criterion": "Focused R4-A: the section 3 engineering allocation is calculated but 012_a_load_power remains open until the 96-kHz/128-ratio ADC 50/5-mA ceilings and LDO ground-current ceiling are guaranteed or formally accepted and enforced; buck >=70% efficiency or <=0.514-W loss at the stated corner is established; exact capacitor MPN/effective values and hot inductor data are verified; product-board thermal paths and local ambient keep each junction <=125 C; and the 750-mA input/fault-energy limit is enforceable. Startup/shutdown and all-rail POR are a separate 012_a_startup requirement. Actual consumption, thermal and ramp measurements stay R14. Board B/interface closure remains required by global R4 only.",
   "resolved_by": null,
   "resolution": null
 }

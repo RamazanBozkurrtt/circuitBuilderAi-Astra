@@ -38,27 +38,51 @@
       "pin_map": "NXP IMXRT1060CEC Rev 4 Table 69 pp.103-111"
     },
     "flash": {
-      "mpn": null,
+      "mpn": "IS25WP064AJBLE",
       "candidate": "IS25WP064AJBLE",
       "voltage_v": 1.8,
       "capacity_mbit": 64,
-      "status": "BLOCKED_ROM_BOOT_AND_PACKAGE_PROOF"
+      "status": "SELECTED_UNFUSED_SINGLE_PAD_BOOT_PENDING_COMPLETE_FCB_AND_RESET_PROOF",
+      "rom_read_profile": "IS25WP064AJBLE, 0x03 one-pad normal read, 24-bit address, 30-MHz ROM initial clock, no quad-enable dependency; FCB field semantics selected in state/rt1062_pin_resource_map.json, LUT binary encoding and timing proof still open",
+      "service_policy": "V1 uses unfused native FlexSPI boot. Factory and field service use powered ROM LPUART1 downloader fixture; no application/OTA field update or OTP fuse programming. ROM USB is not a recovery dependency."
     }
   },
   "microphone_afe": {
     "channels": 4,
     "electrically_equivalent": true,
-    "microphone_supply_v": 2.75,
+    "microphone_supply_v": 2.8,
     "adc_avdd_v": 3.3,
     "adc_iovdd_v": 3.3,
-    "candidate": "four dual OPA2320 unity buffers (one per differential leg), then AC-coupled differential ADC inputs",
-    "status": "BLOCKED_TOPOLOGY_AND_VALUES_NOT_VERIFIED",
+    "candidate": "Four OPA2320AIDGKR dual unity buffers, one amplifier per differential leg; TPD2E2U06DRLR at each mic connector; symmetric buffered AC coupling to ADC",
+    "status": "SELECTED_TOPOLOGY_PENDING_MIC_LOAD_ADC_PIN_AND_POWER_STATE_ELECTRICAL_PROOF",
+    "r4a_selected_circuit": {
+      "buffer_mpn": "OPA2320AIDGKR",
+      "buffer_quantity": 4,
+      "gain_v_per_v": 1,
+      "esd_mpn_per_port": "TPD2E2U06DRLR",
+      "input_series_per_leg_ohm": 100,
+      "output_series_per_leg_ohm": 47,
+      "output_shunt_per_leg_pf": 1000,
+      "ac_coupling_per_leg_uf": 10,
+      "ac_coupling_tolerance_pct": 5,
+      "ac_coupling_candidate_mpn": "MKS2B051001N00JSSD",
+      "adc_input_impedance_setting": "20 kohm typical per pin (P0_R60/65/70/75 bits[3:2]=10)",
+      "adc_pga_gain_db": 0,
+      "adc_dre_agc": "disabled at four analog channels, 96 kHz",
+      "adc_vref_v": 2.75,
+      "adc_hpf": "P0_R107 bits[1:0]=00 with default all-pass coefficients P4_R72..83; verify register readback",
+      "adc_input_quick_charge": "P0_R5 bits[5:4]=11 for 50-ms typical quick-charge duration; verify 10-uF settled before capture",
+      "harness_capacitance_allocation_pf_per_leg": 75,
+      "esd_capacitance_pf_typical": 1.5,
+      "status": "TOPOLOGY_SELECTED_ELECTRICAL_COMPATIBILITY_OPEN_96KHZ_PERFORMANCE_R14",
+      "calculation": "validation/r4a_closure_calculations.py",
+      "performance_provision": "Symmetric 10-uF film coupling, 47-ohm/1-nF output filter and ADC 20-kohm selectable impedance are adjustable after R14 sweep; 20-kohm and 0.838-Hz corner are nominal only. No guaranteed 96-kHz noise/phase claim at R4-A."
+    },
     "missing": [
-      "exact OPA2320 OPN/package, guaranteed load/noise at full conditions",
-      "coupling and RC values/tolerance/phase",
-      "ESD capacitance and cable load",
-      "ADC PGA and HPF/filter register profile",
-      "clipping and noise across bounded SPL and temperature"
+      "R4-A: prove installed mic port total capacitance <=100 pF and resistance >=25 kohm per Infineon Table 6, including harness/ESD/PCB and input across temperature",
+      "R4-A: prove ADC recommended/absolute input voltage, OPA output current and powered-off/backfeed corners with selected coupling and startup topology",
+      "R4-A: confirm film coupling capacitor tolerance, temperature and orderable part; retain adjustable coupling/filter provision",
+      "R14: measure four-channel 96-kHz noise, response, phase, clipping and coupling settling; ADC 20-kohm setting is typical and cannot guarantee analog corner"
     ]
   },
   "power_tree": {
@@ -67,63 +91,102 @@
       {
         "name": "MCU_3V3",
         "nominal_v": 3.3,
-        "regulator_mpn": null,
-        "status": "BLOCKED"
+        "regulator_mpn": "TPS62135RGXR",
+        "status": "SELECTED_PENDING_LOAD_CAPACITOR_AND_RAMP_PROOF"
       },
       {
         "name": "ADC_AVDD_3V3",
         "nominal_v": 3.3,
-        "regulator_mpn": null,
-        "status": "BLOCKED"
+        "regulator_mpn": "TPS7A2033PDQNR",
+        "status": "SELECTED_PENDING_96KHZ_LOAD_AND_THERMAL_PROOF"
       },
       {
-        "name": "MIC_AFE_2V75",
-        "nominal_v": 2.75,
-        "regulator_mpn": null,
-        "status": "BLOCKED"
+        "name": "MIC_2V8",
+        "nominal_v": 2.8,
+        "regulator_mpn": "TPS7A2028PDQNR",
+        "status": "SELECTED_GUARANTEED_VOLTAGE_CONDITIONAL_ON_INPUT_AND_LOAD"
       },
       {
         "name": "FLASH_SD1_1V8",
         "nominal_v": 1.8,
-        "regulator_mpn": null,
-        "status": "BLOCKED"
+        "regulator_mpn": "TPS7A2018PDQNR",
+        "status": "SELECTED_GUARANTEED_VOLTAGE_CONDITIONAL_ON_INPUT_AND_LOAD"
       },
       {
         "name": "RT1062_CORE_INTERNAL_DCDC",
         "nominal_v": null,
         "regulator_mpn": "internal RT1062 with external inductor/capacitors",
-        "status": "BLOCKED_CURRENT_GUIDE_AND_NETWORK"
+        "status": "SELECTED_NETWORK_PENDING_EFFECTIVE_CAP_AND_RAMP_PROOF"
       }
     ],
-    "load_budget_a": null,
+    "load_budget_a": {
+      "status": "CALCULATED_ENGINEERING_ENVELOPE_PENDING_COMPONENT_AND_THERMAL_PROOF",
+      "operating_case": "Four analog microphones and four ADC channels at 96 kHz, 128 BCLK/FSYNC, PLL on, DRE/AGC off; RT1062 active native-flash read; separate flash program/erase peak; Board A 5-V receiving envelope 4.5-5.5 V, local ambient -40..85 C",
+      "classification": "Manufacturer maximum values are used only under their stated test conditions. Other figures are enforceable design allocations, not guaranteed silicon consumption maxima.",
+      "rails": [
+        {"name":"MCU_3V3","regulator":"TPS62135RGXR","manufacturer_max_ma":{"DCDC_IN":110,"VDD_HIGH_IN":50,"VDDA_ADC_3P3":40,"VDD_SNVS_IN":0.25},"design_allocations_ma":{"NVCC_GPIO_EMC":20,"ADC_IOVDD":5,"boot_debug_pulls":5,"supervisor":1,"MIC_2V8_LDO_output":7,"FLASH_SD1_1V8_LDO_output":60,"both_LDO_ground_currents":4,"transient":20},"itemized_ma":322.25,"design_ceiling_ma":350,"headroom_ma":27.75,"voltage_v":[3.2185,3.4259]},
+        {"name":"ADC_AVDD_3V3","regulator":"TPS7A2033PDQNR","consumers_ma":{"TLV320ADC5140_AVDD_design":50,"eight_OPA2320_quiescent_max":13.6,"OPA_output_and_filter_design":4,"other_analog_design":2,"unallocated":5.4},"design_ceiling_ma":75,"voltage_v":[3.2505,3.3495],"note":"50 mA ADC AVDD is an imposed 96-kHz/128-ratio ceiling; TI publishes typical current only."},
+        {"name":"MIC_2V8","regulator":"TPS7A2028PDQNR","consumers_ma":{"four_IM73A135_design_1mA_each":4,"2p2kohm_1pct_minimum_load_bleeder_max":1.31,"unallocated":1.69},"design_ceiling_ma":7,"voltage_v":[2.758,2.842],"note":"Infineon 230-uA maximum applies only at 2.75 V, 25 C and input <=94 dBSPL."},
+        {"name":"FLASH_SD1_1V8","regulator":"TPS7A2018PDQNR","consumers_ma":{"IS25WP064A_core_program_erase_max":30,"RT1062_NVCC_SD1_design":15,"bleeder_I_O_and_transient_reserve":15},"design_ceiling_ma":60,"voltage_v":[1.77,1.83],"note":"ISSI 12-mA normal read maximum excludes output switching; 30-mA program/erase maximum does not bound SD1 bank or other external switching."}
+      ],
+      "five_volt_input":{"design_ceiling_ma":750,"calculated_ma_at_4p5v_and_70pct_buck_efficiency":492.66,"startup_and_step_extra_ma":200,"calculated_with_startup_ma":692.66,"margin_to_design_ceiling_ma":57.34,"other_allocations_ma":{"ADC_LDO_ground_current":2,"USB_5V_service_port":25,"input_misc":10},"efficiency_floor_70pct_is_design_assumption":true},
+      "thermal":{"ambient_max_c":85,"junction_target_max_c":125,"board_assumption":"Reference JEDEC thermal resistances: TPS62135 RGX 38.4 C/W; TPS7A20 DQN 166.1 C/W. Product layout and enclosed ambient must meet or improve these effective values; physical validation R14.","adc_ldo_load_ceiling_ma":75,"buck_efficiency_design_floor":0.70,"status":"CONDITIONAL_REFERENCE_BOARD_SCREEN"},
+      "exact_schematic_values":{"buck_fb_top_ohm":255000,"buck_fb_bottom_ohm":68100,"buck_fb_tolerance_pct":1,"buck_mode":"forced PWM","buck_inductor_candidate":"XAL4020-102MEC, 1 uH +/-20%, 14.6 mOhm maximum DCR at 25 C, 8.7 A 10%-drop Isat at 25 C","buck_input_cap":"10 uF nominal X7R; >=3 uF effective at 5.5 V, tolerance and -40..85 C","buck_output_cap":"2 x 22 uF nominal X7R; >=22 uF effective and <=200 uF local effective at 3.426 V, tolerance and -40..85 C","ldo_caps":"each input/output 4.7 uF nominal X7R; >=1 uF effective at worst bias and -40..85 C","ldo_minimum_load_bleeders":"ADC_AVDD_3V3 2.7 kohm 1% to ground; MIC_2V8 2.2 kohm 1%; FLASH_SD1_1V8 1.5 kohm 1%","mcu_dcdc_inductor":"XFL4020-472MEC 4.7 uH +/-20%, 57.4 mOhm maximum DCR at 25 C","mcu_dcdc_output_cap":"2 x 47 uF nominal X7R; >=33 uF effective total including tolerance/bias/temp, plus HW7 Table 2 local decoupling","mic_local_cap":"100 nF at each microphone VDD pin","adc_local_cap":"per TI SBAS892A supply-pin decoupling, effective value to be selected"},
+      "protection":"TPS62135 internal 4.8-6.5 A switch limit/hiccup and TPS7A20 360-730 mA output limit are regulator self-protection, not load-safe branch limits. A hard fault can dissipate far above continuous budgets; input-source current limit, trace/fuse coordination and downstream branch safety must be completed before schematic release.",
+      "unclosed_exact_items":["Manufacturer-guaranteed TLV320ADC5140 AVDD/IOVDD current at four-channel 96 kHz and 128 BCLK/FSYNC is absent; imposed 50/5-mA ceilings require acceptance and R14 measurement.","TPS62135 guaranteed minimum efficiency or maximum total conversion loss for 4.5-5.5 V, 350 mA and forced PWM is absent; 70% is an acceptance assumption, not a guaranteed thermal bound.","Selected capacitor MPNs with guaranteed effective capacitance at bias/temperature/tolerance and selected inductors' hot Isat/DCR must be frozen; local buck and internal-DCDC stability/current peaks must be checked.","Product-board effective theta-JA, enclosed local ambient and high-load LDO ground current are not guaranteed by the cited device tables; thermal screening is conditional.","Upstream 5-V receiving/current-limit and fault-energy contract is a separate Board B/interface obligation, outside this Board A subtask."],
+      "calculation":"validation/r4a_closure_calculations.py"
+    },
     "sequence_verified": false,
-    "rt1062_hardware_guide": "NXP MIMXRT105060HDUG Rev 7 pp.2-6: SNVS before/tied HIGH; DCDC_PSWITCH RC 5-15 ms, >=1 ms post DCDC stable; 4.7-10 uH Isat >1 A ESR <0.2 ohm; 33 uF DCDC output; Table 2 decoupling. Component selection/derating pending."
+    "rt1062_hardware_guide": "NXP MIMXRT105060HDUG Rev 7 pp.2-6: SNVS before/tied HIGH; DCDC_PSWITCH RC 5-15 ms, >=1 ms post DCDC stable; 4.7-10 uH Isat >1 A ESR <0.2 ohm; 33 uF DCDC output; Table 2 decoupling. Component selection/derating pending.",
+    "r4a_selected_circuit": {
+      "mcu_3v3_buck": "TPS62135RGXR, forced PWM, 255-kohm top/68.1-kohm bottom 1% divider, 1-uH XAL4020-102MEC candidate, effective output 22-200 uF and effective input >=3 uF required",
+      "adc_afe_3v3_ldo": "TPS7A2033PDQNR from received 5 V, >=1-uF effective input/output capacitors",
+      "mic_2v8_ldo": "TPS7A2028PDQNR from MCU_3V3, >=1-uF effective input/output capacitors",
+      "flash_1v8_ldo": "TPS7A2018PDQNR from MCU_3V3, >=1-uF effective input/output capacitors",
+      "flash_core_current": "ISSI IS25WP064A Rev A11 section 9.3: normal read at 50 MHz <=12 mA, program/status-write/erase <=30 mA at 125 C; read output-switching and flash I/O loads are excluded, so total rail maximum remains open",
+      "rt1062_dcdc": "30-kohm 1% and 0.22-uF 10% DCDC_PSWITCH RC; XFL4020-472MEC 4.7-uH inductor; >=33-uF effective DCDC_OUT/VDD_SOC_IN total plus NXP HW7 Table 2 pin-local capacitors",
+      "por_supervisor": "TPS389030DSER monitors MCU_3V3; RESET open drain to POR_B with 10-kohm pullup to tied SNVS/HIGH_IN; MR is reserved for other-rail valid gate, not yet proven; 10-nF 10% CT gives 7.8-15.8-ms calculated release-delay component bound",
+      "snvs": "Tie VDD_SNVS_IN to VDD_HIGH_IN; no backup battery",
+      "board_a_input_required_v": [
+        4.5,
+        5.5
+      ],
+      "mcu_3v3_calculated_v": [
+        3.2185,
+        3.4259
+      ],
+      "board_a_input_current_design_reserve_a": 0.75,
+      "guaranteed_load_budget": false,
+      "calculation": "validation/r4a_closure_calculations.py",
+      "adc_96khz_typical_context": "TI SBAA379 Table 1: four-channel 96-kHz, PLL enabled, DRE disabled, linear phase, 24-bit, 96 BCLK/FSYNC gives 25.68 mA typical AVDD at 3.3 V; excludes I/O and is not a maximum. Selected BCLK/FSYNC=128 point is uncharacterized for maximum current. The former 100-mA LDO screen left 2.64 C reference-board margin; section load_budget_a now imposes a 75-mA rail ceiling with 10.15 C conditional reference-board margin.",
+      "mcu_current_context": "NXP AN12245 Table 8 EVK XIP rail currents are board measurements, not guaranteed maxima; use CEC rated rail currents plus allocated I/O loads for engineering budget."
+    }
   },
   "sheets": [
     {
       "name": "A1 Microphone ports and protection",
       "status": "BLOCKED",
-      "reason": "AFE cable/ESD/filter values open"
+      "reason": "Infineon 100-pF maximum installed mic-port capacitance and 25-kohm minimum load need full harness/ESD/PCB corner proof; 96-kHz noise sweep is R14."
     },
     {
       "name": "A2 AFE and ADC",
       "status": "BLOCKED",
-      "reason": "coupling/gain/ADC decoupling/registers open"
+      "reason": "ADC pin voltage/drive and powered-off compatibility remain unproved. ADC input impedance is typical, so 96-kHz noise/phase and final coupling response are R14 with adjustable values provided."
     },
     {
       "name": "A3 RT1062 core",
       "status": "BLOCKED",
-      "reason": "complete pin/supply/decoupling map open"
+      "reason": "pin-local effective capacitors, power ramp and POR_B supervision remain unproven"
     },
     {
       "name": "A4 Flash boot and clocks",
       "status": "BLOCKED",
-      "reason": "ROM straps, exact flash, crystal/PLL open"
+      "reason": "Flash 03h ROM timing, crystal and powered fixture/reset electrical connections remain open. FCB field profile is selected; generated LUT bytes and tested image are R14."
     },
     {
       "name": "A5 Board A power",
       "status": "BLOCKED",
-      "reason": "regulator guarantees, loads and sequence open"
+      "reason": "Connected-consumer engineering allocations and conditional thermal screens are calculated. Exact capacitor bias/temperature order codes, hot inductor curves, accepted ADC and LDO-ground current ceilings, buck loss/efficiency floor, product-board thermal path and fault-energy limit remain open; physical consumption/thermal tests are R14."
     },
     {
       "name": "A6 USB debug and service",
@@ -143,6 +206,7 @@
     "closure_status": "BLOCKED",
     "nxp_manual_access": "RESOLVED_2026-09-30",
     "sai_frequency_plan": "24 MHz -> PLL4 786.432 MHz /4 -> SAI1/2 24.576 MHz -> BCLK 12.288/6.144 MHz; cross-SAI frame phase not hardware synchronous",
-    "adc_timing": "At 25 C, 20 pF: ADC SDOUT tmax 18 ns; MCU setup 15 ns; 12.288 MHz half-period 40.69 ns; 7.69 ns before skew, 2.69 ns at proposed 5 ns skew. Not full-temperature proof."
+    "adc_timing": "At 25 C, 20 pF: ADC SDOUT tmax 18 ns; MCU setup 15 ns; 12.288 MHz half-period 40.69 ns; 7.69 ns before skew, 2.69 ns at proposed 5 ns skew. Not full-temperature proof.",
+    "r4a_closure_report": "validation/r4a_board_a_closure.md"
   }
 }

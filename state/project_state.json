@@ -25,7 +25,7 @@
     "human_gate": "APPROVED",
     "approval_source": "Project-owner R4 authorization, 2026-09-28"
   },
-  "board_a_status": "r4_blocked_afe_power_boot_and_full_pin_contract",
+  "board_a_status": "r4a_blocked_selected_circuits_pending_schematic_electrical_proof",
   "board_b_status": "r4_blocked_input_buck_amp_passives_and_safety_gate",
   "interface_status": "r4_blocked_loaded_dc_timing_power_off_and_contact_current",
   "open_blockers": [
@@ -86,14 +86,14 @@
     {
       "id": "D1",
       "title": "IM73A135 to TLV320ADC5140 analog input network",
-      "status": "open",
-      "disposition": "R2 evidence and bench; R4 readiness"
+      "status": "r4a_topology_and_values_selected_electrical_proof_open",
+      "disposition": "R4-A selected four dual unity buffers and AC coupling; bounded ADC impedance, cable/ESD capacitance and 96-kHz noise/phase calculations remain schematic blockers. Four-channel bench validation is due R14."
     },
     {
       "id": "D2",
       "title": "RT1062 boot and programming model",
-      "status": "provisional_native_nxp_direction",
-      "disposition": "R3 approval includes provisional native NXP boot direction; exact ROM straps, flash, factory/field recovery and security remain R4 blocker."
+      "status": "r4a2_native_boot_policy_frozen_hardware_open",
+      "disposition": "R3 approval includes provisional native NXP boot direction. R4-A2 freezes unfused native boot, service-only ROM UART recovery, no OTP fuses or OTA path, and datasheet-backed static strap levels. Complete FCB, clock, reset and recovery electrical implementation remain schematic blockers; tested image and execution stay due R14."
     },
     {
       "id": "D3",
@@ -149,6 +149,125 @@
     "report": "validation/r4_schematic_readiness_validation.md",
     "human_gate": "NOT_EVALUATED",
     "r5_authorized": false
+  },
+  "r4a_closure": {
+    "date": "2026-10-01",
+    "scope": "Board A findings PV1-R1-001, PV1-R1-002, and Board A portion of PV1-R1-012",
+    "machine_result": "BLOCKED",
+    "report": "validation/r4a_board_a_closure.md",
+    "focused_gate": "validation/r4a_gate.py",
+    "calculations": "validation/r4a_closure_calculations.py",
+    "board_b_touched": false,
+    "kicad_touched": false,
+    "r5_authorized": false,
+    "blocking_reasons": [
+      "AFE electrical compatibility remains unproved: selected microphone port capacitance cannot yet be bounded to Infineon 100 pF across the installed harness/ESD/PCB, and ADC pin voltage, loading and unpowered transitions lack worst-case proof. Measured 96-kHz noise/phase is R14.",
+      "Boot hardware remains incomplete: prove ISSI 03h read timing at ROM 30 MHz and freeze flash pull/termination, crystal and powered fixture/reset connections. A generated/tested FCB image is R14.",
+      "Board A rail design remains incomplete: publish an explicit 96-kHz engineering load budget, bound I/O and transient loads, derate capacitors/inductors and prove regulator thermal/fault margins. Measured consumption is R14.",
+      "Board A startup remains incomplete: freeze all-rail POR circuit and show guaranteed ramp, DCDC_PSWITCH, reset release and powered-off behavior at corners. Waveform measurements are R14."
+    ],
+    "requirements": [
+      {
+        "id": "001_afe_electrical",
+        "finding": "001",
+        "classification": "SCHEMATIC_ENTRY_BLOCKER",
+        "required_by_phase": "R4",
+        "blocks_r4a": true,
+        "status": "open",
+        "requirement": "Prove microphone 25-kohm minimum resistive and 100-pF maximum capacitive loading, ADC pin absolute/recommended voltage and buffer drive across power states, and a deterministic four-channel coupling/filter topology with adjustable 96-kHz performance provision. Typical ADC impedance may be used only for nominal response, not as a guaranteed limit."
+      },
+      {
+        "id": "001_afe_bench",
+        "finding": "001",
+        "classification": "PHYSICAL_BENCH_VALIDATION",
+        "required_by_phase": "R14",
+        "blocks_r4a": false,
+        "status": "open",
+        "requirement": "Measure the selected-harness four-channel 96-kHz noise, response, clipping/headroom, coupling corner and phase over operating conditions; adjust provided component/filter values before release."
+      },
+      {
+        "id": "002_boot_hardware",
+        "finding": "002",
+        "classification": "SCHEMATIC_ENTRY_BLOCKER",
+        "required_by_phase": "R4",
+        "blocks_r4a": true,
+        "status": "open",
+        "requirement": "Prove the selected flash command, ROM 30-MHz timing and voltage compatibility, boot-pad thresholds, reset/recovery hardware, and schematic-ready crystal and powered fixture connections. The FCB field profile must match ROM and flash semantics; generated binary and execution are R14."
+      },
+      {
+        "id": "002_recovery_policy",
+        "finding": "002",
+        "classification": "SCHEMATIC_ENTRY_BLOCKER",
+        "required_by_phase": "R4",
+        "blocks_r4a": true,
+        "status": "closed",
+        "requirement": "Freeze factory and field recovery, security/fuse and update policy where it determines strap, debug, interface or fixture hardware.",
+        "closure_evidence": "state/rt1062_pin_resource_map.json r4a_board_a_selection.boot_straps: V1 unfused internal boot, ROM UART fixture for factory and field service, no OTA or OTP fuses; NXP RM Rev 4 pp.197-200 and CEC Rev 4 Table 22 static strap corner calculation."
+      },
+      {
+        "id": "002_tested_boot_image",
+        "finding": "002",
+        "classification": "FIRMWARE_BRINGUP_VALIDATION",
+        "required_by_phase": "R14",
+        "blocks_r4a": false,
+        "status": "open",
+        "requirement": "Generate and inspect the exact 512-byte RT1062 FCB/LUT encoding, program the production image and test native boot from the selected flash on implemented hardware."
+      },
+      {
+        "id": "002_recovery_test",
+        "finding": "002",
+        "classification": "FIRMWARE_BRINGUP_VALIDATION",
+        "required_by_phase": "R14",
+        "blocks_r4a": false,
+        "status": "open",
+        "requirement": "Exercise dead-flash recovery and programmed-image update/security paths on implemented hardware."
+      },
+      {
+        "id": "002_clock_usb_bench",
+        "finding": "002",
+        "classification": "PHYSICAL_BENCH_VALIDATION",
+        "required_by_phase": "R14",
+        "blocks_r4a": false,
+        "status": "open",
+        "requirement": "Measure crystal startup, USB clock tolerance and physical boot-pad/fixture levels on implemented hardware."
+      },
+      {
+        "id": "012_a_load_power",
+        "finding": "012",
+        "classification": "SCHEMATIC_ENTRY_BLOCKER",
+        "required_by_phase": "R4",
+        "blocks_r4a": true,
+        "status": "open",
+        "requirement": "Freeze a calculated Board A 96-kHz/flash engineering load budget with explicit reserve for typical-only device currents; prove rail/receiving-envelope corners, I/O and transient allocation, capacitor/inductor derating, regulator thermal and fault margins. Never treat TI/NXP measured or typical current as a guaranteed maximum."
+      },
+      {
+        "id": "012_a_startup",
+        "finding": "012",
+        "classification": "SCHEMATIC_ENTRY_BLOCKER",
+        "required_by_phase": "R4",
+        "blocks_r4a": true,
+        "status": "open",
+        "requirement": "Freeze the all-rail POR gate and prove DCDC, LDO, ramp, reset and powered-off behavior by schematic-ready values and worst-case startup calculations."
+      },
+      {
+        "id": "012_a_bench",
+        "finding": "012",
+        "classification": "PHYSICAL_BENCH_VALIDATION",
+        "required_by_phase": "R14",
+        "blocks_r4a": false,
+        "status": "open",
+        "requirement": "Measure actual 96-kHz and flash-mode rail consumption, rail ramp/POR waveforms, load transients and populated-board thermal behavior against the frozen engineering budget."
+      },
+      {
+        "id": "012_board_b_interface",
+        "finding": "012",
+        "classification": "LATER_BOARD_B_OR_INTERFACE_WORK",
+        "required_by_phase": "R4",
+        "blocks_r4a": false,
+        "status": "open",
+        "requirement": "Close Board B input protection, 5-V source, connector/current/return-drop, inrush and fault contract in the global R4 scope."
+      }
+    ]
   },
   "r4_closure_pass": {
     "date": "2026-09-30",
